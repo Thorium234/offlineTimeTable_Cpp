@@ -3,20 +3,36 @@
 #include <vector>
 #include <map>
 
-const int DAYS = 5;
-const int PERIODS = 8;
+struct TimetableCell {
+    int subjectId = -1;
+    int teacherId = -1;
+    int roomId = -1;
 
-extern const std::string DAY_NAMES[DAYS];
+    bool isEmpty() const {
+        return subjectId == -1;
+    }
+};
+
+struct UnscheduledLesson {
+    int subjectId;
+    int classId;
+    int teacherId;
+    int periodsCount;
+    std::string reason;
+};
 
 class DataManager; // Forward declaration
 
 class Timetable {
 public:
-    // Maps classId -> 5x8 grid of subject/lesson string representation
-    std::map<int, std::vector<std::vector<std::string>>> schedules;
+    // Maps classId -> 2D vector of TimetableCell (dimensions: days x periods)
+    std::map<int, std::vector<std::vector<TimetableCell>>> schedules;
+    std::vector<UnscheduledLesson> unscheduledLessons;
+    int score = 1000;
 
-    void initClass(int classId);
-    void setSlot(int classId, int day, int period, const std::string& subjectName);
-    std::string getSlot(int classId, int day, int period) const;
+    void initClass(int classId, int totalDays, int totalPeriods);
+    void setSlot(int classId, int dayIndex, int periodIndex, int subjectId, int teacherId, int roomId);
+    void clearSlot(int classId, int dayIndex, int periodIndex);
+    TimetableCell getSlot(int classId, int dayIndex, int periodIndex) const;
     void print(const DataManager& dm) const;
 };

@@ -1,62 +1,61 @@
 #include "TimetableEngine.h"
+#include "FeasibilityChecker.h"
+#include "BacktrackingSolver.h"
+#include "GreedySolver.h"
 #include <iostream>
 
 Timetable TimetableEngine::generate(const DataManager& dm) {
-    Timetable timetable;
+    // Default to the advanced BacktrackingSolver
+    BacktrackingSolver defaultSolver;
+    return generateWithStrategy(dm, defaultSolver);
+}
 
-    // Initialize schedules for all classes
-    for (const auto& c : dm.classes) {
-        timetable.initClass(c.id);
+Timetable TimetableEngine::generateWithStrategy(const DataManager& dm, SolverStrategy& strategy) {
+    std::cout << "\n========================================================================\n";
+    std::cout << "Starting Generation using: " << strategy.getName() << "\n";
+    std::cout << "========================================================================\n";
+
+    int numDays = static_cast<int>(dm.days.size());
+    int numPeriods = static_cast<int>(dm.periods.size());
+    Timetable emptyTimetable;
+
+    if (numDays == 0 || numPeriods == 0) {
+        std::cout << "[Error] Cannot generate timetable: Days or Periods are not defined.\n";
+        return emptyTimetable;
     }
 
-    // Keep track of teacher availability (teacherId -> 5x8 grid)
-    std::map<int, std::vector<std::vector<bool>>> teacherBusy;
-    for (const auto& t : dm.teachers) {
-        teacherBusy[t.id] = std::vector<std::vector<bool>>(DAYS, std::vector<bool>(PERIODS, false));
-    }
-
-    // Allocate lessons to slots
-    for (const auto& lesson : dm.lessons) {
-        int periodsNeeded = lesson.periodsPerWeek;
-        int placed = 0;
-
-        // Try to place the lesson in empty slots
-        for (int day = 0; day < DAYS && placed < periodsNeeded; ++day) {
-            for (int period = 0; period < PERIODS && placed < periodsNeeded; ++period) {
-                // Check if class is free (unassigned slot has "---")
-                bool classFree = (timetable.getSlot(lesson.classId, day, period) == "---");
-
-                // Check if teacher is free
-                bool teacherFree = false;
-                auto tIt = teacherBusy.find(lesson.teacherId);
-                if (tIt != teacherBusy.end()) {
-                    teacherFree = !tIt->second[day][period];
-                } else {
-                    // Safe fallback if teacher ID wasn't properly initialized
-                    teacherFree = true;
-                }
-
-                if (classFree && teacherFree) {
-                    // Place the lesson
-                    std::string subjectName = dm.getSubjectName(lesson.subjectId);
-                    timetable.setSlot(lesson.classId, day, period, subjectName);
-
-                    // Mark teacher as busy
-                    if (tIt != teacherBusy.end()) {
-                        tIt->second[day][period] = true;
-                    }
-                    placed++;
-                }
-            }
+    // Pre-validation
+    FeasibilityChecker checker;
+    auto feasErrors = checker.check(dm);
+    if (!feasErrors.empty()) {
+        std::cout << "\n╔═══════════════════════════════════════════════════════════════╗\n";
+        std::cout << "║              FEASIBILITY CHECK FAILED                        ║\n";
+        std::cout << "╚═══════════════════════════════════════════════════════════════╝\n\n";
+        std::cout << "The following issues make scheduling IMPOSSIBLE:\n\n";
+        for (size_t i = 0; i < feasErrors.size(); ++i) {
+            std::cout << "  [" << feasErrors[i].category << "] " << feasErrors[i].message << "\n";
         }
+        std::cout << "\nPlease fix these issues before attempting to generate a timetable.\n";
+        return emptyTimetable;
+    }
+    std::cout << "[✓] Pre-validation passed. Schedule is feasible.\n";
 
-        if (placed < periodsNeeded) {
-            std::cout << "[Warning] Could only schedule " << placed << "/" << periodsNeeded 
-                      << " periods for Subject '" << dm.getSubjectName(lesson.subjectId)
-                      << "' in Class '" << dm.getClassName(lesson.classId)
-                      << "' taught by Teacher '" << dm.getTeacherName(lesson.teacherId) << "'.\n";
-        }
+    // Reset stats
+    lastRunStats = SolverStats();
+
+    // Execute Strategy
+    Timetable result = strategy.solve(dm, lastRunStats);
+
+    // If backtracking failed completely, provide a greedy fallback (optional, but good for UX)
+    if (result.score == 0 && lastRunStats.nodesVisited > 0 && dynamic_cast<BacktrackingSolver*>(&strategy)) {
+        std::cout << "[Warning] Primary solver failed to find a complete solution. Attempting Greedy Fallback...\n";
+        GreedySolver fallbackSolver;
+        SolverStats fallbackStats;
+        result = fallbackSolver.solve(dm, fallbackStats);
+        
+        // Accumulate stats for transparency
+        lastRunStats.nodesVisited += fallbackStats.nodesVisited;
     }
 
-    return timetable;
+    return result;
 }

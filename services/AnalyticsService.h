@@ -1,0 +1,45 @@
+#pragma once
+
+#include <vector>
+#include <string>
+#include "../timetable/Timetable.h"
+
+struct TeacherLoad {
+    int teacherId;
+    std::string name;
+    int assignedPeriods = 0;
+    int availablePeriods = 0;
+    double utilization = 0.0; // percentage
+};
+
+struct RoomUtilizationInfo {
+    int roomId;
+    std::string name;
+    int usedSlots = 0;
+    int totalSlots = 0;
+    double utilization = 0.0; // percentage
+};
+
+struct AnalyticsReport {
+    int totalLessons = 0;
+    int unscheduledLessons = 0;
+    double averageRoomUtilization = 0.0; // percentage
+    double averageTeacherLoad = 0.0;    // lessons per teacher
+    int conflictCount = 0;
+    std::vector<std::string> notes; // optional explanations
+    std::vector<TeacherLoad> teacherLoads;
+    std::vector<RoomUtilizationInfo> roomUtilizations;
+};
+
+class AnalyticsService {
+public:
+    AnalyticsService() = default;
+    AnalyticsReport generateReport(const Timetable& timetable);
+private:
+    double computeRoomUtilization(const Timetable& tt);
+    double computeTeacherLoad(const Timetable& tt);
+    int countConflicts(const Timetable& tt);
+    int countUnscheduled(const Timetable& tt);
+    std::vector<TeacherLoad> computeTeacherLoads(const Timetable& tt);
+    std::vector<RoomUtilizationInfo> computeRoomUtilizations(const Timetable& tt);
+};

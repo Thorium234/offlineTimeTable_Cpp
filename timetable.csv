@@ -1,0 +1,12 @@
+CLASS:,Form A
+DAY,P1 (08:00-08:45),P2 (08:45-09:30),P3 (09:30-10:15),P4 (10:15-11:00),P5 (11:00-11:45),P6 (12:30-13:15),P7 (13:15-14:00),P8 (14:00-14:45),
+Monday,"S1 (T1/Rm 1)","S1 (T1/Rm 1)","S1 (T1/Rm 1)","S1 (T1/Rm 1)","S1 (T1/Rm 1)","S1 (T1/Rm 1)","S1 (T1/Rm 1)","S1 (T1/Rm 1)",
+Tuesday,"S1 (T1/Rm 1)","S1 (T1/Rm 1)","S1 (T1/Rm 1)","S1 (T1/Rm 1)","S1 (T1/Rm 1)","S1 (T1/Rm 1)","S1 (T1/Rm 1)","S1 (T1/Rm 1)",
+Wednesday,"S1 (T1/Rm 1)","S1 (T1/Rm 1)","S1 (T1/Rm 1)","S1 (T1/Rm 1)","S1 (T1/Rm 1)","S1 (T1/Rm 1)","S1 (T1/Rm 1)","S1 (T1/Rm 1)",
+Thursday,"S1 (T1/Rm 1)","S1 (T1/Rm 1)","S1 (T1/Rm 1)","S1 (T1/Rm 1)","S1 (T1/Rm 1)","S1 (T1/Rm 1)","S1 (T1/Rm 1)","S1 (T1/Rm 1)",
+Friday,"S1 (T1/Rm 1)","S1 (T1/Rm 1)","S1 (T1/Rm 1)","S1 (T1/Rm 1)","S1 (T1/Rm 1)","S1 (T1/Rm 1)","S1 (T1/Rm 1)","S1 (T1/Rm 1)",
+
+
+UNSCHEDULED LESSONS REPORT
+CLASS,SUBJECT,TEACHER,MISSING PERIODS,REASON
+"Form A","S1","T1",10,"Insufficient resources: no slot found where teacher, class, and a suitable room (Type ID: 1, capacity >= 30) are simultaneously free."

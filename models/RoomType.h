@@ -1,9 +1,8 @@
 #pragma once
 #include <string>
 
-class SchoolClass {
+class RoomType {
 public:
     int id;
     std::string name;
-    int studentCount;
 };
