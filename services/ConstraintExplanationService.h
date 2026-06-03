@@ -2,16 +2,11 @@
 
 #include <string>
 #include <vector>
+#include "../models/ConstraintViolation.h"
 
 // Forward declarations
 class Timetable;
 class DataManager;
-
-struct ConstraintViolation {
-    std::string type;          // e.g., "Teacher Overload"
-    std::string explanation;   // Human readable description
-    std::string recommendation; // Suggested action
-};
 
 class ConstraintExplanationService {
 public:

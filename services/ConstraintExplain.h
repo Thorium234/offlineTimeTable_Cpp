@@ -6,11 +6,7 @@
 #include "../models/Room.h"
 #include "../models/Day.h"
 #include "../models/Period.h"
-
-struct ConstraintViolation {
-    std::string type; // e.g., "TeacherUnavailable", "RoomCapacity", "FixedEventConflict"
-    std::string explanation; // Human readable description
-};
+#include "../models/ConstraintViolation.h"
 
 class ConstraintExplain {
 public:

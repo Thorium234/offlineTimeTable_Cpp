@@ -152,7 +152,6 @@ Timetable GreedySolver::solve(const DataManager& dm, SolverStats& stats) {
             }
         }
 
-#include "ConstraintExplain.h"
 
         if (!placed) {
             // Simple explanation without specific day/period because they are out of scope here
