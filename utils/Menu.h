@@ -34,7 +34,5 @@ public:
     void run();
     void handleViewTeacherTimetable();
     void handleViewRoomTimetable();
-    void handleExportPdf();
-    void handleGeneticSolve();
-
+    void handleViewAnalytics();
 };

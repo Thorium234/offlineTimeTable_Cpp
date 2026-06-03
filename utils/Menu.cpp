@@ -2,8 +2,6 @@
 #include "../services/ExportService.h"
 #include "../services/Benchmark.h"
 #include "../services/AnalyticsService.h"
-#include "../services/PdfReportService.h"
-#include "../services/GeneticSolver.h"
 #include <iostream>
 #include <iomanip>
 #include <string>
@@ -40,7 +38,7 @@ void Menu::run() {
         std::cout << "║  5. Add Lesson                 ║\n";
         std::cout << "║  6. Add Day                    ║\n";
         std::cout << "║  7. Add Period                 ║\n";
-        std::cout << "║  8. Teacher Unavailability      ║\n";
+        std::cout << "║  8. Teacher Unavailability     ║\n";
         std::cout << "║  9. Add Room Type              ║\n";
         std::cout << "║ 10. Subject Room Requirement   ║\n";
         std::cout << "║ 11. Generate Timetable         ║\n";
@@ -49,49 +47,24 @@ void Menu::run() {
         std::cout << "║ 14. Run Benchmark Suite        ║\n";
         std::cout << "║ 15. Add Fixed Event            ║\n";
         std::cout << "║ 16. Add Teacher Preference     ║\n";
-        std::cout << "║ 17. View Teacher Timetable      ║\n";
-        std::cout << "║ 18. View Room Timetable         ║\n";
-        std::cout << "║ 19. View Analytics Dashboard    ║\n";
-        std::cout << "║ 20. Export PDF Report           ║\n";
-        std::cout << "║ 21. Solve with Genetic Algorithm║\n";
-        std::cout << "║ 22. Exit                       ║\n";
-        std::cout << "╚════════════════════════════════╝\n";
-        std::cout << "║    TIMETABLE GENERATOR v2.0    ║\n";
-        std::cout << "╠════════════════════════════════╣\n";
-        std::cout << "║  1. Add Teacher                ║\n";
-        std::cout << "║  2. Add Subject                ║\n";
-        std::cout << "║  3. Add Class                  ║\n";
-        std::cout << "║  4. Add Room                   ║\n";
-        std::cout << "║  5. Add Lesson                 ║\n";
-        std::cout << "║  6. Add Day                    ║\n";
-        std::cout << "║  7. Add Period                 ║\n";
-        std::cout << "║  8. Teacher Unavailability      ║\n";
-        std::cout << "║ 9. Add Room Type              ║\n";
-        std::cout << "║ 10. Subject Room Requirement   ║\n";
-        std::cout << "║ 11. Generate Timetable         ║\n";
-        std::cout << "║ 12. View Timetable             ║\n";
-        std::cout << "║ 13. Export (CSV/HTML)           ║\n";
-        std::cout << "║ 14. Run Benchmark Suite        ║\n";
-        std::cout << "║ 15. Add Fixed Event            ║\n";
-        std::cout << "║ 16. Add Teacher Preference     ║\n";
-        std::cout << "║ 17. View Teacher Timetable      ║\n";
-        std::cout << "║ 18. View Room Timetable         ║\n";
-        std::cout << "║ 19. View Analytics Dashboard    ║\n";
+        std::cout << "║ 17. View Teacher Timetable     ║\n";
+        std::cout << "║ 18. View Room Timetable        ║\n";
+        std::cout << "║ 19. View Analytics Dashboard   ║\n";
         std::cout << "║ 20. Exit                       ║\n";
         std::cout << "╚════════════════════════════════╝\n";
-        
+
         int choice = readIntInput("Select option: > ");
-        
+
         switch (choice) {
-            case 1: handleAddTeacher(); break;
-            case 2: handleAddSubject(); break;
-            case 3: handleAddClass(); break;
-            case 4: handleAddRoom(); break;
-            case 5: handleAddLesson(); break;
-            case 6: handleAddDay(); break;
-            case 7: handleAddPeriod(); break;
-            case 8: handleAddTeacherConstraint(); break;
-            case 9: handleAddRoomType(); break;
+            case 1:  handleAddTeacher(); break;
+            case 2:  handleAddSubject(); break;
+            case 3:  handleAddClass(); break;
+            case 4:  handleAddRoom(); break;
+            case 5:  handleAddLesson(); break;
+            case 6:  handleAddDay(); break;
+            case 7:  handleAddPeriod(); break;
+            case 8:  handleAddTeacherConstraint(); break;
+            case 9:  handleAddRoomType(); break;
             case 10: handleSetSubjectRequirement(); break;
             case 11: handleGenerateTimetable(); break;
             case 12: handleViewTimetable(); break;
@@ -545,11 +518,13 @@ void Menu::handleAddTeacherPreference() {
 
     if (dm.addTeacherPreference(teacherId, dayId, periodId, type)) {
         std::cout << "Teacher preference recorded successfully: Teacher " << dm.getTeacherName(teacherId)
-                  << " preference for " << dm.getDayName(dayId) << " P" << periodId 
+                  << " preference for " << dm.getDayName(dayId) << " P" << periodId
                   << " set to " << preferenceTypeToString(type) << ".\n";
     } else {
         std::cout << "Failed to record teacher preference.\n";
     }
+}
+
 // View Teacher Timetable
 void Menu::handleViewTeacherTimetable() {
     if (!timetableGenerated) {
@@ -569,8 +544,7 @@ void Menu::handleViewTeacherTimetable() {
             std::cout << std::left << std::setw(12) << dm.getDayName(dm.days[d].id);
             for (int p = 0; p < static_cast<int>(dm.periods.size()); ++p) {
                 std::string cellText = "---";
-                const auto& cell = timetable.getSlot(dm.classes[0].id, d, p); // placeholder to access method
-                // Scan all classes for this teacher at this slot
+                        // Scan all classes for this teacher at this slot
                 for (const auto& pair : timetable.schedules) {
                     const auto& grid = pair.second;
                     if (d < static_cast<int>(grid.size()) && p < static_cast<int>(grid[d].size())) {
@@ -622,9 +596,16 @@ void Menu::handleViewRoomTimetable() {
         }
     }
 }
+
+// View Analytics Dashboard
 void Menu::handleViewAnalytics() {
+    if (!timetableGenerated) {
+        std::cout << "\nPlease generate the timetable first (Option 11).\n";
+        return;
+    }
     AnalyticsService analytics;
-    AnalyticsReport report = analytics.generateReport(timetable);
+    AnalyticsReport report = analytics.generateReport(timetable, dm);
+
     std::cout << "\n--- Analytics Dashboard ---\n";
     std::cout << "Total Scheduled Lessons: " << report.totalLessons << "\n";
     std::cout << "Unscheduled Lessons: " << report.unscheduledLessons << "\n";
@@ -637,7 +618,28 @@ void Menu::handleViewAnalytics() {
             std::cout << " - " << n << "\n";
         }
     }
+
+    // Teacher load breakdown
+    if (!report.teacherLoads.empty()) {
+        std::cout << "\nTeacher Load Details (assigned / available = utilization%):\n";
+        for (const auto &tl : report.teacherLoads) {
+            std::cout << "  " << tl.name << " (ID " << tl.teacherId << "): "
+                      << tl.assignedPeriods << "/" << tl.availablePeriods
+                      << " = " << std::fixed << std::setprecision(1) << tl.utilization << "%\n";
+        }
+    }
+
+    // Room utilization breakdown
+    if (!report.roomUtilizations.empty()) {
+        std::cout << "\nRoom Utilization Details (used / total = utilization%):\n";
+        for (const auto &ru : report.roomUtilizations) {
+            std::cout << "  " << ru.name << " (ID " << ru.roomId << "): "
+                      << ru.usedSlots << "/" << ru.totalSlots
+                      << " = " << std::fixed << std::setprecision(1) << ru.utilization << "%\n";
+        }
+    }
+
     std::cout << "---------------------------\n";
 }
 
-}
+

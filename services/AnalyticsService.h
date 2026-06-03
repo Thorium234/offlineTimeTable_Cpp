@@ -3,6 +3,7 @@
 #include <vector>
 #include <string>
 #include "../timetable/Timetable.h"
+#include "DataManager.h"
 
 struct TeacherLoad {
     int teacherId;
@@ -24,7 +25,7 @@ struct AnalyticsReport {
     int totalLessons = 0;
     int unscheduledLessons = 0;
     double averageRoomUtilization = 0.0; // percentage
-    double averageTeacherLoad = 0.0;    // lessons per teacher
+    double averageTeacherLoad = 0.0;     // periods per teacher
     int conflictCount = 0;
     std::vector<std::string> notes; // optional explanations
     std::vector<TeacherLoad> teacherLoads;
@@ -34,12 +35,11 @@ struct AnalyticsReport {
 class AnalyticsService {
 public:
     AnalyticsService() = default;
-    AnalyticsReport generateReport(const Timetable& timetable);
+    AnalyticsReport generateReport(const Timetable& timetable, const DataManager& dm);
+
 private:
-    double computeRoomUtilization(const Timetable& tt);
-    double computeTeacherLoad(const Timetable& tt);
     int countConflicts(const Timetable& tt);
     int countUnscheduled(const Timetable& tt);
-    std::vector<TeacherLoad> computeTeacherLoads(const Timetable& tt);
-    std::vector<RoomUtilizationInfo> computeRoomUtilizations(const Timetable& tt);
+    std::vector<TeacherLoad>          computeTeacherLoads(const Timetable& tt, const DataManager& dm);
+    std::vector<RoomUtilizationInfo>  computeRoomUtilizations(const Timetable& tt, const DataManager& dm);
 };
