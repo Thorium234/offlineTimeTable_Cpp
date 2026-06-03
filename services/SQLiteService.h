@@ -10,6 +10,7 @@
 struct TeacherRecord {
     int id;
     QString name;
+    int maxConsecutive = 0;
 };
 
 struct SubjectRecord {
@@ -42,8 +43,8 @@ public:
     bool initSchema();
 
     // Teacher CRUD
-    int addTeacher(const QString &name);
-    bool updateTeacher(int id, const QString &newName);
+    int addTeacher(const QString &name, int maxConsecutive = 0);
+    bool updateTeacher(int id, const QString &newName, int maxConsecutive = -1);
     bool removeTeacher(int id);
     std::vector<TeacherRecord> fetchTeachers();
 

@@ -44,7 +44,9 @@ bool SQLiteService::exec(const QString &query) {
 
 bool SQLiteService::initSchema() {
     // Teachers table
-    if (!exec("CREATE TABLE IF NOT EXISTS teachers (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT NOT NULL)")) return false;
+    if (!exec("CREATE TABLE IF NOT EXISTS teachers (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT NOT NULL, maxConsecutive INTEGER DEFAULT 0)")) return false;
+    // Migration: Add maxConsecutive column if it doesn't exist
+    exec("ALTER TABLE teachers ADD COLUMN maxConsecutive INTEGER DEFAULT 0");
     // Subjects table
     if (!exec("CREATE TABLE IF NOT EXISTS subjects (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT NOT NULL)")) return false;
     // Classes table

@@ -1,4 +1,5 @@
 #pragma once
+#include <QShowEvent>
 
 #include <QWidget>
 #include <QTableView>
@@ -11,6 +12,9 @@ class SubjectWidget : public QWidget {
 public:
     explicit SubjectWidget(DataManager *dm, QWidget *parent = nullptr);
     ~SubjectWidget() override = default;
+
+protected:
+    void showEvent(QShowEvent *event) override;
 
 private:
     void setupUi();

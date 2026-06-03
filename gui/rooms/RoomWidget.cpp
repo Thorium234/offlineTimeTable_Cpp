@@ -6,6 +6,7 @@
 #include <QStandardItem>
 
 RoomWidget::RoomWidget(DataManager *dm, QWidget *parent) : QWidget(parent), dm(dm) {
+    resize(800, 500);
     setWindowTitle(tr("Room Management"));
     setupUi();
     setupModelAndView();
@@ -138,4 +139,8 @@ void RoomWidget::deleteRoom() {
             QMessageBox::warning(this, tr("Delete failed"), tr("Could not delete the room."));
         }
     }
+
+void RoomWidget::showEvent(QShowEvent *event) {
+    QWidget::showEvent(event);
+    setupModelAndView(); // Refresh data when tab is shown
 }

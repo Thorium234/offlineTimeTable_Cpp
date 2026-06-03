@@ -6,6 +6,7 @@
 #include <QStandardItem>
 
 ClassWidget::ClassWidget(DataManager *dm, QWidget *parent) : QWidget(parent), dm(dm) {
+    resize(800, 500);
     setWindowTitle(tr("Class Management"));
     setupUi();
     setupModelAndView();
@@ -123,4 +124,8 @@ void ClassWidget::deleteClass() {
             QMessageBox::warning(this, tr("Delete failed"), tr("Could not delete the class."));
         }
     }
+
+void ClassWidget::showEvent(QShowEvent *event) {
+    QWidget::showEvent(event);
+    setupModelAndView(); // Refresh data when tab is shown
 }

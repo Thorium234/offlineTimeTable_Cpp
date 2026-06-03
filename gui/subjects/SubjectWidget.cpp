@@ -6,6 +6,7 @@
 #include <QStandardItem>
 
 SubjectWidget::SubjectWidget(DataManager *dm, QWidget *parent) : QWidget(parent), dm(dm) {
+    resize(800, 500);
     setWindowTitle(tr("Subject Management"));
     setupUi();
     setupModelAndView();
@@ -115,4 +116,8 @@ void SubjectWidget::deleteSubject() {
             QMessageBox::warning(this, tr("Delete failed"), tr("Could not delete the subject."));
         }
     }
+
+void SubjectWidget::showEvent(QShowEvent *event) {
+    QWidget::showEvent(event);
+    setupModelAndView(); // Refresh data when tab is shown
 }
