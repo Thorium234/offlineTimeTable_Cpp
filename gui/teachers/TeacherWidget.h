@@ -1,0 +1,31 @@
+#pragma once
+
+#include <QWidget>
+#include <QTableView>
+#include <QPushButton>
+#include <QStandardItemModel>
+#include "../../services/DataManager.h"
+
+class TeacherWidget : public QWidget {
+    Q_OBJECT
+public:
+    explicit TeacherWidget(QWidget *parent = nullptr);
+    ~TeacherWidget() override = default;
+
+private:
+    void setupUi();
+    void setupModelAndView();
+    void connectSignals();
+
+    QTableView *tableView;
+    QPushButton *addBtn;
+    QPushButton *editBtn;
+    QPushButton *delBtn;
+    QStandardItemModel *model;
+    DataManager dm;
+
+private slots:
+    void addTeacher();
+    void editTeacher();
+    void deleteTeacher();
+};

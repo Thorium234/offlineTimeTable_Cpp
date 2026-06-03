@@ -1,6 +1,6 @@
 #include "utils/Menu.h"
 
-int main() {
+extern "C" int runConsoleMenu() {
     Menu menu;
     menu.run();
     return 0;

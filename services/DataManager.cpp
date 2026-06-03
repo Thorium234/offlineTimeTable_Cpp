@@ -1,5 +1,7 @@
 #include "DataManager.h"
 #include <algorithm>
+#include <QString>
+#include <QDebug>
 
 DataManager::DataManager() {
     // Prepopulate standard school days
@@ -23,18 +25,88 @@ DataManager::DataManager() {
     addRoomType("Classroom");
     addRoomType("Science Lab");
     addRoomType("Computer Lab");
+
+    // Open SQLite DB and load persisted entities
+    if (sql.open()) {
+        for (const auto &rec : sql.fetchTeachers()) {
+            teachers.push_back(Teacher{rec.id, rec.name.toStdString()});
+        }
+        for (const auto &rec : sql.fetchSubjects()) {
+            subjects.push_back(Subject{rec.id, rec.name.toStdString()});
+        }
+        for (const auto &rec : sql.fetchClasses()) {
+            classes.push_back(SchoolClass{rec.id, rec.name.toStdString(), rec.studentCount});
+        }
+        for (const auto &rec : sql.fetchRooms()) {
+            rooms.push_back(Room{rec.id, rec.name.toStdString(), rec.capacity, rec.roomTypeId});
+        }
+    } else {
+        qWarning() << "Failed to open SQLite DB; starting with empty in‑memory data";
+    }
 }
 
-int DataManager::addTeacher(const std::string& name) {
-    int nextId = static_cast<int>(teachers.size()) + 1;
-    teachers.push_back(Teacher{nextId, name});
-    return nextId;
+int DataManager::addTeacher(const std::string &name) {
+    int id = sql.addTeacher(QString::fromStdString(name));
+    if (id != -1) {
+        teachers.push_back(Teacher{id, name});
+    }
+    return id;
 }
 
 int DataManager::addSubject(const std::string& name) {
-    int nextId = static_cast<int>(subjects.size()) + 1;
-    subjects.push_back(Subject{nextId, name});
-    return nextId;
+    int id = sql.addSubject(QString::fromStdString(name));
+    if (id != -1) {
+        subjects.push_back(Subject{id, name});
+    }
+    return id;
+}
+
+bool DataManager::updateTeacher(int id, const std::string& newName) {
+    if (sql.updateTeacher(id, QString::fromStdString(newName))) {
+        for (auto &t : teachers) {
+            if (t.id == id) {
+                t.name = newName;
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
+bool DataManager::removeTeacher(int id) {
+    if (sql.removeTeacher(id)) {
+        for (auto it = teachers.begin(); it != teachers.end(); ++it) {
+            if (it->id == id) {
+                teachers.erase(it);
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
+bool DataManager::updateSubject(int id, const std::string& newName) {
+    if (sql.updateSubject(id, QString::fromStdString(newName))) {
+        for (auto &s : subjects) {
+            if (s.id == id) {
+                s.name = newName;
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
+bool DataManager::removeSubject(int id) {
+    if (sql.removeSubject(id)) {
+        for (auto it = subjects.begin(); it != subjects.end(); ++it) {
+            if (it->id == id) {
+                subjects.erase(it);
+                return true;
+            }
+        }
+    }
+    return false;
 }
 
 // Fixed Event CRUD implementations
@@ -67,16 +139,71 @@ const std::vector<FixedEvent>& DataManager::getFixedEvents() const {
     return fixedEvents;
 }
 
-int DataManager::addClass(const std::string& name, int studentCount) {
-    int nextId = static_cast<int>(classes.size()) + 1;
-    classes.push_back(SchoolClass{nextId, name, studentCount});
-    return nextId;
+int DataManager::addClass(const std::string &name, int studentCount) {
+    int id = sql.addClass(QString::fromStdString(name), studentCount);
+    if (id != -1) {
+        classes.push_back(SchoolClass{id, name, studentCount});
+    }
+    return id;
 }
 
-int DataManager::addRoom(const std::string& name, int capacity, int roomTypeId) {
-    int nextId = static_cast<int>(rooms.size()) + 1;
-    rooms.push_back(Room{nextId, name, capacity, roomTypeId});
-    return nextId;
+int DataManager::addRoom(const std::string &name, int capacity, int roomTypeId) {
+    int id = sql.addRoom(QString::fromStdString(name), capacity, roomTypeId);
+    if (id != -1) {
+        rooms.push_back(Room{id, name, capacity, roomTypeId});
+    }
+    return id;
+}
+
+bool DataManager::updateClass(int id, const std::string& newName, int studentCount) {
+    if (sql.updateClass(id, QString::fromStdString(newName), studentCount)) {
+        for (auto &c : classes) {
+            if (c.id == id) {
+                c.name = newName;
+                c.studentCount = studentCount;
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
+bool DataManager::removeClass(int id) {
+    if (sql.removeClass(id)) {
+        for (auto it = classes.begin(); it != classes.end(); ++it) {
+            if (it->id == id) {
+                classes.erase(it);
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
+bool DataManager::updateRoom(int id, const std::string& newName, int capacity, int roomTypeId) {
+    if (sql.updateRoom(id, QString::fromStdString(newName), capacity, roomTypeId)) {
+        for (auto &r : rooms) {
+            if (r.id == id) {
+                r.name = newName;
+                r.capacity = capacity;
+                r.roomTypeId = roomTypeId;
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
+bool DataManager::removeRoom(int id) {
+    if (sql.removeRoom(id)) {
+        for (auto it = rooms.begin(); it != rooms.end(); ++it) {
+            if (it->id == id) {
+                rooms.erase(it);
+                return true;
+            }
+        }
+    }
+    return false;
 }
 
 bool DataManager::addLesson(int teacherId, int subjectId, int classId, int periodsPerWeek,

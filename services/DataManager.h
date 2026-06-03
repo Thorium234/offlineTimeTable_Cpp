@@ -1,6 +1,7 @@
 #pragma once
+
 #include <vector>
-#include <string>
+#include <cstring>
 #include "../models/Teacher.h"
 #include "../models/Subject.h"
 #include "../models/SchoolClass.h"
@@ -13,9 +14,11 @@
 #include "../models/RoomType.h"
 #include "../models/FixedEvent.h"
 #include "../models/TeacherPreference.h"
+#include "SQLiteService.h"
 
 class DataManager {
 public:
+    // In‑memory vectors (kept for compatibility)
     std::vector<Teacher> teachers;
     std::vector<Subject> subjects;
     std::vector<SchoolClass> classes;
@@ -30,16 +33,31 @@ public:
     // Container for human‑readable constraint violation messages
     mutable std::vector<std::string> placementRejectLog;
     void logPlacementReject(const std::string& msg) const { placementRejectLog.push_back(msg); }
-    // Retrieve the log (read‑only)
     const std::vector<std::string>& getPlacementRejectLog() const { return placementRejectLog; }
     std::vector<RoomType> roomTypes;
 
-    DataManager(); // Constructor to prepopulate defaults
+    // Persistence layer
+    SQLiteService sql;
 
+    DataManager(); // Constructor to prepopulate defaults / load DB
+
+    // CRUD wrappers – now delegate to SQLite and keep vectors in sync
     int addTeacher(const std::string& name);
+    bool updateTeacher(int id, const std::string& newName);
+    bool removeTeacher(int id);
+
     int addSubject(const std::string& name);
+    bool updateSubject(int id, const std::string& newName);
+    bool removeSubject(int id);
+
     int addClass(const std::string& name, int studentCount);
+    bool updateClass(int id, const std::string& newName, int studentCount);
+    bool removeClass(int id);
+
     int addRoom(const std::string& name, int capacity, int roomTypeId);
+    bool updateRoom(int id, const std::string& newName, int capacity, int roomTypeId);
+    bool removeRoom(int id);
+
     bool addLesson(int teacherId, int subjectId, int classId, int periodsPerWeek,
                    int blockSize = 1, int maxPerDay = 0);
 

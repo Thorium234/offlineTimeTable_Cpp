@@ -1,0 +1,8 @@
+/home/thorium/Desktop/programming/2026/c++Projects/timetableGen/build/CMakeFiles/timetableGen.dir
+/home/thorium/Desktop/programming/2026/c++Projects/timetableGen/build/CMakeFiles/timetableGenGui.dir
+/home/thorium/Desktop/programming/2026/c++Projects/timetableGen/build/CMakeFiles/edit_cache.dir
+/home/thorium/Desktop/programming/2026/c++Projects/timetableGen/build/CMakeFiles/rebuild_cache.dir
+/home/thorium/Desktop/programming/2026/c++Projects/timetableGen/build/CMakeFiles/timetableGen_autogen_timestamp_deps.dir
+/home/thorium/Desktop/programming/2026/c++Projects/timetableGen/build/CMakeFiles/timetableGen_autogen.dir
+/home/thorium/Desktop/programming/2026/c++Projects/timetableGen/build/CMakeFiles/timetableGenGui_autogen_timestamp_deps.dir
+/home/thorium/Desktop/programming/2026/c++Projects/timetableGen/build/CMakeFiles/timetableGenGui_autogen.dir

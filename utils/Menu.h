@@ -2,6 +2,7 @@
 #include "../services/DataManager.h"
 #include "../services/TimetableEngine.h"
 #include "../timetable/Timetable.h"
+#include <string>
 
 class Menu {
 private:

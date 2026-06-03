@@ -1,6 +1,6 @@
 CXX = g++
-CXXFLAGS = -std=c++17 -Wall -Wextra -O2
-
+CXXFLAGS = -std=c++17 -Wall -Wextra -O2 $(shell pkg-config --cflags Qt5Widgets Qt5Sql)
+LDFLAGS = $(shell pkg-config --libs Qt5Widgets Qt5Sql)
 TARGET = timetableGen
 SRCS = main.cpp \
        services/DataManager.cpp \
