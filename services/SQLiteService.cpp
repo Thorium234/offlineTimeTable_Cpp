@@ -1,6 +1,9 @@
 #include "SQLiteService.h"
+#include "../utils/PathUtil.h"
 #include <QVariant>
 #include <QDebug>
+#include <QDir>
+#include <QFileInfo>
 
 SQLiteService::SQLiteService() {}
 SQLiteService::~SQLiteService() {
@@ -10,8 +13,19 @@ SQLiteService::~SQLiteService() {
 }
 
 bool SQLiteService::open(const QString &path) {
+    QString resolvedPath = PathUtil::resolvePath(path);
+    
+    // Ensure parent directory exists
+    QFileInfo fileInfo(resolvedPath);
+    QDir dir = fileInfo.dir();
+    if (!dir.exists()) {
+        if (!dir.mkpath(".")) {
+            qWarning() << "Failed to create database directory:" << dir.absolutePath();
+        }
+    }
+
     db = QSqlDatabase::addDatabase("QSQLITE");
-    db.setDatabaseName(path);
+    db.setDatabaseName(resolvedPath);
     if (!db.open()) {
         qWarning() << "Failed to open SQLite database:" << db.lastError().text();
         return false;

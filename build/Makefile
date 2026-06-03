@@ -130,17 +130,17 @@ timetableGen/fast:
 .PHONY : timetableGen/fast
 
 #=============================================================================
-# Target rules for targets named timetableGenGui
+# Target rules for targets named test_runner
 
 # Build rule for target.
-timetableGenGui: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 timetableGenGui
-.PHONY : timetableGenGui
+test_runner: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test_runner
+.PHONY : test_runner
 
 # fast build rule for target.
-timetableGenGui/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/timetableGenGui.dir/build.make CMakeFiles/timetableGenGui.dir/build
-.PHONY : timetableGenGui/fast
+test_runner/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_runner.dir/build.make CMakeFiles/test_runner.dir/build
+.PHONY : test_runner/fast
 
 #=============================================================================
 # Target rules for targets named timetableGen_autogen_timestamp_deps
@@ -169,37 +169,37 @@ timetableGen_autogen/fast:
 .PHONY : timetableGen_autogen/fast
 
 #=============================================================================
-# Target rules for targets named timetableGenGui_autogen_timestamp_deps
+# Target rules for targets named test_runner_autogen_timestamp_deps
 
 # Build rule for target.
-timetableGenGui_autogen_timestamp_deps: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 timetableGenGui_autogen_timestamp_deps
-.PHONY : timetableGenGui_autogen_timestamp_deps
+test_runner_autogen_timestamp_deps: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test_runner_autogen_timestamp_deps
+.PHONY : test_runner_autogen_timestamp_deps
 
 # fast build rule for target.
-timetableGenGui_autogen_timestamp_deps/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/timetableGenGui_autogen_timestamp_deps.dir/build.make CMakeFiles/timetableGenGui_autogen_timestamp_deps.dir/build
-.PHONY : timetableGenGui_autogen_timestamp_deps/fast
+test_runner_autogen_timestamp_deps/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_runner_autogen_timestamp_deps.dir/build.make CMakeFiles/test_runner_autogen_timestamp_deps.dir/build
+.PHONY : test_runner_autogen_timestamp_deps/fast
 
 #=============================================================================
-# Target rules for targets named timetableGenGui_autogen
+# Target rules for targets named test_runner_autogen
 
 # Build rule for target.
-timetableGenGui_autogen: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 timetableGenGui_autogen
-.PHONY : timetableGenGui_autogen
+test_runner_autogen: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test_runner_autogen
+.PHONY : test_runner_autogen
 
 # fast build rule for target.
-timetableGenGui_autogen/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/timetableGenGui_autogen.dir/build.make CMakeFiles/timetableGenGui_autogen.dir/build
-.PHONY : timetableGenGui_autogen/fast
+test_runner_autogen/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_runner_autogen.dir/build.make CMakeFiles/test_runner_autogen.dir/build
+.PHONY : test_runner_autogen/fast
 
 gui/MainWindow.o: gui/MainWindow.cpp.o
 .PHONY : gui/MainWindow.o
 
 # target to build an object file
 gui/MainWindow.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/timetableGenGui.dir/build.make CMakeFiles/timetableGenGui.dir/gui/MainWindow.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/timetableGen.dir/build.make CMakeFiles/timetableGen.dir/gui/MainWindow.cpp.o
 .PHONY : gui/MainWindow.cpp.o
 
 gui/MainWindow.i: gui/MainWindow.cpp.i
@@ -207,7 +207,7 @@ gui/MainWindow.i: gui/MainWindow.cpp.i
 
 # target to preprocess a source file
 gui/MainWindow.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/timetableGenGui.dir/build.make CMakeFiles/timetableGenGui.dir/gui/MainWindow.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/timetableGen.dir/build.make CMakeFiles/timetableGen.dir/gui/MainWindow.cpp.i
 .PHONY : gui/MainWindow.cpp.i
 
 gui/MainWindow.s: gui/MainWindow.cpp.s
@@ -215,7 +215,7 @@ gui/MainWindow.s: gui/MainWindow.cpp.s
 
 # target to generate assembly for a file
 gui/MainWindow.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/timetableGenGui.dir/build.make CMakeFiles/timetableGenGui.dir/gui/MainWindow.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/timetableGen.dir/build.make CMakeFiles/timetableGen.dir/gui/MainWindow.cpp.s
 .PHONY : gui/MainWindow.cpp.s
 
 gui/classes/ClassDialog.o: gui/classes/ClassDialog.cpp.o
@@ -223,7 +223,7 @@ gui/classes/ClassDialog.o: gui/classes/ClassDialog.cpp.o
 
 # target to build an object file
 gui/classes/ClassDialog.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/timetableGenGui.dir/build.make CMakeFiles/timetableGenGui.dir/gui/classes/ClassDialog.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/timetableGen.dir/build.make CMakeFiles/timetableGen.dir/gui/classes/ClassDialog.cpp.o
 .PHONY : gui/classes/ClassDialog.cpp.o
 
 gui/classes/ClassDialog.i: gui/classes/ClassDialog.cpp.i
@@ -231,7 +231,7 @@ gui/classes/ClassDialog.i: gui/classes/ClassDialog.cpp.i
 
 # target to preprocess a source file
 gui/classes/ClassDialog.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/timetableGenGui.dir/build.make CMakeFiles/timetableGenGui.dir/gui/classes/ClassDialog.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/timetableGen.dir/build.make CMakeFiles/timetableGen.dir/gui/classes/ClassDialog.cpp.i
 .PHONY : gui/classes/ClassDialog.cpp.i
 
 gui/classes/ClassDialog.s: gui/classes/ClassDialog.cpp.s
@@ -239,7 +239,7 @@ gui/classes/ClassDialog.s: gui/classes/ClassDialog.cpp.s
 
 # target to generate assembly for a file
 gui/classes/ClassDialog.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/timetableGenGui.dir/build.make CMakeFiles/timetableGenGui.dir/gui/classes/ClassDialog.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/timetableGen.dir/build.make CMakeFiles/timetableGen.dir/gui/classes/ClassDialog.cpp.s
 .PHONY : gui/classes/ClassDialog.cpp.s
 
 gui/classes/ClassWidget.o: gui/classes/ClassWidget.cpp.o
@@ -247,7 +247,7 @@ gui/classes/ClassWidget.o: gui/classes/ClassWidget.cpp.o
 
 # target to build an object file
 gui/classes/ClassWidget.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/timetableGenGui.dir/build.make CMakeFiles/timetableGenGui.dir/gui/classes/ClassWidget.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/timetableGen.dir/build.make CMakeFiles/timetableGen.dir/gui/classes/ClassWidget.cpp.o
 .PHONY : gui/classes/ClassWidget.cpp.o
 
 gui/classes/ClassWidget.i: gui/classes/ClassWidget.cpp.i
@@ -255,7 +255,7 @@ gui/classes/ClassWidget.i: gui/classes/ClassWidget.cpp.i
 
 # target to preprocess a source file
 gui/classes/ClassWidget.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/timetableGenGui.dir/build.make CMakeFiles/timetableGenGui.dir/gui/classes/ClassWidget.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/timetableGen.dir/build.make CMakeFiles/timetableGen.dir/gui/classes/ClassWidget.cpp.i
 .PHONY : gui/classes/ClassWidget.cpp.i
 
 gui/classes/ClassWidget.s: gui/classes/ClassWidget.cpp.s
@@ -263,39 +263,39 @@ gui/classes/ClassWidget.s: gui/classes/ClassWidget.cpp.s
 
 # target to generate assembly for a file
 gui/classes/ClassWidget.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/timetableGenGui.dir/build.make CMakeFiles/timetableGenGui.dir/gui/classes/ClassWidget.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/timetableGen.dir/build.make CMakeFiles/timetableGen.dir/gui/classes/ClassWidget.cpp.s
 .PHONY : gui/classes/ClassWidget.cpp.s
 
-gui/main.o: gui/main.cpp.o
-.PHONY : gui/main.o
+gui/dashboard/DashboardWidget.o: gui/dashboard/DashboardWidget.cpp.o
+.PHONY : gui/dashboard/DashboardWidget.o
 
 # target to build an object file
-gui/main.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/timetableGenGui.dir/build.make CMakeFiles/timetableGenGui.dir/gui/main.cpp.o
-.PHONY : gui/main.cpp.o
+gui/dashboard/DashboardWidget.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/timetableGen.dir/build.make CMakeFiles/timetableGen.dir/gui/dashboard/DashboardWidget.cpp.o
+.PHONY : gui/dashboard/DashboardWidget.cpp.o
 
-gui/main.i: gui/main.cpp.i
-.PHONY : gui/main.i
+gui/dashboard/DashboardWidget.i: gui/dashboard/DashboardWidget.cpp.i
+.PHONY : gui/dashboard/DashboardWidget.i
 
 # target to preprocess a source file
-gui/main.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/timetableGenGui.dir/build.make CMakeFiles/timetableGenGui.dir/gui/main.cpp.i
-.PHONY : gui/main.cpp.i
+gui/dashboard/DashboardWidget.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/timetableGen.dir/build.make CMakeFiles/timetableGen.dir/gui/dashboard/DashboardWidget.cpp.i
+.PHONY : gui/dashboard/DashboardWidget.cpp.i
 
-gui/main.s: gui/main.cpp.s
-.PHONY : gui/main.s
+gui/dashboard/DashboardWidget.s: gui/dashboard/DashboardWidget.cpp.s
+.PHONY : gui/dashboard/DashboardWidget.s
 
 # target to generate assembly for a file
-gui/main.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/timetableGenGui.dir/build.make CMakeFiles/timetableGenGui.dir/gui/main.cpp.s
-.PHONY : gui/main.cpp.s
+gui/dashboard/DashboardWidget.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/timetableGen.dir/build.make CMakeFiles/timetableGen.dir/gui/dashboard/DashboardWidget.cpp.s
+.PHONY : gui/dashboard/DashboardWidget.cpp.s
 
 gui/rooms/RoomDialog.o: gui/rooms/RoomDialog.cpp.o
 .PHONY : gui/rooms/RoomDialog.o
 
 # target to build an object file
 gui/rooms/RoomDialog.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/timetableGenGui.dir/build.make CMakeFiles/timetableGenGui.dir/gui/rooms/RoomDialog.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/timetableGen.dir/build.make CMakeFiles/timetableGen.dir/gui/rooms/RoomDialog.cpp.o
 .PHONY : gui/rooms/RoomDialog.cpp.o
 
 gui/rooms/RoomDialog.i: gui/rooms/RoomDialog.cpp.i
@@ -303,7 +303,7 @@ gui/rooms/RoomDialog.i: gui/rooms/RoomDialog.cpp.i
 
 # target to preprocess a source file
 gui/rooms/RoomDialog.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/timetableGenGui.dir/build.make CMakeFiles/timetableGenGui.dir/gui/rooms/RoomDialog.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/timetableGen.dir/build.make CMakeFiles/timetableGen.dir/gui/rooms/RoomDialog.cpp.i
 .PHONY : gui/rooms/RoomDialog.cpp.i
 
 gui/rooms/RoomDialog.s: gui/rooms/RoomDialog.cpp.s
@@ -311,7 +311,7 @@ gui/rooms/RoomDialog.s: gui/rooms/RoomDialog.cpp.s
 
 # target to generate assembly for a file
 gui/rooms/RoomDialog.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/timetableGenGui.dir/build.make CMakeFiles/timetableGenGui.dir/gui/rooms/RoomDialog.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/timetableGen.dir/build.make CMakeFiles/timetableGen.dir/gui/rooms/RoomDialog.cpp.s
 .PHONY : gui/rooms/RoomDialog.cpp.s
 
 gui/rooms/RoomWidget.o: gui/rooms/RoomWidget.cpp.o
@@ -319,7 +319,7 @@ gui/rooms/RoomWidget.o: gui/rooms/RoomWidget.cpp.o
 
 # target to build an object file
 gui/rooms/RoomWidget.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/timetableGenGui.dir/build.make CMakeFiles/timetableGenGui.dir/gui/rooms/RoomWidget.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/timetableGen.dir/build.make CMakeFiles/timetableGen.dir/gui/rooms/RoomWidget.cpp.o
 .PHONY : gui/rooms/RoomWidget.cpp.o
 
 gui/rooms/RoomWidget.i: gui/rooms/RoomWidget.cpp.i
@@ -327,7 +327,7 @@ gui/rooms/RoomWidget.i: gui/rooms/RoomWidget.cpp.i
 
 # target to preprocess a source file
 gui/rooms/RoomWidget.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/timetableGenGui.dir/build.make CMakeFiles/timetableGenGui.dir/gui/rooms/RoomWidget.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/timetableGen.dir/build.make CMakeFiles/timetableGen.dir/gui/rooms/RoomWidget.cpp.i
 .PHONY : gui/rooms/RoomWidget.cpp.i
 
 gui/rooms/RoomWidget.s: gui/rooms/RoomWidget.cpp.s
@@ -335,7 +335,7 @@ gui/rooms/RoomWidget.s: gui/rooms/RoomWidget.cpp.s
 
 # target to generate assembly for a file
 gui/rooms/RoomWidget.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/timetableGenGui.dir/build.make CMakeFiles/timetableGenGui.dir/gui/rooms/RoomWidget.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/timetableGen.dir/build.make CMakeFiles/timetableGen.dir/gui/rooms/RoomWidget.cpp.s
 .PHONY : gui/rooms/RoomWidget.cpp.s
 
 gui/subjects/SubjectDialog.o: gui/subjects/SubjectDialog.cpp.o
@@ -343,7 +343,7 @@ gui/subjects/SubjectDialog.o: gui/subjects/SubjectDialog.cpp.o
 
 # target to build an object file
 gui/subjects/SubjectDialog.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/timetableGenGui.dir/build.make CMakeFiles/timetableGenGui.dir/gui/subjects/SubjectDialog.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/timetableGen.dir/build.make CMakeFiles/timetableGen.dir/gui/subjects/SubjectDialog.cpp.o
 .PHONY : gui/subjects/SubjectDialog.cpp.o
 
 gui/subjects/SubjectDialog.i: gui/subjects/SubjectDialog.cpp.i
@@ -351,7 +351,7 @@ gui/subjects/SubjectDialog.i: gui/subjects/SubjectDialog.cpp.i
 
 # target to preprocess a source file
 gui/subjects/SubjectDialog.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/timetableGenGui.dir/build.make CMakeFiles/timetableGenGui.dir/gui/subjects/SubjectDialog.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/timetableGen.dir/build.make CMakeFiles/timetableGen.dir/gui/subjects/SubjectDialog.cpp.i
 .PHONY : gui/subjects/SubjectDialog.cpp.i
 
 gui/subjects/SubjectDialog.s: gui/subjects/SubjectDialog.cpp.s
@@ -359,7 +359,7 @@ gui/subjects/SubjectDialog.s: gui/subjects/SubjectDialog.cpp.s
 
 # target to generate assembly for a file
 gui/subjects/SubjectDialog.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/timetableGenGui.dir/build.make CMakeFiles/timetableGenGui.dir/gui/subjects/SubjectDialog.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/timetableGen.dir/build.make CMakeFiles/timetableGen.dir/gui/subjects/SubjectDialog.cpp.s
 .PHONY : gui/subjects/SubjectDialog.cpp.s
 
 gui/subjects/SubjectWidget.o: gui/subjects/SubjectWidget.cpp.o
@@ -367,7 +367,7 @@ gui/subjects/SubjectWidget.o: gui/subjects/SubjectWidget.cpp.o
 
 # target to build an object file
 gui/subjects/SubjectWidget.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/timetableGenGui.dir/build.make CMakeFiles/timetableGenGui.dir/gui/subjects/SubjectWidget.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/timetableGen.dir/build.make CMakeFiles/timetableGen.dir/gui/subjects/SubjectWidget.cpp.o
 .PHONY : gui/subjects/SubjectWidget.cpp.o
 
 gui/subjects/SubjectWidget.i: gui/subjects/SubjectWidget.cpp.i
@@ -375,7 +375,7 @@ gui/subjects/SubjectWidget.i: gui/subjects/SubjectWidget.cpp.i
 
 # target to preprocess a source file
 gui/subjects/SubjectWidget.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/timetableGenGui.dir/build.make CMakeFiles/timetableGenGui.dir/gui/subjects/SubjectWidget.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/timetableGen.dir/build.make CMakeFiles/timetableGen.dir/gui/subjects/SubjectWidget.cpp.i
 .PHONY : gui/subjects/SubjectWidget.cpp.i
 
 gui/subjects/SubjectWidget.s: gui/subjects/SubjectWidget.cpp.s
@@ -383,7 +383,7 @@ gui/subjects/SubjectWidget.s: gui/subjects/SubjectWidget.cpp.s
 
 # target to generate assembly for a file
 gui/subjects/SubjectWidget.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/timetableGenGui.dir/build.make CMakeFiles/timetableGenGui.dir/gui/subjects/SubjectWidget.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/timetableGen.dir/build.make CMakeFiles/timetableGen.dir/gui/subjects/SubjectWidget.cpp.s
 .PHONY : gui/subjects/SubjectWidget.cpp.s
 
 gui/teachers/TeacherDialog.o: gui/teachers/TeacherDialog.cpp.o
@@ -391,7 +391,7 @@ gui/teachers/TeacherDialog.o: gui/teachers/TeacherDialog.cpp.o
 
 # target to build an object file
 gui/teachers/TeacherDialog.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/timetableGenGui.dir/build.make CMakeFiles/timetableGenGui.dir/gui/teachers/TeacherDialog.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/timetableGen.dir/build.make CMakeFiles/timetableGen.dir/gui/teachers/TeacherDialog.cpp.o
 .PHONY : gui/teachers/TeacherDialog.cpp.o
 
 gui/teachers/TeacherDialog.i: gui/teachers/TeacherDialog.cpp.i
@@ -399,7 +399,7 @@ gui/teachers/TeacherDialog.i: gui/teachers/TeacherDialog.cpp.i
 
 # target to preprocess a source file
 gui/teachers/TeacherDialog.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/timetableGenGui.dir/build.make CMakeFiles/timetableGenGui.dir/gui/teachers/TeacherDialog.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/timetableGen.dir/build.make CMakeFiles/timetableGen.dir/gui/teachers/TeacherDialog.cpp.i
 .PHONY : gui/teachers/TeacherDialog.cpp.i
 
 gui/teachers/TeacherDialog.s: gui/teachers/TeacherDialog.cpp.s
@@ -407,7 +407,7 @@ gui/teachers/TeacherDialog.s: gui/teachers/TeacherDialog.cpp.s
 
 # target to generate assembly for a file
 gui/teachers/TeacherDialog.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/timetableGenGui.dir/build.make CMakeFiles/timetableGenGui.dir/gui/teachers/TeacherDialog.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/timetableGen.dir/build.make CMakeFiles/timetableGen.dir/gui/teachers/TeacherDialog.cpp.s
 .PHONY : gui/teachers/TeacherDialog.cpp.s
 
 gui/teachers/TeacherWidget.o: gui/teachers/TeacherWidget.cpp.o
@@ -415,7 +415,7 @@ gui/teachers/TeacherWidget.o: gui/teachers/TeacherWidget.cpp.o
 
 # target to build an object file
 gui/teachers/TeacherWidget.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/timetableGenGui.dir/build.make CMakeFiles/timetableGenGui.dir/gui/teachers/TeacherWidget.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/timetableGen.dir/build.make CMakeFiles/timetableGen.dir/gui/teachers/TeacherWidget.cpp.o
 .PHONY : gui/teachers/TeacherWidget.cpp.o
 
 gui/teachers/TeacherWidget.i: gui/teachers/TeacherWidget.cpp.i
@@ -423,7 +423,7 @@ gui/teachers/TeacherWidget.i: gui/teachers/TeacherWidget.cpp.i
 
 # target to preprocess a source file
 gui/teachers/TeacherWidget.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/timetableGenGui.dir/build.make CMakeFiles/timetableGenGui.dir/gui/teachers/TeacherWidget.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/timetableGen.dir/build.make CMakeFiles/timetableGen.dir/gui/teachers/TeacherWidget.cpp.i
 .PHONY : gui/teachers/TeacherWidget.cpp.i
 
 gui/teachers/TeacherWidget.s: gui/teachers/TeacherWidget.cpp.s
@@ -431,7 +431,7 @@ gui/teachers/TeacherWidget.s: gui/teachers/TeacherWidget.cpp.s
 
 # target to generate assembly for a file
 gui/teachers/TeacherWidget.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/timetableGenGui.dir/build.make CMakeFiles/timetableGenGui.dir/gui/teachers/TeacherWidget.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/timetableGen.dir/build.make CMakeFiles/timetableGen.dir/gui/teachers/TeacherWidget.cpp.s
 .PHONY : gui/teachers/TeacherWidget.cpp.s
 
 main.o: main.cpp.o
@@ -464,7 +464,7 @@ services/AnalyticsService.o: services/AnalyticsService.cpp.o
 # target to build an object file
 services/AnalyticsService.cpp.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/timetableGen.dir/build.make CMakeFiles/timetableGen.dir/services/AnalyticsService.cpp.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/timetableGenGui.dir/build.make CMakeFiles/timetableGenGui.dir/services/AnalyticsService.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_runner.dir/build.make CMakeFiles/test_runner.dir/services/AnalyticsService.cpp.o
 .PHONY : services/AnalyticsService.cpp.o
 
 services/AnalyticsService.i: services/AnalyticsService.cpp.i
@@ -473,7 +473,7 @@ services/AnalyticsService.i: services/AnalyticsService.cpp.i
 # target to preprocess a source file
 services/AnalyticsService.cpp.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/timetableGen.dir/build.make CMakeFiles/timetableGen.dir/services/AnalyticsService.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/timetableGenGui.dir/build.make CMakeFiles/timetableGenGui.dir/services/AnalyticsService.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_runner.dir/build.make CMakeFiles/test_runner.dir/services/AnalyticsService.cpp.i
 .PHONY : services/AnalyticsService.cpp.i
 
 services/AnalyticsService.s: services/AnalyticsService.cpp.s
@@ -482,7 +482,7 @@ services/AnalyticsService.s: services/AnalyticsService.cpp.s
 # target to generate assembly for a file
 services/AnalyticsService.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/timetableGen.dir/build.make CMakeFiles/timetableGen.dir/services/AnalyticsService.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/timetableGenGui.dir/build.make CMakeFiles/timetableGenGui.dir/services/AnalyticsService.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_runner.dir/build.make CMakeFiles/test_runner.dir/services/AnalyticsService.cpp.s
 .PHONY : services/AnalyticsService.cpp.s
 
 services/BacktrackingSolver.o: services/BacktrackingSolver.cpp.o
@@ -491,7 +491,7 @@ services/BacktrackingSolver.o: services/BacktrackingSolver.cpp.o
 # target to build an object file
 services/BacktrackingSolver.cpp.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/timetableGen.dir/build.make CMakeFiles/timetableGen.dir/services/BacktrackingSolver.cpp.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/timetableGenGui.dir/build.make CMakeFiles/timetableGenGui.dir/services/BacktrackingSolver.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_runner.dir/build.make CMakeFiles/test_runner.dir/services/BacktrackingSolver.cpp.o
 .PHONY : services/BacktrackingSolver.cpp.o
 
 services/BacktrackingSolver.i: services/BacktrackingSolver.cpp.i
@@ -500,7 +500,7 @@ services/BacktrackingSolver.i: services/BacktrackingSolver.cpp.i
 # target to preprocess a source file
 services/BacktrackingSolver.cpp.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/timetableGen.dir/build.make CMakeFiles/timetableGen.dir/services/BacktrackingSolver.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/timetableGenGui.dir/build.make CMakeFiles/timetableGenGui.dir/services/BacktrackingSolver.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_runner.dir/build.make CMakeFiles/test_runner.dir/services/BacktrackingSolver.cpp.i
 .PHONY : services/BacktrackingSolver.cpp.i
 
 services/BacktrackingSolver.s: services/BacktrackingSolver.cpp.s
@@ -509,7 +509,7 @@ services/BacktrackingSolver.s: services/BacktrackingSolver.cpp.s
 # target to generate assembly for a file
 services/BacktrackingSolver.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/timetableGen.dir/build.make CMakeFiles/timetableGen.dir/services/BacktrackingSolver.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/timetableGenGui.dir/build.make CMakeFiles/timetableGenGui.dir/services/BacktrackingSolver.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_runner.dir/build.make CMakeFiles/test_runner.dir/services/BacktrackingSolver.cpp.s
 .PHONY : services/BacktrackingSolver.cpp.s
 
 services/Benchmark.o: services/Benchmark.cpp.o
@@ -518,7 +518,7 @@ services/Benchmark.o: services/Benchmark.cpp.o
 # target to build an object file
 services/Benchmark.cpp.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/timetableGen.dir/build.make CMakeFiles/timetableGen.dir/services/Benchmark.cpp.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/timetableGenGui.dir/build.make CMakeFiles/timetableGenGui.dir/services/Benchmark.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_runner.dir/build.make CMakeFiles/test_runner.dir/services/Benchmark.cpp.o
 .PHONY : services/Benchmark.cpp.o
 
 services/Benchmark.i: services/Benchmark.cpp.i
@@ -527,7 +527,7 @@ services/Benchmark.i: services/Benchmark.cpp.i
 # target to preprocess a source file
 services/Benchmark.cpp.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/timetableGen.dir/build.make CMakeFiles/timetableGen.dir/services/Benchmark.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/timetableGenGui.dir/build.make CMakeFiles/timetableGenGui.dir/services/Benchmark.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_runner.dir/build.make CMakeFiles/test_runner.dir/services/Benchmark.cpp.i
 .PHONY : services/Benchmark.cpp.i
 
 services/Benchmark.s: services/Benchmark.cpp.s
@@ -536,7 +536,7 @@ services/Benchmark.s: services/Benchmark.cpp.s
 # target to generate assembly for a file
 services/Benchmark.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/timetableGen.dir/build.make CMakeFiles/timetableGen.dir/services/Benchmark.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/timetableGenGui.dir/build.make CMakeFiles/timetableGenGui.dir/services/Benchmark.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_runner.dir/build.make CMakeFiles/test_runner.dir/services/Benchmark.cpp.s
 .PHONY : services/Benchmark.cpp.s
 
 services/DataManager.o: services/DataManager.cpp.o
@@ -545,7 +545,7 @@ services/DataManager.o: services/DataManager.cpp.o
 # target to build an object file
 services/DataManager.cpp.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/timetableGen.dir/build.make CMakeFiles/timetableGen.dir/services/DataManager.cpp.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/timetableGenGui.dir/build.make CMakeFiles/timetableGenGui.dir/services/DataManager.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_runner.dir/build.make CMakeFiles/test_runner.dir/services/DataManager.cpp.o
 .PHONY : services/DataManager.cpp.o
 
 services/DataManager.i: services/DataManager.cpp.i
@@ -554,7 +554,7 @@ services/DataManager.i: services/DataManager.cpp.i
 # target to preprocess a source file
 services/DataManager.cpp.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/timetableGen.dir/build.make CMakeFiles/timetableGen.dir/services/DataManager.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/timetableGenGui.dir/build.make CMakeFiles/timetableGenGui.dir/services/DataManager.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_runner.dir/build.make CMakeFiles/test_runner.dir/services/DataManager.cpp.i
 .PHONY : services/DataManager.cpp.i
 
 services/DataManager.s: services/DataManager.cpp.s
@@ -563,7 +563,7 @@ services/DataManager.s: services/DataManager.cpp.s
 # target to generate assembly for a file
 services/DataManager.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/timetableGen.dir/build.make CMakeFiles/timetableGen.dir/services/DataManager.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/timetableGenGui.dir/build.make CMakeFiles/timetableGenGui.dir/services/DataManager.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_runner.dir/build.make CMakeFiles/test_runner.dir/services/DataManager.cpp.s
 .PHONY : services/DataManager.cpp.s
 
 services/DomainTracker.o: services/DomainTracker.cpp.o
@@ -572,7 +572,7 @@ services/DomainTracker.o: services/DomainTracker.cpp.o
 # target to build an object file
 services/DomainTracker.cpp.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/timetableGen.dir/build.make CMakeFiles/timetableGen.dir/services/DomainTracker.cpp.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/timetableGenGui.dir/build.make CMakeFiles/timetableGenGui.dir/services/DomainTracker.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_runner.dir/build.make CMakeFiles/test_runner.dir/services/DomainTracker.cpp.o
 .PHONY : services/DomainTracker.cpp.o
 
 services/DomainTracker.i: services/DomainTracker.cpp.i
@@ -581,7 +581,7 @@ services/DomainTracker.i: services/DomainTracker.cpp.i
 # target to preprocess a source file
 services/DomainTracker.cpp.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/timetableGen.dir/build.make CMakeFiles/timetableGen.dir/services/DomainTracker.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/timetableGenGui.dir/build.make CMakeFiles/timetableGenGui.dir/services/DomainTracker.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_runner.dir/build.make CMakeFiles/test_runner.dir/services/DomainTracker.cpp.i
 .PHONY : services/DomainTracker.cpp.i
 
 services/DomainTracker.s: services/DomainTracker.cpp.s
@@ -590,7 +590,7 @@ services/DomainTracker.s: services/DomainTracker.cpp.s
 # target to generate assembly for a file
 services/DomainTracker.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/timetableGen.dir/build.make CMakeFiles/timetableGen.dir/services/DomainTracker.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/timetableGenGui.dir/build.make CMakeFiles/timetableGenGui.dir/services/DomainTracker.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_runner.dir/build.make CMakeFiles/test_runner.dir/services/DomainTracker.cpp.s
 .PHONY : services/DomainTracker.cpp.s
 
 services/ExportService.o: services/ExportService.cpp.o
@@ -599,7 +599,7 @@ services/ExportService.o: services/ExportService.cpp.o
 # target to build an object file
 services/ExportService.cpp.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/timetableGen.dir/build.make CMakeFiles/timetableGen.dir/services/ExportService.cpp.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/timetableGenGui.dir/build.make CMakeFiles/timetableGenGui.dir/services/ExportService.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_runner.dir/build.make CMakeFiles/test_runner.dir/services/ExportService.cpp.o
 .PHONY : services/ExportService.cpp.o
 
 services/ExportService.i: services/ExportService.cpp.i
@@ -608,7 +608,7 @@ services/ExportService.i: services/ExportService.cpp.i
 # target to preprocess a source file
 services/ExportService.cpp.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/timetableGen.dir/build.make CMakeFiles/timetableGen.dir/services/ExportService.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/timetableGenGui.dir/build.make CMakeFiles/timetableGenGui.dir/services/ExportService.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_runner.dir/build.make CMakeFiles/test_runner.dir/services/ExportService.cpp.i
 .PHONY : services/ExportService.cpp.i
 
 services/ExportService.s: services/ExportService.cpp.s
@@ -617,7 +617,7 @@ services/ExportService.s: services/ExportService.cpp.s
 # target to generate assembly for a file
 services/ExportService.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/timetableGen.dir/build.make CMakeFiles/timetableGen.dir/services/ExportService.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/timetableGenGui.dir/build.make CMakeFiles/timetableGenGui.dir/services/ExportService.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_runner.dir/build.make CMakeFiles/test_runner.dir/services/ExportService.cpp.s
 .PHONY : services/ExportService.cpp.s
 
 services/FeasibilityChecker.o: services/FeasibilityChecker.cpp.o
@@ -626,7 +626,7 @@ services/FeasibilityChecker.o: services/FeasibilityChecker.cpp.o
 # target to build an object file
 services/FeasibilityChecker.cpp.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/timetableGen.dir/build.make CMakeFiles/timetableGen.dir/services/FeasibilityChecker.cpp.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/timetableGenGui.dir/build.make CMakeFiles/timetableGenGui.dir/services/FeasibilityChecker.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_runner.dir/build.make CMakeFiles/test_runner.dir/services/FeasibilityChecker.cpp.o
 .PHONY : services/FeasibilityChecker.cpp.o
 
 services/FeasibilityChecker.i: services/FeasibilityChecker.cpp.i
@@ -635,7 +635,7 @@ services/FeasibilityChecker.i: services/FeasibilityChecker.cpp.i
 # target to preprocess a source file
 services/FeasibilityChecker.cpp.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/timetableGen.dir/build.make CMakeFiles/timetableGen.dir/services/FeasibilityChecker.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/timetableGenGui.dir/build.make CMakeFiles/timetableGenGui.dir/services/FeasibilityChecker.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_runner.dir/build.make CMakeFiles/test_runner.dir/services/FeasibilityChecker.cpp.i
 .PHONY : services/FeasibilityChecker.cpp.i
 
 services/FeasibilityChecker.s: services/FeasibilityChecker.cpp.s
@@ -644,7 +644,7 @@ services/FeasibilityChecker.s: services/FeasibilityChecker.cpp.s
 # target to generate assembly for a file
 services/FeasibilityChecker.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/timetableGen.dir/build.make CMakeFiles/timetableGen.dir/services/FeasibilityChecker.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/timetableGenGui.dir/build.make CMakeFiles/timetableGenGui.dir/services/FeasibilityChecker.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_runner.dir/build.make CMakeFiles/test_runner.dir/services/FeasibilityChecker.cpp.s
 .PHONY : services/FeasibilityChecker.cpp.s
 
 services/GreedySolver.o: services/GreedySolver.cpp.o
@@ -653,7 +653,7 @@ services/GreedySolver.o: services/GreedySolver.cpp.o
 # target to build an object file
 services/GreedySolver.cpp.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/timetableGen.dir/build.make CMakeFiles/timetableGen.dir/services/GreedySolver.cpp.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/timetableGenGui.dir/build.make CMakeFiles/timetableGenGui.dir/services/GreedySolver.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_runner.dir/build.make CMakeFiles/test_runner.dir/services/GreedySolver.cpp.o
 .PHONY : services/GreedySolver.cpp.o
 
 services/GreedySolver.i: services/GreedySolver.cpp.i
@@ -662,7 +662,7 @@ services/GreedySolver.i: services/GreedySolver.cpp.i
 # target to preprocess a source file
 services/GreedySolver.cpp.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/timetableGen.dir/build.make CMakeFiles/timetableGen.dir/services/GreedySolver.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/timetableGenGui.dir/build.make CMakeFiles/timetableGenGui.dir/services/GreedySolver.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_runner.dir/build.make CMakeFiles/test_runner.dir/services/GreedySolver.cpp.i
 .PHONY : services/GreedySolver.cpp.i
 
 services/GreedySolver.s: services/GreedySolver.cpp.s
@@ -671,7 +671,7 @@ services/GreedySolver.s: services/GreedySolver.cpp.s
 # target to generate assembly for a file
 services/GreedySolver.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/timetableGen.dir/build.make CMakeFiles/timetableGen.dir/services/GreedySolver.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/timetableGenGui.dir/build.make CMakeFiles/timetableGenGui.dir/services/GreedySolver.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_runner.dir/build.make CMakeFiles/test_runner.dir/services/GreedySolver.cpp.s
 .PHONY : services/GreedySolver.cpp.s
 
 services/ResourceTracker.o: services/ResourceTracker.cpp.o
@@ -680,7 +680,7 @@ services/ResourceTracker.o: services/ResourceTracker.cpp.o
 # target to build an object file
 services/ResourceTracker.cpp.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/timetableGen.dir/build.make CMakeFiles/timetableGen.dir/services/ResourceTracker.cpp.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/timetableGenGui.dir/build.make CMakeFiles/timetableGenGui.dir/services/ResourceTracker.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_runner.dir/build.make CMakeFiles/test_runner.dir/services/ResourceTracker.cpp.o
 .PHONY : services/ResourceTracker.cpp.o
 
 services/ResourceTracker.i: services/ResourceTracker.cpp.i
@@ -689,7 +689,7 @@ services/ResourceTracker.i: services/ResourceTracker.cpp.i
 # target to preprocess a source file
 services/ResourceTracker.cpp.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/timetableGen.dir/build.make CMakeFiles/timetableGen.dir/services/ResourceTracker.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/timetableGenGui.dir/build.make CMakeFiles/timetableGenGui.dir/services/ResourceTracker.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_runner.dir/build.make CMakeFiles/test_runner.dir/services/ResourceTracker.cpp.i
 .PHONY : services/ResourceTracker.cpp.i
 
 services/ResourceTracker.s: services/ResourceTracker.cpp.s
@@ -698,7 +698,7 @@ services/ResourceTracker.s: services/ResourceTracker.cpp.s
 # target to generate assembly for a file
 services/ResourceTracker.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/timetableGen.dir/build.make CMakeFiles/timetableGen.dir/services/ResourceTracker.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/timetableGenGui.dir/build.make CMakeFiles/timetableGenGui.dir/services/ResourceTracker.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_runner.dir/build.make CMakeFiles/test_runner.dir/services/ResourceTracker.cpp.s
 .PHONY : services/ResourceTracker.cpp.s
 
 services/SQLiteService.o: services/SQLiteService.cpp.o
@@ -707,7 +707,7 @@ services/SQLiteService.o: services/SQLiteService.cpp.o
 # target to build an object file
 services/SQLiteService.cpp.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/timetableGen.dir/build.make CMakeFiles/timetableGen.dir/services/SQLiteService.cpp.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/timetableGenGui.dir/build.make CMakeFiles/timetableGenGui.dir/services/SQLiteService.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_runner.dir/build.make CMakeFiles/test_runner.dir/services/SQLiteService.cpp.o
 .PHONY : services/SQLiteService.cpp.o
 
 services/SQLiteService.i: services/SQLiteService.cpp.i
@@ -716,7 +716,7 @@ services/SQLiteService.i: services/SQLiteService.cpp.i
 # target to preprocess a source file
 services/SQLiteService.cpp.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/timetableGen.dir/build.make CMakeFiles/timetableGen.dir/services/SQLiteService.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/timetableGenGui.dir/build.make CMakeFiles/timetableGenGui.dir/services/SQLiteService.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_runner.dir/build.make CMakeFiles/test_runner.dir/services/SQLiteService.cpp.i
 .PHONY : services/SQLiteService.cpp.i
 
 services/SQLiteService.s: services/SQLiteService.cpp.s
@@ -725,7 +725,7 @@ services/SQLiteService.s: services/SQLiteService.cpp.s
 # target to generate assembly for a file
 services/SQLiteService.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/timetableGen.dir/build.make CMakeFiles/timetableGen.dir/services/SQLiteService.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/timetableGenGui.dir/build.make CMakeFiles/timetableGenGui.dir/services/SQLiteService.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_runner.dir/build.make CMakeFiles/test_runner.dir/services/SQLiteService.cpp.s
 .PHONY : services/SQLiteService.cpp.s
 
 services/TimetableEngine.o: services/TimetableEngine.cpp.o
@@ -734,7 +734,7 @@ services/TimetableEngine.o: services/TimetableEngine.cpp.o
 # target to build an object file
 services/TimetableEngine.cpp.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/timetableGen.dir/build.make CMakeFiles/timetableGen.dir/services/TimetableEngine.cpp.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/timetableGenGui.dir/build.make CMakeFiles/timetableGenGui.dir/services/TimetableEngine.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_runner.dir/build.make CMakeFiles/test_runner.dir/services/TimetableEngine.cpp.o
 .PHONY : services/TimetableEngine.cpp.o
 
 services/TimetableEngine.i: services/TimetableEngine.cpp.i
@@ -743,7 +743,7 @@ services/TimetableEngine.i: services/TimetableEngine.cpp.i
 # target to preprocess a source file
 services/TimetableEngine.cpp.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/timetableGen.dir/build.make CMakeFiles/timetableGen.dir/services/TimetableEngine.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/timetableGenGui.dir/build.make CMakeFiles/timetableGenGui.dir/services/TimetableEngine.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_runner.dir/build.make CMakeFiles/test_runner.dir/services/TimetableEngine.cpp.i
 .PHONY : services/TimetableEngine.cpp.i
 
 services/TimetableEngine.s: services/TimetableEngine.cpp.s
@@ -752,7 +752,7 @@ services/TimetableEngine.s: services/TimetableEngine.cpp.s
 # target to generate assembly for a file
 services/TimetableEngine.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/timetableGen.dir/build.make CMakeFiles/timetableGen.dir/services/TimetableEngine.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/timetableGenGui.dir/build.make CMakeFiles/timetableGenGui.dir/services/TimetableEngine.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_runner.dir/build.make CMakeFiles/test_runner.dir/services/TimetableEngine.cpp.s
 .PHONY : services/TimetableEngine.cpp.s
 
 services/TimetableEvaluator.o: services/TimetableEvaluator.cpp.o
@@ -761,7 +761,7 @@ services/TimetableEvaluator.o: services/TimetableEvaluator.cpp.o
 # target to build an object file
 services/TimetableEvaluator.cpp.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/timetableGen.dir/build.make CMakeFiles/timetableGen.dir/services/TimetableEvaluator.cpp.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/timetableGenGui.dir/build.make CMakeFiles/timetableGenGui.dir/services/TimetableEvaluator.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_runner.dir/build.make CMakeFiles/test_runner.dir/services/TimetableEvaluator.cpp.o
 .PHONY : services/TimetableEvaluator.cpp.o
 
 services/TimetableEvaluator.i: services/TimetableEvaluator.cpp.i
@@ -770,7 +770,7 @@ services/TimetableEvaluator.i: services/TimetableEvaluator.cpp.i
 # target to preprocess a source file
 services/TimetableEvaluator.cpp.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/timetableGen.dir/build.make CMakeFiles/timetableGen.dir/services/TimetableEvaluator.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/timetableGenGui.dir/build.make CMakeFiles/timetableGenGui.dir/services/TimetableEvaluator.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_runner.dir/build.make CMakeFiles/test_runner.dir/services/TimetableEvaluator.cpp.i
 .PHONY : services/TimetableEvaluator.cpp.i
 
 services/TimetableEvaluator.s: services/TimetableEvaluator.cpp.s
@@ -779,8 +779,56 @@ services/TimetableEvaluator.s: services/TimetableEvaluator.cpp.s
 # target to generate assembly for a file
 services/TimetableEvaluator.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/timetableGen.dir/build.make CMakeFiles/timetableGen.dir/services/TimetableEvaluator.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/timetableGenGui.dir/build.make CMakeFiles/timetableGenGui.dir/services/TimetableEvaluator.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_runner.dir/build.make CMakeFiles/test_runner.dir/services/TimetableEvaluator.cpp.s
 .PHONY : services/TimetableEvaluator.cpp.s
+
+test_runner_autogen/mocs_compilation.o: test_runner_autogen/mocs_compilation.cpp.o
+.PHONY : test_runner_autogen/mocs_compilation.o
+
+# target to build an object file
+test_runner_autogen/mocs_compilation.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_runner.dir/build.make CMakeFiles/test_runner.dir/test_runner_autogen/mocs_compilation.cpp.o
+.PHONY : test_runner_autogen/mocs_compilation.cpp.o
+
+test_runner_autogen/mocs_compilation.i: test_runner_autogen/mocs_compilation.cpp.i
+.PHONY : test_runner_autogen/mocs_compilation.i
+
+# target to preprocess a source file
+test_runner_autogen/mocs_compilation.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_runner.dir/build.make CMakeFiles/test_runner.dir/test_runner_autogen/mocs_compilation.cpp.i
+.PHONY : test_runner_autogen/mocs_compilation.cpp.i
+
+test_runner_autogen/mocs_compilation.s: test_runner_autogen/mocs_compilation.cpp.s
+.PHONY : test_runner_autogen/mocs_compilation.s
+
+# target to generate assembly for a file
+test_runner_autogen/mocs_compilation.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_runner.dir/build.make CMakeFiles/test_runner.dir/test_runner_autogen/mocs_compilation.cpp.s
+.PHONY : test_runner_autogen/mocs_compilation.cpp.s
+
+tests/test_runner.o: tests/test_runner.cpp.o
+.PHONY : tests/test_runner.o
+
+# target to build an object file
+tests/test_runner.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_runner.dir/build.make CMakeFiles/test_runner.dir/tests/test_runner.cpp.o
+.PHONY : tests/test_runner.cpp.o
+
+tests/test_runner.i: tests/test_runner.cpp.i
+.PHONY : tests/test_runner.i
+
+# target to preprocess a source file
+tests/test_runner.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_runner.dir/build.make CMakeFiles/test_runner.dir/tests/test_runner.cpp.i
+.PHONY : tests/test_runner.cpp.i
+
+tests/test_runner.s: tests/test_runner.cpp.s
+.PHONY : tests/test_runner.s
+
+# target to generate assembly for a file
+tests/test_runner.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_runner.dir/build.make CMakeFiles/test_runner.dir/tests/test_runner.cpp.s
+.PHONY : tests/test_runner.cpp.s
 
 timetable/Timetable.o: timetable/Timetable.cpp.o
 .PHONY : timetable/Timetable.o
@@ -788,7 +836,7 @@ timetable/Timetable.o: timetable/Timetable.cpp.o
 # target to build an object file
 timetable/Timetable.cpp.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/timetableGen.dir/build.make CMakeFiles/timetableGen.dir/timetable/Timetable.cpp.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/timetableGenGui.dir/build.make CMakeFiles/timetableGenGui.dir/timetable/Timetable.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_runner.dir/build.make CMakeFiles/test_runner.dir/timetable/Timetable.cpp.o
 .PHONY : timetable/Timetable.cpp.o
 
 timetable/Timetable.i: timetable/Timetable.cpp.i
@@ -797,7 +845,7 @@ timetable/Timetable.i: timetable/Timetable.cpp.i
 # target to preprocess a source file
 timetable/Timetable.cpp.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/timetableGen.dir/build.make CMakeFiles/timetableGen.dir/timetable/Timetable.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/timetableGenGui.dir/build.make CMakeFiles/timetableGenGui.dir/timetable/Timetable.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_runner.dir/build.make CMakeFiles/test_runner.dir/timetable/Timetable.cpp.i
 .PHONY : timetable/Timetable.cpp.i
 
 timetable/Timetable.s: timetable/Timetable.cpp.s
@@ -806,32 +854,8 @@ timetable/Timetable.s: timetable/Timetable.cpp.s
 # target to generate assembly for a file
 timetable/Timetable.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/timetableGen.dir/build.make CMakeFiles/timetableGen.dir/timetable/Timetable.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/timetableGenGui.dir/build.make CMakeFiles/timetableGenGui.dir/timetable/Timetable.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_runner.dir/build.make CMakeFiles/test_runner.dir/timetable/Timetable.cpp.s
 .PHONY : timetable/Timetable.cpp.s
-
-timetableGenGui_autogen/mocs_compilation.o: timetableGenGui_autogen/mocs_compilation.cpp.o
-.PHONY : timetableGenGui_autogen/mocs_compilation.o
-
-# target to build an object file
-timetableGenGui_autogen/mocs_compilation.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/timetableGenGui.dir/build.make CMakeFiles/timetableGenGui.dir/timetableGenGui_autogen/mocs_compilation.cpp.o
-.PHONY : timetableGenGui_autogen/mocs_compilation.cpp.o
-
-timetableGenGui_autogen/mocs_compilation.i: timetableGenGui_autogen/mocs_compilation.cpp.i
-.PHONY : timetableGenGui_autogen/mocs_compilation.i
-
-# target to preprocess a source file
-timetableGenGui_autogen/mocs_compilation.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/timetableGenGui.dir/build.make CMakeFiles/timetableGenGui.dir/timetableGenGui_autogen/mocs_compilation.cpp.i
-.PHONY : timetableGenGui_autogen/mocs_compilation.cpp.i
-
-timetableGenGui_autogen/mocs_compilation.s: timetableGenGui_autogen/mocs_compilation.cpp.s
-.PHONY : timetableGenGui_autogen/mocs_compilation.s
-
-# target to generate assembly for a file
-timetableGenGui_autogen/mocs_compilation.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/timetableGenGui.dir/build.make CMakeFiles/timetableGenGui.dir/timetableGenGui_autogen/mocs_compilation.cpp.s
-.PHONY : timetableGenGui_autogen/mocs_compilation.cpp.s
 
 timetableGen_autogen/mocs_compilation.o: timetableGen_autogen/mocs_compilation.cpp.o
 .PHONY : timetableGen_autogen/mocs_compilation.o
@@ -889,12 +913,12 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
-	@echo "... timetableGenGui_autogen"
-	@echo "... timetableGenGui_autogen_timestamp_deps"
+	@echo "... test_runner_autogen"
+	@echo "... test_runner_autogen_timestamp_deps"
 	@echo "... timetableGen_autogen"
 	@echo "... timetableGen_autogen_timestamp_deps"
+	@echo "... test_runner"
 	@echo "... timetableGen"
-	@echo "... timetableGenGui"
 	@echo "... gui/MainWindow.o"
 	@echo "... gui/MainWindow.i"
 	@echo "... gui/MainWindow.s"
@@ -904,9 +928,9 @@ help:
 	@echo "... gui/classes/ClassWidget.o"
 	@echo "... gui/classes/ClassWidget.i"
 	@echo "... gui/classes/ClassWidget.s"
-	@echo "... gui/main.o"
-	@echo "... gui/main.i"
-	@echo "... gui/main.s"
+	@echo "... gui/dashboard/DashboardWidget.o"
+	@echo "... gui/dashboard/DashboardWidget.i"
+	@echo "... gui/dashboard/DashboardWidget.s"
 	@echo "... gui/rooms/RoomDialog.o"
 	@echo "... gui/rooms/RoomDialog.i"
 	@echo "... gui/rooms/RoomDialog.s"
@@ -964,12 +988,15 @@ help:
 	@echo "... services/TimetableEvaluator.o"
 	@echo "... services/TimetableEvaluator.i"
 	@echo "... services/TimetableEvaluator.s"
+	@echo "... test_runner_autogen/mocs_compilation.o"
+	@echo "... test_runner_autogen/mocs_compilation.i"
+	@echo "... test_runner_autogen/mocs_compilation.s"
+	@echo "... tests/test_runner.o"
+	@echo "... tests/test_runner.i"
+	@echo "... tests/test_runner.s"
 	@echo "... timetable/Timetable.o"
 	@echo "... timetable/Timetable.i"
 	@echo "... timetable/Timetable.s"
-	@echo "... timetableGenGui_autogen/mocs_compilation.o"
-	@echo "... timetableGenGui_autogen/mocs_compilation.i"
-	@echo "... timetableGenGui_autogen/mocs_compilation.s"
 	@echo "... timetableGen_autogen/mocs_compilation.o"
 	@echo "... timetableGen_autogen/mocs_compilation.i"
 	@echo "... timetableGen_autogen/mocs_compilation.s"

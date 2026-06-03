@@ -5,7 +5,7 @@
 #include <QMessageBox>
 #include <QStandardItem>
 
-RoomWidget::RoomWidget(QWidget *parent) : QWidget(parent) {
+RoomWidget::RoomWidget(DataManager *dm, QWidget *parent) : QWidget(parent), dm(dm) {
     setWindowTitle(tr("Room Management"));
     setupUi();
     setupModelAndView();
@@ -39,13 +39,13 @@ void RoomWidget::setupModelAndView() {
     model->setHeaderData(2, Qt::Horizontal, tr("Capacity"));
     model->setHeaderData(3, Qt::Horizontal, tr("Room Type"));
 
-    const auto &rooms = dm.rooms;
+    const auto &rooms = dm->rooms;
     for (const auto &r : rooms) {
         QList<QStandardItem*> rowItems;
         rowItems << new QStandardItem(QString::number(r.id));
         rowItems << new QStandardItem(QString::fromStdString(r.name));
         rowItems << new QStandardItem(QString::number(r.capacity));
-        rowItems << new QStandardItem(QString::fromStdString(dm.getRoomTypeName(r.roomTypeId)));
+        rowItems << new QStandardItem(QString::fromStdString(dm->getRoomTypeName(r.roomTypeId)));
         // We will store the actual roomTypeId in item's UserData if needed, but we can also map it or find it.
         rowItems[3]->setData(r.roomTypeId, Qt::UserRole);
         model->appendRow(rowItems);
@@ -61,7 +61,7 @@ void RoomWidget::connectSignals() {
 }
 
 void RoomWidget::addRoom() {
-    RoomDialog dlg(dm.roomTypes, this);
+    RoomDialog dlg(dm->roomTypes, this);
     if (dlg.exec() == QDialog::Accepted) {
         const QString name = dlg.roomName();
         int capacity = dlg.capacity();
@@ -70,13 +70,13 @@ void RoomWidget::addRoom() {
             QMessageBox::warning(this, tr("Invalid Input"), tr("Room name cannot be empty."));
             return;
         }
-        int newId = dm.addRoom(name.toStdString(), capacity, roomTypeId);
+        int newId = dm->addRoom(name.toStdString(), capacity, roomTypeId);
         if (newId > 0) {
             QList<QStandardItem*> rowItems;
             rowItems << new QStandardItem(QString::number(newId));
             rowItems << new QStandardItem(name);
             rowItems << new QStandardItem(QString::number(capacity));
-            QStandardItem *typeItem = new QStandardItem(QString::fromStdString(dm.getRoomTypeName(roomTypeId)));
+            QStandardItem *typeItem = new QStandardItem(QString::fromStdString(dm->getRoomTypeName(roomTypeId)));
             typeItem->setData(roomTypeId, Qt::UserRole);
             rowItems << typeItem;
             model->appendRow(rowItems);
@@ -98,7 +98,7 @@ void RoomWidget::editRoom() {
     int oldCapacity = model->item(row, 2)->text().toInt();
     int oldRoomTypeId = model->item(row, 3)->data(Qt::UserRole).toInt();
 
-    RoomDialog dlg(dm.roomTypes, this);
+    RoomDialog dlg(dm->roomTypes, this);
     dlg.setRoomName(oldName);
     dlg.setCapacity(oldCapacity);
     dlg.setRoomTypeId(oldRoomTypeId);
@@ -111,10 +111,10 @@ void RoomWidget::editRoom() {
             QMessageBox::warning(this, tr("Invalid Input"), tr("Room name cannot be empty."));
             return;
         }
-        if (dm.updateRoom(id, newName.toStdString(), newCapacity, newRoomTypeId)) {
+        if (dm->updateRoom(id, newName.toStdString(), newCapacity, newRoomTypeId)) {
             model->item(row, 1)->setText(newName);
             model->item(row, 2)->setText(QString::number(newCapacity));
-            model->item(row, 3)->setText(QString::fromStdString(dm.getRoomTypeName(newRoomTypeId)));
+            model->item(row, 3)->setText(QString::fromStdString(dm->getRoomTypeName(newRoomTypeId)));
             model->item(row, 3)->setData(newRoomTypeId, Qt::UserRole);
         } else {
             QMessageBox::warning(this, tr("Update failed"), tr("Could not update the room."));
@@ -132,7 +132,7 @@ void RoomWidget::deleteRoom() {
     int id = model->item(row, 0)->text().toInt();
     if (QMessageBox::question(this, tr("Confirm delete"),
             tr("Delete room with ID %1?").arg(id)) == QMessageBox::Yes) {
-        if (dm.removeRoom(id)) {
+        if (dm->removeRoom(id)) {
             model->removeRow(row);
         } else {
             QMessageBox::warning(this, tr("Delete failed"), tr("Could not delete the room."));

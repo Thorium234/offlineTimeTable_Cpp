@@ -31,18 +31,12 @@ set(COMMON_SRCS
     services/AnalyticsService.cpp
 )
 
-# CLI target
+# Unified target (auto-detects and runs GUI or CLI)
 add_executable(timetableGen
     main.cpp
     utils/Menu.cpp
-    ${COMMON_SRCS}
-)
-target_link_libraries(timetableGen Qt5::Widgets Qt5::Sql)
-
-# GUI target
-add_executable(timetableGenGui
-    gui/main.cpp
     gui/MainWindow.cpp
+    gui/dashboard/DashboardWidget.cpp
     gui/teachers/TeacherWidget.cpp
     gui/teachers/TeacherDialog.cpp
     gui/subjects/SubjectWidget.cpp
@@ -53,4 +47,13 @@ add_executable(timetableGenGui
     gui/rooms/RoomDialog.cpp
     ${COMMON_SRCS}
 )
-target_link_libraries(timetableGenGui Qt5::Widgets Qt5::Sql)
+target_link_libraries(timetableGen Qt5::Widgets Qt5::Sql -static-libstdc++ -static-libgcc)
+
+# Test Runner target
+add_executable(test_runner
+    tests/test_runner.cpp
+    ${COMMON_SRCS}
+)
+target_link_libraries(test_runner Qt5::Widgets Qt5::Sql -static-libstdc++ -static-libgcc)
+
+

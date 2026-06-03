@@ -5,7 +5,7 @@
 #include <QMessageBox>
 #include <QStandardItem>
 
-SubjectWidget::SubjectWidget(QWidget *parent) : QWidget(parent) {
+SubjectWidget::SubjectWidget(DataManager *dm, QWidget *parent) : QWidget(parent), dm(dm) {
     setWindowTitle(tr("Subject Management"));
     setupUi();
     setupModelAndView();
@@ -37,7 +37,7 @@ void SubjectWidget::setupModelAndView() {
     model->setHeaderData(0, Qt::Horizontal, tr("ID"));
     model->setHeaderData(1, Qt::Horizontal, tr("Name"));
 
-    const auto &subjects = dm.subjects;
+    const auto &subjects = dm->subjects;
     for (const auto &s : subjects) {
         QList<QStandardItem*> rowItems;
         rowItems << new QStandardItem(QString::number(s.id));
@@ -62,7 +62,7 @@ void SubjectWidget::addSubject() {
             QMessageBox::warning(this, tr("Invalid Input"), tr("Subject name cannot be empty."));
             return;
         }
-        int newId = dm.addSubject(name.toStdString());
+        int newId = dm->addSubject(name.toStdString());
         if (newId > 0) {
             QList<QStandardItem*> rowItems;
             rowItems << new QStandardItem(QString::number(newId));
@@ -91,7 +91,7 @@ void SubjectWidget::editSubject() {
             QMessageBox::warning(this, tr("Invalid Input"), tr("Subject name cannot be empty."));
             return;
         }
-        if (dm.updateSubject(id, newName.toStdString())) {
+        if (dm->updateSubject(id, newName.toStdString())) {
             model->item(row, 1)->setText(newName);
         } else {
             QMessageBox::warning(this, tr("Update failed"), tr("Could not update the subject."));
@@ -109,7 +109,7 @@ void SubjectWidget::deleteSubject() {
     int id = model->item(row, 0)->text().toInt();
     if (QMessageBox::question(this, tr("Confirm delete"),
             tr("Delete subject with ID %1?").arg(id)) == QMessageBox::Yes) {
-        if (dm.removeSubject(id)) {
+        if (dm->removeSubject(id)) {
             model->removeRow(row);
         } else {
             QMessageBox::warning(this, tr("Delete failed"), tr("Could not delete the subject."));

@@ -1,0 +1,315 @@
+{
+	"BUILD_DIR" : "/home/thorium/Desktop/programming/2026/c++Projects/timetableGen/build/test_runner_autogen",
+	"CMAKE_BINARY_DIR" : "/home/thorium/Desktop/programming/2026/c++Projects/timetableGen/build",
+	"CMAKE_CURRENT_BINARY_DIR" : "/home/thorium/Desktop/programming/2026/c++Projects/timetableGen/build",
+	"CMAKE_CURRENT_SOURCE_DIR" : "/home/thorium/Desktop/programming/2026/c++Projects/timetableGen",
+	"CMAKE_EXECUTABLE" : "/usr/bin/cmake",
+	"CMAKE_LIST_FILES" : 
+	[
+		"/home/thorium/Desktop/programming/2026/c++Projects/timetableGen/CMakeLists.txt",
+		"/home/thorium/Desktop/programming/2026/c++Projects/timetableGen/build/CMakeFiles/3.28.3/CMakeSystem.cmake",
+		"/usr/share/cmake-3.28/Modules/CMakeSystemSpecificInitialize.cmake",
+		"/usr/share/cmake-3.28/Modules/Platform/Linux-Initialize.cmake",
+		"/home/thorium/Desktop/programming/2026/c++Projects/timetableGen/build/CMakeFiles/3.28.3/CMakeCCompiler.cmake",
+		"/home/thorium/Desktop/programming/2026/c++Projects/timetableGen/build/CMakeFiles/3.28.3/CMakeCXXCompiler.cmake",
+		"/usr/share/cmake-3.28/Modules/CMakeSystemSpecificInformation.cmake",
+		"/usr/share/cmake-3.28/Modules/CMakeGenericSystem.cmake",
+		"/usr/share/cmake-3.28/Modules/CMakeInitializeConfigs.cmake",
+		"/usr/share/cmake-3.28/Modules/Platform/Linux.cmake",
+		"/usr/share/cmake-3.28/Modules/Platform/UnixPaths.cmake",
+		"/usr/share/cmake-3.28/Modules/CMakeCInformation.cmake",
+		"/usr/share/cmake-3.28/Modules/CMakeLanguageInformation.cmake",
+		"/usr/share/cmake-3.28/Modules/Compiler/GNU-C.cmake",
+		"/usr/share/cmake-3.28/Modules/Compiler/GNU.cmake",
+		"/usr/share/cmake-3.28/Modules/Compiler/CMakeCommonCompilerMacros.cmake",
+		"/usr/share/cmake-3.28/Modules/Platform/Linux-GNU-C.cmake",
+		"/usr/share/cmake-3.28/Modules/Platform/Linux-GNU.cmake",
+		"/usr/share/cmake-3.28/Modules/CMakeCommonLanguageInclude.cmake",
+		"/usr/share/cmake-3.28/Modules/CMakeCXXInformation.cmake",
+		"/usr/share/cmake-3.28/Modules/CMakeLanguageInformation.cmake",
+		"/usr/share/cmake-3.28/Modules/Compiler/GNU-CXX.cmake",
+		"/usr/share/cmake-3.28/Modules/Compiler/GNU.cmake",
+		"/usr/share/cmake-3.28/Modules/Platform/Linux-GNU-CXX.cmake",
+		"/usr/share/cmake-3.28/Modules/Platform/Linux-GNU.cmake",
+		"/usr/share/cmake-3.28/Modules/CMakeCommonLanguageInclude.cmake",
+		"/home/thorium/anaconda3/lib/cmake/Qt5/Qt5ConfigVersion.cmake",
+		"/home/thorium/anaconda3/lib/cmake/Qt5/Qt5Config.cmake",
+		"/home/thorium/anaconda3/lib/cmake/Qt5/Qt5ModuleLocation.cmake",
+		"/home/thorium/anaconda3/lib/cmake/Qt5Widgets/Qt5WidgetsConfigVersion.cmake",
+		"/home/thorium/anaconda3/lib/cmake/Qt5Widgets/Qt5WidgetsConfig.cmake",
+		"/home/thorium/anaconda3/lib/cmake/Qt5Gui/Qt5GuiConfigVersion.cmake",
+		"/home/thorium/anaconda3/lib/cmake/Qt5Gui/Qt5GuiConfig.cmake",
+		"/home/thorium/anaconda3/lib/cmake/Qt5Core/Qt5CoreConfigVersion.cmake",
+		"/home/thorium/anaconda3/lib/cmake/Qt5Core/Qt5CoreConfig.cmake",
+		"/home/thorium/anaconda3/lib/cmake/Qt5Core/Qt5CoreConfigExtras.cmake",
+		"/home/thorium/anaconda3/lib/cmake/Qt5Core/Qt5CoreConfigExtrasMkspecDir.cmake",
+		"/home/thorium/anaconda3/lib/cmake/Qt5Core/Qt5CoreMacros.cmake",
+		"/usr/share/cmake-3.28/Modules/CMakeParseArguments.cmake",
+		"/home/thorium/anaconda3/lib/cmake/Qt5Gui/Qt5Gui_QComposePlatformInputContextPlugin.cmake",
+		"/home/thorium/anaconda3/lib/cmake/Qt5Gui/Qt5Gui_QEglFSEmulatorIntegrationPlugin.cmake",
+		"/home/thorium/anaconda3/lib/cmake/Qt5Gui/Qt5Gui_QEglFSIntegrationPlugin.cmake",
+		"/home/thorium/anaconda3/lib/cmake/Qt5Gui/Qt5Gui_QEglFSKmsEglDeviceIntegrationPlugin.cmake",
+		"/home/thorium/anaconda3/lib/cmake/Qt5Gui/Qt5Gui_QEglFSX11IntegrationPlugin.cmake",
+		"/home/thorium/anaconda3/lib/cmake/Qt5Gui/Qt5Gui_QEvdevKeyboardPlugin.cmake",
+		"/home/thorium/anaconda3/lib/cmake/Qt5Gui/Qt5Gui_QEvdevMousePlugin.cmake",
+		"/home/thorium/anaconda3/lib/cmake/Qt5Gui/Qt5Gui_QEvdevTabletPlugin.cmake",
+		"/home/thorium/anaconda3/lib/cmake/Qt5Gui/Qt5Gui_QEvdevTouchScreenPlugin.cmake",
+		"/home/thorium/anaconda3/lib/cmake/Qt5Gui/Qt5Gui_QGifPlugin.cmake",
+		"/home/thorium/anaconda3/lib/cmake/Qt5Gui/Qt5Gui_QICNSPlugin.cmake",
+		"/home/thorium/anaconda3/lib/cmake/Qt5Gui/Qt5Gui_QICOPlugin.cmake",
+		"/home/thorium/anaconda3/lib/cmake/Qt5Gui/Qt5Gui_QIbusPlatformInputContextPlugin.cmake",
+		"/home/thorium/anaconda3/lib/cmake/Qt5Gui/Qt5Gui_QJpegPlugin.cmake",
+		"/home/thorium/anaconda3/lib/cmake/Qt5Gui/Qt5Gui_QMinimalEglIntegrationPlugin.cmake",
+		"/home/thorium/anaconda3/lib/cmake/Qt5Gui/Qt5Gui_QMinimalIntegrationPlugin.cmake",
+		"/home/thorium/anaconda3/lib/cmake/Qt5Gui/Qt5Gui_QOffscreenIntegrationPlugin.cmake",
+		"/home/thorium/anaconda3/lib/cmake/Qt5Gui/Qt5Gui_QPdfPlugin.cmake",
+		"/home/thorium/anaconda3/lib/cmake/Qt5Gui/Qt5Gui_QSvgIconPlugin.cmake",
+		"/home/thorium/anaconda3/lib/cmake/Qt5Gui/Qt5Gui_QSvgPlugin.cmake",
+		"/home/thorium/anaconda3/lib/cmake/Qt5Gui/Qt5Gui_QTgaPlugin.cmake",
+		"/home/thorium/anaconda3/lib/cmake/Qt5Gui/Qt5Gui_QTiffPlugin.cmake",
+		"/home/thorium/anaconda3/lib/cmake/Qt5Gui/Qt5Gui_QTuioTouchPlugin.cmake",
+		"/home/thorium/anaconda3/lib/cmake/Qt5Gui/Qt5Gui_QVirtualKeyboardPlugin.cmake",
+		"/home/thorium/anaconda3/lib/cmake/Qt5Gui/Qt5Gui_QVncIntegrationPlugin.cmake",
+		"/home/thorium/anaconda3/lib/cmake/Qt5Gui/Qt5Gui_QWbmpPlugin.cmake",
+		"/home/thorium/anaconda3/lib/cmake/Qt5Gui/Qt5Gui_QWebGLIntegrationPlugin.cmake",
+		"/home/thorium/anaconda3/lib/cmake/Qt5Gui/Qt5Gui_QWebpPlugin.cmake",
+		"/home/thorium/anaconda3/lib/cmake/Qt5Gui/Qt5Gui_QXcbEglIntegrationPlugin.cmake",
+		"/home/thorium/anaconda3/lib/cmake/Qt5Gui/Qt5Gui_QXcbGlxIntegrationPlugin.cmake",
+		"/home/thorium/anaconda3/lib/cmake/Qt5Gui/Qt5Gui_QXcbIntegrationPlugin.cmake",
+		"/home/thorium/anaconda3/lib/cmake/Qt5Gui/Qt5Gui_QXdgDesktopPortalThemePlugin.cmake",
+		"/home/thorium/anaconda3/lib/cmake/Qt5Gui/Qt5GuiConfigExtras.cmake",
+		"/home/thorium/anaconda3/lib/cmake/Qt5Widgets/Qt5WidgetsConfigExtras.cmake",
+		"/home/thorium/anaconda3/lib/cmake/Qt5Widgets/Qt5WidgetsMacros.cmake",
+		"/usr/share/cmake-3.28/Modules/CMakeParseArguments.cmake",
+		"/home/thorium/anaconda3/lib/cmake/Qt5Sql/Qt5SqlConfigVersion.cmake",
+		"/home/thorium/anaconda3/lib/cmake/Qt5Sql/Qt5SqlConfig.cmake",
+		"/home/thorium/anaconda3/lib/cmake/Qt5Sql/Qt5Sql_QMYSQLDriverPlugin.cmake",
+		"/home/thorium/anaconda3/lib/cmake/Qt5Sql/Qt5Sql_QPSQLDriverPlugin.cmake",
+		"/home/thorium/anaconda3/lib/cmake/Qt5Sql/Qt5Sql_QSQLiteDriverPlugin.cmake"
+	],
+	"CMAKE_SOURCE_DIR" : "/home/thorium/Desktop/programming/2026/c++Projects/timetableGen",
+	"DEP_FILE" : "/home/thorium/Desktop/programming/2026/c++Projects/timetableGen/build/test_runner_autogen/deps",
+	"DEP_FILE_RULE_NAME" : "test_runner_autogen/timestamp",
+	"HEADERS" : 
+	[
+		[
+			"/home/thorium/Desktop/programming/2026/c++Projects/timetableGen/services/AnalyticsService.h",
+			"MU",
+			"3BYFHCGL5U/moc_AnalyticsService.cpp",
+			null
+		],
+		[
+			"/home/thorium/Desktop/programming/2026/c++Projects/timetableGen/services/BacktrackingSolver.h",
+			"MU",
+			"3BYFHCGL5U/moc_BacktrackingSolver.cpp",
+			null
+		],
+		[
+			"/home/thorium/Desktop/programming/2026/c++Projects/timetableGen/services/Benchmark.h",
+			"MU",
+			"3BYFHCGL5U/moc_Benchmark.cpp",
+			null
+		],
+		[
+			"/home/thorium/Desktop/programming/2026/c++Projects/timetableGen/services/DataManager.h",
+			"MU",
+			"3BYFHCGL5U/moc_DataManager.cpp",
+			null
+		],
+		[
+			"/home/thorium/Desktop/programming/2026/c++Projects/timetableGen/services/DomainTracker.h",
+			"MU",
+			"3BYFHCGL5U/moc_DomainTracker.cpp",
+			null
+		],
+		[
+			"/home/thorium/Desktop/programming/2026/c++Projects/timetableGen/services/ExportService.h",
+			"MU",
+			"3BYFHCGL5U/moc_ExportService.cpp",
+			null
+		],
+		[
+			"/home/thorium/Desktop/programming/2026/c++Projects/timetableGen/services/FeasibilityChecker.h",
+			"MU",
+			"3BYFHCGL5U/moc_FeasibilityChecker.cpp",
+			null
+		],
+		[
+			"/home/thorium/Desktop/programming/2026/c++Projects/timetableGen/services/GreedySolver.h",
+			"MU",
+			"3BYFHCGL5U/moc_GreedySolver.cpp",
+			null
+		],
+		[
+			"/home/thorium/Desktop/programming/2026/c++Projects/timetableGen/services/ResourceTracker.h",
+			"MU",
+			"3BYFHCGL5U/moc_ResourceTracker.cpp",
+			null
+		],
+		[
+			"/home/thorium/Desktop/programming/2026/c++Projects/timetableGen/services/SQLiteService.h",
+			"MU",
+			"3BYFHCGL5U/moc_SQLiteService.cpp",
+			null
+		],
+		[
+			"/home/thorium/Desktop/programming/2026/c++Projects/timetableGen/services/TimetableEngine.h",
+			"MU",
+			"3BYFHCGL5U/moc_TimetableEngine.cpp",
+			null
+		],
+		[
+			"/home/thorium/Desktop/programming/2026/c++Projects/timetableGen/services/TimetableEvaluator.h",
+			"MU",
+			"3BYFHCGL5U/moc_TimetableEvaluator.cpp",
+			null
+		],
+		[
+			"/home/thorium/Desktop/programming/2026/c++Projects/timetableGen/timetable/Timetable.h",
+			"MU",
+			"LTCI7GO2FP/moc_Timetable.cpp",
+			null
+		]
+	],
+	"HEADER_EXTENSIONS" : [ "h", "hh", "h++", "hm", "hpp", "hxx", "in", "txx" ],
+	"INCLUDE_DIR" : "/home/thorium/Desktop/programming/2026/c++Projects/timetableGen/build/test_runner_autogen/include",
+	"MOC_COMPILATION_FILE" : "/home/thorium/Desktop/programming/2026/c++Projects/timetableGen/build/test_runner_autogen/mocs_compilation.cpp",
+	"MOC_DEFINITIONS" : 
+	[
+		"QT_CORE_LIB",
+		"QT_GUI_LIB",
+		"QT_NO_DEBUG",
+		"QT_SQL_LIB",
+		"QT_WIDGETS_LIB"
+	],
+	"MOC_DEPEND_FILTERS" : 
+	[
+		[
+			"Q_PLUGIN_METADATA",
+			"[\n][ \t]*Q_PLUGIN_METADATA[ \t]*\\([^\\)]*FILE[ \t]*\"([^\"]+)\""
+		]
+	],
+	"MOC_INCLUDES" : 
+	[
+		"/home/thorium/anaconda3/include/qt",
+		"/home/thorium/anaconda3/include/qt/QtWidgets",
+		"/home/thorium/anaconda3/include/qt/QtGui",
+		"/home/thorium/anaconda3/include/qt/QtCore",
+		"/home/thorium/anaconda3/mkspecs/linux-g++",
+		"/home/thorium/anaconda3/include/qt/QtSql",
+		"/usr/include",
+		"/usr/include/c++/13",
+		"/usr/include/x86_64-linux-gnu/c++/13",
+		"/usr/include/c++/13/backward",
+		"/usr/lib/gcc/x86_64-linux-gnu/13/include",
+		"/usr/local/include",
+		"/usr/include/x86_64-linux-gnu"
+	],
+	"MOC_MACRO_NAMES" : [ "Q_OBJECT", "Q_GADGET", "Q_NAMESPACE", "Q_NAMESPACE_EXPORT" ],
+	"MOC_OPTIONS" : [],
+	"MOC_PATH_PREFIX" : false,
+	"MOC_PREDEFS_CMD" : 
+	[
+		"/usr/bin/c++",
+		"-std=gnu++17",
+		"-dM",
+		"-E",
+		"-c",
+		"/usr/share/cmake-3.28/Modules/CMakeCXXCompilerABI.cpp"
+	],
+	"MOC_PREDEFS_FILE" : "/home/thorium/Desktop/programming/2026/c++Projects/timetableGen/build/test_runner_autogen/moc_predefs.h",
+	"MOC_RELAXED_MODE" : false,
+	"MOC_SKIP" : 
+	[
+		"/home/thorium/Desktop/programming/2026/c++Projects/timetableGen/build/timetableGen_autogen/mocs_compilation.cpp"
+	],
+	"MULTI_CONFIG" : false,
+	"PARALLEL" : 2,
+	"PARSE_CACHE_FILE" : "/home/thorium/Desktop/programming/2026/c++Projects/timetableGen/build/CMakeFiles/test_runner_autogen.dir/ParseCache.txt",
+	"QT_MOC_EXECUTABLE" : "/home/thorium/anaconda3/bin/moc",
+	"QT_UIC_EXECUTABLE" : "/home/thorium/anaconda3/bin/uic",
+	"QT_VERSION_MAJOR" : 5,
+	"QT_VERSION_MINOR" : 15,
+	"SETTINGS_FILE" : "/home/thorium/Desktop/programming/2026/c++Projects/timetableGen/build/CMakeFiles/test_runner_autogen.dir/AutogenUsed.txt",
+	"SOURCES" : 
+	[
+		[
+			"/home/thorium/Desktop/programming/2026/c++Projects/timetableGen/services/AnalyticsService.cpp",
+			"MU",
+			null
+		],
+		[
+			"/home/thorium/Desktop/programming/2026/c++Projects/timetableGen/services/BacktrackingSolver.cpp",
+			"MU",
+			null
+		],
+		[
+			"/home/thorium/Desktop/programming/2026/c++Projects/timetableGen/services/Benchmark.cpp",
+			"MU",
+			null
+		],
+		[
+			"/home/thorium/Desktop/programming/2026/c++Projects/timetableGen/services/DataManager.cpp",
+			"MU",
+			null
+		],
+		[
+			"/home/thorium/Desktop/programming/2026/c++Projects/timetableGen/services/DomainTracker.cpp",
+			"MU",
+			null
+		],
+		[
+			"/home/thorium/Desktop/programming/2026/c++Projects/timetableGen/services/ExportService.cpp",
+			"MU",
+			null
+		],
+		[
+			"/home/thorium/Desktop/programming/2026/c++Projects/timetableGen/services/FeasibilityChecker.cpp",
+			"MU",
+			null
+		],
+		[
+			"/home/thorium/Desktop/programming/2026/c++Projects/timetableGen/services/GreedySolver.cpp",
+			"MU",
+			null
+		],
+		[
+			"/home/thorium/Desktop/programming/2026/c++Projects/timetableGen/services/ResourceTracker.cpp",
+			"MU",
+			null
+		],
+		[
+			"/home/thorium/Desktop/programming/2026/c++Projects/timetableGen/services/SQLiteService.cpp",
+			"MU",
+			null
+		],
+		[
+			"/home/thorium/Desktop/programming/2026/c++Projects/timetableGen/services/TimetableEngine.cpp",
+			"MU",
+			null
+		],
+		[
+			"/home/thorium/Desktop/programming/2026/c++Projects/timetableGen/services/TimetableEvaluator.cpp",
+			"MU",
+			null
+		],
+		[
+			"/home/thorium/Desktop/programming/2026/c++Projects/timetableGen/tests/test_runner.cpp",
+			"MU",
+			null
+		],
+		[
+			"/home/thorium/Desktop/programming/2026/c++Projects/timetableGen/timetable/Timetable.cpp",
+			"MU",
+			null
+		]
+	],
+	"UIC_OPTIONS" : [],
+	"UIC_SEARCH_PATHS" : [],
+	"UIC_SKIP" : 
+	[
+		"/home/thorium/Desktop/programming/2026/c++Projects/timetableGen/build/timetableGen_autogen/mocs_compilation.cpp"
+	],
+	"UIC_UI_FILES" : [],
+	"VERBOSITY" : 0
+}

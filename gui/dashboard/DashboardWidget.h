@@ -5,6 +5,10 @@
 #include <QPushButton>
 #include <QTextEdit>
 #include "../../services/DataManager.h"
+#include "../../timetable/Timetable.h"
+
+class QGroupBox;
+class QVBoxLayout;
 
 class DashboardWidget : public QWidget {
     Q_OBJECT
@@ -35,4 +39,9 @@ private:
     QLabel *statusLabel;
     QTextEdit *reportText;
     QPushButton *generateBtn;
+
+    // Room Utilization widgets
+    QGroupBox *roomUtilizationBox;
+    QVBoxLayout *roomListLayout;
+    void updateRoomUtilization(const Timetable &timetable);
 };

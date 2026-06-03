@@ -200,8 +200,12 @@ CMakeFiles/timetableGen.dir/services/SQLiteService.cpp.o: \
  /usr/include/c++/13/bits/stl_vector.h \
  /usr/include/c++/13/bits/stl_bvector.h \
  /usr/include/c++/13/bits/vector.tcc \
- /home/thorium/anaconda3/include/qt/QtCore/QVariant \
- /home/thorium/anaconda3/include/qt/QtCore/qvariant.h \
+ /home/thorium/Desktop/programming/2026/c++Projects/timetableGen/services/../utils/PathUtil.h \
+ /home/thorium/anaconda3/include/qt/QtCore/QCoreApplication \
+ /home/thorium/anaconda3/include/qt/QtCore/qcoreapplication.h \
+ /home/thorium/anaconda3/include/qt/QtCore/qobject.h \
+ /home/thorium/anaconda3/include/qt/QtCore/qobjectdefs.h \
+ /home/thorium/anaconda3/include/qt/QtCore/qobjectdefs_impl.h \
  /home/thorium/anaconda3/include/qt/QtCore/qlist.h \
  /home/thorium/anaconda3/include/qt/QtCore/qalgorithms.h \
  /home/thorium/anaconda3/include/qt/QtCore/qiterator.h \
@@ -236,30 +240,39 @@ CMakeFiles/timetableGen.dir/services/SQLiteService.cpp.o: \
  /home/thorium/anaconda3/include/qt/QtCore/qstringlist.h \
  /home/thorium/anaconda3/include/qt/QtCore/qregexp.h \
  /home/thorium/anaconda3/include/qt/QtCore/qstringmatcher.h \
+ /home/thorium/anaconda3/include/qt/QtCore/qscopedpointer.h \
  /home/thorium/anaconda3/include/qt/QtCore/qmetatype.h \
  /home/thorium/anaconda3/include/qt/QtCore/qvarlengtharray.h \
  /home/thorium/anaconda3/include/qt/QtCore/qcontainerfwd.h \
- /home/thorium/anaconda3/include/qt/QtCore/qobjectdefs.h \
- /home/thorium/anaconda3/include/qt/QtCore/qobjectdefs_impl.h \
  /usr/include/c++/13/map /usr/include/c++/13/bits/stl_tree.h \
  /usr/include/c++/13/bits/stl_map.h \
  /usr/include/c++/13/bits/stl_multimap.h \
- /home/thorium/anaconda3/include/qt/QtCore/qmap.h \
- /home/thorium/anaconda3/include/qt/QtCore/qhash.h \
- /home/thorium/anaconda3/include/qt/QtCore/qobject.h \
- /home/thorium/anaconda3/include/qt/QtCore/qscopedpointer.h \
  /home/thorium/anaconda3/include/qt/QtCore/qobject_impl.h \
  /usr/include/c++/13/chrono /usr/include/c++/13/bits/chrono.h \
  /usr/include/c++/13/ratio /usr/include/c++/13/cstdint \
  /usr/include/c++/13/limits /usr/include/c++/13/ctime \
- /usr/include/c++/13/bits/parse_numbers.h /usr/include/c++/13/variant \
+ /usr/include/c++/13/bits/parse_numbers.h \
+ /home/thorium/anaconda3/include/qt/QtCore/qcoreevent.h \
+ /home/thorium/anaconda3/include/qt/QtCore/qeventloop.h \
+ /home/thorium/anaconda3/include/qt/QtCore/QFileInfo \
+ /home/thorium/anaconda3/include/qt/QtCore/qfileinfo.h \
+ /home/thorium/anaconda3/include/qt/QtCore/qfile.h \
+ /home/thorium/anaconda3/include/qt/QtCore/qfiledevice.h \
+ /home/thorium/anaconda3/include/qt/QtCore/qiodevice.h \
+ /home/thorium/anaconda3/include/qt/QtCore/qshareddata.h \
+ /home/thorium/anaconda3/include/qt/QtCore/qhash.h \
+ /home/thorium/anaconda3/include/qt/QtCore/QDir \
+ /home/thorium/anaconda3/include/qt/QtCore/qdir.h \
+ /home/thorium/anaconda3/include/qt/QtCore/qfileinfo.h \
+ /home/thorium/anaconda3/include/qt/QtCore/QVariant \
+ /home/thorium/anaconda3/include/qt/QtCore/qvariant.h \
+ /home/thorium/anaconda3/include/qt/QtCore/qmap.h \
+ /usr/include/c++/13/variant \
  /home/thorium/anaconda3/include/qt/QtCore/QDebug \
  /home/thorium/anaconda3/include/qt/QtCore/qdebug.h \
  /home/thorium/anaconda3/include/qt/QtCore/qtextstream.h \
- /home/thorium/anaconda3/include/qt/QtCore/qiodevice.h \
  /home/thorium/anaconda3/include/qt/QtCore/qlocale.h \
  /home/thorium/anaconda3/include/qt/QtCore/qvariant.h \
- /home/thorium/anaconda3/include/qt/QtCore/qshareddata.h \
  /home/thorium/anaconda3/include/qt/QtCore/qset.h \
  /home/thorium/anaconda3/include/qt/QtCore/qcontiguouscache.h \
  /home/thorium/anaconda3/include/qt/QtCore/qsharedpointer.h \

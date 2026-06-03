@@ -5,7 +5,7 @@
 #include <QMessageBox>
 #include <QStandardItem>
 
-ClassWidget::ClassWidget(QWidget *parent) : QWidget(parent) {
+ClassWidget::ClassWidget(DataManager *dm, QWidget *parent) : QWidget(parent), dm(dm) {
     setWindowTitle(tr("Class Management"));
     setupUi();
     setupModelAndView();
@@ -38,7 +38,7 @@ void ClassWidget::setupModelAndView() {
     model->setHeaderData(1, Qt::Horizontal, tr("Name"));
     model->setHeaderData(2, Qt::Horizontal, tr("Student Count"));
 
-    const auto &classes = dm.classes;
+    const auto &classes = dm->classes;
     for (const auto &c : classes) {
         QList<QStandardItem*> rowItems;
         rowItems << new QStandardItem(QString::number(c.id));
@@ -65,7 +65,7 @@ void ClassWidget::addClass() {
             QMessageBox::warning(this, tr("Invalid Input"), tr("Class name cannot be empty."));
             return;
         }
-        int newId = dm.addClass(name.toStdString(), count);
+        int newId = dm->addClass(name.toStdString(), count);
         if (newId > 0) {
             QList<QStandardItem*> rowItems;
             rowItems << new QStandardItem(QString::number(newId));
@@ -98,7 +98,7 @@ void ClassWidget::editClass() {
             QMessageBox::warning(this, tr("Invalid Input"), tr("Class name cannot be empty."));
             return;
         }
-        if (dm.updateClass(id, newName.toStdString(), newCount)) {
+        if (dm->updateClass(id, newName.toStdString(), newCount)) {
             model->item(row, 1)->setText(newName);
             model->item(row, 2)->setText(QString::number(newCount));
         } else {
@@ -117,7 +117,7 @@ void ClassWidget::deleteClass() {
     int id = model->item(row, 0)->text().toInt();
     if (QMessageBox::question(this, tr("Confirm delete"),
             tr("Delete class with ID %1?").arg(id)) == QMessageBox::Yes) {
-        if (dm.removeClass(id)) {
+        if (dm->removeClass(id)) {
             model->removeRow(row);
         } else {
             QMessageBox::warning(this, tr("Delete failed"), tr("Could not delete the class."));

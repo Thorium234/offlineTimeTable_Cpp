@@ -9,7 +9,7 @@
 class SubjectWidget : public QWidget {
     Q_OBJECT
 public:
-    explicit SubjectWidget(QWidget *parent = nullptr);
+    explicit SubjectWidget(DataManager *dm, QWidget *parent = nullptr);
     ~SubjectWidget() override = default;
 
 private:
@@ -22,7 +22,7 @@ private:
     QPushButton *editBtn;
     QPushButton *delBtn;
     QStandardItemModel *model;
-    DataManager dm;
+    DataManager *dm;
 
 private slots:
     void addSubject();

@@ -1,8 +1,8 @@
 #pragma once
 
 #include <QMainWindow>
-
-class QTabWidget;
+#include <QTabWidget>
+#include "../services/DataManager.h"
 
 class MainWindow : public QMainWindow {
     Q_OBJECT
@@ -15,4 +15,5 @@ private:
     void loadStyleSheet();
 
     QTabWidget *tabWidget;
+    DataManager dm;
 };

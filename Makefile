@@ -21,6 +21,7 @@ OBJS = $(SRCS:.cpp=.o)
 TEST_TARGET = test_runner
 TEST_SRCS = tests/test_runner.cpp \
             services/DataManager.cpp \
+            services/SQLiteService.cpp \
             services/TimetableEngine.cpp \
             services/ResourceTracker.cpp \
             services/ExportService.cpp \

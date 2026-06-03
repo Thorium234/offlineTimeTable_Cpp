@@ -1,5 +1,6 @@
 #include "DashboardWidget.h"
 #include "../../services/TimetableEngine.h"
+#include "../../services/AnalyticsService.h"
 #include <QVBoxLayout>
 #include <QHBoxLayout>
 #include <QGridLayout>
@@ -7,6 +8,8 @@
 #include <QGroupBox>
 #include <QShowEvent>
 #include <QMessageBox>
+#include <QProgressBar>
+#include <QScrollArea>
 
 DashboardWidget::DashboardWidget(DataManager *dm, QWidget *parent)
     : QWidget(parent), dm(dm) {
@@ -63,6 +66,10 @@ void DashboardWidget::setupUi() {
     metricsLayout->addWidget(createMetricCard(tr("CLASSES"), classCountLabel, "#ff6600"));
     metricsLayout->addWidget(createMetricCard(tr("ROOMS"), roomCountLabel, "#ff6600"));
     mainLayout->addLayout(metricsLayout);
+
+    // Bottom layout: Scheduler Box (Left) and Room Utilization Box (Right)
+    QHBoxLayout *bottomLayout = new QHBoxLayout;
+    bottomLayout->setSpacing(20);
 
     // Scheduler Panel
     QGroupBox *schedulerBox = new QGroupBox(tr("Scheduling Engine Control"), this);
@@ -129,8 +136,48 @@ void DashboardWidget::setupUi() {
     );
     schedLayout->addWidget(reportText);
 
-    mainLayout->addWidget(schedulerBox);
-    mainLayout->setStretchFactor(schedulerBox, 1);
+    bottomLayout->addWidget(schedulerBox, 3); // 3/5 width ratio
+
+    // Room Utilization Panel
+    roomUtilizationBox = new QGroupBox(tr("Room Utilization"), this);
+    roomUtilizationBox->setStyleSheet(
+        "QGroupBox {"
+        "  font-weight: bold;"
+        "  border: 1px solid rgba(255, 255, 255, 0.08);"
+        "  border-radius: 8px;"
+        "  margin-top: 15px;"
+        "  padding-top: 15px;"
+        "}"
+        "QGroupBox::title {"
+        "  subcontrol-origin: margin;"
+        "  subcontrol-position: top left;"
+        "  left: 10px;"
+        "  padding: 0 5px;"
+        "  color: #ff6600;"
+        "}"
+    );
+
+    QVBoxLayout *roomBoxLayout = new QVBoxLayout(roomUtilizationBox);
+    roomBoxLayout->setContentsMargins(10, 15, 10, 10);
+
+    QScrollArea *scrollArea = new QScrollArea(roomUtilizationBox);
+    scrollArea->setWidgetResizable(true);
+    scrollArea->setFrameShape(QFrame::NoFrame);
+    scrollArea->setStyleSheet("background: transparent;");
+
+    QWidget *scrollWidget = new QWidget(scrollArea);
+    scrollWidget->setStyleSheet("background: transparent;");
+    roomListLayout = new QVBoxLayout(scrollWidget);
+    roomListLayout->setContentsMargins(0, 0, 0, 0);
+    roomListLayout->setSpacing(8);
+
+    scrollArea->setWidget(scrollWidget);
+    roomBoxLayout->addWidget(scrollArea);
+
+    bottomLayout->addWidget(roomUtilizationBox, 2); // 2/5 width ratio
+
+    mainLayout->addLayout(bottomLayout);
+    mainLayout->setStretchFactor(bottomLayout, 1);
 
     connect(generateBtn, &QPushButton::clicked, this, &DashboardWidget::onGenerateTimetable);
 }
@@ -141,6 +188,7 @@ void DashboardWidget::refreshStats() {
         subjectCountLabel->setText(QString::number(dm->subjects.size()));
         classCountLabel->setText(QString::number(dm->classes.size()));
         roomCountLabel->setText(QString::number(dm->rooms.size()));
+        updateRoomUtilization(Timetable()); // Populate rooms with 0% utilization on start
     }
 }
 
@@ -203,4 +251,61 @@ void DashboardWidget::onGenerateTimetable() {
     }
 
     reportText->setPlainText(report);
+    updateRoomUtilization(timetable);
+}
+
+void DashboardWidget::updateRoomUtilization(const Timetable &timetable) {
+    // Clear previous items in room layout
+    QLayoutItem *child;
+    while ((child = roomListLayout->takeAt(0)) != nullptr) {
+        if (child->widget()) {
+            child->widget()->deleteLater();
+        }
+        delete child;
+    }
+
+    AnalyticsService analytics;
+    AnalyticsReport report = analytics.generateReport(timetable, *dm);
+
+    for (const auto &roomInfo : report.roomUtilizations) {
+        QWidget *roomRow = new QWidget(this);
+        QHBoxLayout *rowLayout = new QHBoxLayout(roomRow);
+        rowLayout->setContentsMargins(0, 5, 0, 5);
+
+        QLabel *nameLabel = new QLabel(QString::fromStdString(roomInfo.name), roomRow);
+        nameLabel->setFixedWidth(100);
+        nameLabel->setStyleSheet("font-weight: bold; color: #ffffff; border: none; background: transparent;");
+
+        QProgressBar *bar = new QProgressBar(roomRow);
+        bar->setRange(0, 100);
+        bar->setValue(static_cast<int>(roomInfo.utilization));
+        // Customize styling: ASC orange gradient
+        bar->setStyleSheet(
+            "QProgressBar {"
+            "  border: 1px solid rgba(255, 255, 255, 0.1);"
+            "  border-radius: 4px;"
+            "  background-color: rgba(20, 20, 20, 0.5);"
+            "  text-align: center;"
+            "  color: white;"
+            "  font-weight: bold;"
+            "}"
+            "QProgressBar::chunk {"
+            "  background-color: qlineargradient(x1:0, y1:0, x2:1, y2:0, stop:0 #ff6600, stop:1 #ff8833);"
+            "  border-radius: 3px;"
+            "}"
+        );
+
+        QLabel *detailLabel = new QLabel(QString("%1/%2 slots").arg(roomInfo.usedSlots).arg(roomInfo.totalSlots), roomRow);
+        detailLabel->setFixedWidth(80);
+        detailLabel->setAlignment(Qt::AlignRight | Qt::AlignVCenter);
+        detailLabel->setStyleSheet("color: #a0a0a0; font-size: 9pt; border: none; background: transparent;");
+
+        rowLayout->addWidget(nameLabel);
+        rowLayout->addWidget(bar);
+        rowLayout->addWidget(detailLabel);
+
+        roomListLayout->addWidget(roomRow);
+    }
+    // Add stretch at the end to keep items compressed at top
+    roomListLayout->addStretch();
 }

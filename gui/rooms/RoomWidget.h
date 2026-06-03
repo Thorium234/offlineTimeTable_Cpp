@@ -9,7 +9,7 @@
 class RoomWidget : public QWidget {
     Q_OBJECT
 public:
-    explicit RoomWidget(QWidget *parent = nullptr);
+    explicit RoomWidget(DataManager *dm, QWidget *parent = nullptr);
     ~RoomWidget() override = default;
 
 private:
@@ -22,7 +22,7 @@ private:
     QPushButton *editBtn;
     QPushButton *delBtn;
     QStandardItemModel *model;
-    DataManager dm;
+    DataManager *dm;
 
 private slots:
     void addRoom();

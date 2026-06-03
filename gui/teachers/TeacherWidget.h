@@ -9,7 +9,7 @@
 class TeacherWidget : public QWidget {
     Q_OBJECT
 public:
-    explicit TeacherWidget(QWidget *parent = nullptr);
+    explicit TeacherWidget(DataManager *dm, QWidget *parent = nullptr);
     ~TeacherWidget() override = default;
 
 private:
@@ -22,7 +22,7 @@ private:
     QPushButton *editBtn;
     QPushButton *delBtn;
     QStandardItemModel *model;
-    DataManager dm;
+    DataManager *dm;
 
 private slots:
     void addTeacher();

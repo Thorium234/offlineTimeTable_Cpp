@@ -3,6 +3,7 @@
 #include <QSplashScreen>
 #include <QPixmap>
 #include "MainWindow.h"
+#include "../utils/PathUtil.h"
 
 int main(int argc, char *argv[])
 {
@@ -31,7 +32,7 @@ int main(int argc, char *argv[])
     // ------------------------------------------------------------------
     // GUI mode – optional splash screen while the application starts.
     // ------------------------------------------------------------------
-    QPixmap splashPixmap("gui/splash.png"); // place your image here.
+    QPixmap splashPixmap(PathUtil::resolvePath("gui/splash.png")); // place your image here.
     QSplashScreen splash(splashPixmap);
     splash.show();
     // Process events so the splash actually appears before we build the UI.

@@ -7,7 +7,7 @@
 #include <QTableView>
 #include <QPushButton>
 
-TeacherWidget::TeacherWidget(QWidget *parent) : QWidget(parent) {
+TeacherWidget::TeacherWidget(DataManager *dm, QWidget *parent) : QWidget(parent), dm(dm) {
     setWindowTitle(tr("Teacher Management"));
     resize(800, 500);
     setupUi();
@@ -41,7 +41,7 @@ void TeacherWidget::setupModelAndView() {
     model->setHeaderData(0, Qt::Horizontal, tr("ID"));
     model->setHeaderData(1, Qt::Horizontal, tr("Name"));
     // Fill rows
-    const auto &teachers = dm.teachers;
+    const auto &teachers = dm->teachers;
     for (const auto &t : teachers) {
         QList<QStandardItem*> rowItems;
         rowItems << new QStandardItem(QString::number(t.id));
@@ -62,7 +62,7 @@ void TeacherWidget::addTeacher() {
     TeacherDialog dlg(this);
     if (dlg.exec() == QDialog::Accepted) {
         const QString name = dlg.teacherName();
-        int newId = dm.addTeacher(name.toStdString());
+        int newId = dm->addTeacher(name.toStdString());
         if (newId > 0) {
             // Append to model
             QList<QStandardItem*> rowItems;
@@ -88,7 +88,7 @@ void TeacherWidget::editTeacher() {
     dlg.setTeacherName(oldName);
     if (dlg.exec() == QDialog::Accepted) {
         const QString newName = dlg.teacherName();
-        if (dm.updateTeacher(id, newName.toStdString())) {
+        if (dm->updateTeacher(id, newName.toStdString())) {
             model->item(row, 1)->setText(newName);
         } else {
             QMessageBox::warning(this, tr("Update failed"), tr("Could not update the teacher."));
@@ -106,7 +106,7 @@ void TeacherWidget::deleteTeacher() {
     int id = model->item(row, 0)->text().toInt();
     if (QMessageBox::question(this, tr("Confirm delete"),
             tr("Delete teacher with ID %1?").arg(id)) == QMessageBox::Yes) {
-        if (dm.removeTeacher(id)) {
+        if (dm->removeTeacher(id)) {
             model->removeRow(row);
         } else {
             QMessageBox::warning(this, tr("Delete failed"), tr("Could not delete the teacher."));

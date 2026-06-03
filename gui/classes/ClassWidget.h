@@ -9,7 +9,7 @@
 class ClassWidget : public QWidget {
     Q_OBJECT
 public:
-    explicit ClassWidget(QWidget *parent = nullptr);
+    explicit ClassWidget(DataManager *dm, QWidget *parent = nullptr);
     ~ClassWidget() override = default;
 
 private:
@@ -22,7 +22,7 @@ private:
     QPushButton *editBtn;
     QPushButton *delBtn;
     QStandardItemModel *model;
-    DataManager dm;
+    DataManager *dm;
 
 private slots:
     void addClass();
