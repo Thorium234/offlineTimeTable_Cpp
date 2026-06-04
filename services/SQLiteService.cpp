@@ -46,7 +46,6 @@ bool SQLiteService::initSchema() {
     // Teachers table
     if (!exec("CREATE TABLE IF NOT EXISTS teachers (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT NOT NULL, maxConsecutive INTEGER DEFAULT 0)")) return false;
     // Migration: Add maxConsecutive column if it doesn't exist
-    exec("ALTER TABLE teachers ADD COLUMN maxConsecutive INTEGER DEFAULT 0");
     // Subjects table
     if (!exec("CREATE TABLE IF NOT EXISTS subjects (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT NOT NULL)")) return false;
     // Classes table
@@ -56,17 +55,23 @@ bool SQLiteService::initSchema() {
     return true;
 }
 
-int SQLiteService::addTeacher(const QString &name) {
+int SQLiteService::addTeacher(const QString &name, int maxConsecutive) {
     QSqlQuery q(db);
-    q.prepare("INSERT INTO teachers (name) VALUES (:name)");
+    q.prepare("INSERT INTO teachers (name, maxConsecutive) VALUES (:name, :maxConsecutive)");
     q.bindValue(":name", name);
+    q.bindValue(":maxConsecutive", maxConsecutive);
     if (!q.exec()) return -1;
     return q.lastInsertId().toInt();
 }
 
-bool SQLiteService::updateTeacher(int id, const QString &newName) {
+bool SQLiteService::updateTeacher(int id, const QString &newName, int maxConsecutive) {
     QSqlQuery q(db);
-    q.prepare("UPDATE teachers SET name = :name WHERE id = :id");
+    if (maxConsecutive >= 0) {
+        q.prepare("UPDATE teachers SET name = :name, maxConsecutive = :maxConsecutive WHERE id = :id");
+        q.bindValue(":maxConsecutive", maxConsecutive);
+    } else {
+        q.prepare("UPDATE teachers SET name = :name WHERE id = :id");
+    }
     q.bindValue(":name", newName);
     q.bindValue(":id", id);
     return q.exec();

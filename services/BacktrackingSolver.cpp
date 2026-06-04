@@ -18,6 +18,50 @@ int BacktrackingSolver::countSubjectOnDay(const Timetable& timetable, int classI
     return count;
 }
 
+int BacktrackingSolver::countTeacherConsecutive(const ResourceTracker& tracker, int teacherId,
+                                                int dayIdx, int numPeriods) const {
+    int maxConsecutive = 0;
+    int currentConsecutive = 0;
+    
+    for (int p = 0; p < numPeriods; ++p) {
+        if (tracker.isBusy(ResourceType::TEACHER, teacherId, dayIdx, p)) {
+            currentConsecutive++;
+            maxConsecutive = std::max(maxConsecutive, currentConsecutive);
+        } else {
+            currentConsecutive = 0;
+        }
+    }
+    
+    return maxConsecutive;
+}
+
+int BacktrackingSolver::getTeacherMaxConsecutive(const DataManager& dm, int teacherId) const {
+    for (const auto& t : dm.teachers) {
+        if (t.id == teacherId) {
+            return t.maxConsecutive;
+        }
+    }
+    return 0; // No limit by default
+}
+
+int BacktrackingSolver::getClassEarliestPeriod(const DataManager& dm, int classId) const {
+    for (const auto& c : dm.classes) {
+        if (c.id == classId) {
+            return c.earliestPeriod;
+        }
+    }
+    return -1; // No constraint
+}
+
+int BacktrackingSolver::getClassLatestPeriod(const DataManager& dm, int classId) const {
+    for (const auto& c : dm.classes) {
+        if (c.id == classId) {
+            return c.latestPeriod;
+        }
+    }
+    return -1; // No constraint
+}
+
 int BacktrackingSolver::getLCVScore(int unitIdx, int d, int p,
                                      const std::vector<LessonUnit>& units,
                                      const std::vector<bool>& placed,
@@ -165,6 +209,40 @@ bool BacktrackingSolver::backtrack(int placedCount,
             }
         }
         if (!canPlace) continue;
+
+        // ==== Check Education Block (Earliest/Latest Period) ====
+        int earliestPeriod = getClassEarliestPeriod(dm, unit.classId);
+        int latestPeriod = getClassLatestPeriod(dm, unit.classId);
+        
+        if (earliestPeriod >= 0 && p < earliestPeriod) {
+            continue; // Block starts before earliest allowed period
+        }
+        if (latestPeriod >= 0 && p + k - 1 > latestPeriod) {
+            continue; // Block ends after latest allowed period
+        }
+
+        // ==== Check Teacher Max Consecutive ====
+        int teacherMaxConsecutive = getTeacherMaxConsecutive(dm, unit.teacherId);
+        if (teacherMaxConsecutive > 0) {
+            // Count existing consecutive periods before p
+            int left = 0;
+            for (int i = p - 1; i >= 0 && tracker.isBusy(ResourceType::TEACHER, unit.teacherId, d, i); --i) {
+                left++;
+            }
+            // Count how many periods in the block
+            int blockLength = k;
+            // Count existing consecutive periods after the block
+            int right = 0;
+            int afterBlock = p + k;
+            for (int i = afterBlock; i < numPeriods && tracker.isBusy(ResourceType::TEACHER, unit.teacherId, d, i); ++i) {
+                right++;
+            }
+            // Total consecutive if we place here
+            int totalConsecutive = left + blockLength + right;
+            if (totalConsecutive > teacherMaxConsecutive) {
+                continue;
+            }
+        }
 
         // Check maxPerDay constraint
         if (unit.maxPerDay > 0) {

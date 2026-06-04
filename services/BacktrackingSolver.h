@@ -11,6 +11,19 @@ private:
     int countSubjectOnDay(const Timetable& timetable, int classId, int subjectId, 
                           int dayIdx, int numPeriods) const;
 
+    // Helper to count max consecutive periods for a teacher on a given day
+    int countTeacherConsecutive(const ResourceTracker& tracker, int teacherId, 
+                                int dayIdx, int numPeriods) const;
+
+    // Get teacher max consecutive limit from DataManager
+    int getTeacherMaxConsecutive(const DataManager& dm, int teacherId) const;
+
+    // Get class earliest period constraint (-1 = no constraint)
+    int getClassEarliestPeriod(const DataManager& dm, int classId) const;
+
+    // Get class latest period constraint (-1 = no constraint)
+    int getClassLatestPeriod(const DataManager& dm, int classId) const;
+
     bool backtrack(int placedCount,
                    const std::vector<LessonUnit>& units,
                    std::vector<bool>& placed,
