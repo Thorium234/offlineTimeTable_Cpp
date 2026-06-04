@@ -139,6 +139,7 @@ void RoomWidget::deleteRoom() {
             QMessageBox::warning(this, tr("Delete failed"), tr("Could not delete the room."));
         }
     }
+}
 
 void RoomWidget::showEvent(QShowEvent *event) {
     QWidget::showEvent(event);

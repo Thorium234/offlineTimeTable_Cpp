@@ -213,6 +213,13 @@ CMakeFiles/timetableGen.dir/services/DataManager.cpp.o: \
  /home/thorium/anaconda3/include/qt/QtSql/qsqlerror.h \
  /home/thorium/anaconda3/include/qt/QtCore/QString \
  /home/thorium/anaconda3/include/qt/QtCore/qstring.h \
+ /home/thorium/Desktop/programming/2026/c++Projects/timetableGen/services/../timetable/Timetable.h \
+ /usr/include/c++/13/map /usr/include/c++/13/bits/stl_tree.h \
+ /usr/include/c++/13/ext/aligned_buffer.h \
+ /usr/include/c++/13/bits/node_handle.h \
+ /usr/include/c++/13/bits/stl_map.h \
+ /usr/include/c++/13/bits/stl_multimap.h \
+ /usr/include/c++/13/bits/erase_if.h \
  /home/thorium/anaconda3/include/qt/QtCore/QDebug \
  /home/thorium/anaconda3/include/qt/QtCore/qdebug.h \
  /home/thorium/anaconda3/include/qt/QtCore/qalgorithms.h \
@@ -228,11 +235,8 @@ CMakeFiles/timetableGen.dir/services/DataManager.cpp.o: \
  /usr/include/c++/13/bits/unordered_map.h \
  /usr/include/c++/13/bits/hashtable.h \
  /usr/include/c++/13/bits/hashtable_policy.h \
- /usr/include/c++/13/ext/aligned_buffer.h \
  /usr/include/c++/13/bits/enable_special_members.h \
- /usr/include/c++/13/bits/node_handle.h \
- /usr/include/c++/13/bits/erase_if.h /usr/include/c++/13/array \
- /usr/include/c++/13/compare \
+ /usr/include/c++/13/array /usr/include/c++/13/compare \
  /home/thorium/anaconda3/include/qt/QtCore/qvector.h \
  /home/thorium/anaconda3/include/qt/QtCore/qcontainertools_impl.h \
  /usr/include/c++/13/list /usr/include/c++/13/bits/stl_list.h \
@@ -250,9 +254,7 @@ CMakeFiles/timetableGen.dir/services/DataManager.cpp.o: \
  /home/thorium/anaconda3/include/qt/QtCore/qstringlist.h \
  /home/thorium/anaconda3/include/qt/QtCore/qregexp.h \
  /home/thorium/anaconda3/include/qt/QtCore/qstringmatcher.h \
- /home/thorium/anaconda3/include/qt/QtCore/qmap.h /usr/include/c++/13/map \
- /usr/include/c++/13/bits/stl_tree.h /usr/include/c++/13/bits/stl_map.h \
- /usr/include/c++/13/bits/stl_multimap.h \
+ /home/thorium/anaconda3/include/qt/QtCore/qmap.h \
  /home/thorium/anaconda3/include/qt/QtCore/qtextstream.h \
  /home/thorium/anaconda3/include/qt/QtCore/qiodevice.h \
  /home/thorium/anaconda3/include/qt/QtCore/qobject.h \

@@ -4,7 +4,7 @@
 #include <QPushButton>
 #include <QTextEdit>
 #include <QLabel>
-#include "../services/DataManager.h"
+#include "../../services/DataManager.h"
 
 class BenchmarkWidget : public QWidget {
     Q_OBJECT

@@ -1,281 +1,313 @@
 #include "TimetableViewWidget.h"
 #include <QVBoxLayout>
 #include <QHBoxLayout>
-#include <QLabel>
-#include <QMessageBox>
 #include <QHeaderView>
+#include <QToolTip>
 
 TimetableViewWidget::TimetableViewWidget(DataManager *dm, QWidget *parent)
     : QWidget(parent), dm(dm) {
-    setWindowTitle(tr("Timetable Viewer"));
-    resize(900, 600);
     setupUi();
-}
-
-void TimetableViewWidget::setTimetable(const Timetable &t) {
-    timetable = t;
-    refresh();
 }
 
 void TimetableViewWidget::setupUi() {
     QVBoxLayout *mainLayout = new QVBoxLayout(this);
-    
-    QTabWidget *tabWidget = new QTabWidget(this);
-    
-    // Class Timetable tab
-    QWidget *classTab = new QWidget(this);
-    QVBoxLayout *classLayout = new QVBoxLayout(classTab);
-    
-    QHBoxLayout *classSelectLayout = new QHBoxLayout;
-    classSelectLayout->addWidget(new QLabel(tr("Select Class:"), classTab));
-    classCombo = new QComboBox(classTab);
-    classSelectLayout->addWidget(classCombo);
-    classLayout->addLayout(classSelectLayout);
-    
-    classTableWidget = new QTableWidget(classTab);
-    classLayout->addWidget(classTableWidget);
-    
-    // Teacher Timetable tab
-    QWidget *teacherTab = new QWidget(this);
-    QVBoxLayout *teacherLayout = new QVBoxLayout(teacherTab);
-    
-    QHBoxLayout *teacherSelectLayout = new QHBoxLayout;
-    teacherSelectLayout->addWidget(new QLabel(tr("Select Teacher:"), teacherTab));
-    teacherCombo = new QComboBox(teacherTab);
-    teacherSelectLayout->addWidget(teacherCombo);
-    teacherLayout->addLayout(teacherSelectLayout);
-    
-    teacherTableWidget = new QTableWidget(teacherTab);
-    teacherLayout->addWidget(teacherTableWidget);
-    
-    // Room Timetable tab
-    QWidget *roomTab = new QWidget(this);
-    QVBoxLayout *roomLayout = new QVBoxLayout(roomTab);
-    
-    QHBoxLayout *roomSelectLayout = new QHBoxLayout;
-    roomSelectLayout->addWidget(new QLabel(tr("Select Room:"), roomTab));
-    roomCombo = new QComboBox(roomTab);
-    roomSelectLayout->addWidget(roomCombo);
-    roomLayout->addLayout(roomSelectLayout);
-    
-    roomTableWidget = new QTableWidget(roomTab);
-    roomLayout->addWidget(roomTableWidget);
-    
-    tabWidget->addTab(classTab, tr("Class Timetable"));
-    tabWidget->addTab(teacherTab, tr("Teacher Timetable"));
-    tabWidget->addTab(roomTab, tr("Room Timetable"));
-    
-    mainLayout->addWidget(tabWidget);
-    
-    setupClassTimetableTab();
-    setupTeacherTimetableTab();
-    setupRoomTimetableTab();
-    
-    // Connect signals
-    connect(classCombo, QOverload<const QString&>::of(&QComboBox::currentTextChanged),
-            this, &TimetableViewWidget::populateClassTimetable);
-    connect(teacherCombo, QOverload<const QString&>::of(&QComboBox::currentTextChanged),
-            this, &TimetableViewWidget::populateTeacherTimetable);
-    connect(roomCombo, QOverload<const QString&>::of(&QComboBox::currentTextChanged),
-            this, &TimetableViewWidget::populateRoomTimetable);
+    mainLayout->setContentsMargins(0, 0, 0, 0);
+    mainLayout->setSpacing(0);
+
+    viewTitle = new QLabel(tr("Class Timetable"), this);
+    viewTitle->setObjectName("GridTitle");
+    viewTitle->setFixedHeight(32);
+    mainLayout->addWidget(viewTitle);
+
+    gridWidget = new QTableWidget(this);
+    gridWidget->setObjectName("TimetableGrid");
+    gridWidget->setSelectionMode(QAbstractItemView::SingleSelection);
+    gridWidget->setSelectionBehavior(QAbstractItemView::SelectItems);
+    gridWidget->setEditTriggers(QAbstractItemView::NoEditTriggers);
+    gridWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+    gridWidget->verticalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+    gridWidget->setShowGrid(true);
+    mainLayout->addWidget(gridWidget, 1);
+
+    // Empty state
+    emptyState = new QWidget(this);
+    QVBoxLayout *emptyLayout = new QVBoxLayout(emptyState);
+    QLabel *emptyLabel = new QLabel(tr("No timetable generated yet.\nAdd resources and lessons, then click Generate."), emptyState);
+    emptyLabel->setAlignment(Qt::AlignCenter);
+    emptyLabel->setStyleSheet("color: #555; font-size: 14pt; border: none; background: transparent;");
+    emptyLayout->addWidget(emptyLabel);
+    emptyState->setVisible(true);
+    mainLayout->addWidget(emptyState);
+
+    connect(gridWidget, &QTableWidget::cellClicked, this, &TimetableViewWidget::onCellClicked);
 }
 
-void TimetableViewWidget::setupClassTimetableTab() {
-    classCombo->clear();
-    for (const auto &c : dm->classes) {
-        classCombo->addItem(QString::fromStdString(c.name), c.id);
+void TimetableViewWidget::setTimetable(const Timetable &t) {
+    timetable = t;
+    dm->timetableGenerated = true;
+    dm->lastTimetable = t;
+    emptyState->setVisible(false);
+    gridWidget->setVisible(true);
+    populateGrid();
+}
+
+void TimetableViewWidget::setViewMode(ViewMode mode) {
+    currentMode = mode;
+    selectedEntityId = -1;
+    if (dm->timetableGenerated) {
+        populateGrid();
     }
 }
 
-void TimetableViewWidget::setupTeacherTimetableTab() {
-    teacherCombo->clear();
-    for (const auto &t : dm->teachers) {
-        teacherCombo->addItem(QString::fromStdString(t.name), t.id);
+void TimetableViewWidget::setViewSelection(const QString &type, int id) {
+    selectedEntityId = id;
+    if (dm->timetableGenerated) {
+        populateGrid();
     }
-}
-
-void TimetableViewWidget::setupRoomTimetableTab() {
-    roomCombo->clear();
-    for (const auto &r : dm->rooms) {
-        roomCombo->addItem(QString::fromStdString(r.name), r.id);
-    }
-}
-
-void TimetableViewWidget::populateClassTimetable(const QString &className) {
-    classTableWidget->clear();
-    
-    if (dm->days.empty() || dm->periods.empty()) {
-        classTableWidget->setRowCount(0);
-        classTableWidget->setColumnCount(0);
-        return;
-    }
-    
-    int classId = -1;
-    for (const auto &c : dm->classes) {
-        if (QString::fromStdString(c.name) == className) {
-            classId = c.id;
-            break;
-        }
-    }
-    
-    if (classId == -1) return;
-    
-    // Setup table dimensions
-    classTableWidget->setRowCount(dm->days.size());
-    classTableWidget->setColumnCount(dm->periods.size() + 1);
-    
-    // Headers
-    QStringList headers;
-    headers << "";
-    for (const auto &p : dm->periods) {
-        headers << QString::fromStdString(p.startTime);
-    }
-    classTableWidget->setHorizontalHeaderLabels(headers);
-    
-    QStringList dayLabels;
-    for (const auto &d : dm->days) {
-        dayLabels << QString::fromStdString(d.name);
-    }
-    classTableWidget->setVerticalHeaderLabels(dayLabels);
-    
-    // Find schedule for this class
-    auto it = timetable.schedules.find(classId);
-    if (it != timetable.schedules.end()) {
-        const auto &grid = it->second;
-        for (int d = 0; d < static_cast<int>(dm->days.size()) && d < static_cast<int>(grid.size()); ++d) {
-            for (int p = 0; p < static_cast<int>(dm->periods.size()) && p < static_cast<int>(grid[d].size()); ++p) {
-                const auto &cell = grid[d][p];
-                if (cell.subjectId > 0) {
-                    QString cellText = QString::fromStdString(dm->getSubjectName(cell.subjectId)) + "\n" +
-                                       QString::fromStdString(dm->getTeacherName(cell.teacherId)) + "\n" +
-                                       QString::fromStdString(dm->getRoomName(cell.roomId));
-                    classTableWidget->setItem(d, p + 1, new QTableWidgetItem(cellText));
-                }
-            }
-        }
-    }
-    
-    classTableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
-    classTableWidget->verticalHeader()->setSectionResizeMode(QHeaderView::Stretch);
-}
-
-void TimetableViewWidget::populateTeacherTimetable(const QString &teacherName) {
-    teacherTableWidget->clear();
-    
-    if (dm->days.empty() || dm->periods.empty()) {
-        teacherTableWidget->setRowCount(0);
-        teacherTableWidget->setColumnCount(0);
-        return;
-    }
-    
-    int teacherId = -1;
-    for (const auto &t : dm->teachers) {
-        if (QString::fromStdString(t.name) == teacherName) {
-            teacherId = t.id;
-            break;
-        }
-    }
-    
-    if (teacherId == -1) return;
-    
-    teacherTableWidget->setRowCount(dm->days.size());
-    teacherTableWidget->setColumnCount(dm->periods.size() + 1);
-    
-    QStringList headers;
-    headers << "";
-    for (const auto &p : dm->periods) {
-        headers << QString::fromStdString(p.startTime);
-    }
-    teacherTableWidget->setHorizontalHeaderLabels(headers);
-    
-    QStringList dayLabels;
-    for (const auto &d : dm->days) {
-        dayLabels << QString::fromStdString(d.name);
-    }
-    teacherTableWidget->setVerticalHeaderLabels(dayLabels);
-    
-    // Scan all class schedules for this teacher
-    for (const auto &pair : timetable.schedules) {
-        const auto &grid = pair.second;
-        for (int d = 0; d < static_cast<int>(grid.size()); ++d) {
-            for (int p = 0; p < static_cast<int>(grid[d].size()); ++p) {
-                const auto &cell = grid[d][p];
-                if (cell.teacherId == teacherId && cell.subjectId > 0) {
-                    QString cellText = QString::fromStdString(dm->getClassName(pair.first)) + "\n" +
-                                       QString::fromStdString(dm->getSubjectName(cell.subjectId)) + "\n" +
-                                       QString::fromStdString(dm->getRoomName(cell.roomId));
-                    teacherTableWidget->setItem(d, p + 1, new QTableWidgetItem(cellText));
-                }
-            }
-        }
-    }
-    
-    teacherTableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
-    teacherTableWidget->verticalHeader()->setSectionResizeMode(QHeaderView::Stretch);
-}
-
-void TimetableViewWidget::populateRoomTimetable(const QString &roomName) {
-    roomTableWidget->clear();
-    
-    if (dm->days.empty() || dm->periods.empty()) {
-        roomTableWidget->setRowCount(0);
-        roomTableWidget->setColumnCount(0);
-        return;
-    }
-    
-    int roomId = -1;
-    for (const auto &r : dm->rooms) {
-        if (QString::fromStdString(r.name) == roomName) {
-            roomId = r.id;
-            break;
-        }
-    }
-    
-    if (roomId == -1) return;
-    
-    roomTableWidget->setRowCount(dm->days.size());
-    roomTableWidget->setColumnCount(dm->periods.size() + 1);
-    
-    QStringList headers;
-    headers << "";
-    for (const auto &p : dm->periods) {
-        headers << QString::fromStdString(p.startTime);
-    }
-    roomTableWidget->setHorizontalHeaderLabels(headers);
-    
-    QStringList dayLabels;
-    for (const auto &d : dm->days) {
-        dayLabels << QString::fromStdString(d.name);
-    }
-    roomTableWidget->setVerticalHeaderLabels(dayLabels);
-    
-    // Scan all class schedules for this room
-    for (const auto &pair : timetable.schedules) {
-        const auto &grid = pair.second;
-        for (int d = 0; d < static_cast<int>(grid.size()); ++d) {
-            for (int p = 0; p < static_cast<int>(grid[d].size()); ++p) {
-                const auto &cell = grid[d][p];
-                if (cell.roomId == roomId && cell.subjectId > 0) {
-                    QString cellText = QString::fromStdString(dm->getClassName(pair.first)) + "\n" +
-                                       QString::fromStdString(dm->getSubjectName(cell.subjectId)) + "\n" +
-                                       QString::fromStdString(dm->getTeacherName(cell.teacherId));
-                    roomTableWidget->setItem(d, p + 1, new QTableWidgetItem(cellText));
-                }
-            }
-        }
-    }
-    
-    roomTableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
-    roomTableWidget->verticalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 }
 
 void TimetableViewWidget::refresh() {
-    setupClassTimetableTab();
-    setupTeacherTimetableTab();
-    setupRoomTimetableTab();
+    if (dm->timetableGenerated) {
+        setTimetable(dm->lastTimetable);
+    }
 }
 
 void TimetableViewWidget::showEvent(QShowEvent *event) {
     QWidget::showEvent(event);
-    refresh();
+    if (dm->timetableGenerated) {
+        setTimetable(dm->lastTimetable);
+    }
+}
+
+void TimetableViewWidget::populateGrid() {
+    gridWidget->clear();
+
+    if (dm->days.empty() || dm->periods.empty()) {
+        gridWidget->setRowCount(0);
+        gridWidget->setColumnCount(0);
+        return;
+    }
+
+    switch (currentMode) {
+        case ViewMode::CLASS: populateClassGrid(); break;
+        case ViewMode::TEACHER: populateTeacherGrid(); break;
+        case ViewMode::ROOM: populateRoomGrid(); break;
+    }
+}
+
+void TimetableViewWidget::populateClassGrid() {
+    int numDays = static_cast<int>(dm->days.size());
+    int numPeriods = static_cast<int>(dm->periods.size());
+
+    gridWidget->setRowCount(numDays);
+    gridWidget->setColumnCount(numPeriods + 1);
+
+    // Horizontal headers
+    QStringList headers;
+    headers << "";
+    for (const auto &p : dm->periods) {
+        headers << QString::fromStdString(p.startTime);
+    }
+    gridWidget->setHorizontalHeaderLabels(headers);
+
+    // Vertical headers
+    QStringList dayLabels;
+    for (const auto &d : dm->days) {
+        dayLabels << QString::fromStdString(d.name);
+    }
+    gridWidget->setVerticalHeaderLabels(dayLabels);
+
+    // Determine which classes to show
+    auto iterBegin = timetable.schedules.begin();
+    auto iterEnd = timetable.schedules.end();
+
+    if (selectedEntityId > 0) {
+        // Show only selected class
+        auto it = timetable.schedules.find(selectedEntityId);
+        if (it != timetable.schedules.end()) {
+            iterBegin = it;
+            iterEnd = std::next(it);
+            viewTitle->setText(tr("Class Timetable: %1")
+                .arg(QString::fromStdString(dm->getClassName(selectedEntityId))));
+        }
+    } else {
+        viewTitle->setText(tr("Class Timetable (all classes)"));
+    }
+
+    // For each class, add its cells to the grid (we'll overlay by appending text)
+    // This is a simplified view - shows first class's schedule or overlays
+    // For multi-class view, we show the first class
+    bool populated = false;
+    for (auto it = iterBegin; it != iterEnd; ++it) {
+        int classId = it->first;
+        const auto &grid = it->second;
+        for (int d = 0; d < numDays && d < static_cast<int>(grid.size()); ++d) {
+            for (int p = 0; p < numPeriods && p < static_cast<int>(grid[d].size()); ++p) {
+                const auto &cell = grid[d][p];
+                if (!cell.isEmpty()) {
+                    QString teacherName = QString::fromStdString(dm->getTeacherName(cell.teacherId));
+                    QString subjectName = QString::fromStdString(dm->getSubjectName(cell.subjectId));
+                    QString roomName = QString::fromStdString(dm->getRoomName(cell.roomId));
+                    QString cellText = subjectName + "\n" + teacherName + "\n" + roomName;
+
+                    QTableWidgetItem *item = new QTableWidgetItem(cellText);
+                    item->setToolTip(tr("Subject: %1\nTeacher: %2\nRoom: %3\nClass: %4")
+                        .arg(subjectName).arg(teacherName).arg(roomName)
+                        .arg(QString::fromStdString(dm->getClassName(classId))));
+                    item->setData(Qt::UserRole, cell.subjectId);
+                    item->setData(Qt::UserRole + 1, cell.teacherId);
+                    item->setBackground(colorForSubject(cell.subjectId));
+
+                    // Set text color based on background brightness
+                    QColor bg = colorForSubject(cell.subjectId);
+                    item->setForeground(bg.lightness() > 128 ? QColor("#1a1a1a") : QColor("#ffffff"));
+
+                    gridWidget->setItem(d, p + 1, item);
+                    populated = true;
+                }
+            }
+        }
+        break; // Show only first class in "all" view
+    }
+
+    if (!populated && selectedEntityId > 0) {
+        viewTitle->setText(tr("No schedule found for selected class."));
+    }
+}
+
+void TimetableViewWidget::populateTeacherGrid() {
+    int numDays = static_cast<int>(dm->days.size());
+    int numPeriods = static_cast<int>(dm->periods.size());
+
+    gridWidget->setRowCount(numDays);
+    gridWidget->setColumnCount(numPeriods + 1);
+
+    QStringList headers;
+    headers << "";
+    for (const auto &p : dm->periods) {
+        headers << QString::fromStdString(p.startTime);
+    }
+    gridWidget->setHorizontalHeaderLabels(headers);
+
+    QStringList dayLabels;
+    for (const auto &d : dm->days) {
+        dayLabels << QString::fromStdString(d.name);
+    }
+    gridWidget->setVerticalHeaderLabels(dayLabels);
+
+    if (selectedEntityId > 0) {
+        viewTitle->setText(tr("Teacher Timetable: %1")
+            .arg(QString::fromStdString(dm->getTeacherName(selectedEntityId))));
+    } else {
+        viewTitle->setText(tr("Teacher Timetable (select a teacher from the sidebar)"));
+        return;
+    }
+
+    // Scan all class schedules for this teacher
+    for (const auto &pair : timetable.schedules) {
+        int classId = pair.first;
+        const auto &grid = pair.second;
+        for (int d = 0; d < numDays && d < static_cast<int>(grid.size()); ++d) {
+            for (int p = 0; p < numPeriods && p < static_cast<int>(grid[d].size()); ++p) {
+                const auto &cell = grid[d][p];
+                if (cell.teacherId == selectedEntityId && !cell.isEmpty()) {
+                    QString subjectName = QString::fromStdString(dm->getSubjectName(cell.subjectId));
+                    QString className = QString::fromStdString(dm->getClassName(classId));
+                    QString roomName = QString::fromStdString(dm->getRoomName(cell.roomId));
+                    QString cellText = subjectName + "\n" + className + "\n" + roomName;
+
+                    QTableWidgetItem *item = new QTableWidgetItem(cellText);
+                    item->setToolTip(tr("Subject: %1\nClass: %2\nRoom: %3")
+                        .arg(subjectName).arg(className).arg(roomName));
+                    item->setData(Qt::UserRole, cell.subjectId);
+                    item->setData(Qt::UserRole + 1, cell.teacherId);
+                    item->setBackground(colorForSubject(cell.subjectId));
+
+                    QColor bg = colorForSubject(cell.subjectId);
+                    item->setForeground(bg.lightness() > 128 ? QColor("#1a1a1a") : QColor("#ffffff"));
+
+                    gridWidget->setItem(d, p + 1, item);
+                }
+            }
+        }
+    }
+}
+
+void TimetableViewWidget::populateRoomGrid() {
+    int numDays = static_cast<int>(dm->days.size());
+    int numPeriods = static_cast<int>(dm->periods.size());
+
+    gridWidget->setRowCount(numDays);
+    gridWidget->setColumnCount(numPeriods + 1);
+
+    QStringList headers;
+    headers << "";
+    for (const auto &p : dm->periods) {
+        headers << QString::fromStdString(p.startTime);
+    }
+    gridWidget->setHorizontalHeaderLabels(headers);
+
+    QStringList dayLabels;
+    for (const auto &d : dm->days) {
+        dayLabels << QString::fromStdString(d.name);
+    }
+    gridWidget->setVerticalHeaderLabels(dayLabels);
+
+    if (selectedEntityId > 0) {
+        viewTitle->setText(tr("Room Timetable: %1")
+            .arg(QString::fromStdString(dm->getRoomName(selectedEntityId))));
+    } else {
+        viewTitle->setText(tr("Room Timetable (select a room from the sidebar)"));
+        return;
+    }
+
+    // Scan all class schedules for this room
+    for (const auto &pair : timetable.schedules) {
+        int classId = pair.first;
+        const auto &grid = pair.second;
+        for (int d = 0; d < numDays && d < static_cast<int>(grid.size()); ++d) {
+            for (int p = 0; p < numPeriods && p < static_cast<int>(grid[d].size()); ++p) {
+                const auto &cell = grid[d][p];
+                if (cell.roomId == selectedEntityId && !cell.isEmpty()) {
+                    QString subjectName = QString::fromStdString(dm->getSubjectName(cell.subjectId));
+                    QString teacherName = QString::fromStdString(dm->getTeacherName(cell.teacherId));
+                    QString className = QString::fromStdString(dm->getClassName(classId));
+                    QString cellText = subjectName + "\n" + teacherName + "\n" + className;
+
+                    QTableWidgetItem *item = new QTableWidgetItem(cellText);
+                    item->setToolTip(tr("Subject: %1\nTeacher: %2\nClass: %3")
+                        .arg(subjectName).arg(teacherName).arg(className));
+                    item->setData(Qt::UserRole, cell.subjectId);
+                    item->setData(Qt::UserRole + 1, cell.teacherId);
+                    item->setBackground(colorForSubject(cell.subjectId));
+
+                    QColor bg = colorForSubject(cell.subjectId);
+                    item->setForeground(bg.lightness() > 128 ? QColor("#1a1a1a") : QColor("#ffffff"));
+
+                    gridWidget->setItem(d, p + 1, item);
+                }
+            }
+        }
+    }
+}
+
+void TimetableViewWidget::onCellClicked(int row, int col) {
+    QTableWidgetItem *item = gridWidget->item(row, col);
+    if (!item) return;
+    QString tip = item->toolTip();
+    if (!tip.isEmpty()) {
+        QToolTip::showText(QCursor::pos(), tip, this);
+    }
+}
+
+QColor TimetableViewWidget::colorForTeacher(int teacherId) const {
+    if (teacherId <= 0) return QColor("#2a2a2a");
+    int hue = (teacherId * 61) % 360;
+    return QColor::fromHsl(hue, 160, 80);
+}
+
+QColor TimetableViewWidget::colorForSubject(int subjectId) const {
+    if (subjectId <= 0) return QColor("#2a2a2a");
+    int hue = (subjectId * 47 + 30) % 360;
+    return QColor::fromHsl(hue, 140, 75);
 }

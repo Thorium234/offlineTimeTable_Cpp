@@ -214,6 +214,7 @@ CMakeFiles/timetableGen.dir/services/FeasibilityChecker.cpp.o: \
  /home/thorium/anaconda3/include/qt/QtSql/qsqlerror.h \
  /home/thorium/anaconda3/include/qt/QtCore/QString \
  /home/thorium/anaconda3/include/qt/QtCore/qstring.h \
+ /home/thorium/Desktop/programming/2026/c++Projects/timetableGen/services/../timetable/Timetable.h \
  /usr/include/c++/13/map /usr/include/c++/13/bits/stl_tree.h \
  /usr/include/c++/13/ext/aligned_buffer.h \
  /usr/include/c++/13/bits/node_handle.h \

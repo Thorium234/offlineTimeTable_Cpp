@@ -242,53 +242,29 @@ gui/classes/ClassDialog.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/timetableGen.dir/build.make CMakeFiles/timetableGen.dir/gui/classes/ClassDialog.cpp.s
 .PHONY : gui/classes/ClassDialog.cpp.s
 
-gui/classes/ClassWidget.o: gui/classes/ClassWidget.cpp.o
-.PHONY : gui/classes/ClassWidget.o
+gui/ribbon/RibbonToolbar.o: gui/ribbon/RibbonToolbar.cpp.o
+.PHONY : gui/ribbon/RibbonToolbar.o
 
 # target to build an object file
-gui/classes/ClassWidget.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/timetableGen.dir/build.make CMakeFiles/timetableGen.dir/gui/classes/ClassWidget.cpp.o
-.PHONY : gui/classes/ClassWidget.cpp.o
+gui/ribbon/RibbonToolbar.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/timetableGen.dir/build.make CMakeFiles/timetableGen.dir/gui/ribbon/RibbonToolbar.cpp.o
+.PHONY : gui/ribbon/RibbonToolbar.cpp.o
 
-gui/classes/ClassWidget.i: gui/classes/ClassWidget.cpp.i
-.PHONY : gui/classes/ClassWidget.i
-
-# target to preprocess a source file
-gui/classes/ClassWidget.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/timetableGen.dir/build.make CMakeFiles/timetableGen.dir/gui/classes/ClassWidget.cpp.i
-.PHONY : gui/classes/ClassWidget.cpp.i
-
-gui/classes/ClassWidget.s: gui/classes/ClassWidget.cpp.s
-.PHONY : gui/classes/ClassWidget.s
-
-# target to generate assembly for a file
-gui/classes/ClassWidget.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/timetableGen.dir/build.make CMakeFiles/timetableGen.dir/gui/classes/ClassWidget.cpp.s
-.PHONY : gui/classes/ClassWidget.cpp.s
-
-gui/dashboard/DashboardWidget.o: gui/dashboard/DashboardWidget.cpp.o
-.PHONY : gui/dashboard/DashboardWidget.o
-
-# target to build an object file
-gui/dashboard/DashboardWidget.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/timetableGen.dir/build.make CMakeFiles/timetableGen.dir/gui/dashboard/DashboardWidget.cpp.o
-.PHONY : gui/dashboard/DashboardWidget.cpp.o
-
-gui/dashboard/DashboardWidget.i: gui/dashboard/DashboardWidget.cpp.i
-.PHONY : gui/dashboard/DashboardWidget.i
+gui/ribbon/RibbonToolbar.i: gui/ribbon/RibbonToolbar.cpp.i
+.PHONY : gui/ribbon/RibbonToolbar.i
 
 # target to preprocess a source file
-gui/dashboard/DashboardWidget.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/timetableGen.dir/build.make CMakeFiles/timetableGen.dir/gui/dashboard/DashboardWidget.cpp.i
-.PHONY : gui/dashboard/DashboardWidget.cpp.i
+gui/ribbon/RibbonToolbar.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/timetableGen.dir/build.make CMakeFiles/timetableGen.dir/gui/ribbon/RibbonToolbar.cpp.i
+.PHONY : gui/ribbon/RibbonToolbar.cpp.i
 
-gui/dashboard/DashboardWidget.s: gui/dashboard/DashboardWidget.cpp.s
-.PHONY : gui/dashboard/DashboardWidget.s
+gui/ribbon/RibbonToolbar.s: gui/ribbon/RibbonToolbar.cpp.s
+.PHONY : gui/ribbon/RibbonToolbar.s
 
 # target to generate assembly for a file
-gui/dashboard/DashboardWidget.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/timetableGen.dir/build.make CMakeFiles/timetableGen.dir/gui/dashboard/DashboardWidget.cpp.s
-.PHONY : gui/dashboard/DashboardWidget.cpp.s
+gui/ribbon/RibbonToolbar.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/timetableGen.dir/build.make CMakeFiles/timetableGen.dir/gui/ribbon/RibbonToolbar.cpp.s
+.PHONY : gui/ribbon/RibbonToolbar.cpp.s
 
 gui/rooms/RoomDialog.o: gui/rooms/RoomDialog.cpp.o
 .PHONY : gui/rooms/RoomDialog.o
@@ -314,29 +290,29 @@ gui/rooms/RoomDialog.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/timetableGen.dir/build.make CMakeFiles/timetableGen.dir/gui/rooms/RoomDialog.cpp.s
 .PHONY : gui/rooms/RoomDialog.cpp.s
 
-gui/rooms/RoomWidget.o: gui/rooms/RoomWidget.cpp.o
-.PHONY : gui/rooms/RoomWidget.o
+gui/sidebar/DataSidebar.o: gui/sidebar/DataSidebar.cpp.o
+.PHONY : gui/sidebar/DataSidebar.o
 
 # target to build an object file
-gui/rooms/RoomWidget.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/timetableGen.dir/build.make CMakeFiles/timetableGen.dir/gui/rooms/RoomWidget.cpp.o
-.PHONY : gui/rooms/RoomWidget.cpp.o
+gui/sidebar/DataSidebar.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/timetableGen.dir/build.make CMakeFiles/timetableGen.dir/gui/sidebar/DataSidebar.cpp.o
+.PHONY : gui/sidebar/DataSidebar.cpp.o
 
-gui/rooms/RoomWidget.i: gui/rooms/RoomWidget.cpp.i
-.PHONY : gui/rooms/RoomWidget.i
+gui/sidebar/DataSidebar.i: gui/sidebar/DataSidebar.cpp.i
+.PHONY : gui/sidebar/DataSidebar.i
 
 # target to preprocess a source file
-gui/rooms/RoomWidget.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/timetableGen.dir/build.make CMakeFiles/timetableGen.dir/gui/rooms/RoomWidget.cpp.i
-.PHONY : gui/rooms/RoomWidget.cpp.i
+gui/sidebar/DataSidebar.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/timetableGen.dir/build.make CMakeFiles/timetableGen.dir/gui/sidebar/DataSidebar.cpp.i
+.PHONY : gui/sidebar/DataSidebar.cpp.i
 
-gui/rooms/RoomWidget.s: gui/rooms/RoomWidget.cpp.s
-.PHONY : gui/rooms/RoomWidget.s
+gui/sidebar/DataSidebar.s: gui/sidebar/DataSidebar.cpp.s
+.PHONY : gui/sidebar/DataSidebar.s
 
 # target to generate assembly for a file
-gui/rooms/RoomWidget.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/timetableGen.dir/build.make CMakeFiles/timetableGen.dir/gui/rooms/RoomWidget.cpp.s
-.PHONY : gui/rooms/RoomWidget.cpp.s
+gui/sidebar/DataSidebar.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/timetableGen.dir/build.make CMakeFiles/timetableGen.dir/gui/sidebar/DataSidebar.cpp.s
+.PHONY : gui/sidebar/DataSidebar.cpp.s
 
 gui/subjects/SubjectDialog.o: gui/subjects/SubjectDialog.cpp.o
 .PHONY : gui/subjects/SubjectDialog.o
@@ -362,30 +338,6 @@ gui/subjects/SubjectDialog.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/timetableGen.dir/build.make CMakeFiles/timetableGen.dir/gui/subjects/SubjectDialog.cpp.s
 .PHONY : gui/subjects/SubjectDialog.cpp.s
 
-gui/subjects/SubjectWidget.o: gui/subjects/SubjectWidget.cpp.o
-.PHONY : gui/subjects/SubjectWidget.o
-
-# target to build an object file
-gui/subjects/SubjectWidget.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/timetableGen.dir/build.make CMakeFiles/timetableGen.dir/gui/subjects/SubjectWidget.cpp.o
-.PHONY : gui/subjects/SubjectWidget.cpp.o
-
-gui/subjects/SubjectWidget.i: gui/subjects/SubjectWidget.cpp.i
-.PHONY : gui/subjects/SubjectWidget.i
-
-# target to preprocess a source file
-gui/subjects/SubjectWidget.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/timetableGen.dir/build.make CMakeFiles/timetableGen.dir/gui/subjects/SubjectWidget.cpp.i
-.PHONY : gui/subjects/SubjectWidget.cpp.i
-
-gui/subjects/SubjectWidget.s: gui/subjects/SubjectWidget.cpp.s
-.PHONY : gui/subjects/SubjectWidget.s
-
-# target to generate assembly for a file
-gui/subjects/SubjectWidget.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/timetableGen.dir/build.make CMakeFiles/timetableGen.dir/gui/subjects/SubjectWidget.cpp.s
-.PHONY : gui/subjects/SubjectWidget.cpp.s
-
 gui/teachers/TeacherDialog.o: gui/teachers/TeacherDialog.cpp.o
 .PHONY : gui/teachers/TeacherDialog.o
 
@@ -410,29 +362,29 @@ gui/teachers/TeacherDialog.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/timetableGen.dir/build.make CMakeFiles/timetableGen.dir/gui/teachers/TeacherDialog.cpp.s
 .PHONY : gui/teachers/TeacherDialog.cpp.s
 
-gui/teachers/TeacherWidget.o: gui/teachers/TeacherWidget.cpp.o
-.PHONY : gui/teachers/TeacherWidget.o
+gui/timetableview/TimetableViewWidget.o: gui/timetableview/TimetableViewWidget.cpp.o
+.PHONY : gui/timetableview/TimetableViewWidget.o
 
 # target to build an object file
-gui/teachers/TeacherWidget.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/timetableGen.dir/build.make CMakeFiles/timetableGen.dir/gui/teachers/TeacherWidget.cpp.o
-.PHONY : gui/teachers/TeacherWidget.cpp.o
+gui/timetableview/TimetableViewWidget.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/timetableGen.dir/build.make CMakeFiles/timetableGen.dir/gui/timetableview/TimetableViewWidget.cpp.o
+.PHONY : gui/timetableview/TimetableViewWidget.cpp.o
 
-gui/teachers/TeacherWidget.i: gui/teachers/TeacherWidget.cpp.i
-.PHONY : gui/teachers/TeacherWidget.i
+gui/timetableview/TimetableViewWidget.i: gui/timetableview/TimetableViewWidget.cpp.i
+.PHONY : gui/timetableview/TimetableViewWidget.i
 
 # target to preprocess a source file
-gui/teachers/TeacherWidget.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/timetableGen.dir/build.make CMakeFiles/timetableGen.dir/gui/teachers/TeacherWidget.cpp.i
-.PHONY : gui/teachers/TeacherWidget.cpp.i
+gui/timetableview/TimetableViewWidget.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/timetableGen.dir/build.make CMakeFiles/timetableGen.dir/gui/timetableview/TimetableViewWidget.cpp.i
+.PHONY : gui/timetableview/TimetableViewWidget.cpp.i
 
-gui/teachers/TeacherWidget.s: gui/teachers/TeacherWidget.cpp.s
-.PHONY : gui/teachers/TeacherWidget.s
+gui/timetableview/TimetableViewWidget.s: gui/timetableview/TimetableViewWidget.cpp.s
+.PHONY : gui/timetableview/TimetableViewWidget.s
 
 # target to generate assembly for a file
-gui/teachers/TeacherWidget.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/timetableGen.dir/build.make CMakeFiles/timetableGen.dir/gui/teachers/TeacherWidget.cpp.s
-.PHONY : gui/teachers/TeacherWidget.cpp.s
+gui/timetableview/TimetableViewWidget.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/timetableGen.dir/build.make CMakeFiles/timetableGen.dir/gui/timetableview/TimetableViewWidget.cpp.s
+.PHONY : gui/timetableview/TimetableViewWidget.cpp.s
 
 main.o: main.cpp.o
 .PHONY : main.o
@@ -925,30 +877,24 @@ help:
 	@echo "... gui/classes/ClassDialog.o"
 	@echo "... gui/classes/ClassDialog.i"
 	@echo "... gui/classes/ClassDialog.s"
-	@echo "... gui/classes/ClassWidget.o"
-	@echo "... gui/classes/ClassWidget.i"
-	@echo "... gui/classes/ClassWidget.s"
-	@echo "... gui/dashboard/DashboardWidget.o"
-	@echo "... gui/dashboard/DashboardWidget.i"
-	@echo "... gui/dashboard/DashboardWidget.s"
+	@echo "... gui/ribbon/RibbonToolbar.o"
+	@echo "... gui/ribbon/RibbonToolbar.i"
+	@echo "... gui/ribbon/RibbonToolbar.s"
 	@echo "... gui/rooms/RoomDialog.o"
 	@echo "... gui/rooms/RoomDialog.i"
 	@echo "... gui/rooms/RoomDialog.s"
-	@echo "... gui/rooms/RoomWidget.o"
-	@echo "... gui/rooms/RoomWidget.i"
-	@echo "... gui/rooms/RoomWidget.s"
+	@echo "... gui/sidebar/DataSidebar.o"
+	@echo "... gui/sidebar/DataSidebar.i"
+	@echo "... gui/sidebar/DataSidebar.s"
 	@echo "... gui/subjects/SubjectDialog.o"
 	@echo "... gui/subjects/SubjectDialog.i"
 	@echo "... gui/subjects/SubjectDialog.s"
-	@echo "... gui/subjects/SubjectWidget.o"
-	@echo "... gui/subjects/SubjectWidget.i"
-	@echo "... gui/subjects/SubjectWidget.s"
 	@echo "... gui/teachers/TeacherDialog.o"
 	@echo "... gui/teachers/TeacherDialog.i"
 	@echo "... gui/teachers/TeacherDialog.s"
-	@echo "... gui/teachers/TeacherWidget.o"
-	@echo "... gui/teachers/TeacherWidget.i"
-	@echo "... gui/teachers/TeacherWidget.s"
+	@echo "... gui/timetableview/TimetableViewWidget.o"
+	@echo "... gui/timetableview/TimetableViewWidget.i"
+	@echo "... gui/timetableview/TimetableViewWidget.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"

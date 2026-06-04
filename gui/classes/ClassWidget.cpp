@@ -124,6 +124,7 @@ void ClassWidget::deleteClass() {
             QMessageBox::warning(this, tr("Delete failed"), tr("Could not delete the class."));
         }
     }
+}
 
 void ClassWidget::showEvent(QShowEvent *event) {
     QWidget::showEvent(event);

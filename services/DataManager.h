@@ -15,6 +15,7 @@
 #include "../models/FixedEvent.h"
 #include "../models/TeacherPreference.h"
 #include "SQLiteService.h"
+#include "../timetable/Timetable.h"
 
 class DataManager {
 public:
@@ -35,6 +36,10 @@ public:
     void logPlacementReject(const std::string& msg) const { placementRejectLog.push_back(msg); }
     const std::vector<std::string>& getPlacementRejectLog() const { return placementRejectLog; }
     std::vector<RoomType> roomTypes;
+
+    // Last generated timetable (accessible by all GUI tabs)
+    Timetable lastTimetable;
+    bool timetableGenerated = false;
 
     // Persistence layer
     SQLiteService sql;

@@ -1,5 +1,5 @@
 #include "ExportWidget.h"
-#include "../services/ExportService.h"
+#include "../../services/ExportService.h"
 #include <QVBoxLayout>
 #include <QHBoxLayout>
 #include <QLabel>
@@ -124,7 +124,15 @@ void ExportWidget::exportToHTML() {
     }
 }
 
+void ExportWidget::showEvent(QShowEvent *event) {
+    QWidget::showEvent(event);
+    refresh();
+}
+
 void ExportWidget::refresh() {
+    if (dm->timetableGenerated) {
+        setTimetable(dm->lastTimetable);
+    }
     // Reset status
     statusLabel->setText("");
     filenameEdit->clear();

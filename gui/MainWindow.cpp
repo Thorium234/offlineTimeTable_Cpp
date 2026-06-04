@@ -1,22 +1,15 @@
 #include "MainWindow.h"
-#include "dashboard/DashboardWidget.h"
-#include "teachers/TeacherWidget.h"
-#include "subjects/SubjectWidget.h"
-#include "classes/ClassWidget.h"
-#include "rooms/RoomWidget.h"
-#include "lessons/LessonWidget.h"
-#include "timeslot/TimeSlotWidget.h"
-#include "constraints/ConstraintWidget.h"
-#include "roomtypes/RoomTypeWidget.h"
-#include "timetableview/TimetableViewWidget.h"
-#include "export/ExportWidget.h"
-#include "events/FixedEventWidget.h"
-#include "preferences/PreferenceWidget.h"
-#include "benchmark/BenchmarkWidget.h"
+#include "../services/TimetableEngine.h"
+#include "../services/ExportService.h"
+#include "../services/Benchmark.h"
 #include "../utils/PathUtil.h"
-#include <QTabWidget>
-#include <QIcon>
+#include <QVBoxLayout>
+#include <QHBoxLayout>
+#include <QStatusBar>
+#include <QMessageBox>
+#include <QFileDialog>
 #include <QFile>
+#include <QApplication>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent) {
@@ -27,31 +20,52 @@ MainWindow::MainWindow(QWidget *parent)
 MainWindow::~MainWindow() = default;
 
 void MainWindow::setupUi() {
-    tabWidget = new QTabWidget(this);
+    // Central widget
+    QWidget *central = new QWidget(this);
+    setCentralWidget(central);
 
-    // Core management tabs
-    tabWidget->addTab(new DashboardWidget(&dm, this), QIcon(PathUtil::resolvePath("gui/icons/dashboard.svg")), tr("Dashboard"));
-    tabWidget->addTab(new TeacherWidget(&dm, this), QIcon(PathUtil::resolvePath("gui/icons/teacher.svg")), tr("Teachers"));
-    tabWidget->addTab(new SubjectWidget(&dm, this), QIcon(PathUtil::resolvePath("gui/icons/subject.svg")), tr("Subjects"));
-    tabWidget->addTab(new ClassWidget(&dm, this), QIcon(PathUtil::resolvePath("gui/icons/class.svg")), tr("Classes"));
-    tabWidget->addTab(new RoomWidget(&dm, this), QIcon(PathUtil::resolvePath("gui/icons/room.svg")), tr("Rooms"));
-    tabWidget->addTab(new LessonWidget(&dm, this), QIcon(PathUtil::resolvePath("gui/icons/lesson.svg")), tr("Lessons"));
-    
-    // Time and constraints
-    tabWidget->addTab(new TimeSlotWidget(&dm, this), QIcon(PathUtil::resolvePath("gui/icons/timeslot.svg")), tr("Days & Periods"));
-    tabWidget->addTab(new ConstraintWidget(&dm, this), QIcon(PathUtil::resolvePath("gui/icons/constraint.svg")), tr("Constraints"));
-    tabWidget->addTab(new RoomTypeWidget(&dm, this), QIcon(PathUtil::resolvePath("gui/icons/roomtype.svg")), tr("Room Types"));
-    tabWidget->addTab(new FixedEventWidget(&dm, this), QIcon(PathUtil::resolvePath("gui/icons/event.svg")), tr("Fixed Events"));
-    tabWidget->addTab(new PreferenceWidget(&dm, this), QIcon(PathUtil::resolvePath("gui/icons/preference.svg")), tr("Preferences"));
-    
-    // Timetable operations
-    tabWidget->addTab(new TimetableViewWidget(&dm, this), QIcon(PathUtil::resolvePath("gui/icons/timetable.svg")), tr("View Timetable"));
-    tabWidget->addTab(new ExportWidget(&dm, this), QIcon(PathUtil::resolvePath("gui/icons/export.svg")), tr("Export"));
-    tabWidget->addTab(new BenchmarkWidget(&dm, this), QIcon(PathUtil::resolvePath("gui/icons/benchmark.svg")), tr("Benchmark"));
+    QVBoxLayout *mainLayout = new QVBoxLayout(central);
+    mainLayout->setContentsMargins(0, 0, 0, 0);
+    mainLayout->setSpacing(0);
 
-    setCentralWidget(tabWidget);
-    setWindowTitle(tr("Timetable Generator - Management"));
-    resize(1000, 700);
+    // 1. Ribbon toolbar at the top
+    ribbon = new RibbonToolbar(&dm, this);
+    mainLayout->addWidget(ribbon);
+
+    // 2. Splitter: sidebar + timetable grid
+    splitter = new QSplitter(Qt::Horizontal, this);
+    splitter->setHandleWidth(1);
+
+    sidebar = new DataSidebar(&dm, this);
+    timetableView = new TimetableViewWidget(&dm, this);
+
+    splitter->addWidget(sidebar);
+    splitter->addWidget(timetableView);
+    splitter->setStretchFactor(0, 0);  // sidebar doesn't stretch
+    splitter->setStretchFactor(1, 1);  // grid stretches
+    splitter->setSizes({220, 780});
+
+    mainLayout->addWidget(splitter, 1);
+
+    // 3. Status bar
+    statusInfoLabel = new QLabel(tr("Ready. Add resources and lessons, then click Generate."), this);
+    statusInfoLabel->setStyleSheet("color: #888; padding: 2px 8px;");
+    statusBar()->addWidget(statusInfoLabel, 1);
+    statusBar()->setStyleSheet(
+        "QStatusBar { background: #141414; border-top: 1px solid #333; }"
+        "QStatusBar::item { border: none; }"
+    );
+
+    setWindowTitle(tr("Timetable Generator"));
+    resize(1200, 800);
+
+    // Signal connections
+    connect(ribbon, &RibbonToolbar::generateClicked, this, &MainWindow::onGenerateTimetable);
+    connect(ribbon, &RibbonToolbar::exportCsvClicked, this, &MainWindow::onExportCSV);
+    connect(ribbon, &RibbonToolbar::exportHtmlClicked, this, &MainWindow::onExportHTML);
+    connect(ribbon, &RibbonToolbar::benchmarkClicked, this, &MainWindow::onBenchmark);
+    connect(ribbon, &RibbonToolbar::viewModeChanged, this, &MainWindow::onViewModeChanged);
+    connect(sidebar, &DataSidebar::itemSelected, this, &MainWindow::onSidebarItemSelected);
 }
 
 void MainWindow::loadStyleSheet() {
@@ -59,5 +73,109 @@ void MainWindow::loadStyleSheet() {
     if (file.open(QFile::ReadOnly | QFile::Text)) {
         QString styleSheet = QLatin1String(file.readAll());
         setStyleSheet(styleSheet);
+    }
+}
+
+void MainWindow::onGenerateTimetable() {
+    if (dm.lessons.empty()) {
+        QMessageBox::warning(this, tr("Cannot Generate"),
+            tr("No lessons have been assigned yet. Add lessons first."));
+        return;
+    }
+
+    ribbon->setGenerationRunning(true);
+    ribbon->setStatusText(tr("Generating..."));
+    statusInfoLabel->setText(tr("Running scheduling engine..."));
+    QApplication::processEvents();
+
+    dm.placementRejectLog.clear();
+
+    TimetableEngine engine;
+    Timetable timetable = engine.generate(dm);
+
+    dm.lastTimetable = timetable;
+    dm.timetableGenerated = true;
+
+    timetableView->setTimetable(timetable);
+    ribbon->setScore(timetable.score);
+    ribbon->setGenerationRunning(false);
+
+    int unscheduled = static_cast<int>(timetable.unscheduledLessons.size());
+    if (unscheduled == 0) {
+        ribbon->setStatusText(tr("Ready"));
+        statusInfoLabel->setText(tr("Timetable generated successfully! Score: %1/1000, Nodes: %2")
+            .arg(timetable.score).arg(engine.getLastRunStats().nodesVisited));
+    } else {
+        ribbon->setStatusText(tr("Warnings"));
+        statusInfoLabel->setText(tr("Generated with %1 unscheduled lessons. Score: %2/1000")
+            .arg(unscheduled).arg(timetable.score));
+    }
+}
+
+void MainWindow::onExportCSV() {
+    if (!dm.timetableGenerated) {
+        QMessageBox::information(this, tr("No Timetable"), tr("Generate a timetable first."));
+        return;
+    }
+    QString path = QFileDialog::getSaveFileName(this, tr("Export CSV"), "timetable.csv", tr("CSV Files (*.csv)"));
+    if (path.isEmpty()) return;
+    if (ExportService::exportToCSV(path.toStdString(), dm.lastTimetable, dm)) {
+        statusInfoLabel->setText(tr("Exported to CSV: %1").arg(path));
+    } else {
+        QMessageBox::warning(this, tr("Export Failed"), tr("Could not export CSV."));
+    }
+}
+
+void MainWindow::onExportHTML() {
+    if (!dm.timetableGenerated) {
+        QMessageBox::information(this, tr("No Timetable"), tr("Generate a timetable first."));
+        return;
+    }
+    QString path = QFileDialog::getSaveFileName(this, tr("Export HTML"), "timetable.html", tr("HTML Files (*.html)"));
+    if (path.isEmpty()) return;
+    if (ExportService::exportToHTML(path.toStdString(), dm.lastTimetable, dm)) {
+        statusInfoLabel->setText(tr("Exported to HTML: %1").arg(path));
+    } else {
+        QMessageBox::warning(this, tr("Export Failed"), tr("Could not export HTML."));
+    }
+}
+
+void MainWindow::onBenchmark() {
+    if (dm.lessons.empty()) {
+        QMessageBox::warning(this, tr("Cannot Benchmark"),
+            tr("Add at least one lesson before running the benchmark."));
+        return;
+    }
+    ribbon->setGenerationRunning(true);
+    ribbon->setStatusText(tr("Benchmarking..."));
+    QApplication::processEvents();
+
+    Benchmark::runSuite();
+
+    ribbon->setGenerationRunning(false);
+    ribbon->setStatusText(tr("Ready"));
+    statusInfoLabel->setText(tr("Benchmark complete. Check console output for results."));
+}
+
+void MainWindow::onViewModeChanged(ViewMode mode) {
+    timetableView->setViewMode(mode);
+}
+
+void MainWindow::onSidebarItemSelected(const QString &type, int id) {
+    if (type == "teacher") {
+        timetableView->setViewMode(ViewMode::TEACHER);
+        timetableView->setViewSelection("teacher", id);
+        statusInfoLabel->setText(tr("Viewing teacher timetable: %1")
+            .arg(QString::fromStdString(dm.getTeacherName(id))));
+    } else if (type == "class") {
+        timetableView->setViewMode(ViewMode::CLASS);
+        timetableView->setViewSelection("class", id);
+        statusInfoLabel->setText(tr("Viewing class timetable: %1")
+            .arg(QString::fromStdString(dm.getClassName(id))));
+    } else if (type == "room") {
+        timetableView->setViewMode(ViewMode::ROOM);
+        timetableView->setViewSelection("room", id);
+        statusInfoLabel->setText(tr("Viewing room timetable: %1")
+            .arg(QString::fromStdString(dm.getRoomName(id))));
     }
 }

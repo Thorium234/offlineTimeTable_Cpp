@@ -216,6 +216,10 @@ void DashboardWidget::onGenerateTimetable() {
     TimetableEngine engine;
     Timetable timetable = engine.generate(*dm);
 
+    // Store in DataManager so other tabs can access it
+    dm->lastTimetable = timetable;
+    dm->timetableGenerated = true;
+
     generateBtn->setEnabled(true);
 
     QString report;

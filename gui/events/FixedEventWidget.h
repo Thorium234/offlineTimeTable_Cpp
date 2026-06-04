@@ -1,17 +1,22 @@
 #pragma once
 
 #include <QWidget>
+#include <QShowEvent>
 #include <QTableView>
 #include <QPushButton>
 #include <QComboBox>
 #include <QLineEdit>
-#include "../services/DataManager.h"
+#include <QStandardItemModel>
+#include "../../services/DataManager.h"
 
 class FixedEventWidget : public QWidget {
     Q_OBJECT
 public:
     explicit FixedEventWidget(DataManager *dm, QWidget *parent = nullptr);
     void refresh();
+
+protected:
+    void showEvent(QShowEvent *event) override;
 
 private:
     void setupUi();

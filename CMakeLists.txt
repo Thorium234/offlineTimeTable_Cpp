@@ -31,19 +31,17 @@ set(COMMON_SRCS
     services/AnalyticsService.cpp
 )
 
-# Unified target (auto-detects and runs GUI or CLI)
+# Unified target - aSc TimeTables style layout
 add_executable(timetableGen
     main.cpp
     utils/Menu.cpp
     gui/MainWindow.cpp
-    gui/dashboard/DashboardWidget.cpp
-    gui/teachers/TeacherWidget.cpp
+    gui/ribbon/RibbonToolbar.cpp
+    gui/sidebar/DataSidebar.cpp
+    gui/timetableview/TimetableViewWidget.cpp
     gui/teachers/TeacherDialog.cpp
-    gui/subjects/SubjectWidget.cpp
     gui/subjects/SubjectDialog.cpp
-    gui/classes/ClassWidget.cpp
     gui/classes/ClassDialog.cpp
-    gui/rooms/RoomWidget.cpp
     gui/rooms/RoomDialog.cpp
     ${COMMON_SRCS}
 )
@@ -55,5 +53,3 @@ add_executable(test_runner
     ${COMMON_SRCS}
 )
 target_link_libraries(test_runner Qt5::Widgets Qt5::Sql -static-libstdc++ -static-libgcc)
-
-

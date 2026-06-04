@@ -66,9 +66,9 @@ include CMakeFiles/test_runner_autogen_timestamp_deps.dir/compiler_depend.make
 # Include the progress variables for this target.
 include CMakeFiles/test_runner_autogen_timestamp_deps.dir/progress.make
 
-CMakeFiles/test_runner_autogen_timestamp_deps: /home/thorium/anaconda3/bin/uic
 CMakeFiles/test_runner_autogen_timestamp_deps: /home/thorium/anaconda3/lib/libQt5Widgets.so.5.15.2
 CMakeFiles/test_runner_autogen_timestamp_deps: /home/thorium/anaconda3/lib/libQt5Sql.so.5.15.2
+CMakeFiles/test_runner_autogen_timestamp_deps: /home/thorium/anaconda3/bin/uic
 CMakeFiles/test_runner_autogen_timestamp_deps: /home/thorium/anaconda3/bin/moc
 
 test_runner_autogen_timestamp_deps: CMakeFiles/test_runner_autogen_timestamp_deps

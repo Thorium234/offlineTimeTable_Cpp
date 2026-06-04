@@ -116,6 +116,7 @@ void SubjectWidget::deleteSubject() {
             QMessageBox::warning(this, tr("Delete failed"), tr("Could not delete the subject."));
         }
     }
+}
 
 void SubjectWidget::showEvent(QShowEvent *event) {
     QWidget::showEvent(event);

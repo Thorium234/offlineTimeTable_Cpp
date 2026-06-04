@@ -287,8 +287,11 @@ CMakeFiles/timetableGen.dir/timetableGen_autogen/mocs_compilation.cpp.o: \
  /home/thorium/anaconda3/include/qt/QtGui/qkeysequence.h \
  /home/thorium/anaconda3/include/qt/QtWidgets/qtabwidget.h \
  /home/thorium/anaconda3/include/qt/QtGui/qicon.h \
- /home/thorium/anaconda3/include/qt/QtWidgets/QTabWidget \
- /home/thorium/anaconda3/include/qt/QtWidgets/qtabwidget.h \
+ /home/thorium/anaconda3/include/qt/QtWidgets/QSplitter \
+ /home/thorium/anaconda3/include/qt/QtWidgets/qsplitter.h \
+ /home/thorium/anaconda3/include/qt/QtWidgets/qframe.h \
+ /home/thorium/anaconda3/include/qt/QtWidgets/QLabel \
+ /home/thorium/anaconda3/include/qt/QtWidgets/qlabel.h \
  /home/thorium/Desktop/programming/2026/c++Projects/timetableGen/build/timetableGen_autogen/DMHXEJ42XS/../../../gui/../services/DataManager.h \
  /usr/include/c++/13/cstring \
  /home/thorium/Desktop/programming/2026/c++Projects/timetableGen/build/timetableGen_autogen/DMHXEJ42XS/../../../gui/../services/../models/Teacher.h \
@@ -315,69 +318,71 @@ CMakeFiles/timetableGen.dir/timetableGen_autogen/mocs_compilation.cpp.o: \
  /home/thorium/anaconda3/include/qt/QtSql/qsqlerror.h \
  /home/thorium/anaconda3/include/qt/QtCore/QString \
  /home/thorium/anaconda3/include/qt/QtCore/qstring.h \
+ /home/thorium/Desktop/programming/2026/c++Projects/timetableGen/build/timetableGen_autogen/DMHXEJ42XS/../../../gui/../services/../timetable/Timetable.h \
+ /home/thorium/Desktop/programming/2026/c++Projects/timetableGen/build/timetableGen_autogen/DMHXEJ42XS/../../../gui/ribbon/RibbonToolbar.h \
+ /home/thorium/anaconda3/include/qt/QtWidgets/QWidget \
+ /home/thorium/anaconda3/include/qt/QtWidgets/qwidget.h \
+ /home/thorium/anaconda3/include/qt/QtWidgets/QPushButton \
+ /home/thorium/anaconda3/include/qt/QtWidgets/qpushbutton.h \
+ /home/thorium/anaconda3/include/qt/QtWidgets/qabstractbutton.h \
+ /home/thorium/anaconda3/include/qt/QtWidgets/QButtonGroup \
+ /home/thorium/anaconda3/include/qt/QtWidgets/qbuttongroup.h \
+ /home/thorium/Desktop/programming/2026/c++Projects/timetableGen/build/timetableGen_autogen/DMHXEJ42XS/../../../gui/sidebar/DataSidebar.h \
+ /home/thorium/anaconda3/include/qt/QtWidgets/QTreeWidget \
+ /home/thorium/anaconda3/include/qt/QtWidgets/qtreewidget.h \
+ /home/thorium/anaconda3/include/qt/QtWidgets/qtreeview.h \
+ /home/thorium/anaconda3/include/qt/QtWidgets/qabstractitemview.h \
+ /home/thorium/anaconda3/include/qt/QtWidgets/qabstractscrollarea.h \
+ /home/thorium/anaconda3/include/qt/QtCore/qabstractitemmodel.h \
+ /home/thorium/anaconda3/include/qt/QtCore/qvariant.h \
+ /home/thorium/anaconda3/include/qt/QtCore/qmap.h \
+ /usr/include/c++/13/variant \
+ /home/thorium/anaconda3/include/qt/QtCore/qitemselectionmodel.h \
+ /home/thorium/anaconda3/include/qt/QtCore/qset.h \
+ /home/thorium/anaconda3/include/qt/QtWidgets/qabstractitemdelegate.h \
+ /home/thorium/anaconda3/include/qt/QtWidgets/qstyleoption.h \
+ /home/thorium/anaconda3/include/qt/QtCore/qlocale.h \
+ /home/thorium/anaconda3/include/qt/QtWidgets/qabstractspinbox.h \
+ /home/thorium/anaconda3/include/qt/QtGui/qvalidator.h \
+ /home/thorium/anaconda3/include/qt/QtCore/qregularexpression.h \
+ /home/thorium/anaconda3/include/qt/QtWidgets/qslider.h \
+ /home/thorium/anaconda3/include/qt/QtWidgets/qabstractslider.h \
+ /home/thorium/anaconda3/include/qt/QtWidgets/qstyle.h \
+ /home/thorium/anaconda3/include/qt/QtWidgets/qtabbar.h \
+ /home/thorium/anaconda3/include/qt/QtWidgets/qrubberband.h \
+ /home/thorium/anaconda3/include/qt/QtWidgets/qtreewidgetitemiterator.h \
+ /home/thorium/Desktop/programming/2026/c++Projects/timetableGen/build/timetableGen_autogen/DMHXEJ42XS/../../../gui/timetableview/TimetableViewWidget.h \
+ /home/thorium/anaconda3/include/qt/QtGui/QShowEvent \
+ /home/thorium/anaconda3/include/qt/QtGui/qevent.h \
+ /home/thorium/anaconda3/include/qt/QtCore/qcoreevent.h \
+ /home/thorium/anaconda3/include/qt/QtCore/qurl.h \
+ /home/thorium/anaconda3/include/qt/QtCore/qfile.h \
+ /home/thorium/anaconda3/include/qt/QtCore/qfiledevice.h \
+ /home/thorium/anaconda3/include/qt/QtGui/qvector2d.h \
+ /home/thorium/anaconda3/include/qt/QtGui/qtouchdevice.h \
+ /home/thorium/anaconda3/include/qt/QtWidgets/QTableWidget \
+ /home/thorium/anaconda3/include/qt/QtWidgets/qtablewidget.h \
+ /home/thorium/anaconda3/include/qt/QtWidgets/qtableview.h \
+ /home/thorium/anaconda3/include/qt/QtWidgets/QComboBox \
+ /home/thorium/anaconda3/include/qt/QtWidgets/qcombobox.h \
  /home/thorium/Desktop/programming/2026/c++Projects/timetableGen/build/timetableGen_autogen/6XHY6POGKJ/moc_ClassDialog.cpp \
  /home/thorium/Desktop/programming/2026/c++Projects/timetableGen/build/timetableGen_autogen/6XHY6POGKJ/../../../gui/classes/ClassDialog.h \
  /home/thorium/anaconda3/include/qt/QtWidgets/QDialog \
  /home/thorium/anaconda3/include/qt/QtWidgets/qdialog.h \
  /home/thorium/anaconda3/include/qt/QtWidgets/QLineEdit \
  /home/thorium/anaconda3/include/qt/QtWidgets/qlineedit.h \
- /home/thorium/anaconda3/include/qt/QtWidgets/qframe.h \
  /home/thorium/anaconda3/include/qt/QtGui/qtextcursor.h \
  /home/thorium/anaconda3/include/qt/QtGui/qtextformat.h \
- /home/thorium/anaconda3/include/qt/QtCore/qvariant.h \
- /home/thorium/anaconda3/include/qt/QtCore/qmap.h \
- /usr/include/c++/13/variant \
  /home/thorium/anaconda3/include/qt/QtGui/qpen.h \
  /home/thorium/anaconda3/include/qt/QtGui/qtextoption.h \
  /home/thorium/anaconda3/include/qt/QtWidgets/QSpinBox \
  /home/thorium/anaconda3/include/qt/QtWidgets/qspinbox.h \
- /home/thorium/anaconda3/include/qt/QtWidgets/qabstractspinbox.h \
- /home/thorium/anaconda3/include/qt/QtGui/qvalidator.h \
- /home/thorium/anaconda3/include/qt/QtCore/qregularexpression.h \
- /home/thorium/anaconda3/include/qt/QtCore/qlocale.h \
- /home/thorium/anaconda3/include/qt/QtWidgets/QPushButton \
- /home/thorium/anaconda3/include/qt/QtWidgets/qpushbutton.h \
- /home/thorium/anaconda3/include/qt/QtWidgets/qabstractbutton.h \
- /home/thorium/Desktop/programming/2026/c++Projects/timetableGen/build/timetableGen_autogen/6XHY6POGKJ/moc_ClassWidget.cpp \
- /home/thorium/Desktop/programming/2026/c++Projects/timetableGen/build/timetableGen_autogen/6XHY6POGKJ/../../../gui/classes/ClassWidget.h \
- /home/thorium/anaconda3/include/qt/QtWidgets/QWidget \
- /home/thorium/anaconda3/include/qt/QtWidgets/qwidget.h \
- /home/thorium/anaconda3/include/qt/QtWidgets/QTableView \
- /home/thorium/anaconda3/include/qt/QtWidgets/qtableview.h \
- /home/thorium/anaconda3/include/qt/QtWidgets/qabstractitemview.h \
- /home/thorium/anaconda3/include/qt/QtWidgets/qabstractscrollarea.h \
- /home/thorium/anaconda3/include/qt/QtCore/qabstractitemmodel.h \
- /home/thorium/anaconda3/include/qt/QtCore/qitemselectionmodel.h \
- /home/thorium/anaconda3/include/qt/QtCore/qset.h \
- /home/thorium/anaconda3/include/qt/QtWidgets/qabstractitemdelegate.h \
- /home/thorium/anaconda3/include/qt/QtWidgets/qstyleoption.h \
- /home/thorium/anaconda3/include/qt/QtWidgets/qslider.h \
- /home/thorium/anaconda3/include/qt/QtWidgets/qabstractslider.h \
- /home/thorium/anaconda3/include/qt/QtWidgets/qstyle.h \
- /home/thorium/anaconda3/include/qt/QtWidgets/qtabbar.h \
- /home/thorium/anaconda3/include/qt/QtWidgets/qrubberband.h \
- /home/thorium/anaconda3/include/qt/QtGui/QStandardItemModel \
- /home/thorium/anaconda3/include/qt/QtGui/qstandarditemmodel.h \
- /home/thorium/Desktop/programming/2026/c++Projects/timetableGen/build/timetableGen_autogen/RFHCREA6TT/moc_DashboardWidget.cpp \
- /home/thorium/Desktop/programming/2026/c++Projects/timetableGen/build/timetableGen_autogen/RFHCREA6TT/../../../gui/dashboard/DashboardWidget.h \
- /home/thorium/anaconda3/include/qt/QtWidgets/QLabel \
- /home/thorium/anaconda3/include/qt/QtWidgets/qlabel.h \
- /home/thorium/anaconda3/include/qt/QtWidgets/QTextEdit \
- /home/thorium/anaconda3/include/qt/QtWidgets/qtextedit.h \
- /home/thorium/anaconda3/include/qt/QtGui/qtextdocument.h \
- /home/thorium/anaconda3/include/qt/QtCore/qurl.h \
- /home/thorium/Desktop/programming/2026/c++Projects/timetableGen/build/timetableGen_autogen/RFHCREA6TT/../../../gui/dashboard/../../timetable/Timetable.h \
+ /home/thorium/Desktop/programming/2026/c++Projects/timetableGen/build/timetableGen_autogen/KDFFYXMCPP/moc_RibbonToolbar.cpp \
  /home/thorium/Desktop/programming/2026/c++Projects/timetableGen/build/timetableGen_autogen/QCHROAVVAC/moc_RoomDialog.cpp \
  /home/thorium/Desktop/programming/2026/c++Projects/timetableGen/build/timetableGen_autogen/QCHROAVVAC/../../../gui/rooms/RoomDialog.h \
- /home/thorium/anaconda3/include/qt/QtWidgets/QComboBox \
- /home/thorium/anaconda3/include/qt/QtWidgets/qcombobox.h \
- /home/thorium/Desktop/programming/2026/c++Projects/timetableGen/build/timetableGen_autogen/QCHROAVVAC/moc_RoomWidget.cpp \
- /home/thorium/Desktop/programming/2026/c++Projects/timetableGen/build/timetableGen_autogen/QCHROAVVAC/../../../gui/rooms/RoomWidget.h \
+ /home/thorium/Desktop/programming/2026/c++Projects/timetableGen/build/timetableGen_autogen/OL4NCZULB5/moc_DataSidebar.cpp \
  /home/thorium/Desktop/programming/2026/c++Projects/timetableGen/build/timetableGen_autogen/3N7FN5E5SX/moc_SubjectDialog.cpp \
  /home/thorium/Desktop/programming/2026/c++Projects/timetableGen/build/timetableGen_autogen/3N7FN5E5SX/../../../gui/subjects/SubjectDialog.h \
- /home/thorium/Desktop/programming/2026/c++Projects/timetableGen/build/timetableGen_autogen/3N7FN5E5SX/moc_SubjectWidget.cpp \
- /home/thorium/Desktop/programming/2026/c++Projects/timetableGen/build/timetableGen_autogen/3N7FN5E5SX/../../../gui/subjects/SubjectWidget.h \
  /home/thorium/Desktop/programming/2026/c++Projects/timetableGen/build/timetableGen_autogen/T42TDTEGMM/moc_TeacherDialog.cpp \
  /home/thorium/Desktop/programming/2026/c++Projects/timetableGen/build/timetableGen_autogen/T42TDTEGMM/../../../gui/teachers/TeacherDialog.h \
- /home/thorium/Desktop/programming/2026/c++Projects/timetableGen/build/timetableGen_autogen/T42TDTEGMM/moc_TeacherWidget.cpp \
- /home/thorium/Desktop/programming/2026/c++Projects/timetableGen/build/timetableGen_autogen/T42TDTEGMM/../../../gui/teachers/TeacherWidget.h
+ /home/thorium/Desktop/programming/2026/c++Projects/timetableGen/build/timetableGen_autogen/Y35E7JOGH3/moc_TimetableViewWidget.cpp

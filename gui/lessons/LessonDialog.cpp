@@ -1,5 +1,5 @@
 #include "LessonDialog.h"
-#include "../services/DataManager.h"
+#include "../../services/DataManager.h"
 #include <QVBoxLayout>
 #include <QHBoxLayout>
 #include <QLabel>

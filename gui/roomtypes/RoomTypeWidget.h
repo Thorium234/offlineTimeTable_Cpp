@@ -1,18 +1,23 @@
 #pragma once
 
 #include <QWidget>
+#include <QShowEvent>
 #include <QTableView>
 #include <QPushButton>
 #include <QComboBox>
 #include <QLineEdit>
 #include <QTabWidget>
-#include "../services/DataManager.h"
+#include <QStandardItemModel>
+#include "../../services/DataManager.h"
 
 class RoomTypeWidget : public QWidget {
     Q_OBJECT
 public:
     explicit RoomTypeWidget(DataManager *dm, QWidget *parent = nullptr);
     void refresh();
+
+protected:
+    void showEvent(QShowEvent *event) override;
 
 private:
     void setupUi();

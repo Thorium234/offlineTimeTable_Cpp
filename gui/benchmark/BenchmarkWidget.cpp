@@ -1,9 +1,11 @@
 #include "BenchmarkWidget.h"
-#include "../services/Benchmark.h"
+#include "../../services/Benchmark.h"
+#include "../../services/TimetableEngine.h"
 #include <QVBoxLayout>
 #include <QHBoxLayout>
 #include <QLabel>
 #include <QMessageBox>
+#include <sstream>
 
 BenchmarkWidget::BenchmarkWidget(DataManager *dm, QWidget *parent)
     : QWidget(parent), dm(dm) {

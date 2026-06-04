@@ -112,6 +112,7 @@ void TeacherWidget::deleteTeacher() {
             QMessageBox::warning(this, tr("Delete failed"), tr("Could not delete the teacher."));
         }
     }
+}
 
 void TeacherWidget::showEvent(QShowEvent *event) {
     QWidget::showEvent(event);

@@ -307,8 +307,11 @@ CMakeFiles/timetableGen.dir/main.cpp.o: \
  /home/thorium/anaconda3/include/qt/QtWidgets/qmainwindow.h \
  /home/thorium/anaconda3/include/qt/QtWidgets/qtabwidget.h \
  /home/thorium/anaconda3/include/qt/QtGui/qicon.h \
- /home/thorium/anaconda3/include/qt/QtWidgets/QTabWidget \
- /home/thorium/anaconda3/include/qt/QtWidgets/qtabwidget.h \
+ /home/thorium/anaconda3/include/qt/QtWidgets/QSplitter \
+ /home/thorium/anaconda3/include/qt/QtWidgets/qsplitter.h \
+ /home/thorium/anaconda3/include/qt/QtWidgets/qframe.h \
+ /home/thorium/anaconda3/include/qt/QtWidgets/QLabel \
+ /home/thorium/anaconda3/include/qt/QtWidgets/qlabel.h \
  /home/thorium/Desktop/programming/2026/c++Projects/timetableGen/gui/../services/DataManager.h \
  /usr/include/c++/13/cstring \
  /home/thorium/Desktop/programming/2026/c++Projects/timetableGen/gui/../services/../models/Teacher.h \
@@ -335,15 +338,54 @@ CMakeFiles/timetableGen.dir/main.cpp.o: \
  /home/thorium/anaconda3/include/qt/QtSql/qsqlerror.h \
  /home/thorium/anaconda3/include/qt/QtCore/QString \
  /home/thorium/anaconda3/include/qt/QtCore/qstring.h \
+ /home/thorium/Desktop/programming/2026/c++Projects/timetableGen/gui/../services/../timetable/Timetable.h \
+ /home/thorium/Desktop/programming/2026/c++Projects/timetableGen/gui/ribbon/RibbonToolbar.h \
+ /home/thorium/anaconda3/include/qt/QtWidgets/QWidget \
+ /home/thorium/anaconda3/include/qt/QtWidgets/qwidget.h \
+ /home/thorium/anaconda3/include/qt/QtWidgets/QPushButton \
+ /home/thorium/anaconda3/include/qt/QtWidgets/qpushbutton.h \
+ /home/thorium/anaconda3/include/qt/QtWidgets/qabstractbutton.h \
+ /home/thorium/anaconda3/include/qt/QtWidgets/QButtonGroup \
+ /home/thorium/anaconda3/include/qt/QtWidgets/qbuttongroup.h \
+ /home/thorium/Desktop/programming/2026/c++Projects/timetableGen/gui/sidebar/DataSidebar.h \
+ /home/thorium/anaconda3/include/qt/QtWidgets/QTreeWidget \
+ /home/thorium/anaconda3/include/qt/QtWidgets/qtreewidget.h \
+ /home/thorium/anaconda3/include/qt/QtWidgets/qtreeview.h \
+ /home/thorium/anaconda3/include/qt/QtWidgets/qabstractitemview.h \
+ /home/thorium/anaconda3/include/qt/QtWidgets/qabstractscrollarea.h \
+ /home/thorium/anaconda3/include/qt/QtCore/qabstractitemmodel.h \
+ /home/thorium/anaconda3/include/qt/QtCore/qitemselectionmodel.h \
+ /home/thorium/anaconda3/include/qt/QtCore/qset.h \
+ /home/thorium/anaconda3/include/qt/QtWidgets/qabstractitemdelegate.h \
+ /home/thorium/anaconda3/include/qt/QtWidgets/qstyleoption.h \
+ /home/thorium/anaconda3/include/qt/QtWidgets/qabstractspinbox.h \
+ /home/thorium/anaconda3/include/qt/QtGui/qvalidator.h \
+ /home/thorium/anaconda3/include/qt/QtCore/qregularexpression.h \
+ /home/thorium/anaconda3/include/qt/QtWidgets/qslider.h \
+ /home/thorium/anaconda3/include/qt/QtWidgets/qabstractslider.h \
+ /home/thorium/anaconda3/include/qt/QtWidgets/qstyle.h \
+ /home/thorium/anaconda3/include/qt/QtWidgets/qtabbar.h \
+ /home/thorium/anaconda3/include/qt/QtWidgets/qrubberband.h \
+ /home/thorium/anaconda3/include/qt/QtWidgets/qtreewidgetitemiterator.h \
+ /home/thorium/Desktop/programming/2026/c++Projects/timetableGen/gui/timetableview/TimetableViewWidget.h \
+ /home/thorium/anaconda3/include/qt/QtGui/QShowEvent \
+ /home/thorium/anaconda3/include/qt/QtGui/qevent.h \
+ /home/thorium/anaconda3/include/qt/QtCore/qurl.h \
+ /home/thorium/anaconda3/include/qt/QtCore/qfile.h \
+ /home/thorium/anaconda3/include/qt/QtCore/qfiledevice.h \
+ /home/thorium/anaconda3/include/qt/QtGui/qvector2d.h \
+ /home/thorium/anaconda3/include/qt/QtGui/qtouchdevice.h \
+ /home/thorium/anaconda3/include/qt/QtWidgets/QTableWidget \
+ /home/thorium/anaconda3/include/qt/QtWidgets/qtablewidget.h \
+ /home/thorium/anaconda3/include/qt/QtWidgets/qtableview.h \
+ /home/thorium/anaconda3/include/qt/QtWidgets/QComboBox \
+ /home/thorium/anaconda3/include/qt/QtWidgets/qcombobox.h \
  /home/thorium/Desktop/programming/2026/c++Projects/timetableGen/utils/Menu.h \
  /home/thorium/Desktop/programming/2026/c++Projects/timetableGen/utils/../services/TimetableEngine.h \
- /home/thorium/Desktop/programming/2026/c++Projects/timetableGen/utils/../services/../timetable/Timetable.h \
  /home/thorium/Desktop/programming/2026/c++Projects/timetableGen/utils/../services/SolverStrategy.h \
  /home/thorium/Desktop/programming/2026/c++Projects/timetableGen/utils/PathUtil.h \
  /home/thorium/anaconda3/include/qt/QtCore/QFileInfo \
  /home/thorium/anaconda3/include/qt/QtCore/qfileinfo.h \
- /home/thorium/anaconda3/include/qt/QtCore/qfile.h \
- /home/thorium/anaconda3/include/qt/QtCore/qfiledevice.h \
  /home/thorium/anaconda3/include/qt/QtCore/QDir \
  /home/thorium/anaconda3/include/qt/QtCore/qdir.h \
  /home/thorium/anaconda3/include/qt/QtCore/qfileinfo.h

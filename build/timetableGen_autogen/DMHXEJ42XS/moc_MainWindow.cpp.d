@@ -1,5 +1,8 @@
 /home/thorium/Desktop/programming/2026/c++Projects/timetableGen/build/timetableGen_autogen/DMHXEJ42XS/moc_MainWindow.cpp: /home/thorium/Desktop/programming/2026/c++Projects/timetableGen/gui/MainWindow.h \
   /home/thorium/Desktop/programming/2026/c++Projects/timetableGen/build/timetableGen_autogen/moc_predefs.h \
+  /home/thorium/Desktop/programming/2026/c++Projects/timetableGen/gui/ribbon/RibbonToolbar.h \
+  /home/thorium/Desktop/programming/2026/c++Projects/timetableGen/gui/sidebar/DataSidebar.h \
+  /home/thorium/Desktop/programming/2026/c++Projects/timetableGen/gui/timetableview/TimetableViewWidget.h \
   /home/thorium/Desktop/programming/2026/c++Projects/timetableGen/models/Day.h \
   /home/thorium/Desktop/programming/2026/c++Projects/timetableGen/models/FixedEvent.h \
   /home/thorium/Desktop/programming/2026/c++Projects/timetableGen/models/Lesson.h \
@@ -14,7 +17,9 @@
   /home/thorium/Desktop/programming/2026/c++Projects/timetableGen/models/TeacherPreference.h \
   /home/thorium/Desktop/programming/2026/c++Projects/timetableGen/services/DataManager.h \
   /home/thorium/Desktop/programming/2026/c++Projects/timetableGen/services/SQLiteService.h \
+  /home/thorium/Desktop/programming/2026/c++Projects/timetableGen/timetable/Timetable.h \
   /home/thorium/anaconda3/include/qt/QtCore/QString \
+  /home/thorium/anaconda3/include/qt/QtCore/qabstractitemmodel.h \
   /home/thorium/anaconda3/include/qt/QtCore/qalgorithms.h \
   /home/thorium/anaconda3/include/qt/QtCore/qarraydata.h \
   /home/thorium/anaconda3/include/qt/QtCore/qatomic.h \
@@ -27,7 +32,10 @@
   /home/thorium/anaconda3/include/qt/QtCore/qconfig.h \
   /home/thorium/anaconda3/include/qt/QtCore/qcontainerfwd.h \
   /home/thorium/anaconda3/include/qt/QtCore/qcontainertools_impl.h \
+  /home/thorium/anaconda3/include/qt/QtCore/qcoreevent.h \
   /home/thorium/anaconda3/include/qt/QtCore/qdatastream.h \
+  /home/thorium/anaconda3/include/qt/QtCore/qfile.h \
+  /home/thorium/anaconda3/include/qt/QtCore/qfiledevice.h \
   /home/thorium/anaconda3/include/qt/QtCore/qflags.h \
   /home/thorium/anaconda3/include/qt/QtCore/qgenericatomic.h \
   /home/thorium/anaconda3/include/qt/QtCore/qglobal.h \
@@ -35,10 +43,13 @@
   /home/thorium/anaconda3/include/qt/QtCore/qhash.h \
   /home/thorium/anaconda3/include/qt/QtCore/qhashfunctions.h \
   /home/thorium/anaconda3/include/qt/QtCore/qiodevice.h \
+  /home/thorium/anaconda3/include/qt/QtCore/qitemselectionmodel.h \
   /home/thorium/anaconda3/include/qt/QtCore/qiterator.h \
   /home/thorium/anaconda3/include/qt/QtCore/qline.h \
   /home/thorium/anaconda3/include/qt/QtCore/qlist.h \
+  /home/thorium/anaconda3/include/qt/QtCore/qlocale.h \
   /home/thorium/anaconda3/include/qt/QtCore/qlogging.h \
+  /home/thorium/anaconda3/include/qt/QtCore/qmap.h \
   /home/thorium/anaconda3/include/qt/QtCore/qmargins.h \
   /home/thorium/anaconda3/include/qt/QtCore/qmetatype.h \
   /home/thorium/anaconda3/include/qt/QtCore/qnamespace.h \
@@ -53,7 +64,9 @@
   /home/thorium/anaconda3/include/qt/QtCore/qrect.h \
   /home/thorium/anaconda3/include/qt/QtCore/qrefcount.h \
   /home/thorium/anaconda3/include/qt/QtCore/qregexp.h \
+  /home/thorium/anaconda3/include/qt/QtCore/qregularexpression.h \
   /home/thorium/anaconda3/include/qt/QtCore/qscopedpointer.h \
+  /home/thorium/anaconda3/include/qt/QtCore/qset.h \
   /home/thorium/anaconda3/include/qt/QtCore/qshareddata.h \
   /home/thorium/anaconda3/include/qt/QtCore/qsharedpointer.h \
   /home/thorium/anaconda3/include/qt/QtCore/qsharedpointer_impl.h \
@@ -68,12 +81,16 @@
   /home/thorium/anaconda3/include/qt/QtCore/qsystemdetection.h \
   /home/thorium/anaconda3/include/qt/QtCore/qtcore-config.h \
   /home/thorium/anaconda3/include/qt/QtCore/qtypeinfo.h \
+  /home/thorium/anaconda3/include/qt/QtCore/qurl.h \
+  /home/thorium/anaconda3/include/qt/QtCore/qvariant.h \
   /home/thorium/anaconda3/include/qt/QtCore/qvarlengtharray.h \
   /home/thorium/anaconda3/include/qt/QtCore/qvector.h \
   /home/thorium/anaconda3/include/qt/QtCore/qversiontagging.h \
+  /home/thorium/anaconda3/include/qt/QtGui/QShowEvent \
   /home/thorium/anaconda3/include/qt/QtGui/qbrush.h \
   /home/thorium/anaconda3/include/qt/QtGui/qcolor.h \
   /home/thorium/anaconda3/include/qt/QtGui/qcursor.h \
+  /home/thorium/anaconda3/include/qt/QtGui/qevent.h \
   /home/thorium/anaconda3/include/qt/QtGui/qfont.h \
   /home/thorium/anaconda3/include/qt/QtGui/qfontinfo.h \
   /home/thorium/anaconda3/include/qt/QtGui/qfontmetrics.h \
@@ -91,7 +108,10 @@
   /home/thorium/anaconda3/include/qt/QtGui/qrgba64.h \
   /home/thorium/anaconda3/include/qt/QtGui/qtgui-config.h \
   /home/thorium/anaconda3/include/qt/QtGui/qtguiglobal.h \
+  /home/thorium/anaconda3/include/qt/QtGui/qtouchdevice.h \
   /home/thorium/anaconda3/include/qt/QtGui/qtransform.h \
+  /home/thorium/anaconda3/include/qt/QtGui/qvalidator.h \
+  /home/thorium/anaconda3/include/qt/QtGui/qvector2d.h \
   /home/thorium/anaconda3/include/qt/QtGui/qwindowdefs.h \
   /home/thorium/anaconda3/include/qt/QtSql/QSqlDatabase \
   /home/thorium/anaconda3/include/qt/QtSql/QSqlError \
@@ -101,11 +121,40 @@
   /home/thorium/anaconda3/include/qt/QtSql/qsqlquery.h \
   /home/thorium/anaconda3/include/qt/QtSql/qtsql-config.h \
   /home/thorium/anaconda3/include/qt/QtSql/qtsqlglobal.h \
+  /home/thorium/anaconda3/include/qt/QtWidgets/QButtonGroup \
+  /home/thorium/anaconda3/include/qt/QtWidgets/QComboBox \
+  /home/thorium/anaconda3/include/qt/QtWidgets/QLabel \
   /home/thorium/anaconda3/include/qt/QtWidgets/QMainWindow \
-  /home/thorium/anaconda3/include/qt/QtWidgets/QTabWidget \
+  /home/thorium/anaconda3/include/qt/QtWidgets/QPushButton \
+  /home/thorium/anaconda3/include/qt/QtWidgets/QSplitter \
+  /home/thorium/anaconda3/include/qt/QtWidgets/QTableWidget \
+  /home/thorium/anaconda3/include/qt/QtWidgets/QTreeWidget \
+  /home/thorium/anaconda3/include/qt/QtWidgets/QWidget \
+  /home/thorium/anaconda3/include/qt/QtWidgets/qabstractbutton.h \
+  /home/thorium/anaconda3/include/qt/QtWidgets/qabstractitemdelegate.h \
+  /home/thorium/anaconda3/include/qt/QtWidgets/qabstractitemview.h \
+  /home/thorium/anaconda3/include/qt/QtWidgets/qabstractscrollarea.h \
+  /home/thorium/anaconda3/include/qt/QtWidgets/qabstractslider.h \
+  /home/thorium/anaconda3/include/qt/QtWidgets/qabstractspinbox.h \
+  /home/thorium/anaconda3/include/qt/QtWidgets/qbuttongroup.h \
+  /home/thorium/anaconda3/include/qt/QtWidgets/qcombobox.h \
+  /home/thorium/anaconda3/include/qt/QtWidgets/qframe.h \
+  /home/thorium/anaconda3/include/qt/QtWidgets/qlabel.h \
   /home/thorium/anaconda3/include/qt/QtWidgets/qmainwindow.h \
+  /home/thorium/anaconda3/include/qt/QtWidgets/qpushbutton.h \
+  /home/thorium/anaconda3/include/qt/QtWidgets/qrubberband.h \
   /home/thorium/anaconda3/include/qt/QtWidgets/qsizepolicy.h \
+  /home/thorium/anaconda3/include/qt/QtWidgets/qslider.h \
+  /home/thorium/anaconda3/include/qt/QtWidgets/qsplitter.h \
+  /home/thorium/anaconda3/include/qt/QtWidgets/qstyle.h \
+  /home/thorium/anaconda3/include/qt/QtWidgets/qstyleoption.h \
+  /home/thorium/anaconda3/include/qt/QtWidgets/qtabbar.h \
+  /home/thorium/anaconda3/include/qt/QtWidgets/qtableview.h \
+  /home/thorium/anaconda3/include/qt/QtWidgets/qtablewidget.h \
   /home/thorium/anaconda3/include/qt/QtWidgets/qtabwidget.h \
+  /home/thorium/anaconda3/include/qt/QtWidgets/qtreeview.h \
+  /home/thorium/anaconda3/include/qt/QtWidgets/qtreewidget.h \
+  /home/thorium/anaconda3/include/qt/QtWidgets/qtreewidgetitemiterator.h \
   /home/thorium/anaconda3/include/qt/QtWidgets/qtwidgets-config.h \
   /home/thorium/anaconda3/include/qt/QtWidgets/qtwidgetsglobal.h \
   /home/thorium/anaconda3/include/qt/QtWidgets/qwidget.h \
@@ -278,6 +327,7 @@
   /usr/include/sched.h \
   /usr/include/stdc-predef.h \
   /usr/include/stdint.h \
+  /usr/include/stdio.h \
   /usr/include/stdlib.h \
   /usr/include/string.h \
   /usr/include/strings.h \
@@ -317,6 +367,7 @@
   /usr/include/x86_64-linux-gnu/bits/stdint-intn.h \
   /usr/include/x86_64-linux-gnu/bits/stdint-least.h \
   /usr/include/x86_64-linux-gnu/bits/stdint-uintn.h \
+  /usr/include/x86_64-linux-gnu/bits/stdio_lim.h \
   /usr/include/x86_64-linux-gnu/bits/stdlib-float.h \
   /usr/include/x86_64-linux-gnu/bits/struct_mutex.h \
   /usr/include/x86_64-linux-gnu/bits/struct_rwlock.h \
@@ -329,15 +380,19 @@
   /usr/include/x86_64-linux-gnu/bits/types.h \
   /usr/include/x86_64-linux-gnu/bits/types/FILE.h \
   /usr/include/x86_64-linux-gnu/bits/types/__FILE.h \
+  /usr/include/x86_64-linux-gnu/bits/types/__fpos64_t.h \
+  /usr/include/x86_64-linux-gnu/bits/types/__fpos_t.h \
   /usr/include/x86_64-linux-gnu/bits/types/__locale_t.h \
   /usr/include/x86_64-linux-gnu/bits/types/__mbstate_t.h \
   /usr/include/x86_64-linux-gnu/bits/types/__sigset_t.h \
   /usr/include/x86_64-linux-gnu/bits/types/clock_t.h \
   /usr/include/x86_64-linux-gnu/bits/types/clockid_t.h \
+  /usr/include/x86_64-linux-gnu/bits/types/cookie_io_functions_t.h \
   /usr/include/x86_64-linux-gnu/bits/types/error_t.h \
   /usr/include/x86_64-linux-gnu/bits/types/locale_t.h \
   /usr/include/x86_64-linux-gnu/bits/types/mbstate_t.h \
   /usr/include/x86_64-linux-gnu/bits/types/sigset_t.h \
+  /usr/include/x86_64-linux-gnu/bits/types/struct_FILE.h \
   /usr/include/x86_64-linux-gnu/bits/types/struct___jmp_buf_tag.h \
   /usr/include/x86_64-linux-gnu/bits/types/struct_itimerspec.h \
   /usr/include/x86_64-linux-gnu/bits/types/struct_sched_param.h \
