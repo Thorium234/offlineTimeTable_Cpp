@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Thorium234 — School Scheduler</title>
+<link rel="stylesheet" href="/static/css/asc.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous">
+</head>
+<body>
+
+<!-- RIBBON -->
+<div id="ribbon">
+  <div class="ribbon-brand">
+    <span class="logo">&#9883;</span>
+    <h1>Thorium234<span>School Scheduler Pro</span></h1>
+  </div>
+  <div class="ribbon-center">
+    <div class="ribbon-tabs">
+      <button class="rtab active" data-tab="home">Home</button>
+      <button class="rtab" data-tab="data">Data Entry</button>
+      <button class="rtab" data-tab="timetable">Timetable</button>
+      <button class="rtab" data-tab="analytics">Analytics</button>
+    </div>
+    <div class="ribbon-groups" id="ribbon-content">
+      <!-- populated by JS -->
+    </div>
+  </div>
+  <div class="ribbon-right">
+    <div class="score-w">
+      <div class="num" id="score-num">—</div>
+      <div class="lbl">SCORE</div>
+    </div>
+    <div class="conflict-w" id="conflict-w" style="display:none" onclick="App.showConflicts()" title="Conflicts detected">
+      <i class="fa-solid fa-triangle-exclamation"></i>
+      <span id="conflict-count">0</span>
+    </div>
+  </div>
+</div>
+
+<!-- BODY -->
+<div id="app-body">
+  <!-- SIDEBAR -->
+  <div id="sidebar">
+    <div class="sb-search">
+      <input type="text" id="sidebar-search" placeholder="Search...">
+    </div>
+    <div class="sb-panels" id="sidebar-panels">
+      <!-- Teachers -->
+      <div class="sp" id="sp-teachers">
+        <div class="sp-hd" onclick="App.togglePanel('teachers')">
+          <i class="ico fa-solid fa-chalkboard-user"></i>
+          <span class="ttl">Teachers</span>
+          <span class="cnt" id="cnt-teachers">0</span>
+          <i class="chev fa-solid fa-chevron-down"></i>
+        </div>
+        <div class="sp-body">
+          <button class="sp-add" onclick="App.openTeacherDialog()"><i class="fa-solid fa-plus"></i> Add Teacher</button>
+          <div id="list-teachers"></div>
+        </div>
+      </div>
+      <!-- Subjects -->
+      <div class="sp" id="sp-subjects">
+        <div class="sp-hd" onclick="App.togglePanel('subjects')">
+          <i class="ico fa-solid fa-book"></i>
+          <span class="ttl">Subjects</span>
+          <span class="cnt" id="cnt-subjects">0</span>
+          <i class="chev fa-solid fa-chevron-down"></i>
+        </div>
+        <div class="sp-body">
+          <button class="sp-add" onclick="App.openSubjectDialog()"><i class="fa-solid fa-plus"></i> Add Subject</button>
+          <div id="list-subjects"></div>
+        </div>
+      </div>
+      <!-- Classes -->
+      <div class="sp" id="sp-classes">
+        <div class="sp-hd" onclick="App.togglePanel('classes')">
+          <i class="ico fa-solid fa-users"></i>
+          <span class="ttl">Classes</span>
+          <span class="cnt" id="cnt-classes">0</span>
+          <i class="chev fa-solid fa-chevron-down"></i>
+        </div>
+        <div class="sp-body">
+          <button class="sp-add" onclick="App.openClassDialog()"><i class="fa-solid fa-plus"></i> Add Class</button>
+          <div id="list-classes"></div>
+        </div>
+      </div>
+      <!-- Rooms -->
+      <div class="sp" id="sp-rooms">
+        <div class="sp-hd" onclick="App.togglePanel('rooms')">
+          <i class="ico fa-solid fa-door-open"></i>
+          <span class="ttl">Rooms</span>
+          <span class="cnt" id="cnt-rooms">0</span>
+          <i class="chev fa-solid fa-chevron-down"></i>
+        </div>
+        <div class="sp-body">
+          <button class="sp-add" onclick="App.openRoomDialog()"><i class="fa-solid fa-plus"></i> Add Room</button>
+          <div id="list-rooms"></div>
+        </div>
+      </div>
+      <!-- Lessons -->
+      <div class="sp" id="sp-lessons">
+        <div class="sp-hd" onclick="App.togglePanel('lessons')">
+          <i class="ico fa-solid fa-book-open"></i>
+          <span class="ttl">Lessons</span>
+          <span class="cnt" id="cnt-lessons">0</span>
+          <i class="chev fa-solid fa-chevron-down"></i>
+        </div>
+        <div class="sp-body">
+          <button class="sp-add" onclick="App.openLessonDialog()"><i class="fa-solid fa-plus"></i> Add Lesson</button>
+          <div id="list-lessons"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MAIN AREA -->
+  <div id="main-area">
+    <div id="view-area">
+      <div id="view-home" class="view active"></div>
+      <div id="view-data" class="view" style="display:none"></div>
+      <div id="view-timetable" class="view" style="display:none"></div>
+      <div id="view-analytics" class="view" style="display:none"></div>
+    </div>
+  </div>
+</div>
+
+<!-- TOASTS -->
+<div id="toasts"></div>
+
+<script src="/static/js/app.js"></script>
+</body>
+</html>
