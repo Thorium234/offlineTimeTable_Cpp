@@ -5,9 +5,12 @@
 #include <vector>
 
 class BacktrackingSolver : public SolverStrategy {
-private:
-    const long long MAX_STATES = 1500000; // Large search space limit for Extreme/Large scales
+public:
+    Timetable solve(const DataManager& dm, SolverStats& stats, const SolverOptions& options = {}) override;
+    std::string getName() const override { return "Advanced Backtracking Solver (MRV + LCV + Domain Propagation)"; }
 
+private:
+    long long m_maxStates = 1500000;
     int countSubjectOnDay(const Timetable& timetable, int classId, int subjectId, 
                           int dayIdx, int numPeriods) const;
 
@@ -42,8 +45,4 @@ private:
                     const std::vector<bool>& placed,
                     const DomainTracker& domainTracker,
                     int numPeriods) const;
-
-public:
-    Timetable solve(const DataManager& dm, SolverStats& stats) override;
-    std::string getName() const override { return "Advanced Backtracking Solver (MRV + LCV + Domain Propagation)"; }
 };

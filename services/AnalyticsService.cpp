@@ -1,6 +1,8 @@
 #include "AnalyticsService.h"
 #include "../timetable/Timetable.h"
 #include <unordered_map>
+#include <map>
+#include <algorithm>
 
 // ---------------------------------------------------------------------------
 // Public API
@@ -47,6 +49,67 @@ AnalyticsReport AnalyticsService::generateReport(const Timetable& timetable, con
     }
 
     (void)slotsPerWeek; // suppress unused warning when rooms list is empty
+
+    // --- Gap analysis per class ---
+    for (const auto &c : dm.classes) {
+        auto it = timetable.schedules.find(c.id);
+        if (it == timetable.schedules.end()) continue;
+        const auto &grid = it->second;
+        int totalGaps = 0, maxGap = 0, gapPeriods = 0;
+        for (int d = 0; d < numDays && d < static_cast<int>(grid.size()); ++d) {
+            std::vector<int> occupied;
+            for (int p = 0; p < numPeriods && p < static_cast<int>(grid[d].size()); ++p) {
+                if (!grid[d][p].isEmpty()) occupied.push_back(p);
+            }
+            for (size_t i = 1; i < occupied.size(); ++i) {
+                int gap = occupied[i] - occupied[i - 1] - 1;
+                if (gap > 0) {
+                    totalGaps += gap;
+                    maxGap = std::max(maxGap, gap);
+                    gapPeriods += gap;
+                }
+            }
+        }
+        report.classGaps.push_back({c.id, c.name, totalGaps, maxGap, gapPeriods});
+    }
+
+    // --- Subject distribution per class ---
+    std::map<std::pair<int, int>, int> subjDist; // (classId, subjectId) -> count
+    for (const auto &classEntry : timetable.schedules) {
+        for (const auto &dayVec : classEntry.second) {
+            for (const auto &cell : dayVec) {
+                if (!cell.isEmpty()) {
+                    subjDist[{classEntry.first, cell.subjectId}]++;
+                }
+            }
+        }
+    }
+    for (const auto &[key, cnt] : subjDist) {
+        int classId = key.first;
+        int subjectId = key.second;
+        SubjectDistributionInfo info;
+        info.classId = classId;
+        info.className = dm.getClassName(classId);
+        info.subjectName = dm.getSubjectName(subjectId);
+        info.slotCount = cnt;
+        report.subjectDistribution.push_back(info);
+    }
+
+    // --- Week type distribution ---
+    std::map<int, int> weekCount;
+    for (const auto &classEntry : timetable.schedules) {
+        for (const auto &dayVec : classEntry.second) {
+            for (const auto &cell : dayVec) {
+                if (!cell.isEmpty()) {
+                    weekCount[cell.weekType]++;
+                }
+            }
+        }
+    }
+    for (const auto &[wt, cnt] : weekCount) {
+        report.weekTypeDistribution.push_back({wt, cnt});
+    }
+
     return report;
 }
 

@@ -76,6 +76,9 @@ void FeasibilityChecker::checkTeacherOverload(const DataManager& dm, std::vector
     std::map<int, int> teacherAssigned;
     for (const auto& lesson : dm.lessons) {
         teacherAssigned[lesson.teacherId] += lesson.periodsPerWeek;
+        if (lesson.secondTeacherId > 0) {
+            teacherAssigned[lesson.secondTeacherId] += lesson.periodsPerWeek;
+        }
     }
 
     for (const auto& pair : teacherAssigned) {

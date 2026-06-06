@@ -21,6 +21,26 @@ struct RoomUtilizationInfo {
     double utilization = 0.0; // percentage
 };
 
+struct ClassGapInfo {
+    int classId;
+    std::string className;
+    int totalGaps = 0;
+    int maxGap = 0;
+    int gapPeriods = 0;
+};
+
+struct SubjectDistributionInfo {
+    int classId;
+    std::string className;
+    std::string subjectName;
+    int slotCount = 0;
+};
+
+struct WeekTypeDistInfo {
+    int weekType = 0;
+    int count = 0;
+};
+
 struct AnalyticsReport {
     int totalLessons = 0;
     int unscheduledLessons = 0;
@@ -30,6 +50,9 @@ struct AnalyticsReport {
     std::vector<std::string> notes; // optional explanations
     std::vector<TeacherLoad> teacherLoads;
     std::vector<RoomUtilizationInfo> roomUtilizations;
+    std::vector<ClassGapInfo> classGaps;
+    std::vector<SubjectDistributionInfo> subjectDistribution;
+    std::vector<WeekTypeDistInfo> weekTypeDistribution;
 };
 
 class AnalyticsService {

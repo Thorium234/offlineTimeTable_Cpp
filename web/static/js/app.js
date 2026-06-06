@@ -7,6 +7,7 @@ const S = {
   teachers: [], subjects: [], classes: [], rooms: [], roomTypes: [],
   lessons: [], slots: [], unscheduled: [],
   days: [], periods: [],
+  substitutions: [], divisions: [],
   currentTab: 'home',
   ttView: 'class',
   ttEntity: null,
@@ -14,6 +15,8 @@ const S = {
   conflicts: [],
   solverSeed: 42,
   solverAlgo: 'backtrack',
+  versions: [],
+  weekFilter: 0, // 0=combined, 1=week A, 2=week B
 };
 
 // ── API ──────────────────────────────────────────────────────────────────
@@ -105,14 +108,16 @@ function autoColor(list) { return COLORS[list.length % COLORS.length]; }
 // ── LOAD ALL DATA ─────────────────────────────────────────────────────────
 async function loadAll() {
   try {
-    const [teachers, subjects, classes, rooms, roomTypes, lessons, slots, meta] = await Promise.all([
+    const [teachers, subjects, classes, rooms, roomTypes, lessons, slots, meta, substitutions, divisions] = await Promise.all([
       api.get('/api/teachers'), api.get('/api/subjects'), api.get('/api/classes'),
       api.get('/api/rooms'), api.get('/api/room_types'), api.get('/api/lessons'),
       api.get('/api/timetable'), api.get('/api/meta'),
+      api.get('/api/substitutions'), api.get('/api/divisions'),
     ]);
     S.teachers=teachers; S.subjects=subjects; S.classes=classes;
     S.rooms=rooms; S.roomTypes=roomTypes; S.lessons=lessons;
     S.slots=slots; S.days=meta.days; S.periods=meta.periods;
+    S.substitutions=substitutions; S.divisions=divisions;
     renderSidebar();
     renderCurrentView();
     checkConflicts();
@@ -160,6 +165,8 @@ function renderSidebar() {
   renderEntityList('classes', S.classes, search);
   renderEntityList('rooms', S.rooms, search);
   renderLessonsList(search);
+  renderSubstitutionsList(search);
+  renderDivisionsList(search);
 }
 
 function renderEntityList(type, items, search='') {
@@ -228,7 +235,9 @@ const RIBBON_TABS = {
     '</div><div class="rgroup-lbl">Add Entity</div></div>' +
     '<div class="rgroup"><div class="rbtns">' +
       '<button class="rbtn primary" onclick="App.openLessonDialog()"><i class="fa-solid fa-plus-circle"></i><span>Add Lesson</span></button>' +
-    '</div><div class="rgroup-lbl">Lessons</div></div>' +
+      '<button class="rbtn" onclick="App.openSubstitutionDialog()"><i class="fa-solid fa-people-arrows"></i><span>Substitute</span></button>' +
+      '<button class="rbtn" onclick="App.openDivisionDialog()"><i class="fa-solid fa-layer-group"></i><span>Division</span></button>' +
+    '</div><div class="rgroup-lbl">Advanced</div></div>' +
     '<div class="rgroup"><div class="rbtns">' +
       '<button class="rbtn" onclick="App.exportData()"><i class="fa-solid fa-download"></i><span>Export</span></button>' +
       '<button class="rbtn" onclick="App.importData()"><i class="fa-solid fa-upload"></i><span>Import</span></button>' +
@@ -243,6 +252,8 @@ const RIBBON_TABS = {
     '<div class="rgroup"><div class="rbtns">' +
       '<button class="rbtn primary" onclick="App.generate()"><i class="fa-solid fa-wand-magic-sparkles"></i><span>Generate</span></button>' +
       '<button class="rbtn" onclick="App.openSolverOptions()"><i class="fa-solid fa-sliders"></i><span>Options</span></button>' +
+      '<button class="rbtn" onclick="App.saveVersion()"><i class="fa-solid fa-floppy-disk"></i><span>Save</span></button>' +
+      '<button class="rbtn" onclick="App.showVersions()"><i class="fa-solid fa-clock-rotate-left"></i><span>Versions</span></button>' +
     '</div><div class="rgroup-lbl">Solver</div></div>' +
     '<div class="rgroup"><div class="rbtns">' +
       '<button class="rbtn" onclick="App.clearTimetable()"><i class="fa-solid fa-eraser"></i><span>Clear</span></button>' +
@@ -250,12 +261,17 @@ const RIBBON_TABS = {
     '</div><div class="rgroup-lbl">Reset</div></div>' +
     '<div class="rgroup"><div class="rbtns">' +
       '<button class="rbtn" onclick="App.exportHTML(S.ttView)"><i class="fa-solid fa-file-export"></i><span>HTML</span></button>' +
+      '<button class="rbtn" onclick="App.exportPDF(S.ttView)"><i class="fa-solid fa-file-pdf"></i><span>PDF</span></button>' +
       '<button class="rbtn" onclick="window.print()"><i class="fa-solid fa-print"></i><span>Print</span></button>' +
-    '</div><div class="rgroup-lbl">Export</div></div>',
+    '</div><div class="rgroup-lbl">Export</div></div>' +
+    '<div class="rgroup"><div class="rbtns">' +
+      '<button class="rbtn primary" onclick="App.openCustomTimetable()"><i class="fa-solid fa-wand-magic-sparkles"></i><span>Custom TT</span></button>' +
+    '</div><div class="rgroup-lbl">Custom</div></div>',
 
   analytics:
     '<div class="rgroup"><div class="rbtns">' +
       '<button class="rbtn" onclick="App.loadAnalytics()"><i class="fa-solid fa-rotate"></i><span>Refresh</span></button>' +
+      '<button class="rbtn" onclick="App.compareVersions()"><i class="fa-solid fa-code-compare"></i><span>Compare</span></button>' +
     '</div><div class="rgroup-lbl">Analytics</div></div>',
 };
 
@@ -376,15 +392,18 @@ function renderDataView() {
       '<button class="btn btn-primary" onclick="App.openLessonDialog()"><i class="fa-solid fa-plus"></i> Add Lesson</button>' +
     '</div>' +
     '<table class="data-table"><thead><tr>' +
-      '<th>Class</th><th>Subject</th><th>Teacher</th><th>Periods/Week</th><th>Block</th><th>Max/Day</th><th></th>' +
+      '<th>Class</th><th>Subject</th><th>Teacher</th><th>2nd Teacher</th><th>Combined</th><th>Periods/Week</th><th>Block</th><th>Max/Day</th><th>Week</th><th></th>' +
     '</tr></thead><tbody>' +
     S.lessons.map(l =>
       '<tr><td><strong>' + esc(l.className) + '</strong></td>' +
       '<td><span class="chip" style="background:' + (l.subjectColor||'#4A90D9') + '">' + esc(l.subjectName) + '</span></td>' +
       '<td>' + esc(l.teacherName) + '</td>' +
+      '<td>' + (l.secondTeacherName ? esc(l.secondTeacherName) : '—') + '</td>' +
+      '<td>' + (l.combinedClassIds && l.combinedClassIds.length ? l.combinedClassIds.join(', ') : '—') + '</td>' +
       '<td><span class="badge">' + l.periodsPerWeek + '</span></td>' +
       '<td>' + l.blockSize + '</td>' +
       '<td>' + (l.maxPerDay||'—') + '</td>' +
+      '<td>' + (l.weekType===1?'A':l.weekType===2?'B':'Every') + '</td>' +
       '<td style="white-space:nowrap">' +
         '<button class="btn btn-ghost btn-sm" onclick="App.openLessonDialog(' + l.id + ')"><i class="fa-solid fa-pen"></i></button> ' +
         '<button class="btn btn-danger btn-sm" onclick="App.deleteLesson(' + l.id + ')"><i class="fa-solid fa-trash"></i></button>' +
@@ -416,6 +435,14 @@ function renderTimetableView() {
     : view==='teacher' ? S.slots.filter(s=>s.teacherId===S.ttEntity)
     : S.slots.filter(s=>s.roomId===S.ttEntity);
 
+  // Apply week filter
+  const wf = S.weekFilter;
+  if (wf === 1) {
+    filteredSlots = filteredSlots.filter(s => (s.weekType||0) !== 2);
+  } else if (wf === 2) {
+    filteredSlots = filteredSlots.filter(s => (s.weekType||0) !== 1);
+  }
+
   const slotMap = {};
   filteredSlots.forEach(s => { slotMap[s.dayId+'_'+s.periodId] = s; });
 
@@ -440,23 +467,27 @@ function renderTimetableView() {
       if (slot) {
         const color = slot.subjectColor || '#4A90D9';
         const isLocked = slot.locked;
+        const wt = slot.weekType || 0;
+        const wtBadge = wt === 1 ? '<span class="wt-badge" style="font-size:9px;background:rgba(255,255,255,0.3);border-radius:3px;padding:0 4px;margin-left:4px">A</span>'
+          : wt === 2 ? '<span class="wt-badge" style="font-size:9px;background:rgba(255,255,255,0.3);border-radius:3px;padding:0 4px;margin-left:4px">B</span>'
+          : '';
         const lockIcon = isLocked
-          ? '<button title="Unlock" onclick="App.toggleLock(' + slot.classId + ',' + slot.dayId + ',' + slot.periodId + ',false)"><i class="fa-solid fa-lock"></i></button>'
-          : '<button title="Lock (pin)" onclick="App.toggleLock(' + slot.classId + ',' + slot.dayId + ',' + slot.periodId + ',true)"><i class="fa-solid fa-lock-open"></i></button>';
-        return '<td id="' + cellId + '" data-day="' + d.id + '" data-period="' + p.id + '"' +
+          ? '<button title="Unlock" onclick="App.toggleLock(' + slot.classId + ',' + slot.dayId + ',' + slot.periodId + ',false,' + wt + ')"><i class="fa-solid fa-lock"></i></button>'
+          : '<button title="Lock (pin)" onclick="App.toggleLock(' + slot.classId + ',' + slot.dayId + ',' + slot.periodId + ',true,' + wt + ')"><i class="fa-solid fa-lock-open"></i></button>';
+        return '<td id="' + cellId + '" data-day="' + d.id + '" data-period="' + p.id + '" data-week="' + wt + '"' +
           (isConflict?' class="conflict-cell"':'') +
           ' ondragover="App.onDragOver(event,this)" ondrop="App.onDrop(event,this)" ondragleave="App.onDragLeave(this)">' +
           '<div class="lcard' + (isLocked?' locked':'') + '" style="background:' + color + '"' +
             (isLocked ? '' : ' draggable="true"') +
-            ' data-class="' + slot.classId + '" data-day="' + slot.dayId + '" data-period="' + slot.periodId + '"' +
+            ' data-class="' + slot.classId + '" data-day="' + slot.dayId + '" data-period="' + slot.periodId + '" data-week="' + wt + '"' +
             (isLocked ? '' : ' ondragstart="App.onDragStart(event,this)"') + '>' +
             '<div>' +
-              '<div class="lc-subj">' + esc(slot.subjectName||'') + '</div>' +
+              '<div class="lc-subj">' + esc(slot.subjectName||'') + wtBadge + '</div>' +
               '<div class="lc-teacher"><i class="fa-solid fa-user" style="font-size:9px;margin-right:3px"></i>' + esc(slot.teacherName||'') + '</div>' +
               '<div class="lc-room"><i class="fa-solid fa-door-open" style="font-size:9px;margin-right:3px"></i>' + esc(slot.roomName||'—') + '</div>' +
             '</div>' +
             '<div class="lc-acts">' + lockIcon +
-              '<button title="Remove" onclick="App.removeSlot(' + slot.classId + ',' + slot.dayId + ',' + slot.periodId + ')"><i class="fa-solid fa-xmark"></i></button>' +
+              '<button title="Remove" onclick="App.removeSlot(' + slot.classId + ',' + slot.dayId + ',' + slot.periodId + ',' + wt + ')"><i class="fa-solid fa-xmark"></i></button>' +
             '</div>' +
           '</div></td>';
       }
@@ -469,7 +500,14 @@ function renderTimetableView() {
 
   el.innerHTML = banner +
     '<div class="tt-hd"><h2><i class="fa-solid fa-calendar-week" style="margin-right:8px"></i>' + esc(entity.name) + '</h2>' +
-    '<div class="tt-sel">' + navBtns + '</div></div>' +
+    '<div class="tt-sel">' + navBtns + '</div>' +
+    '<div class="tt-week" style="margin-left:16px;display:inline-flex;align-items:center;gap:4px">' +
+      '<label style="font-size:12px;color:var(--text-muted)">Week:</label>' +
+      '<select onchange="App.setWeekFilter(parseInt(this.value))">' +
+        '<option value="0"' + (S.weekFilter===0?' selected':'') + '>Combined</option>' +
+        '<option value="1"' + (S.weekFilter===1?' selected':'') + '>Week A</option>' +
+        '<option value="2"' + (S.weekFilter===2?' selected':'') + '>Week B</option>' +
+      '</select></div></div>' +
     '<div class="tt-wrap"><table><thead><tr>' +
       '<th class="pcol">Period</th>' + S.days.map(d=>'<th>'+d.name+'</th>').join('') +
     '</tr></thead><tbody>' + rows + '</tbody></table></div>';
@@ -560,18 +598,18 @@ async function saveSolverOptions() {
 }
 
 // ── SLOT LOCK / REMOVE ───────────────────────────────────────────────────
-async function toggleLock(classId, dayId, periodId, lock) {
+async function toggleLock(classId, dayId, periodId, lock, weekType) {
   try {
-    await api.post('/api/timetable/lock', {classId, dayId, periodId, locked: lock});
+    await api.post('/api/timetable/lock', {classId, dayId, periodId, locked: lock, weekType: weekType||0});
     S.slots = await api.get('/api/timetable');
     renderTimetableView();
     toast(lock ? 'Slot pinned — won\'t move on re-generate' : 'Slot unpinned', 'success');
   } catch(e) { toast(e.message, 'error'); }
 }
 
-async function removeSlot(classId, dayId, periodId) {
+async function removeSlot(classId, dayId, periodId, weekType) {
   try {
-    await api.post('/api/timetable/remove', {classId, dayId, periodId});
+    await api.post('/api/timetable/remove', {classId, dayId, periodId, weekType: weekType||0});
     S.slots = await api.get('/api/timetable');
     await checkConflicts();
     renderTimetableView();
@@ -586,6 +624,7 @@ function onDragStart(e, el) {
     classId: parseInt(el.dataset.class),
     dayId: parseInt(el.dataset.day),
     periodId: parseInt(el.dataset.period),
+    weekType: parseInt(el.dataset.week) || 0,
   };
   e.dataTransfer.effectAllowed = 'move';
   el.style.opacity = '0.5';
@@ -606,6 +645,7 @@ async function onDrop(e, td) {
     await api.post('/api/timetable/move', {
       classId: dragData.classId,
       fromDay: dragData.dayId, fromPeriod: dragData.periodId,
+      fromWeekType: dragData.weekType,
       toDay, toPeriod,
     });
     S.slots = await api.get('/api/timetable');
@@ -729,12 +769,26 @@ function openLessonDialog(id) {
     '<div class="fg"><label>Teacher</label><select id="l-teacher">' +
       S.teachers.map(t=>'<option value="'+t.id+'"'+(l&&l.teacherId===t.id?' selected':'')+'>'+esc(t.name)+'</option>').join('') +
     '</select></div>' +
+    '<div class="fg"><label>Second Teacher</label><select id="l-teacher2">' +
+      '<option value="-1"'+(l&&(l.secondTeacherId||-1)===-1?' selected':'')+'>None</option>' +
+      S.teachers.map(t=>'<option value="'+t.id+'"'+(l&&l.secondTeacherId===t.id?' selected':'')+'>'+esc(t.name)+'</option>').join('') +
+    '</select></div>' +
+    '<div class="fg"><label>Combined Classes</label><div id="l-combined" style="max-height:120px;overflow-y:auto;border:1px solid var(--border);border-radius:6px;padding:6px;background:var(--surface)">' +
+      S.classes.map(c => '<label style="display:block;font-size:12px;padding:2px 4px;cursor:pointer"><input type="checkbox" value="'+c.id+'"' +
+        (l && l.combinedClassIds && l.combinedClassIds.indexOf(c.id)>=0?' checked':'') +
+        ' style="margin-right:6px">'+esc(c.name)+'</label>').join('') +
+    '</div></div>' +
     '<div class="form-row">' +
       '<div class="fg"><label>Periods / Week</label><input type="number" id="l-ppw" value="' + (l?l.periodsPerWeek:2) + '" min="1" max="40"></div>' +
       '<div class="fg"><label>Block Size</label><input type="number" id="l-block" value="' + (l?l.blockSize:1) + '" min="1" max="4"></div>' +
     '</div>' +
     '<div class="fg"><label>Max Per Day <span style="text-transform:none;font-weight:400;color:var(--text-muted)">(0 = unlimited)</span></label>' +
-      '<input type="number" id="l-mpd" value="' + (l?l.maxPerDay:0) + '" min="0" max="8"></div>';
+      '<input type="number" id="l-mpd" value="' + (l?l.maxPerDay:0) + '" min="0" max="8"></div>' +
+    '<div class="fg"><label>Week Type</label><select id="l-week">' +
+      '<option value="0"' + (l&&(l.weekType||0)===0?' selected':'') + '>Every Week</option>' +
+      '<option value="1"' + (l&&l.weekType===1?' selected':'') + '>Week A (Odd)</option>' +
+      '<option value="2"' + (l&&l.weekType===2?' selected':'') + '>Week B (Even)</option>' +
+    '</select></div>';
   openModal(l?'Edit Lesson':'Add Lesson', 'book-open', body,
     '<button class="btn btn-ghost" onclick="closeModal()">Cancel</button>' +
     '<button class="btn btn-primary" onclick="App.saveLesson(' + (l?l.id:'null') + ')"><i class="fa-solid fa-check"></i> Save</button>');
@@ -744,15 +798,28 @@ async function saveLesson(id) {
   const classId = parseInt(document.getElementById('l-class').value);
   const subjectId = parseInt(document.getElementById('l-subject').value);
   const teacherId = parseInt(document.getElementById('l-teacher').value);
+  const secondTeacherId = parseInt(document.getElementById('l-teacher2').value) || -1;
   const ppw = parseInt(document.getElementById('l-ppw').value)||1;
   const block = parseInt(document.getElementById('l-block').value)||1;
   const mpd = parseInt(document.getElementById('l-mpd').value)||0;
+  const weekType = parseInt(document.getElementById('l-week').value)||0;
+  // Collect combined class IDs
+  const combinedClassIds = [];
+  document.querySelectorAll('#l-combined input[type=checkbox]:checked').forEach(cb => {
+    combinedClassIds.push(parseInt(cb.value));
+  });
   try {
     if (id) {
-      await api.put('/api/lessons/'+id, {classId,subjectId,teacherId,periodsPerWeek:ppw,blockSize:block,maxPerDay:mpd});
+      await api.put('/api/lessons/'+id, {classId,subjectId,teacherId,secondTeacherId,periodsPerWeek:ppw,blockSize:block,maxPerDay:mpd,weekType});
+      // Save combined classes
+      await api.post('/api/lessons/'+id+'/combined_classes', {classIds: combinedClassIds});
       toast('Lesson updated','success');
     } else {
-      await api.post('/api/lessons', {classId,subjectId,teacherId,periodsPerWeek:ppw,blockSize:block,maxPerDay:mpd});
+      const result = await api.post('/api/lessons', {classId,subjectId,teacherId,secondTeacherId,periodsPerWeek:ppw,blockSize:block,maxPerDay:mpd,weekType});
+      // Save combined classes for new lesson
+      if (combinedClassIds.length > 0) {
+        await api.post('/api/lessons/'+result.id+'/combined_classes', {classIds: combinedClassIds});
+      }
       toast('Lesson added','success');
     }
     closeModal(); await loadAll();
@@ -840,6 +907,62 @@ async function toggleConstraint(el) {
 }
 
 // ── ANALYTICS ─────────────────────────────────────────────────────────────
+
+function renderSubjectDistribution(subjDist) {
+  if (!subjDist || !subjDist.length) return '';
+  const grouped = {};
+  for (const s of subjDist) {
+    if (!grouped[s.className]) grouped[s.className] = [];
+    grouped[s.className].push(s);
+  }
+  const html = Object.entries(grouped).slice(0, 5).map(([cls, subs]) => {
+    const total = subs.reduce((a, s) => a + s.slots, 0);
+    const bars = subs.slice(0, 4).map(s => {
+      const pct = Math.round(s.slots / total * 100);
+      return '<div class="bar-item" style="margin-bottom:3px">' +
+        '<span class="bar-lbl" style="min-width:80px;font-size:10px">' + esc(s.subjectName) + '</span>' +
+        '<div class="bar-track" style="height:6px"><div class="bar-fill" style="width:' + pct + '%;background:var(--navy-light)"></div></div>' +
+        '<span class="bar-pct" style="font-size:10px;min-width:30px">' + pct + '%</span></div>';
+    }).join('');
+    const more = subs.length > 4 ? '<div style="font-size:10px;color:var(--text-muted)">+' + (subs.length - 4) + ' more</div>' : '';
+    return '<div style="margin-bottom:8px;border-bottom:1px solid var(--border);padding-bottom:6px"><strong style="font-size:11px">' + esc(cls) + '</strong>' + bars + more + '</div>';
+  }).join('');
+  return '<div class="stat-card"><h4><i class="fa-solid fa-book"></i> Subject Distribution</h4>' + html + '</div>';
+}
+
+function renderGapStats(gapStats) {
+  if (!gapStats || !gapStats.length) return '';
+  const totalGaps = gapStats.reduce((a, g) => a + g.totalGaps, 0);
+  const maxGap = Math.max(...gapStats.map(g => g.maxGap));
+  const html = gapStats.slice(0, 6).map(g => {
+    const pct = maxGap > 0 ? Math.round(g.maxGap / maxGap * 100) : 0;
+    const cls = g.maxGap <= 1 ? 'ok' : g.maxGap <= 3 ? 'warn' : 'danger';
+    return '<div class="bar-item" style="margin-bottom:3px">' +
+      '<span class="bar-lbl" style="min-width:90px;font-size:10px">' + esc(g.className) + '</span>' +
+      '<div class="bar-track" style="height:6px"><div class="bar-fill ' + cls + '" style="width:' + pct + '%"></div></div>' +
+      '<span class="bar-pct" style="font-size:10px;min-width:50px">gap ' + g.maxGap + '</span></div>';
+  }).join('');
+  const more = gapStats.length > 6 ? '<div style="font-size:10px;color:var(--text-muted);margin-top:4px">+' + (gapStats.length - 6) + ' more classes</div>' : '';
+  return '<div class="stat-card"><h4><i class="fa-solid fa-grip-lines"></i> Gap Analysis</h4>' +
+    '<div class="sub" style="margin-bottom:6px">' + totalGaps + ' gaps across classes &middot; max gap: ' + maxGap + '</div>' +
+    html + more + '</div>';
+}
+
+function renderWeekTypeDistribution(weekDist) {
+  if (!weekDist || !weekDist.length) return '';
+  const labels = {0: 'Every Week', 1: 'Week A', 2: 'Week B'};
+  const colors = {0: '#5b8def', 1: '#27ae60', 2: '#f39c12'};
+  const total = weekDist.reduce((a, w) => a + w.cnt, 0);
+  const bars = weekDist.map(w => {
+    const pct = Math.round(w.cnt / total * 100);
+    return '<div class="bar-item" style="margin-bottom:3px">' +
+      '<span class="bar-lbl" style="min-width:80px;font-size:10px">' + (labels[w.weekType] || 'Week ' + w.weekType) + '</span>' +
+      '<div class="bar-track" style="height:6px"><div class="bar-fill" style="width:' + pct + '%;background:' + (colors[w.weekType] || '#888') + '"></div></div>' +
+      '<span class="bar-pct" style="font-size:10px;min-width:50px">' + w.cnt + ' (' + pct + '%)</span></div>';
+  }).join('');
+  return '<div class="stat-card"><h4><i class="fa-solid fa-calendar-week"></i> Week Type Distribution</h4>' + bars + '</div>';
+}
+
 async function loadAnalytics() {
   const el = document.getElementById('view-analytics');
   showSpinner('Loading analytics…');
@@ -914,6 +1037,9 @@ async function loadAnalytics() {
         '<div class="stat-card"><h4><i class="fa-solid fa-door-open"></i> Room Utilization</h4>' + roomBars + '</div>' +
         '<div class="stat-card"><h4><i class="fa-solid fa-calendar-days"></i> Day Distribution</h4>' + dayBars + '</div>' +
         '<div class="stat-card"><h4><i class="fa-solid fa-clock"></i> Period Load</h4>' + periodBars + '</div>' +
+        renderSubjectDistribution(data.subjectDistribution) +
+        renderGapStats(data.gapStats) +
+        renderWeekTypeDistribution(data.weekTypeDistribution) +
       '</div>';
   } catch(e) {
     hideSpinner();
@@ -959,7 +1085,8 @@ function setTTView(view) {
 }
 function selectTTEntity(id) { S.ttEntity=id; renderTimetableView(); }
 function openLessonsView() { switchTab('data'); setTimeout(()=>{ if(S.lessons.length===0) App.openLessonDialog(); },100); }
-function exportHTML(view) { window.open('/api/export/html?view='+view,'_blank'); }
+function exportHTML(view) { window.open('/api/export/html?view='+view+'&week='+S.weekFilter,'_blank'); }
+function exportPDF(view) { window.open('/api/export/pdf?view='+view+'&week='+S.weekFilter,'_blank'); }
 
 function exportData() {
   window.open('/api/data/export','_blank');
@@ -987,6 +1114,339 @@ function importData() {
   input.click();
 }
 
+// ── VERSIONS (aSc-style save & compare) ───────────────────────────────────
+async function saveVersion() {
+  const label = prompt('Name this version:', 'Version ' + (S.versions ? S.versions.length + 1 : 1));
+  if (!label) return;
+  try {
+    await api.post('/api/versions', {label});
+    await loadVersions();
+    toast('Version saved: ' + label, 'success');
+  } catch(err) {
+    toast('Failed to save: ' + (err.message||err), 'error');
+  }
+}
+
+async function loadVersions() {
+  try {
+    S.versions = await api.get('/api/versions');
+  } catch(e) { S.versions = []; }
+}
+
+async function showVersions() {
+  await loadVersions();
+  const vs = S.versions || [];
+  if (vs.length === 0) {
+    toast('No saved versions yet. Generate and click Save.','info');
+    return;
+  }
+  let html = '<div style="display:flex;flex-direction:column;gap:8px">';
+  for (const v of vs) {
+    html += '<div style="display:flex;align-items:center;justify-content:space-between;background:var(--surface);padding:10px 14px;border-radius:8px;border:1px solid var(--border)">' +
+      '<div><strong>' + esc(v.label) + '</strong><br><span style="font-size:11px;color:var(--text-muted)">' +
+      esc(v.timestamp) + ' — Score: ' + (v.score || '—') + ' — ' + v.slotCount + ' slots, ' + v.unscheduledCount + ' unscheduled</span></div>' +
+      '<button class="btn btn-primary btn-sm" onclick="restoreVersion(' + v.id + ');closeModal()">Restore</button></div>';
+  }
+  html += '</div>';
+  openModal('Saved Versions (' + vs.length + ')', '', html);
+}
+
+async function restoreVersion(vid) {
+  if (!confirm('Restore this version? Current timetable will be replaced.')) return;
+  try {
+    await api.post('/api/versions/' + vid + '/restore');
+    await loadAll();
+    toast('Version restored','success');
+  } catch(err) {
+    toast('Failed: ' + (err.message||err), 'error');
+  }
+}
+
+// ── SUBSTITUTIONS ──────────────────────────────────────────────────────────
+function renderSubstitutionsList(search='') {
+  const filtered = search
+    ? S.substitutions.filter(s => (s.origTeacherName+s.subjectName+s.className).toLowerCase().includes(search))
+    : S.substitutions;
+  const el = document.getElementById('list-substitutions');
+  if (!el) return;
+  document.getElementById('cnt-substitutions').textContent = S.substitutions.length;
+  const statusColors = {PENDING:'var(--warning)',ASSIGNED:'var(--navy)',COMPLETED:'var(--success)',CANCELLED:'var(--danger)'};
+  el.innerHTML = filtered.slice(0, 20).map(s =>
+    '<div class="ei" data-id="' + s.id + '">' +
+    '<span class="nm">' + esc(s.origTeacherName||'?') + ' → ' + esc(s.subTeacherName||'—') + '</span>' +
+    '<span class="sub">' + esc(s.subjectName||'') + ' · ' + esc(s.className||'') + '</span>' +
+    '<span style="font-size:10px;color:' + (statusColors[s.status]||'#888') + ';font-weight:600">' + s.status + '</span>' +
+    '<span class="acts">' +
+      (s.status==='PENDING' ? '<button class="btn btn-sm" onclick="App.approveSubstitution('+s.id+')" title="Approve"><i class="fa-solid fa-check" style="color:var(--success)"></i></button>' : '') +
+      (s.status==='ASSIGNED' ? '<button class="btn btn-sm" onclick="App.completeSubstitution('+s.id+')" title="Complete"><i class="fa-solid fa-flag-checkered" style="color:var(--navy)"></i></button>' : '') +
+      '<button class="btn btn-sm del" onclick="App.deleteSubstitution('+s.id+')"><i class="fa-solid fa-trash"></i></button>' +
+    '</span></div>'
+  ).join('');
+}
+
+async function openSubstitutionDialog() {
+  if (S.teachers.length<2) { toast('Need at least 2 teachers for substitutions','warn'); return; }
+  const now = new Date().toISOString().slice(0,10);
+  const body =
+    '<div class="fg"><label>Absent Teacher</label><select id="sub-orig">' +
+      S.teachers.map(t=>'<option value="'+t.id+'">'+esc(t.name)+'</option>').join('') +
+    '</select></div>' +
+    '<div class="fg"><label>Subject</label><select id="sub-subject">' +
+      S.subjects.map(s=>'<option value="'+s.id+'">'+esc(s.name)+'</option>').join('') +
+    '</select></div>' +
+    '<div class="fg"><label>Class</label><select id="sub-class">' +
+      S.classes.map(c=>'<option value="'+c.id+'">'+esc(c.name)+'</option>').join('') +
+    '</select></div>' +
+    '<div class="form-row">' +
+      '<div class="fg"><label>Day</label><select id="sub-day">' +
+        S.days.map(d=>'<option value="'+d.id+'">'+d.name+'</option>').join('') +
+      '</select></div>' +
+      '<div class="fg"><label>Period</label><select id="sub-period">' +
+        S.periods.map(p=>'<option value="'+p.id+'">P'+p.id+' ('+p.start+')</option>').join('') +
+      '</select></div>' +
+    '</div>' +
+    '<div class="fg"><label>Reason</label><input type="text" id="sub-reason" placeholder="e.g. Sick leave"></div>' +
+    '<div class="fg"><label>Date</label><input type="date" id="sub-date" value="'+now+'"></div>' +
+    '<div class="fg"><button class="btn btn-outline" onclick="App.suggestSubstitutes()"><i class="fa-solid fa-wand-sparkles"></i> Suggest Cover Teachers</button></div>' +
+    '<div id="sub-suggest-results" style="margin-top:8px;max-height:200px;overflow-y:auto"></div>';
+  openModal('Request Substitution', 'people-arrows', body,
+    '<button class="btn btn-ghost" onclick="closeModal()">Cancel</button>' +
+    '<button class="btn btn-primary" onclick="App.saveSubstitution()"><i class="fa-solid fa-check"></i> Create Request</button>');
+}
+
+async function suggestSubstitutes() {
+  const absent = parseInt(document.getElementById('sub-orig').value);
+  const subj = parseInt(document.getElementById('sub-subject').value);
+  const day = parseInt(document.getElementById('sub-day').value);
+  const period = parseInt(document.getElementById('sub-period').value);
+  const el = document.getElementById('sub-suggest-results');
+  if (!el) return;
+  el.innerHTML = '<span style="color:#888">Searching...</span>';
+  try {
+    const suggestions = await api.get('/api/substitutions/suggest', {
+      absentTeacherId: absent, subjectId: subj, dayId: day, periodId: period
+    });
+    if (!suggestions.length) {
+      el.innerHTML = '<span style="color:var(--danger)">No suitable substitutes found.</span>';
+      return;
+    }
+    el.innerHTML = '<div style="font-weight:600;margin-bottom:4px;font-size:13px">Recommended Substitutes:</div>' +
+      suggestions.map((s, i) =>
+        '<div style="display:flex;justify-content:space-between;align-items:center;padding:4px 6px;background:' +
+        (i % 2 === 0 ? 'var(--bg-secondary)' : 'transparent') + ';border-radius:4px;margin-bottom:2px">' +
+        '<span><span style="font-weight:600">' + esc(s.teacherName) + '</span> ' +
+        '<span style="font-size:11px;color:#888">' + esc(s.reason) + '</span></span>' +
+        '<span style="font-weight:700;color:' + (s.score >= 80 ? 'var(--success)' : s.score >= 50 ? 'var(--warning)' : 'var(--danger)') + '">' +
+        s.score + '</span></div>'
+      ).join('');
+  } catch(e) {
+    el.innerHTML = '<span style="color:var(--danger)">Error: ' + esc(e.message) + '</span>';
+  }
+}
+
+async function saveSubstitution() {
+  const orig = parseInt(document.getElementById('sub-orig').value);
+  const subj = parseInt(document.getElementById('sub-subject').value);
+  const cls = parseInt(document.getElementById('sub-class').value);
+  const day = parseInt(document.getElementById('sub-day').value);
+  const period = parseInt(document.getElementById('sub-period').value);
+  const reason = document.getElementById('sub-reason').value.trim();
+  const date = document.getElementById('sub-date').value;
+  try {
+    await api.post('/api/substitutions', {originalTeacherId:orig,subjectId:subj,classId:cls,dayId:day,periodId:period,reason,date});
+    closeModal(); await loadAll();
+    toast('Substitution request created','success');
+    S.currentTab='home'; switchTab('home');
+  } catch(e) { toast(e.message,'error'); }
+}
+
+async function approveSubstitution(id) {
+  const sub = S.substitutions.find(s=>s.id===id);
+  if (!sub) return;
+  const body =
+    '<div class="fg"><label>Substitute Teacher</label><select id="sub-appr-teacher">' +
+      S.teachers.filter(t=>t.id!==sub.originalTeacherId).map(t=>'<option value="'+t.id+'">'+esc(t.name)+'</option>').join('') +
+    '</select></div>' +
+    '<div class="fg"><button class="btn btn-outline" onclick="App.suggestForApprove('+id+')"><i class="fa-solid fa-wand-sparkles"></i> Suggest Best Match</button></div>' +
+    '<div id="sub-approve-suggest" style="margin-top:4px;font-size:12px;color:#888"></div>';
+  openModal('Assign Substitute', 'user-check', body,
+    '<button class="btn btn-ghost" onclick="closeModal()">Cancel</button>' +
+    '<button class="btn btn-primary" onclick="App.doApproveSubstitution('+id+')"><i class="fa-solid fa-check"></i> Assign</button>');
+}
+
+async function suggestForApprove(id) {
+  const sub = S.substitutions.find(s=>s.id===id);
+  if (!sub) return;
+  const el = document.getElementById('sub-approve-suggest');
+  try {
+    const suggestions = await api.get('/api/substitutions/suggest', {
+      absentTeacherId: sub.originalTeacherId, subjectId: sub.subjectId,
+      dayId: sub.dayId, periodId: sub.periodId
+    });
+    if (!suggestions.length) {
+      el.innerHTML = 'No suitable substitutes found.';
+      return;
+    }
+    const best = suggestions[0];
+    const sel = document.getElementById('sub-appr-teacher');
+    for (let opt of sel.options) {
+      if (parseInt(opt.value) === best.teacherId) {
+        sel.value = best.teacherId;
+        break;
+      }
+    }
+    el.innerHTML = 'Recommended: <strong>' + esc(best.teacherName) + '</strong> (score: ' + best.score + ') &mdash; ' + esc(best.reason);
+  } catch(e) {
+    el.innerHTML = 'Error: ' + esc(e.message);
+  }
+}
+
+async function doApproveSubstitution(id) {
+  const subTeacherId = parseInt(document.getElementById('sub-appr-teacher').value);
+  try {
+    await api.put('/api/substitutions/'+id+'/status', {status:'ASSIGNED'});
+    closeModal(); await loadAll();
+    toast('Substitute assigned','success');
+  } catch(e) { toast(e.message,'error'); }
+}
+
+async function completeSubstitution(id) {
+  try {
+    await api.put('/api/substitutions/'+id+'/status', {status:'COMPLETED'});
+    await loadAll();
+    toast('Substitution completed','success');
+  } catch(e) { toast(e.message,'error'); }
+}
+
+async function deleteSubstitution(id) {
+  if (!confirm('Delete this substitution request?')) return;
+  try {
+    await api.del('/api/substitutions/'+id);
+    await loadAll();
+    toast('Substitution deleted');
+  } catch(e) { toast(e.message,'error'); }
+}
+
+// ── DIVISIONS ──────────────────────────────────────────────────────────────
+function renderDivisionsList(search='') {
+  const el = document.getElementById('list-divisions');
+  if (!el) return;
+  document.getElementById('cnt-divisions').textContent = S.divisions.length;
+  const filtered = search
+    ? S.divisions.filter(d => d.name.toLowerCase().includes(search))
+    : S.divisions;
+  el.innerHTML = filtered.map(d =>
+    '<div class="ei" data-id="' + d.id + '">' +
+    '<span class="nm">' + esc(d.name) + '</span>' +
+    '<span class="sub">' + (d.members?d.members.length:0) + ' classes' +
+      (d.canRunInParallel ? ' · parallel' : '') + '</span>' +
+    '<span class="acts">' +
+      '<button onclick="App.editDivision('+d.id+')"><i class="fa-solid fa-pen"></i></button>' +
+      '<button class="del" onclick="App.deleteDivision('+d.id+')"><i class="fa-solid fa-trash"></i></button>' +
+    '</span></div>'
+  ).join('');
+}
+
+async function openDivisionDialog(id) {
+  const d = id ? S.divisions.find(x=>x.id===id) : null;
+  const body =
+    '<div class="fg"><label>Division Name</label><input type="text" id="div-name" value="' + esc(d?d.name:'') + '" placeholder="e.g. Section A"></div>' +
+    '<div class="fg"><label><input type="checkbox" id="div-parallel"' + (d&&d.canRunInParallel?' checked':'') + '> Classes can be scheduled in parallel</label></div>' +
+    '<div class="fg"><label>Assign Classes</label><div style="max-height:150px;overflow-y:auto;border:1px solid var(--border);border-radius:6px;padding:6px">' +
+      S.classes.map(c => {
+        const assigned = d && d.members && d.members.some(m=>m.id===c.id);
+        return '<label style="display:block;padding:2px 0;font-size:12px"><input type="checkbox" class="div-class-cb" value="'+c.id+'"'+(assigned?' checked':'')+'> '+esc(c.name)+'</label>';
+      }).join('') +
+    '</div></div>';
+  openModal(d?'Edit Division':'Add Division', 'layer-group', body,
+    '<button class="btn btn-ghost" onclick="closeModal()">Cancel</button>' +
+    '<button class="btn btn-primary" onclick="App.saveDivision('+(d?d.id:'null')+')"><i class="fa-solid fa-check"></i> Save</button>');
+}
+
+async function saveDivision(id) {
+  const name = document.getElementById('div-name').value.trim();
+  if (!name) { toast('Name required','error'); return; }
+  const parallel = document.getElementById('div-parallel').checked;
+  try {
+    if (id) {
+      await api.put('/api/divisions/'+id, {name,canRunInParallel:parallel});
+    } else {
+      const res = await api.post('/api/divisions', {name,canRunInParallel:parallel});
+      id = res.id;
+    }
+    // Assign/unassign classes
+    const cbs = document.querySelectorAll('.div-class-cb');
+    for (const cb of cbs) {
+      const cid = parseInt(cb.value);
+      if (cb.checked) {
+        await api.post('/api/divisions/assign', {divisionId:id,classId:cid});
+      } else {
+        await api.post('/api/divisions/unassign', {classId:cid});
+      }
+    }
+    closeModal(); await loadAll();
+    toast('Division saved','success');
+  } catch(e) { toast(e.message,'error'); }
+}
+
+async function deleteDivision(id) {
+  if (!confirm('Delete this division? Classes will be unassigned.')) return;
+  try {
+    await api.del('/api/divisions/'+id);
+    await loadAll();
+    toast('Division deleted');
+  } catch(e) { toast(e.message,'error'); }
+}
+
+// ── VERSION COMPARISON ─────────────────────────────────────────────────────
+async function compareVersions() {
+  await loadVersions();
+  const vs = S.versions || [];
+  if (vs.length < 2) { toast('Need at least 2 saved versions to compare','warn'); return; }
+  const body =
+    '<div class="fg"><label>Version 1</label><select id="cmp-v1">' +
+      vs.map(v => '<option value="'+v.id+'">'+esc(v.label)+'</option>').join('') +
+    '</select></div>' +
+    '<div class="fg"><label>Version 2</label><select id="cmp-v2">' +
+      vs.map(v => '<option value="'+v.id+'">'+esc(v.label)+'</option>').join('') +
+    '</select></div>' +
+    '<div id="cmp-result"></div>';
+  openModal('Compare Versions', 'code-compare', body,
+    '<button class="btn btn-ghost" onclick="closeModal()">Close</button>' +
+    '<button class="btn btn-primary" onclick="App.doCompareVersions()"><i class="fa-solid fa-code-compare"></i> Compare</button>');
+}
+
+async function doCompareVersions() {
+  const v1 = parseInt(document.getElementById('cmp-v1').value);
+  const v2 = parseInt(document.getElementById('cmp-v2').value);
+  if (v1 === v2) { toast('Select two different versions','warn'); return; }
+  try {
+    const result = await api.post('/api/versions/compare', {v1, v2});
+    const el = document.getElementById('cmp-result');
+    el.innerHTML =
+      '<div style="margin-top:12px;background:var(--surface);padding:12px;border-radius:8px;border:1px solid var(--border)">' +
+      '<div style="display:flex;gap:16px;margin-bottom:10px">' +
+        '<div><strong>' + esc(result.v1.label) + '</strong><br>Score: ' + (result.v1.score||'—') + '</div>' +
+        '<div><strong>' + esc(result.v2.label) + '</strong><br>Score: ' + (result.v2.score||'—') + '</div>' +
+      '</div>' +
+      '<div style="display:flex;gap:16px;font-size:13px">' +
+        '<span style="color:var(--success)"><i class="fa-solid fa-plus-circle"></i> Added: ' + result.added + '</span>' +
+        '<span style="color:var(--danger)"><i class="fa-solid fa-minus-circle"></i> Removed: ' + result.removed + '</span>' +
+        '<span style="color:var(--accent)"><i class="fa-solid fa-pen"></i> Changed: ' + result.changed + '</span>' +
+      '</div>';
+
+    if (result.addedSlots && result.addedSlots.length > 0) {
+      el.innerHTML += '<h4 style="margin-top:10px;font-size:12px;color:var(--success)">Added</h4>' +
+        result.addedSlots.slice(0,5).map(s => '<div style="font-size:11px;padding:2px 0">Day ' + s.dayId + ' P' + s.periodId + '</div>').join('');
+    }
+    if (result.removedSlots && result.removedSlots.length > 0) {
+      el.innerHTML += '<h4 style="margin-top:10px;font-size:12px;color:var(--danger)">Removed</h4>' +
+        result.removedSlots.slice(0,5).map(s => '<div style="font-size:11px;padding:2px 0">Day ' + s.dayId + ' P' + s.periodId + '</div>').join('');
+    }
+    el.innerHTML += '</div>';
+  } catch(e) { toast(e.message,'error'); }
+}
+
 // ── UTILS ──────────────────────────────────────────────────────────────────
 function esc(s) {
   if (!s) return '';
@@ -995,6 +1455,182 @@ function esc(s) {
 function togglePanel(type) {
   document.getElementById('sp-'+type).classList.toggle('collapsed');
 }
+function setWeekFilter(val) {
+  S.weekFilter = val;
+  renderTimetableView();
+}
+
+// ── CUSTOM TIMETABLE ──────────────────────────────────────────────────────
+let _customPayload = null;
+
+function openCustomTimetable() {
+  _customPayload = null;
+  const body =
+    '<div style="display:flex;gap:8px;margin-bottom:12px">' +
+      '<button class="btn btn-sm btn-primary" onclick="App.loadSampleSchool()" style="flex:1">' +
+        '<i class="fa-solid fa-graduation-cap"></i> Load Sample School' +
+      '</button>' +
+    '</div>' +
+    '<div class="fg"><label>School Name</label>' +
+      '<input type="text" id="ct-school-name" value="School Timetable"></div>' +
+    '<h4 class="ct-section-title">Schedule Configuration</h4>' +
+    '<div class="form-row">' +
+      '<div class="fg"><label>Day Start</label><input type="time" id="ct-day-start" value="07:30"></div>' +
+      '<div class="fg"><label>Day End</label><input type="time" id="ct-day-end" value="16:30"></div>' +
+    '</div>' +
+    '<div class="fg"><label>Default Lesson Duration (min)</label>' +
+      '<input type="number" id="ct-default-dur" value="40" min="10" max="120" step="5"></div>' +
+    '<h4 class="ct-section-title">' +
+      'Time Blocks (Breaks &amp; Fixed Events)' +
+      '<button class="btn btn-sm" onclick="addTimeBlock()" style="float:right;margin-top:-4px">' +
+        '<i class="fa-solid fa-plus"></i> Add' +
+      '</button>' +
+    '</h4>' +
+    '<div id="ct-time-blocks"></div>' +
+    '<h4 class="ct-section-title">Classes <span id="ct-class-count" style="font-weight:400;color:var(--text-muted)"></span></h4>' +
+    '<div id="ct-classes" class="ct-classes-list"></div>';
+  const footer =
+    '<button class="btn btn-ghost" onclick="closeModal()">Cancel</button>' +
+    '<button class="btn btn-accent" onclick="App.generateCustomTimetable()">' +
+      '<i class="fa-solid fa-wand-magic-sparkles"></i> Generate Timetable' +
+    '</button>';
+  openModal('Custom Timetable', 'cog', body, footer, true);
+  addTimeBlock();
+}
+
+function addTimeBlock(block) {
+  const container = document.getElementById('ct-time-blocks');
+  if (!container) return;
+  const days = ['Monday','Tuesday','Wednesday','Thursday','Friday'];
+  const blockDays = block ? (block.days || []) : [];
+  const div = document.createElement('div');
+  div.className = 'ct-block-row';
+  div.innerHTML =
+    '<input type="text" class="ct-block-name" placeholder="Name" value="' + esc(block ? block.name : '') + '">' +
+    '<input type="time" class="ct-block-start" value="' + (block ? block.start : '10:00') + '">' +
+    '<input type="time" class="ct-block-end" value="' + (block ? block.end : '10:30') + '">' +
+    '<label class="ct-day-cb"><input type="checkbox" class="ct-block-day" value="All"' +
+      (blockDays.includes('All') ? ' checked' : '') + '> All</label>' +
+    days.map(d => '<label class="ct-day-cb"><input type="checkbox" class="ct-block-day" value="' + d + '"' +
+      (blockDays.includes(d) ? ' checked' : '') + '> ' + d.slice(0,3) + '</label>').join('') +
+    '<button class="btn btn-sm btn-danger" onclick="this.parentElement.remove()"><i class="fa-solid fa-times"></i></button>';
+  container.appendChild(div);
+}
+
+async function loadSampleSchool() {
+  showSpinner('Loading sample data…');
+  try {
+    const resp = await fetch('/api/sample-school');
+    const data = await resp.json();
+    _customPayload = data;
+    document.getElementById('ct-school-name').value = data.school ? data.school.name : 'School Timetable';
+    if (data.configuration) {
+      document.getElementById('ct-day-start').value = data.configuration.day_start || '07:30';
+      document.getElementById('ct-day-end').value = data.configuration.day_end || '16:30';
+      document.getElementById('ct-default-dur').value = data.configuration.default_lesson_duration_minutes || 40;
+    }
+    const tbContainer = document.getElementById('ct-time-blocks');
+    tbContainer.innerHTML = '';
+    if (data.time_blocks) data.time_blocks.forEach(function(tb) { addTimeBlock(tb); });
+    renderCustomClasses(data.classes || []);
+    toast('Sample school loaded — edit durations & breaks then generate', 'success');
+  } catch(e) {
+    toast('Failed to load sample: ' + (e.message || e), 'error');
+  } finally { hideSpinner(); }
+}
+
+function renderCustomClasses(classes) {
+  const container = document.getElementById('ct-classes');
+  const count = document.getElementById('ct-class-count');
+  if (!container) return;
+  container.innerHTML = classes.map(function(c) {
+    return '<div class="ct-class-row" data-id="' + esc(c.id) + '">' +
+      '<span class="ct-class-name">' + esc(c.name || c.id) + '</span>' +
+      '<label class="ct-class-dur-label">Duration: ' +
+        '<input type="number" class="ct-class-dur" value="' + (c.lesson_duration_minutes || 40) + '" min="10" max="120" step="5"> min' +
+      '</label>' +
+      '<span class="ct-class-subjects">' + (c.subject_requirements ? c.subject_requirements.length : 0) + ' subjects</span>' +
+    '</div>';
+  }).join('');
+  if (count) count.textContent = '(' + classes.length + ')';
+}
+
+async function generateCustomTimetable() {
+  const schoolName = document.getElementById('ct-school-name').value.trim() || 'School Timetable';
+  const dayStart = document.getElementById('ct-day-start').value || '07:30';
+  const dayEnd = document.getElementById('ct-day-end').value || '16:30';
+  const defaultDur = parseInt(document.getElementById('ct-default-dur').value) || 40;
+
+  const blockRows = document.querySelectorAll('#ct-time-blocks .ct-block-row');
+  const timeBlocks = [];
+  blockRows.forEach(function(row) {
+    const name = row.querySelector('.ct-block-name').value.trim();
+    const start = row.querySelector('.ct-block-start').value;
+    const end = row.querySelector('.ct-block-end').value;
+    const dayCbs = row.querySelectorAll('.ct-block-day:checked');
+    const days = Array.from(dayCbs).map(function(cb) { return cb.value; });
+    if (name && start && end && days.length > 0) {
+      timeBlocks.push({ name: name, type: 'fixed_break', start: start, end: end, days: days });
+    }
+  });
+
+  const classRows = document.querySelectorAll('#ct-classes .ct-class-row');
+  const classes = [];
+  classRows.forEach(function(row) {
+    const id = row.dataset.id;
+    const dur = parseInt(row.querySelector('.ct-class-dur').value) || defaultDur;
+    const orig = _customPayload && _customPayload.classes.find(function(c) { return c.id === id; });
+    if (orig) {
+      const copy = JSON.parse(JSON.stringify(orig));
+      copy.lesson_duration_minutes = dur;
+      classes.push(copy);
+    }
+  });
+
+  const payload = {
+    school: { name: schoolName },
+    configuration: {
+      day_start: dayStart,
+      day_end: dayEnd,
+      default_lesson_duration_minutes: defaultDur,
+    },
+    time_blocks: timeBlocks,
+    teachers: _customPayload ? (_customPayload.teachers || []) : [],
+    classes: classes,
+  };
+
+  if (classes.length === 0) {
+    toast('No classes configured. Load a sample school first.', 'warn');
+    return;
+  }
+
+  showSpinner('Generating timetable…');
+  try {
+    const resp = await fetch('/api/generate-timetable?format=pdf', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+    });
+    if (!resp.ok) {
+      const err = await resp.json().catch(function() { return { error: resp.statusText }; });
+      throw new Error(err.error || 'Generation failed');
+    }
+    const blob = await resp.blob();
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'timetable_custom.pdf';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+    closeModal();
+    toast('Timetable generated successfully', 'success');
+  } catch(e) {
+    toast('Generation failed: ' + (e.message || e), 'error');
+  } finally { hideSpinner(); }
+}
+
 
 // ── APP OBJECT ─────────────────────────────────────────────────────────────
 window.App = {
@@ -1007,11 +1643,18 @@ window.App = {
   openLessonDialog, saveLesson, deleteLesson,
   openLessonsView, openConstraintsDialog, toggleConstraint,
   loadAnalytics, exportHTML, exportData, importData,
+  saveVersion, showVersions, restoreVersion, loadVersions,
   selectEntity, editEntity, deleteEntity,
   setTTView, selectTTEntity,
+  setWeekFilter,
   togglePanel, toggleLock, removeSlot,
   onDragStart, onDragOver, onDragLeave, onDrop,
   showConflicts,
+  openSubstitutionDialog, saveSubstitution, approveSubstitution, doApproveSubstitution, completeSubstitution, deleteSubstitution,
+  suggestSubstitutes, suggestForApprove,
+  openDivisionDialog, saveDivision, deleteDivision,
+  compareVersions, doCompareVersions,
+  openCustomTimetable, loadSampleSchool, generateCustomTimetable,
 };
 
 // ── INIT ───────────────────────────────────────────────────────────────────

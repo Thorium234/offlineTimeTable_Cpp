@@ -1,2 +1,50 @@
-idea/*
-idea
+# ─── Build artifacts ─────────────────────────────────────────────────────────
+build_cmake/
+build/
+*.o
+*.obj
+*.exe
+*.out
+*.a
+*.so
+*.dylib
+timetableGen
+test_runner
+
+# ─── IDE / Editor ────────────────────────────────────────────────────────────
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+*.orig
+*.bak
+
+# ─── Qt generated ────────────────────────────────────────────────────────────
+*_autogen/
+moc_*.cpp
+moc_*.h
+qrc_*.cpp
+ui_*.h
+
+# ─── Python ──────────────────────────────────────────────────────────────────
+__pycache__/
+*.pyc
+*.pyo
+venv/
+.venv/
+.pytest_cache/
+
+# ─── Database (user data stored here; exclude from version control) ──────────
+data/*.db
+data/*.db-shm
+data/*.db-wal
+
+# ─── Environment / Secrets ───────────────────────────────────────────────────
+.env
+.env.local
+
+# ─── Static analysis / tooling ───────────────────────────────────────────────
+compile_commands.json
+.clangd/
+

@@ -44,14 +44,14 @@ Timetable TimetableEngine::generateWithStrategy(const DataManager& dm, SolverStr
     lastRunStats = SolverStats();
 
     // Execute Strategy
-    Timetable result = strategy.solve(dm, lastRunStats);
+    Timetable result = strategy.solve(dm, lastRunStats, dm.solverOptions);
 
     // If backtracking failed completely, provide a greedy fallback (optional, but good for UX)
     if (result.score == 0 && lastRunStats.nodesVisited > 0 && dynamic_cast<BacktrackingSolver*>(&strategy)) {
         std::cout << "[Warning] Primary solver failed to find a complete solution. Attempting Greedy Fallback...\n";
         GreedySolver fallbackSolver;
         SolverStats fallbackStats;
-        result = fallbackSolver.solve(dm, fallbackStats);
+        result = fallbackSolver.solve(dm, fallbackStats, dm.solverOptions);
         
         // Accumulate stats for transparency
         lastRunStats.nodesVisited += fallbackStats.nodesVisited;

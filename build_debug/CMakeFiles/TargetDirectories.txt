@@ -1,0 +1,10 @@
+/home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/build_debug/CMakeFiles/timetableGen.dir
+/home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/build_debug/CMakeFiles/test_runner.dir
+/home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/build_debug/CMakeFiles/run.dir
+/home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/build_debug/CMakeFiles/check.dir
+/home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/build_debug/CMakeFiles/edit_cache.dir
+/home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/build_debug/CMakeFiles/rebuild_cache.dir
+/home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/build_debug/CMakeFiles/timetableGen_autogen_timestamp_deps.dir
+/home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/build_debug/CMakeFiles/timetableGen_autogen.dir
+/home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/build_debug/CMakeFiles/test_runner_autogen_timestamp_deps.dir
+/home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/build_debug/CMakeFiles/test_runner_autogen.dir

@@ -31,6 +31,45 @@ struct RoomRecord {
     int roomTypeId;
 };
 
+struct LessonRecord {
+    int id;
+    int teacherId;
+    int secondTeacherId = -1;
+    int subjectId;
+    int classId;
+    std::vector<int> combinedClassIds;
+    int periodsPerWeek;
+    int blockSize;
+    int maxPerDay;
+    int weekType = 0;
+};
+
+struct ConstraintRecord {
+    int teacherId;
+    int dayId;
+    int periodId;
+};
+
+struct PreferenceRecord {
+    int teacherId;
+    int dayId;
+    int periodId;
+    QString prefType;
+};
+
+struct RoomTypeRecord {
+    int id;
+    QString name;
+};
+
+struct FixedEventRecord {
+    int id;
+    int dayId;
+    int periodId;
+    QString name;
+    QString recurrence;
+};
+
 class SQLiteService {
 public:
     SQLiteService();
@@ -65,6 +104,69 @@ public:
     bool updateRoom(int id, const QString &newName, int capacity, int roomTypeId);
     bool removeRoom(int id);
     std::vector<RoomRecord> fetchRooms();
+
+    // Lesson CRUD
+    int addLesson(int teacherId, int subjectId, int classId, int periodsPerWeek, int blockSize, int maxPerDay, int weekType = 0, int secondTeacherId = -1);
+    bool updateLesson(int id, int teacherId, int subjectId, int classId, int periodsPerWeek, int blockSize, int maxPerDay, int weekType = 0, int secondTeacherId = -1);
+    bool removeLesson(int id);
+    std::vector<LessonRecord> fetchLessons();
+    bool addCombinedClass(int lessonId, int classId);
+    bool removeCombinedClasses(int lessonId);
+    std::vector<int> fetchCombinedClassIds(int lessonId);
+
+    // Teacher constraints
+    bool addTeacherConstraint(int teacherId, int dayId, int periodId);
+    bool removeTeacherConstraint(int teacherId, int dayId, int periodId);
+    std::vector<ConstraintRecord> fetchTeacherConstraints();
+
+    // Teacher preferences
+    bool addTeacherPreference(int teacherId, int dayId, int periodId, const QString &prefType);
+    bool removeTeacherPreference(int teacherId, int dayId, int periodId);
+    std::vector<PreferenceRecord> fetchTeacherPreferences();
+
+    // Room types
+    std::vector<RoomTypeRecord> fetchRoomTypes();
+
+    // Fixed events
+    int addFixedEvent(int dayId, int periodId, const QString &name, const QString &recurrence);
+    bool removeFixedEvent(int id);
+    std::vector<FixedEventRecord> fetchFixedEvents();
+
+    // Timetable slots
+    bool clearTimetableSlots();
+    bool addTimetableSlot(int classId, int dayId, int periodId, int subjectId, int teacherId, int roomId);
+
+    // Substitutions
+    int addSubstitution(int origTeacherId, int subTeacherId, int subjectId, int classId,
+                        int dayId, int periodId, const QString &reason, const QString &date);
+    bool updateSubstitutionStatus(int id, const QString &status);
+    bool removeSubstitution(int id);
+    struct SubstitutionRecord {
+        int id;
+        int originalTeacherId;
+        int substituteTeacherId;
+        int subjectId;
+        int classId;
+        int dayId;
+        int periodId;
+        QString status;
+        QString reason;
+        QString date;
+    };
+    std::vector<SubstitutionRecord> fetchSubstitutions();
+
+    // Divisions
+    int addDivision(const QString &name, bool canRunInParallel);
+    bool updateDivision(int id, const QString &name, bool canRunInParallel);
+    bool removeDivision(int id);
+    struct DivisionRecord {
+        int id;
+        QString name;
+        bool canRunInParallel;
+    };
+    std::vector<DivisionRecord> fetchDivisions();
+    bool addClassToDivision(int classId, int divisionId);
+    bool removeClassFromDivision(int classId);
 
     // Expose underlying QSqlDatabase for Qt models
     QSqlDatabase &getDatabase();

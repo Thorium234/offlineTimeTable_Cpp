@@ -1,4 +1,5 @@
 #include "GreedySolver.h"
+#include "DataManager.h"
 #include "TimetableEvaluator.h"
 #include <map>
 #include <algorithm>
@@ -17,7 +18,7 @@ int GreedySolver::countSubjectOnDay(const Timetable& timetable, int classId, int
     return count;
 }
 
-Timetable GreedySolver::solve(const DataManager& dm, SolverStats& stats) {
+Timetable GreedySolver::solve(const DataManager& dm, SolverStats& stats, const SolverOptions& options) {
     Timetable timetable;
     int numDays = static_cast<int>(dm.days.size());
     int numPeriods = static_cast<int>(dm.periods.size());
@@ -51,12 +52,15 @@ Timetable GreedySolver::solve(const DataManager& dm, SolverStats& stats) {
             units.push_back(LessonUnit{
                 static_cast<int>(i),
                 lesson.teacherId,
+                lesson.secondTeacherId,
                 lesson.subjectId,
                 lesson.classId,
+                lesson.combinedClassIds,
                 reqRoomTypeId,
                 studentCount,
                 curSize,
-                lesson.maxPerDay
+                lesson.maxPerDay,
+                lesson.weekType
             });
             periodsLeft -= curSize;
         }
@@ -71,27 +75,39 @@ Timetable GreedySolver::solve(const DataManager& dm, SolverStats& stats) {
     });
 
     for (const auto& unit : units) {
-        stats.nodesVisited++; // Treat each placement attempt as a visited node/decision
+        stats.nodesVisited++;
 
         bool placed = false;
         int k = unit.blockSize;
 
+        // Build list of all class IDs (primary + combined)
+        std::vector<int> allClassIds;
+        allClassIds.push_back(unit.classId);
+        allClassIds.insert(allClassIds.end(), unit.combinedClassIds.begin(), unit.combinedClassIds.end());
+
+        // Build list of all teacher IDs (primary + second)
+        std::vector<int> allTeacherIds;
+        allTeacherIds.push_back(unit.teacherId);
+        if (unit.secondTeacherId >= 0) {
+            allTeacherIds.push_back(unit.secondTeacherId);
+        }
+
         // Try to place the block in the first matching slot
         for (int d = 0; d < numDays && !placed; ++d) {
-            // Check maxPerDay constraint
+            // Check maxPerDay constraint for primary class
             if (unit.maxPerDay > 0) {
                 int alreadyOnDay = countSubjectOnDay(timetable, unit.classId, unit.subjectId, d, numPeriods);
                 if (alreadyOnDay + k > unit.maxPerDay) continue;
             }
 
             for (int p = 0; p <= numPeriods - k && !placed; ++p) {
-                // Check if teacher/class is busy
                 bool slotFree = true;
+                int wt = unit.weekType;
                 for (int offset = 0; offset < k; ++offset) {
                     int dayId = dm.days[d].id;
                     int periodId = dm.periods[p + offset].id;
 
-                    // Fixed events conflict check (recurrence-aware)
+                    // Fixed events conflict check
                     for (const auto& fe : dm.fixedEvents) {
                         bool blocked = false;
                         switch (fe.recurrence) {
@@ -105,19 +121,26 @@ Timetable GreedySolver::solve(const DataManager& dm, SolverStats& stats) {
                             default:
                                 throw std::logic_error("Unknown recurrence type");
                         }
-                        if (blocked) {
-                            slotFree = false;
-                            break;
+                        if (blocked) { slotFree = false; break; }
+                    }
+                    if (!slotFree) break;
+
+                    // Check all classes (primary + combined)
+                    for (int cid : allClassIds) {
+                        if (tracker.isBusy(ResourceType::CLASS, cid, d, p + offset, wt)) {
+                            slotFree = false; break;
                         }
                     }
                     if (!slotFree) break;
 
-                    if (tracker.isBusy(ResourceType::CLASS, unit.classId, d, p + offset) ||
-                        tracker.isBusy(ResourceType::TEACHER, unit.teacherId, d, p + offset) ||
-                        dm.isTeacherUnavailable(unit.teacherId, dayId, periodId)) {
-                        slotFree = false;
-                        break;
+                    // Check all teachers (primary + second)
+                    for (int tid : allTeacherIds) {
+                        if (tracker.isBusy(ResourceType::TEACHER, tid, d, p + offset, wt) ||
+                            dm.isTeacherUnavailable(tid, dayId, periodId)) {
+                            slotFree = false; break;
+                        }
                     }
+                    if (!slotFree) break;
                 }
                 if (!slotFree) continue;
 
@@ -126,8 +149,8 @@ Timetable GreedySolver::solve(const DataManager& dm, SolverStats& stats) {
                 for (const auto& room : dm.rooms) {
                     if (room.roomTypeId == unit.reqRoomTypeId && room.capacity >= unit.studentCount) {
                         bool roomFree = true;
-                        for (int offset = 0; offset < k; ++offset) {
-                            if (tracker.isBusy(ResourceType::ROOM, room.id, d, p + offset)) {
+                for (int offset = 0; offset < k; ++offset) {
+                    if (tracker.isBusy(ResourceType::ROOM, room.id, d, p + offset, wt)) {
                                 roomFree = false;
                                 break;
                             }
@@ -140,12 +163,16 @@ Timetable GreedySolver::solve(const DataManager& dm, SolverStats& stats) {
                 }
 
                 if (allocatedRoomId != -1) {
-                    // Place it!
+                    // Place it! Mark all classes and teachers as busy
                     for (int offset = 0; offset < k; ++offset) {
-                        timetable.setSlot(unit.classId, d, p + offset, unit.subjectId, unit.teacherId, allocatedRoomId);
-                        tracker.markBusy(ResourceType::CLASS, unit.classId, d, p + offset, true);
-                        tracker.markBusy(ResourceType::TEACHER, unit.teacherId, d, p + offset, true);
-                        tracker.markBusy(ResourceType::ROOM, allocatedRoomId, d, p + offset, true);
+                        for (int cid : allClassIds) {
+                            timetable.setSlot(cid, d, p + offset, unit.subjectId, unit.teacherId, allocatedRoomId, wt);
+                            tracker.markBusy(ResourceType::CLASS, cid, d, p + offset, wt);
+                        }
+                        for (int tid : allTeacherIds) {
+                            tracker.markBusy(ResourceType::TEACHER, tid, d, p + offset, wt);
+                        }
+                        tracker.markBusy(ResourceType::ROOM, allocatedRoomId, d, p + offset, wt);
                     }
                     placed = true;
                 }
@@ -154,9 +181,14 @@ Timetable GreedySolver::solve(const DataManager& dm, SolverStats& stats) {
 
 
         if (!placed) {
-            // Simple explanation without specific day/period because they are out of scope here
+            // Build class names for error message
+            std::string classList = dm.getClassName(unit.classId);
+            for (int ccid : unit.combinedClassIds) {
+                classList += "+" + dm.getClassName(ccid);
+            }
             std::string reason = "Greedy Placement Failed: No free consecutive slots of size " +
-                                 std::to_string(k) + " found with teacher/class/room available.";
+                                 std::to_string(k) + " found for " + classList +
+                                 " with teacher/class/room available.";
             dm.logPlacementReject(reason);
             timetable.unscheduledLessons.push_back(UnscheduledLesson{
                 unit.subjectId,

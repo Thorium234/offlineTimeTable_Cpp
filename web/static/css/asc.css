@@ -262,3 +262,17 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(
 .conflict-item i{color:var(--danger);margin-top:2px;flex-shrink:0}
 .conflict-item .desc{flex:1}
 .conflict-item .loc{font-size:10px;color:var(--text-muted);margin-top:2px}
+
+/* ── CUSTOM TIMETABLE ── */
+.ct-section-title{font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:.4px;margin:14px 0 8px;padding-bottom:4px;border-bottom:1px solid var(--border);font-weight:700}
+.ct-block-row{display:flex;align-items:center;gap:6px;padding:6px 8px;background:var(--bg);border-radius:var(--radius);margin-bottom:5px;flex-wrap:wrap}
+.ct-block-name{width:100px;padding:5px 7px;border:1px solid var(--border);border-radius:4px;font-size:12px}
+.ct-block-start,.ct-block-end{width:80px;padding:5px 7px;border:1px solid var(--border);border-radius:4px;font-size:12px}
+.ct-day-cb{font-size:11px;display:inline-flex;align-items:center;gap:2px;cursor:pointer;white-space:nowrap}
+.ct-day-cb input{margin:0}
+.classes-list{display:flex;flex-direction:column;gap:4px}
+.ct-class-row{display:flex;align-items:center;gap:10px;padding:8px 10px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius)}
+.ct-class-name{font-weight:600;font-size:13px;color:var(--text);min-width:100px}
+.ct-class-dur-label{font-size:11px;color:var(--text-muted);display:flex;align-items:center;gap:4px}
+.ct-class-dur{width:58px;padding:4px 6px;border:1px solid var(--border);border-radius:4px;font-size:12px;text-align:center}
+.ct-class-subjects{font-size:11px;color:var(--text-muted);margin-left:auto}

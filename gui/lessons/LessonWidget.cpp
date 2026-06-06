@@ -9,7 +9,7 @@
 LessonWidget::LessonWidget(DataManager *dm, QWidget *parent)
     : QWidget(parent), dm(dm) {
     setWindowTitle(tr("Lesson Management"));
-    resize(800, 500);
+    resize(900, 500);
     setupUi();
     setupModelAndView();
     connectSignals();
@@ -34,30 +34,48 @@ void LessonWidget::setupUi() {
 
 void LessonWidget::setupModelAndView() {
     model = new QStandardItemModel(this);
-    model->setColumnCount(7);
+    model->setColumnCount(10);
     model->setHeaderData(0, Qt::Horizontal, tr("Teacher"));
-    model->setHeaderData(1, Qt::Horizontal, tr("Subject"));
-    model->setHeaderData(2, Qt::Horizontal, tr("Class"));
-    model->setHeaderData(3, Qt::Horizontal, tr("Periods/Week"));
-    model->setHeaderData(4, Qt::Horizontal, tr("Block Size"));
-    model->setHeaderData(5, Qt::Horizontal, tr("Max/Day"));
-    model->setHeaderData(6, Qt::Horizontal, tr("ID"));
+    model->setHeaderData(1, Qt::Horizontal, tr("2nd Teacher"));
+    model->setHeaderData(2, Qt::Horizontal, tr("Subject"));
+    model->setHeaderData(3, Qt::Horizontal, tr("Class"));
+    model->setHeaderData(4, Qt::Horizontal, tr("Combined"));
+    model->setHeaderData(5, Qt::Horizontal, tr("Periods/Week"));
+    model->setHeaderData(6, Qt::Horizontal, tr("Block Size"));
+    model->setHeaderData(7, Qt::Horizontal, tr("Max/Day"));
+    model->setHeaderData(8, Qt::Horizontal, tr("Week"));
+    model->setHeaderData(9, Qt::Horizontal, tr("ID"));
 
     int idx = 0;
     for (const auto &l : dm->lessons) {
         QList<QStandardItem*> rowItems;
         rowItems << new QStandardItem(QString::fromStdString(dm->getTeacherName(l.teacherId)));
+        QString secondTeacher = l.secondTeacherId >= 0
+            ? QString::fromStdString(dm->getTeacherName(l.secondTeacherId)) : QStringLiteral("—");
+        rowItems << new QStandardItem(secondTeacher);
         rowItems << new QStandardItem(QString::fromStdString(dm->getSubjectName(l.subjectId)));
         rowItems << new QStandardItem(QString::fromStdString(dm->getClassName(l.classId)));
+        QString combined;
+        for (size_t ci = 0; ci < l.combinedClassIds.size(); ++ci) {
+            if (ci > 0) combined += QStringLiteral(", ");
+            combined += QString::fromStdString(dm->getClassName(l.combinedClassIds[ci]));
+        }
+        if (combined.isEmpty()) combined = QStringLiteral("—");
+        rowItems << new QStandardItem(combined);
         rowItems << new QStandardItem(QString::number(l.periodsPerWeek));
         rowItems << new QStandardItem(QString::number(l.blockSize));
         rowItems << new QStandardItem(l.maxPerDay == 0 ? "N/A" : QString::number(l.maxPerDay));
+        QString weekLabel;
+        if (l.weekType == 0) weekLabel = tr("Every");
+        else if (l.weekType == 1) weekLabel = tr("Week A");
+        else weekLabel = tr("Week B");
+        rowItems << new QStandardItem(weekLabel);
         rowItems << new QStandardItem(QString::number(idx)); // Store index
         model->appendRow(rowItems);
         idx++;
     }
     tableView->setModel(model);
-    tableView->hideColumn(6); // Hide index column
+    tableView->hideColumn(9); // Hide index column
     tableView->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 }
 
@@ -83,7 +101,10 @@ void LessonWidget::addLesson() {
             dlg.classId(),
             dlg.periodsPerWeek(),
             dlg.blockSize(),
-            dlg.maxPerDay()
+            dlg.maxPerDay(),
+            dlg.weekType(),
+            dlg.secondTeacherId(),
+            dlg.combinedClassIds()
         );
         refresh();
     }
@@ -98,12 +119,12 @@ void LessonWidget::deleteLesson() {
     }
     
     int row = cur.row();
-    int idx = model->item(row, 6)->text().toInt();
+    int idx = model->item(row, 8)->text().toInt();
     
     if (QMessageBox::question(this, tr("Confirm Delete"),
             tr("Delete this lesson?")) == QMessageBox::Yes) {
         if (idx >= 0 && idx < static_cast<int>(dm->lessons.size())) {
-            dm->lessons.erase(dm->lessons.begin() + idx);
+            dm->removeLesson(dm->lessons[idx].id);
             refresh();
         }
     }

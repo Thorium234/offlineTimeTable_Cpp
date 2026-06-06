@@ -10,6 +10,6 @@ private:
                           int dayIdx, int numPeriods) const;
 
 public:
-    Timetable solve(const DataManager& dm, SolverStats& stats) override;
+    Timetable solve(const DataManager& dm, SolverStats& stats, const SolverOptions& options = {}) override;
     std::string getName() const override { return "Greedy Fallback Solver"; }
 };

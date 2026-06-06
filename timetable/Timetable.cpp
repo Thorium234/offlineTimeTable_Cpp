@@ -7,11 +7,82 @@ void Timetable::initClass(int classId, int totalDays, int totalPeriods) {
     schedules[classId] = std::vector<std::vector<TimetableCell>>(totalDays, std::vector<TimetableCell>(totalPeriods));
 }
 
-void Timetable::setSlot(int classId, int dayIndex, int periodIndex, int subjectId, int teacherId, int roomId) {
+void Timetable::setSlot(int classId, int dayIndex, int periodIndex, int subjectId, int teacherId, int roomId, int weekType) {
     if (schedules.find(classId) == schedules.end()) {
         schedules[classId] = std::vector<std::vector<TimetableCell>>(5, std::vector<TimetableCell>(8));
     }
-    schedules[classId][dayIndex][periodIndex] = TimetableCell{subjectId, teacherId, roomId};
+    schedules[classId][dayIndex][periodIndex] = TimetableCell{subjectId, teacherId, roomId, false, weekType};
+}
+
+void Timetable::setSlotLocked(int classId, int dayIndex, int periodIndex, int subjectId, int teacherId, int roomId, bool locked) {
+    if (schedules.find(classId) == schedules.end()) {
+        schedules[classId] = std::vector<std::vector<TimetableCell>>(5, std::vector<TimetableCell>(8));
+    }
+    if (dayIndex >= 0 && dayIndex < static_cast<int>(schedules[classId].size()) &&
+        periodIndex >= 0 && periodIndex < static_cast<int>(schedules[classId][dayIndex].size())) {
+        schedules[classId][dayIndex][periodIndex] = TimetableCell{subjectId, teacherId, roomId, locked};
+    }
+}
+
+bool Timetable::moveSlot(int srcClassId, int srcDay, int srcPeriod,
+                          int dstClassId, int dstDay, int dstPeriod) {
+    auto srcIt = schedules.find(srcClassId);
+    auto dstIt = schedules.find(dstClassId);
+    if (srcIt == schedules.end() || dstIt == schedules.end()) return false;
+
+    auto &srcGrid = srcIt->second;
+    auto &dstGrid = dstIt->second;
+
+    if (srcDay < 0 || srcDay >= static_cast<int>(srcGrid.size()) ||
+        srcPeriod < 0 || srcPeriod >= static_cast<int>(srcGrid[srcDay].size()) ||
+        dstDay < 0 || dstDay >= static_cast<int>(dstGrid.size()) ||
+        dstPeriod < 0 || dstPeriod >= static_cast<int>(dstGrid[dstDay].size())) {
+        return false;
+    }
+
+    TimetableCell &src = srcGrid[srcDay][srcPeriod];
+    TimetableCell &dst = dstGrid[dstDay][dstPeriod];
+
+    if (src.locked || dst.locked) return false;
+    if (src.isEmpty()) return false;
+
+    dst = src;
+    src = TimetableCell{};
+    return true;
+}
+
+bool Timetable::swapSlots(int classA, int dayA, int periodA,
+                           int classB, int dayB, int periodB) {
+    auto itA = schedules.find(classA);
+    auto itB = schedules.find(classB);
+    if (itA == schedules.end() || itB == schedules.end()) return false;
+
+    auto &gridA = itA->second;
+    auto &gridB = itB->second;
+
+    if (dayA < 0 || dayA >= static_cast<int>(gridA.size()) ||
+        periodA < 0 || periodA >= static_cast<int>(gridA[dayA].size()) ||
+        dayB < 0 || dayB >= static_cast<int>(gridB.size()) ||
+        periodB < 0 || periodB >= static_cast<int>(gridB[dayB].size())) {
+        return false;
+    }
+
+    TimetableCell &cellA = gridA[dayA][periodA];
+    TimetableCell &cellB = gridB[dayB][periodB];
+
+    if (cellA.locked || cellB.locked) return false;
+
+    std::swap(cellA, cellB);
+    return true;
+}
+
+bool Timetable::isSlotLocked(int classId, int dayIndex, int periodIndex) const {
+    auto it = schedules.find(classId);
+    if (it == schedules.end()) return false;
+    const auto &grid = it->second;
+    if (dayIndex < 0 || dayIndex >= static_cast<int>(grid.size())) return false;
+    if (periodIndex < 0 || periodIndex >= static_cast<int>(grid[dayIndex].size())) return false;
+    return grid[dayIndex][periodIndex].locked;
 }
 
 void Timetable::clearSlot(int classId, int dayIndex, int periodIndex) {
@@ -55,7 +126,15 @@ void Timetable::print(const DataManager& dm) const {
         const auto& grid = pair.second;
 
         std::cout << "\n------------------------------------------------------------------------------------------------------------------------\n";
-        std::cout << " CLASS: " << dm.getClassName(classId) << " (Students: " << dm.classes[classId - 1].studentCount << ")\n";
+        std::cout << " CLASS: " << dm.getClassName(classId) << " (Students: ";
+        {
+            bool found = false;
+            for (const auto &c : dm.classes) {
+                if (c.id == classId) { std::cout << c.studentCount; found = true; break; }
+            }
+            if (!found) std::cout << "?";
+        }
+        std::cout << ")\n";
         std::cout << "------------------------------------------------------------------------------------------------------------------------\n";
 
         // Print header

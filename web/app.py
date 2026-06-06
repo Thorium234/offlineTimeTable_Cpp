@@ -2,13 +2,22 @@ import sqlite3
 import os
 import random
 import json
+import logging
+from datetime import datetime
 from flask import Flask, request, jsonify, render_template, Response
 from flask_cors import CORS
 
 app = Flask(__name__)
 CORS(app)
 
-DB_PATH = os.path.join(os.path.dirname(__file__), '..', 'data', 'timetableGen.db')
+# Silence default request logging when launched by C++ binary
+if os.environ.get("FLASK_SILENT_LOGS"):
+    log = logging.getLogger('werkzeug')
+    log.setLevel(logging.ERROR)
+
+DB_PATH = os.environ.get('FLASK_DB_PATH') or os.path.join(
+    os.path.dirname(__file__), '..', 'data', 'timetableGen.db'
+)
 
 DAYS = [
     {'id': 1, 'name': 'Monday'},
@@ -70,6 +79,7 @@ def init_db():
         CREATE TABLE IF NOT EXISTS lessons (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             teacherId INTEGER NOT NULL,
+            secondTeacherId INTEGER DEFAULT -1,
             subjectId INTEGER NOT NULL,
             classId INTEGER NOT NULL,
             periodsPerWeek INTEGER NOT NULL DEFAULT 1,
@@ -100,7 +110,25 @@ def init_db():
             teacherId INTEGER,
             roomId INTEGER,
             locked INTEGER NOT NULL DEFAULT 0,
-            UNIQUE(classId, dayId, periodId)
+            weekType INTEGER NOT NULL DEFAULT 0,
+            UNIQUE(classId, dayId, periodId, weekType)
+        );
+        CREATE TABLE IF NOT EXISTS divisions (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            name TEXT NOT NULL,
+            canRunInParallel INTEGER NOT NULL DEFAULT 1
+        );
+        CREATE TABLE IF NOT EXISTS substitutions (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            originalTeacherId INTEGER NOT NULL,
+            substituteTeacherId INTEGER NOT NULL DEFAULT -1,
+            subjectId INTEGER NOT NULL,
+            classId INTEGER NOT NULL,
+            dayId INTEGER NOT NULL,
+            periodId INTEGER NOT NULL,
+            status TEXT NOT NULL DEFAULT 'PENDING',
+            reason TEXT DEFAULT '',
+            date TEXT DEFAULT ''
         );
     """)
     # Migrations — add columns that may be missing in existing DBs
@@ -108,6 +136,12 @@ def init_db():
         "ALTER TABLE timetable_slots ADD COLUMN locked INTEGER NOT NULL DEFAULT 0",
         "ALTER TABLE teachers ADD COLUMN color TEXT NOT NULL DEFAULT ''",
         "ALTER TABLE subjects ADD COLUMN color TEXT NOT NULL DEFAULT ''",
+        "ALTER TABLE classes ADD COLUMN divisionId INTEGER DEFAULT NULL",
+        "ALTER TABLE classes ADD COLUMN groupId INTEGER DEFAULT NULL",
+        "ALTER TABLE lessons ADD COLUMN weekType INTEGER DEFAULT 0",
+        "ALTER TABLE lessons ADD COLUMN secondTeacherId INTEGER DEFAULT -1",
+        "ALTER TABLE timetable_slots ADD COLUMN weekType INTEGER NOT NULL DEFAULT 0",
+        "CREATE TABLE IF NOT EXISTS lesson_combined_classes (lessonId INTEGER NOT NULL, classId INTEGER NOT NULL, UNIQUE(lessonId, classId))",
     ]:
         try:
             c.execute(migration)
@@ -170,10 +204,12 @@ def update_teacher(tid):
 def delete_teacher(tid):
     conn = get_db()
     for q in ["DELETE FROM teachers WHERE id=?",
-              "DELETE FROM lessons WHERE teacherId=?",
+              "DELETE FROM lessons WHERE teacherId=? OR secondTeacherId=?",
               "DELETE FROM teacher_constraints WHERE teacherId=?",
-              "DELETE FROM teacher_preferences WHERE teacherId=?"]:
-        conn.execute(q, (tid,))
+              "DELETE FROM teacher_preferences WHERE teacherId=?",
+              "DELETE FROM substitutions WHERE originalTeacherId=? OR substituteTeacherId=?",
+              "DELETE FROM timetable_slots WHERE teacherId=?"]:
+        conn.execute(q, (tid, tid, tid, tid, tid, tid))
     conn.commit()
     conn.close()
     return jsonify({'ok': True})
@@ -223,6 +259,7 @@ def delete_subject(sid):
     conn = get_db()
     conn.execute("DELETE FROM subjects WHERE id=?", (sid,))
     conn.execute("DELETE FROM lessons WHERE subjectId=?", (sid,))
+    conn.execute("DELETE FROM timetable_slots WHERE subjectId=?", (sid,))
     conn.commit()
     conn.close()
     return jsonify({'ok': True})
@@ -273,6 +310,9 @@ def delete_class(cid):
     conn = get_db()
     conn.execute("DELETE FROM classes WHERE id=?", (cid,))
     conn.execute("DELETE FROM lessons WHERE classId=?", (cid,))
+    conn.execute("DELETE FROM lesson_combined_classes WHERE classId=?", (cid,))
+    conn.execute("DELETE FROM substitutions WHERE classId=?", (cid,))
+    conn.execute("DELETE FROM timetable_slots WHERE classId=?", (cid,))
     conn.commit()
     conn.close()
     return jsonify({'ok': True})
@@ -324,6 +364,8 @@ def update_room(rid):
 def delete_room(rid):
     conn = get_db()
     conn.execute("DELETE FROM rooms WHERE id=?", (rid,))
+    conn.execute("DELETE FROM timetable_slots WHERE roomId=?", (rid,))
+    conn.execute("DELETE FROM substitutions WHERE substituteTeacherId=?", (rid,))
     conn.commit()
     conn.close()
     return jsonify({'ok': True})
@@ -370,12 +412,17 @@ def get_lessons():
     conn = get_db()
     data = qrows(conn.execute("""
         SELECT l.*,t.name as teacherName,t.color as teacherColor,
+               t2.name as secondTeacherName,
                s.name as subjectName,s.color as subjectColor,c.name as className
         FROM lessons l
         JOIN teachers t ON l.teacherId=t.id
+        LEFT JOIN teachers t2 ON l.secondTeacherId=t2.id
         JOIN subjects s ON l.subjectId=s.id
         JOIN classes c ON l.classId=c.id
         ORDER BY c.name,s.name"""))
+    for row in data:
+        row['combinedClassIds'] = [r['classId'] for r in qrows(conn.execute(
+            "SELECT classId FROM lesson_combined_classes WHERE lessonId=? ORDER BY classId", (row['id'],)))]
     conn.close()
     return jsonify(data)
 
@@ -387,11 +434,11 @@ def add_lesson():
         return jsonify({'error': 'teacherId, subjectId, classId required'}), 400
     conn = get_db()
     c = conn.cursor()
-    c.execute("""INSERT INTO lessons (teacherId,subjectId,classId,periodsPerWeek,blockSize,maxPerDay)
-                 VALUES(?,?,?,?,?,?)""",
-              (d['teacherId'], d['subjectId'], d['classId'],
+    c.execute("""INSERT INTO lessons (teacherId,secondTeacherId,subjectId,classId,periodsPerWeek,blockSize,maxPerDay,weekType)
+                 VALUES(?,?,?,?,?,?,?,?)""",
+              (d['teacherId'], d.get('secondTeacherId', -1), d['subjectId'], d['classId'],
                int(d.get('periodsPerWeek', 1)), int(d.get('blockSize', 1)),
-               int(d.get('maxPerDay', 0))))
+               int(d.get('maxPerDay', 0)), int(d.get('weekType', 0))))
     conn.commit()
     nid = c.lastrowid
     conn.close()
@@ -402,11 +449,11 @@ def add_lesson():
 def update_lesson(lid):
     d = request.json
     conn = get_db()
-    conn.execute("""UPDATE lessons SET teacherId=?,subjectId=?,classId=?,
-                    periodsPerWeek=?,blockSize=?,maxPerDay=? WHERE id=?""",
-                 (d['teacherId'], d['subjectId'], d['classId'],
+    conn.execute("""UPDATE lessons SET teacherId=?,secondTeacherId=?,subjectId=?,classId=?,
+                    periodsPerWeek=?,blockSize=?,maxPerDay=?,weekType=? WHERE id=?""",
+                 (d['teacherId'], d.get('secondTeacherId', -1), d['subjectId'], d['classId'],
                   int(d.get('periodsPerWeek', 1)), int(d.get('blockSize', 1)),
-                  int(d.get('maxPerDay', 0)), lid))
+                  int(d.get('maxPerDay', 0)), int(d.get('weekType', 0)), lid))
     conn.commit()
     conn.close()
     return jsonify({'ok': True})
@@ -415,7 +462,34 @@ def update_lesson(lid):
 @app.route('/api/lessons/<int:lid>', methods=['DELETE'])
 def delete_lesson(lid):
     conn = get_db()
+    conn.execute("DELETE FROM lesson_combined_classes WHERE lessonId=?", (lid,))
     conn.execute("DELETE FROM lessons WHERE id=?", (lid,))
+    conn.execute("DELETE FROM timetable_slots WHERE subjectId=? AND classId IN "
+                 "(SELECT classId FROM lessons WHERE id=?)",
+                 (lid, lid))
+    conn.commit()
+    conn.close()
+    return jsonify({'ok': True})
+
+
+# ── COMBINED CLASSES ────────────────────────────────────────────────────────────
+
+@app.route('/api/lessons/<int:lid>/combined_classes', methods=['GET'])
+def get_combined_classes(lid):
+    conn = get_db()
+    data = [row['classId'] for row in qrows(conn.execute(
+        "SELECT classId FROM lesson_combined_classes WHERE lessonId=? ORDER BY classId", (lid,)))]
+    conn.close()
+    return jsonify(data)
+
+@app.route('/api/lessons/<int:lid>/combined_classes', methods=['POST'])
+def set_combined_classes(lid):
+    d = request.json or {}
+    class_ids = d.get('classIds', [])
+    conn = get_db()
+    conn.execute("DELETE FROM lesson_combined_classes WHERE lessonId=?", (lid,))
+    for cid in class_ids:
+        conn.execute("INSERT OR IGNORE INTO lesson_combined_classes (lessonId, classId) VALUES (?,?)", (lid, cid))
     conn.commit()
     conn.close()
     return jsonify({'ok': True})
@@ -488,6 +562,15 @@ def generate_timetable():
     teacher_data = qrows(conn.execute("SELECT * FROM teachers"))
     # Load locked slots (they are preserved)
     locked_slots = qrows(conn.execute("SELECT * FROM timetable_slots WHERE locked=1"))
+    # Load combined classes for each lesson
+    combined_map = {}
+    for row in qrows(conn.execute("SELECT lessonId, classId FROM lesson_combined_classes ORDER BY lessonId, classId")):
+        lid = row['lessonId']
+        if lid not in combined_map:
+            combined_map[lid] = []
+        combined_map[lid].append(row['classId'])
+    for lesson in lessons_data:
+        lesson['combinedClassIds'] = combined_map.get(lesson['id'], [])
     conn.close()
     if not lessons_data:
         return jsonify({'error': 'No lessons defined. Add lessons first.'}), 400
@@ -531,17 +614,34 @@ def _slot_score(tid, day, period, pref_map, teacher_busy, max_consecutive, day_c
     return score
 
 
+def _is_busy_week(busy_map, key, week_type):
+    """Check if resource is busy considering week type. week_type: 0=every, 1=A, 2=B."""
+    if (key + (0,)) in busy_map:
+        return True  # every-week blocks everything
+    if week_type == 1 and (key + (1,)) in busy_map:
+        return True
+    if week_type == 2 and (key + (2,)) in busy_map:
+        return True
+    return False
+
+
+def _mark_busy_week(busy_map, key, week_type):
+    busy_map[key + (week_type,)] = True
+
+
+def _unmark_busy_week(busy_map, key, week_type):
+    busy_map.pop(key + (week_type,), None)
+
+
 def _solve_backtrack(lessons, rooms, constraints, prefs, teachers, locked_slots, seed=42):
     """
-    Constraint-based greedy solver with soft-constraint scoring.
-    Iterates lessons ordered by difficulty (most periods first, fewest options first),
-    scores each candidate slot, picks the best available, and backtracks if stuck.
-    Respects locked slots (pre-placed, immovable).
+    Week-aware constraint-based greedy solver with soft-constraint scoring.
+    Respects locked slots (pre-placed, immovable) and weekType.
     """
     rng = random.Random(seed)
     blocked = {(c['teacherId'], c['dayId'], c['periodId']) for c in constraints}
     pref_map = _build_pref_map(prefs)
-    teacher_max_consec = {t['id']: t.get('maxConsecutive', 0) for t in teachers}
+    teacher_max_consec = {t['id']: int(t.get('maxConsecutive', 0) or 0) for t in teachers}
 
     teacher_busy = {}
     class_busy = {}
@@ -550,16 +650,16 @@ def _solve_backtrack(lessons, rooms, constraints, prefs, teachers, locked_slots,
 
     # Pre-fill locked slots
     for s in locked_slots:
-        teacher_busy[(s['teacherId'], s['dayId'], s['periodId'])] = True
-        class_busy[(s['classId'], s['dayId'], s['periodId'])] = True
+        wt = int(s.get('weekType', 0))
+        _mark_busy_week(teacher_busy, (s['teacherId'], s['dayId'], s['periodId']), wt)
+        _mark_busy_week(class_busy, (s['classId'], s['dayId'], s['periodId']), wt)
         if s['roomId']:
-            room_busy[(s['roomId'], s['dayId'], s['periodId'])] = True
+            _mark_busy_week(room_busy, (s['roomId'], s['dayId'], s['periodId']), wt)
 
     all_rooms = rooms[:]
     slots = []
     unscheduled = []
 
-    # Sort lessons: most periods/week first; ties broken by fewer available slots
     def difficulty(lesson):
         tid = lesson['teacherId']
         avail = sum(1 for d in DAYS for p in PERIODS
@@ -574,65 +674,77 @@ def _solve_backtrack(lessons, rooms, constraints, prefs, teachers, locked_slots,
         cid = lesson['classId']
         ppw = lesson['periodsPerWeek']
         mpd = lesson.get('maxPerDay', 0)
+        wt = int(lesson.get('weekType', 0))
+        second_tid = int(lesson.get('secondTeacherId', -1))
+        combined_ids = lesson.get('combinedClassIds', [])
+
+        all_class_ids = [cid] + combined_ids
+        all_teacher_ids = [tid]
+        if second_tid >= 0:
+            all_teacher_ids.append(second_tid)
+
         max_consec = teacher_max_consec.get(tid, 0)
         placed = 0
         day_count = {}
 
-        # Build candidate list and score each
         candidates = []
         for d in DAYS:
             for p in PERIODS:
                 did, pid = d['id'], p['id']
                 if (tid, did, pid) in blocked:
                     continue
-                if teacher_busy.get((tid, did, pid)):
+                # Check all teachers
+                any_teacher_busy = any(_is_busy_week(teacher_busy, (atid, did, pid), wt) for atid in all_teacher_ids)
+                if any_teacher_busy:
                     continue
-                if class_busy.get((cid, did, pid)):
+                # Check all classes
+                any_class_busy = any(_is_busy_week(class_busy, (acid, did, pid), wt) for acid in all_class_ids)
+                if any_class_busy:
                     continue
                 sc = _slot_score(tid, did, pid, pref_map, teacher_busy, max_consec, {})
                 candidates.append((sc, rng.random(), did, pid))
 
-        # Sort by score desc, shuffle ties via rng
         candidates.sort(key=lambda x: (-x[0], x[1]))
 
         for _, _, day, period in candidates:
             if placed >= ppw:
                 break
-            if teacher_busy.get((tid, day, period)):
+            any_teacher_busy = any(_is_busy_week(teacher_busy, (atid, day, period), wt) for atid in all_teacher_ids)
+            if any_teacher_busy:
                 continue
-            if class_busy.get((cid, day, period)):
+            any_class_busy = any(_is_busy_week(class_busy, (acid, day, period), wt) for acid in all_class_ids)
+            if any_class_busy:
                 continue
             if mpd and day_count.get(day, 0) >= mpd:
                 continue
 
-            # Check consecutive constraint
             if max_consec > 0:
                 consecutive = sum(1 for pid in range(max(1, period - max_consec), period)
-                                  if teacher_busy.get((tid, day, pid)))
+                                  if any(_is_busy_week(teacher_busy, (atid, day, pid), wt) for atid in all_teacher_ids))
                 if consecutive >= max_consec:
                     soft_violations += 1
                     continue
 
-            # Pick a room
             room_id = None
             for rm in all_rooms:
-                if rm.get('id') and not room_busy.get((rm['id'], day, period)):
+                if rm.get('id') and not _is_busy_week(room_busy, (rm['id'], day, period), wt):
                     room_id = rm['id']
                     break
 
-            # Track soft constraint violations (undesirable slots)
             pref = pref_map.get((tid, day, period), 'NEUTRAL')
             if pref == 'UNDESIRABLE':
                 soft_violations += 1
 
-            teacher_busy[(tid, day, period)] = True
-            class_busy[(cid, day, period)] = True
+            for atid in all_teacher_ids:
+                _mark_busy_week(teacher_busy, (atid, day, period), wt)
+            for acid in all_class_ids:
+                _mark_busy_week(class_busy, (acid, day, period), wt)
             if room_id:
-                room_busy[(room_id, day, period)] = True
+                _mark_busy_week(room_busy, (room_id, day, period), wt)
             day_count[day] = day_count.get(day, 0) + 1
             slots.append({'classId': cid, 'dayId': day, 'periodId': period,
                           'subjectId': sid, 'teacherId': tid, 'roomId': room_id,
-                          'locked': 0})
+                          'locked': 0, 'weekType': wt})
             placed += 1
 
         if placed < ppw:
@@ -656,16 +768,17 @@ def _solve_backtrack(lessons, rooms, constraints, prefs, teachers, locked_slots,
 
 
 def _solve_greedy(lessons, rooms, constraints, prefs, teachers, locked_slots, seed=42):
-    """Fast greedy solver — random shuffle, no backtracking."""
+    """Fast greedy solver — random shuffle, no backtracking. Week-aware."""
     rng = random.Random(seed)
     blocked = {(c['teacherId'], c['dayId'], c['periodId']) for c in constraints}
 
     teacher_busy, class_busy, room_busy = {}, {}, {}
     for s in locked_slots:
-        teacher_busy[(s['teacherId'], s['dayId'], s['periodId'])] = True
-        class_busy[(s['classId'], s['dayId'], s['periodId'])] = True
+        wt = int(s.get('weekType', 0))
+        _mark_busy_week(teacher_busy, (s['teacherId'], s['dayId'], s['periodId']), wt)
+        _mark_busy_week(class_busy, (s['classId'], s['dayId'], s['periodId']), wt)
         if s['roomId']:
-            room_busy[(s['roomId'], s['dayId'], s['periodId'])] = True
+            _mark_busy_week(room_busy, (s['roomId'], s['dayId'], s['periodId']), wt)
 
     all_rooms = rooms[:]
     slots, unscheduled = [], []
@@ -676,6 +789,15 @@ def _solve_greedy(lessons, rooms, constraints, prefs, teachers, locked_slots, se
         cid = lesson['classId']
         ppw = lesson['periodsPerWeek']
         mpd = lesson.get('maxPerDay', 0)
+        wt = int(lesson.get('weekType', 0))
+        second_tid = int(lesson.get('secondTeacherId', -1))
+        combined_ids = lesson.get('combinedClassIds', [])
+
+        all_class_ids = [cid] + combined_ids
+        all_teacher_ids = [tid]
+        if second_tid >= 0:
+            all_teacher_ids.append(second_tid)
+
         placed = 0
         day_count = {}
         options = [(d['id'], p['id']) for d in DAYS for p in PERIODS
@@ -686,22 +808,27 @@ def _solve_greedy(lessons, rooms, constraints, prefs, teachers, locked_slots, se
                 break
             if mpd and day_count.get(day, 0) >= mpd:
                 continue
-            if teacher_busy.get((tid, day, period)):
+            any_teacher_busy = any(_is_busy_week(teacher_busy, (atid, day, period), wt) for atid in all_teacher_ids)
+            if any_teacher_busy:
                 continue
-            if class_busy.get((cid, day, period)):
+            any_class_busy = any(_is_busy_week(class_busy, (acid, day, period), wt) for acid in all_class_ids)
+            if any_class_busy:
                 continue
             room_id = None
             for rm in all_rooms:
-                if rm.get('id') and not room_busy.get((rm['id'], day, period)):
+                if rm.get('id') and not _is_busy_week(room_busy, (rm['id'], day, period), wt):
                     room_id = rm['id']
                     break
-            teacher_busy[(tid, day, period)] = True
-            class_busy[(cid, day, period)] = True
+            for atid in all_teacher_ids:
+                _mark_busy_week(teacher_busy, (atid, day, period), wt)
+            for acid in all_class_ids:
+                _mark_busy_week(class_busy, (acid, day, period), wt)
             if room_id:
-                room_busy[(room_id, day, period)] = True
+                _mark_busy_week(room_busy, (room_id, day, period), wt)
             day_count[day] = day_count.get(day, 0) + 1
             slots.append({'classId': cid, 'dayId': day, 'periodId': period,
-                          'subjectId': sid, 'teacherId': tid, 'roomId': room_id, 'locked': 0})
+                          'subjectId': sid, 'teacherId': tid, 'roomId': room_id,
+                          'locked': 0, 'weekType': wt})
             placed += 1
         if placed < ppw:
             unscheduled.append({'subjectId': sid, 'classId': cid, 'teacherId': tid,
@@ -715,15 +842,22 @@ def _solve_greedy(lessons, rooms, constraints, prefs, teachers, locked_slots, se
 
 def _save_timetable(data, locked_slots):
     conn = get_db()
-    # Remove only unlocked slots
-    conn.execute("DELETE FROM timetable_slots WHERE locked=0")
-    for s in data.get('slots', []):
-        conn.execute("""INSERT OR IGNORE INTO timetable_slots
-                        (classId,dayId,periodId,subjectId,teacherId,roomId,locked) VALUES(?,?,?,?,?,?,0)""",
-                     (s['classId'], s['dayId'], s['periodId'],
-                      s.get('subjectId'), s.get('teacherId'), s.get('roomId')))
-    conn.commit()
-    conn.close()
+    conn.execute("BEGIN")
+    try:
+        # Remove only unlocked slots
+        conn.execute("DELETE FROM timetable_slots WHERE locked=0")
+        for s in data.get('slots', []):
+            conn.execute("""INSERT OR IGNORE INTO timetable_slots
+                            (classId,dayId,periodId,subjectId,teacherId,roomId,locked,weekType) VALUES(?,?,?,?,?,?,0,?)""",
+                         (s['classId'], s['dayId'], s['periodId'],
+                          s.get('subjectId'), s.get('teacherId'), s.get('roomId'),
+                          s.get('weekType', 0)))
+        conn.commit()
+    except Exception:
+        conn.rollback()
+        raise
+    finally:
+        conn.close()
 
 
 # ── TIMETABLE ─────────────────────────────────────────────────────────────────
@@ -749,24 +883,24 @@ def move_slot():
     cid = d['classId']
     fd, fp, td2, tp = d['fromDay'], d['fromPeriod'], d['toDay'], d['toPeriod']
     conn = get_db()
-    src = conn.execute("SELECT * FROM timetable_slots WHERE classId=? AND dayId=? AND periodId=?",
-                       (cid, fd, fp)).fetchone()
+    src = conn.execute("SELECT * FROM timetable_slots WHERE classId=? AND dayId=? AND periodId=? AND weekType=?",
+                       (cid, fd, fp, int(d.get('fromWeekType', 0)))).fetchone()
     if not src:
         conn.close()
         return jsonify({'error': 'Source slot not found'}), 404
     if dict(src).get('locked'):
         conn.close()
         return jsonify({'error': 'This slot is locked and cannot be moved'}), 400
-    target = conn.execute("SELECT * FROM timetable_slots WHERE classId=? AND dayId=? AND periodId=?",
-                          (cid, td2, tp)).fetchone()
+    target = conn.execute("SELECT * FROM timetable_slots WHERE classId=? AND dayId=? AND periodId=? AND weekType=?",
+                          (cid, td2, tp, int(d.get('fromWeekType', 0)))).fetchone()
     if target and dict(target).get('locked'):
         conn.close()
         return jsonify({'error': 'Target slot is locked'}), 400
     if target:
-        conn.execute("UPDATE timetable_slots SET dayId=?,periodId=? WHERE classId=? AND dayId=? AND periodId=?",
-                     (fd, fp, cid, td2, tp))
-    conn.execute("UPDATE timetable_slots SET dayId=?,periodId=? WHERE classId=? AND dayId=? AND periodId=?",
-                 (td2, tp, cid, fd, fp))
+        conn.execute("UPDATE timetable_slots SET dayId=?,periodId=? WHERE classId=? AND dayId=? AND periodId=? AND weekType=?",
+                     (fd, fp, cid, td2, tp, int(d.get('fromWeekType', 0))))
+    conn.execute("UPDATE timetable_slots SET dayId=?,periodId=? WHERE classId=? AND dayId=? AND periodId=? AND weekType=?",
+                 (td2, tp, cid, fd, fp, int(d.get('fromWeekType', 0))))
     conn.commit()
     conn.close()
     return jsonify({'ok': True})
@@ -776,14 +910,15 @@ def move_slot():
 def remove_slot():
     d = request.json
     cid, day, period = d['classId'], d['dayId'], d['periodId']
+    wt = int(d.get('weekType', 0))
     conn = get_db()
-    slot = conn.execute("SELECT * FROM timetable_slots WHERE classId=? AND dayId=? AND periodId=?",
-                        (cid, day, period)).fetchone()
+    slot = conn.execute("SELECT * FROM timetable_slots WHERE classId=? AND dayId=? AND periodId=? AND weekType=?",
+                        (cid, day, period, wt)).fetchone()
     if slot and dict(slot).get('locked'):
         conn.close()
         return jsonify({'error': 'Slot is locked. Unlock it first.'}), 400
-    conn.execute("DELETE FROM timetable_slots WHERE classId=? AND dayId=? AND periodId=?",
-                 (cid, day, period))
+    conn.execute("DELETE FROM timetable_slots WHERE classId=? AND dayId=? AND periodId=? AND weekType=?",
+                 (cid, day, period, wt))
     conn.commit()
     conn.close()
     return jsonify({'ok': True})
@@ -793,10 +928,11 @@ def remove_slot():
 def lock_slot():
     d = request.json
     cid, day, period = d['classId'], d['dayId'], d['periodId']
+    wt = int(d.get('weekType', 0))
     locked = 1 if d.get('locked', True) else 0
     conn = get_db()
-    conn.execute("UPDATE timetable_slots SET locked=? WHERE classId=? AND dayId=? AND periodId=?",
-                 (locked, cid, day, period))
+    conn.execute("UPDATE timetable_slots SET locked=? WHERE classId=? AND dayId=? AND periodId=? AND weekType=?",
+                 (locked, cid, day, period, wt))
     conn.commit()
     conn.close()
     return jsonify({'ok': True})
@@ -848,6 +984,55 @@ def get_analytics():
                COALESCE((SELECT SUM(l.periodsPerWeek) FROM lessons l WHERE l.classId=c.id),0) as required
         FROM classes c LEFT JOIN timetable_slots ts ON ts.classId=c.id
         GROUP BY c.id ORDER BY c.name"""))
+
+    # Subject distribution per class
+    subject_dist = qrows(conn.execute("""
+        SELECT c.name as className, sub.name as subjectName, COUNT(ts.id) as slots
+        FROM classes c
+        JOIN timetable_slots ts ON ts.classId=c.id
+        JOIN subjects sub ON ts.subjectId=sub.id
+        GROUP BY c.id, ts.subjectId
+        ORDER BY c.name, slots DESC"""))
+
+    # Gap statistics per class
+    slots = qrows(conn.execute("""
+        SELECT classId, dayId, periodId, subjectId
+        FROM timetable_slots ORDER BY classId, dayId, periodId"""))
+    gap_by_class = {}
+    for s in slots:
+        cid = s['classId']
+        if cid not in gap_by_class:
+            gap_by_class[cid] = {}
+        if s['dayId'] not in gap_by_class[cid]:
+            gap_by_class[cid][s['dayId']] = []
+        gap_by_class[cid][s['dayId']].append(s['periodId'])
+
+    gap_stats_list = []
+    class_names = {r['id']: r['name'] for r in qrows(conn.execute("SELECT id, name FROM classes"))}
+    for cid, days in gap_by_class.items():
+        total_gaps = 0
+        max_gap = 0
+        gap_periods = 0
+        class_name = class_names.get(cid, f"Class {cid}")
+        for day_id, periods in days.items():
+            periods.sort()
+            for i in range(1, len(periods)):
+                gap = periods[i] - periods[i-1] - 1
+                if gap > 0:
+                    total_gaps += gap
+                    max_gap = max(max_gap, gap)
+                    gap_periods += gap
+        gap_stats_list.append({
+            'className': class_name,
+            'totalGaps': total_gaps,
+            'maxGap': max_gap,
+            'gapPeriods': gap_periods
+        })
+
+    # Week type distribution
+    week_dist = qrows(conn.execute("""
+        SELECT weekType, COUNT(*) as cnt FROM timetable_slots GROUP BY weekType ORDER BY weekType"""))
+
     conn.close()
     return jsonify({
         'teacherLoad': teacher_load,
@@ -857,6 +1042,9 @@ def get_analytics():
         'dayDistribution': day_dist,
         'periodDistribution': period_dist,
         'classSummary': class_summary,
+        'subjectDistribution': subject_dist,
+        'gapStats': gap_stats_list,
+        'weekTypeDistribution': week_dist,
     })
 
 
@@ -882,6 +1070,8 @@ def export_data():
         'lessons': qrows(conn.execute("SELECT * FROM lessons")),
         'teacher_constraints': qrows(conn.execute("SELECT * FROM teacher_constraints")),
         'teacher_preferences': qrows(conn.execute("SELECT * FROM teacher_preferences")),
+        'divisions': qrows(conn.execute("SELECT * FROM divisions")),
+        'substitutions': qrows(conn.execute("SELECT * FROM substitutions")),
     }
     conn.close()
     return Response(
@@ -898,39 +1088,56 @@ def import_data():
         if not data or data.get('version') != 1:
             return jsonify({'error': 'Invalid import file (version mismatch)'}), 400
         conn = get_db()
-        # Clear existing
-        for tbl in ['teacher_preferences', 'teacher_constraints', 'lessons',
-                    'timetable_slots', 'rooms', 'classes', 'subjects', 'teachers', 'room_types']:
-            conn.execute('DELETE FROM ' + tbl)
-        # Insert teachers
-        for t in data.get('teachers', []):
-            conn.execute("INSERT INTO teachers (id,name,maxConsecutive,color) VALUES(?,?,?,?)",
-                         (t['id'], t['name'], t.get('maxConsecutive', 0), t.get('color', '')))
-        for s in data.get('subjects', []):
-            conn.execute("INSERT INTO subjects (id,name,color) VALUES(?,?,?)",
-                         (s['id'], s['name'], s.get('color', '')))
-        for c in data.get('classes', []):
-            conn.execute("INSERT INTO classes (id,name,studentCount) VALUES(?,?,?)",
-                         (c['id'], c['name'], c.get('studentCount', 0)))
-        for rt in data.get('room_types', []):
-            conn.execute("INSERT INTO room_types (id,name) VALUES(?,?)", (rt['id'], rt['name']))
-        for r in data.get('rooms', []):
-            conn.execute("INSERT INTO rooms (id,name,capacity,roomTypeId) VALUES(?,?,?,?)",
-                         (r['id'], r['name'], r.get('capacity', 30), r.get('roomTypeId', 1)))
-        for l in data.get('lessons', []):
-            conn.execute("""INSERT INTO lessons (id,teacherId,subjectId,classId,periodsPerWeek,blockSize,maxPerDay)
-                            VALUES(?,?,?,?,?,?,?)""",
-                         (l['id'], l['teacherId'], l['subjectId'], l['classId'],
-                          l.get('periodsPerWeek', 1), l.get('blockSize', 1), l.get('maxPerDay', 0)))
-        for tc in data.get('teacher_constraints', []):
-            conn.execute("INSERT OR IGNORE INTO teacher_constraints (teacherId,dayId,periodId) VALUES(?,?,?)",
-                         (tc['teacherId'], tc['dayId'], tc['periodId']))
-        for tp in data.get('teacher_preferences', []):
-            conn.execute("""INSERT OR IGNORE INTO teacher_preferences (teacherId,dayId,periodId,prefType)
-                            VALUES(?,?,?,?)""",
-                         (tp['teacherId'], tp['dayId'], tp['periodId'], tp.get('prefType', 'NEUTRAL')))
-        conn.commit()
-        conn.close()
+        conn.execute("BEGIN")
+        try:
+            # Clear existing
+            for tbl in ['teacher_preferences', 'teacher_constraints', 'lessons',
+                        'timetable_slots', 'substitutions', 'divisions',
+                        'rooms', 'classes', 'subjects', 'teachers', 'room_types']:
+                conn.execute('DELETE FROM ' + tbl)
+            # Insert teachers
+            for t in data.get('teachers', []):
+                conn.execute("INSERT INTO teachers (id,name,maxConsecutive,color) VALUES(?,?,?,?)",
+                             (t['id'], t['name'], int(t.get('maxConsecutive', 0) or 0), t.get('color', '')))
+            for s in data.get('subjects', []):
+                conn.execute("INSERT INTO subjects (id,name,color) VALUES(?,?,?)",
+                             (s['id'], s['name'], s.get('color', '')))
+            for c in data.get('classes', []):
+                conn.execute("INSERT INTO classes (id,name,studentCount) VALUES(?,?,?)",
+                             (c['id'], c['name'], c.get('studentCount', 0)))
+            for rt in data.get('room_types', []):
+                conn.execute("INSERT INTO room_types (id,name) VALUES(?,?)", (rt['id'], rt['name']))
+            for r in data.get('rooms', []):
+                conn.execute("INSERT INTO rooms (id,name,capacity,roomTypeId) VALUES(?,?,?,?)",
+                             (r['id'], r['name'], r.get('capacity', 30), r.get('roomTypeId', 1)))
+            for l in data.get('lessons', []):
+                conn.execute("""INSERT INTO lessons (id,teacherId,subjectId,classId,periodsPerWeek,blockSize,maxPerDay)
+                                VALUES(?,?,?,?,?,?,?)""",
+                             (l['id'], l['teacherId'], l['subjectId'], l['classId'],
+                              l.get('periodsPerWeek', 1), l.get('blockSize', 1), l.get('maxPerDay', 0)))
+            for tc in data.get('teacher_constraints', []):
+                conn.execute("INSERT OR IGNORE INTO teacher_constraints (teacherId,dayId,periodId) VALUES(?,?,?)",
+                             (tc['teacherId'], tc['dayId'], tc['periodId']))
+            for tp in data.get('teacher_preferences', []):
+                conn.execute("""INSERT OR IGNORE INTO teacher_preferences (teacherId,dayId,periodId,prefType)
+                                VALUES(?,?,?,?)""",
+                             (tp['teacherId'], tp['dayId'], tp['periodId'], tp.get('prefType', 'NEUTRAL')))
+            for d in data.get('divisions', []):
+                conn.execute("INSERT OR IGNORE INTO divisions (id,name,canRunInParallel) VALUES(?,?,?)",
+                             (d['id'], d['name'], int(d.get('canRunInParallel', 1))))
+            for s in data.get('substitutions', []):
+                conn.execute("""INSERT OR IGNORE INTO substitutions
+                                (id,originalTeacherId,substituteTeacherId,subjectId,classId,dayId,periodId,status,reason,date)
+                                VALUES(?,?,?,?,?,?,?,?,?,?)""",
+                             (s['id'], s['originalTeacherId'], s.get('substituteTeacherId', -1),
+                              s['subjectId'], s['classId'], s['dayId'], s['periodId'],
+                              s.get('status', 'PENDING'), s.get('reason', ''), s.get('date', '')))
+            conn.commit()
+        except Exception:
+            conn.rollback()
+            raise
+        finally:
+            conn.close()
         return jsonify({'ok': True})
     except Exception as e:
         return jsonify({'error': str(e)}), 500
@@ -941,6 +1148,7 @@ def import_data():
 @app.route('/api/export/html')
 def export_html():
     view = request.args.get('view', 'class')
+    week = request.args.get('week', '0')
     conn = get_db()
     slot_data = qrows(conn.execute("""
         SELECT ts.*,s.name as subjectName,s.color as subjectColor,
@@ -950,52 +1158,235 @@ def export_html():
         LEFT JOIN teachers t ON ts.teacherId=t.id
         LEFT JOIN rooms r ON ts.roomId=r.id
         LEFT JOIN classes c ON ts.classId=c.id"""))
+    unscheduled = _build_unscheduled_list(conn)
     conn.close()
-    html = _build_html(slot_data, view)
+    html = _build_html(slot_data, unscheduled, view, week)
     return Response(html, mimetype='text/html',
-                    headers={'Content-Disposition': 'attachment;filename=thorium234_timetable.html'})
+                    headers={'Content-Disposition': 'attachment;filename=timetable.html'})
 
 
-def _build_html(slots, view):
+@app.route('/api/export/pdf')
+def export_pdf():
+    view = request.args.get('view', 'class')
+    week = request.args.get('week', '0')
+    conn = get_db()
+    slot_data = qrows(conn.execute("""
+        SELECT ts.*,s.name as subjectName,s.color as subjectColor,
+               t.name as teacherName,r.name as roomName,c.name as className
+        FROM timetable_slots ts
+        LEFT JOIN subjects s ON ts.subjectId=s.id
+        LEFT JOIN teachers t ON ts.teacherId=t.id
+        LEFT JOIN rooms r ON ts.roomId=r.id
+        LEFT JOIN classes c ON ts.classId=c.id"""))
+    unscheduled = _build_unscheduled_list(conn)
+    conn.close()
+    html = _build_html(slot_data, unscheduled, view, week)
+    try:
+        import pdfkit
+        pdf = pdfkit.from_string(html, options={
+            'page-size': 'A3', 'orientation': 'Landscape',
+            'margin-top': '8mm', 'margin-bottom': '8mm',
+            'margin-left': '8mm', 'margin-right': '8mm',
+            'enable-local-file-access': '',
+            'no-outline': '',
+            'encoding': 'UTF-8',
+        })
+        return Response(pdf, mimetype='application/pdf',
+                        headers={'Content-Disposition': 'attachment;filename=timetable.pdf'})
+    except (ImportError, OSError, IOError) as e:
+        return Response(html, mimetype='text/html',
+                        headers={'Content-Disposition': 'attachment;filename=timetable.html'})
+
+
+def _build_html(slots, unscheduled, view, week='0'):
+    now = datetime.now().strftime('%Y-%m-%d %H:%M')
+    view_label = {'class': 'Class', 'teacher': 'Teacher', 'room': 'Room'}.get(view, 'Class')
+    week_label = {0: 'All Weeks', 1: 'Week A', 2: 'Week B'}.get(int(week), 'All Weeks')
+
     key = 'className' if view == 'class' else ('teacherName' if view == 'teacher' else 'roomName')
     by = {}
     for s in slots:
         e = s.get(key) or 'Unknown'
-        by.setdefault(e, {})
-        by[e][(s['dayId'], s['periodId'])] = s
-    day_names = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']
-    h = [
-        '<!DOCTYPE html><html><head><meta charset="UTF-8">',
-        '<title>Thorium234 Timetable</title><style>',
-        'body{font-family:Segoe UI,sans-serif;padding:20px;background:#f5f7fa}',
-        'h1{color:#1e3a5f;border-bottom:3px solid #f0a500;padding-bottom:8px}',
-        'h2{color:#1e3a5f;margin-top:24px}',
-        'table{border-collapse:collapse;width:100%;margin:8px 0}',
-        'th{background:#1e3a5f;color:#fff;padding:8px 12px;font-size:12px}',
-        'td{border:1px solid #dde;padding:6px;min-width:90px;text-align:center;font-size:11px}',
-        '.c{border-radius:4px;padding:5px;color:#fff;font-weight:600;line-height:1.5}',
-        '.locked{outline:2px solid #f0a500}',
-        '</style></head><body>',
-        '<h1>&#128197; Thorium234 — School Timetable</h1>',
-    ]
-    for entity, grid in sorted(by.items()):
-        h.append('<h2>%s</h2><table><tr><th>Period</th>' % entity)
-        h += ['<th>%s</th>' % d for d in day_names]
-        h.append('</tr>')
-        for pi in range(1, 9):
-            h.append('<tr><td style="background:#f0f4f8;font-weight:600">P%d</td>' % pi)
-            for di in range(1, 6):
+        by.setdefault(e, [])
+        by[e].append(s)
+
+    # Sort each entity's slots into a (dayId, periodId) lookup
+    entity_grids = {}
+    for entity, slot_list in sorted(by.items()):
+        grid = {}
+        for s in slot_list:
+            grid[(s['dayId'], s['periodId'])] = s
+        entity_grids[entity] = grid
+
+    h = []
+    h.append('''<!DOCTYPE html>
+<html><head><meta charset="UTF-8">
+<title>Timetable - ''' + view_label + ''' View</title>
+<style>
+  @page { margin: 12mm 10mm; }
+  * { box-sizing: border-box; }
+  body {
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    font-size: 9pt; color: #1e293b; margin: 0; padding: 0;
+    -webkit-print-color-adjust: exact; print-color-adjust: exact;
+  }
+  .report-header {
+    text-align: center; padding: 24px 0 16px; margin-bottom: 20px;
+    border-bottom: 3px solid #f0a500;
+  }
+  .report-header h1 {
+    font-size: 22pt; font-weight: 800; color: #1e3a5f; margin: 0 0 4px;
+  }
+  .report-header .meta {
+    font-size: 9pt; color: #64748b; margin: 4px 0;
+  }
+  .report-header .meta span { margin: 0 12px; }
+  .entity-section {
+    page-break-before: always; padding-top: 8px;
+  }
+  .entity-section:first-of-type { page-break-before: avoid; }
+  .entity-title {
+    font-size: 14pt; font-weight: 700; color: #1e3a5f;
+    margin: 0 0 10px; padding-bottom: 6px;
+    border-bottom: 2px solid #e2e8f0;
+  }
+  table {
+    width: 100%; border-collapse: collapse; table-layout: fixed;
+  }
+  thead th {
+    background: #1e3a5f; color: #fff; padding: 7px 4px;
+    font-size: 8pt; font-weight: 600; text-align: center;
+    border: 1px solid #1e3a5f; letter-spacing: 0.3px;
+  }
+  thead th.day-header { width: 10%; }
+  thead th.period-col { width: 8%; }
+  tbody td {
+    border: 1px solid #cbd5e1; padding: 5px 3px;
+    vertical-align: middle; text-align: center;
+    height: 48px;
+  }
+  tbody tr:nth-child(even) td { background: #f8fafc; }
+  td.period-label {
+    background: #f1f5f9; font-weight: 700; font-size: 8pt;
+    color: #475569; width: 8%;
+  }
+  td.period-label small { display: block; font-weight: 400; color: #94a3b8; font-size: 6.5pt; }
+  .slot-card {
+    display: inline-block; border-radius: 4px; padding: 4px 6px;
+    color: #fff; width: 100%; line-height: 1.4;
+  }
+  .slot-subj {
+    font-weight: 700; font-size: 8.5pt; display: block;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+  .slot-detail {
+    font-size: 6.5pt; display: block; opacity: 0.9;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+  .slot-detail i { font-style: normal; }
+  .week-badge {
+    display: inline-block; font-size: 6pt; font-weight: 700;
+    background: rgba(255,255,255,0.3); border-radius: 2px;
+    padding: 0 3px; margin-left: 2px; vertical-align: middle;
+  }
+  .locked-mark {
+    display: inline-block; font-size: 6pt; margin-left: 2px;
+  }
+  .empty-cell { color: #cbd5e1; font-size: 9pt; }
+
+  /* Unscheduled section */
+  .unsched-section { page-break-before: always; }
+  .unsched-title {
+    font-size: 14pt; font-weight: 700; color: #dc2626;
+    margin: 0 0 10px; padding-bottom: 6px;
+    border-bottom: 2px solid #fecaca;
+  }
+  .unsched-table th {
+    background: #dc2626; color: #fff; padding: 7px 8px;
+    font-size: 8pt; font-weight: 600; text-align: left;
+    border: 1px solid #dc2626;
+  }
+  .unsched-table td {
+    border: 1px solid #fecaca; padding: 6px 8px; font-size: 8pt;
+  }
+  .unsched-table tr:nth-child(even) td { background: #fef2f2; }
+
+  @media print {
+    .report-header { margin-bottom: 12px; }
+  }
+</style>
+</head><body>
+''')
+
+    h.append('<div class="report-header">')
+    h.append('<h1>School Timetable</h1>')
+    h.append('<div class="meta">')
+    h.append('<span>View: <strong>' + view_label + '</strong></span>')
+    h.append('<span>Week: <strong>' + week_label + '</strong></span>')
+    h.append('<span>Generated: <strong>' + now + '</strong></span>')
+    h.append('</div></div>')
+
+    for entity, grid in entity_grids.items():
+        h.append('<div class="entity-section">')
+        h.append('<div class="entity-title">' + view_label + ': ' + entity + '</div>')
+        h.append('<table><thead><tr>')
+        h.append('<th class="period-col">Period</th>')
+        for d in DAYS:
+            h.append('<th class="day-header">' + d['name'] + '</th>')
+        h.append('</tr></thead><tbody>')
+
+        for p in PERIODS:
+            pi = p['id']
+            h.append('<tr>')
+            h.append('<td class="period-label">P' + str(pi) + '<small>' + p['start'] + '</small></td>')
+            for d in DAYS:
+                di = d['id']
                 s = grid.get((di, pi))
                 if s:
                     col = s.get('subjectColor') or '#4A90D9'
-                    lk = ' locked' if s.get('locked') else ''
-                    h.append('<td><div class="c%s" style="background:%s">%s<br>'
-                              '<small>%s</small><br><small>%s</small></div></td>'
-                              % (lk, col, s['subjectName'], s['teacherName'], s.get('roomName', '')))
+                    wt = s.get('weekType', 0)
+                    locked = s.get('locked', False)
+                    wt_badge = ''
+                    if wt == 1:
+                        wt_badge = '<span class="week-badge">A</span>'
+                    elif wt == 2:
+                        wt_badge = '<span class="week-badge">B</span>'
+                    lock_mark = '&#128274; ' if locked else ''
+                    h.append('<td><div class="slot-card" style="background:' + col + '">')
+                    h.append('<span class="slot-subj">' + lock_mark + (s['subjectName'] or '') + wt_badge + '</span>')
+                    if view == 'class':
+                        h.append('<span class="slot-detail"><i>' + (s['teacherName'] or '') + '</i> &middot; ' + (s.get('roomName', '') or '') + '</span>')
+                    elif view == 'teacher':
+                        h.append('<span class="slot-detail"><i>' + (s['className'] or '') + '</i> &middot; ' + (s.get('roomName', '') or '') + '</span>')
+                    else:
+                        h.append('<span class="slot-detail"><i>' + (s['className'] or '') + '</i> &middot; ' + (s['teacherName'] or '') + '</span>')
+                    h.append('</div></td>')
                 else:
-                    h.append('<td style="color:#ccc">&#8212;</td>')
+                    h.append('<td><span class="empty-cell">&mdash;</span></td>')
             h.append('</tr>')
-        h.append('</table>')
+
+        h.append('</tbody></table></div>')
+
+    if unscheduled:
+        h.append('<div class="unsched-section">')
+        h.append('<div class="unsched-title">Unscheduled Lessons (' + str(len(unscheduled)) + ')</div>')
+        h.append('<table class="unsched-table"><thead><tr>')
+        h.append('<th style="width:25%">Class</th>')
+        h.append('<th style="width:25%">Subject</th>')
+        h.append('<th style="width:20%">Teacher</th>')
+        h.append('<th style="width:12%">Unscheduled Periods</th>')
+        h.append('<th style="width:18%">Reason</th>')
+        h.append('</tr></thead><tbody>')
+        for u in unscheduled:
+            h.append('<tr>')
+            h.append('<td><strong>' + (u.get('className') or '') + '</strong></td>')
+            h.append('<td>' + (u.get('subjectName') or '') + '</td>')
+            h.append('<td>' + (u.get('teacherName') or '') + '</td>')
+            h.append('<td>' + str(u.get('periodsCount', 0)) + '</td>')
+            h.append('<td>' + (u.get('reason') or 'Insufficient available slots') + '</td>')
+            h.append('</tr>')
+        h.append('</tbody></table></div>')
+
     h.append('</body></html>')
     return ''.join(h)
 
@@ -1043,6 +1434,296 @@ def get_conflicts():
     return jsonify(conflicts)
 
 
+# ── SUBSTITUTIONS ─────────────────────────────────────────────────────────────
+
+@app.route('/api/substitutions', methods=['GET'])
+def get_substitutions():
+    conn = get_db()
+    conn.execute("""
+        CREATE TABLE IF NOT EXISTS substitutions (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            originalTeacherId INTEGER NOT NULL,
+            substituteTeacherId INTEGER NOT NULL DEFAULT -1,
+            subjectId INTEGER NOT NULL,
+            classId INTEGER NOT NULL,
+            dayId INTEGER NOT NULL,
+            periodId INTEGER NOT NULL,
+            status TEXT NOT NULL DEFAULT 'PENDING',
+            reason TEXT DEFAULT '',
+            date TEXT DEFAULT ''
+        )""")
+    data = qrows(conn.execute("""
+        SELECT s.*,t1.name as origTeacherName,t2.name as subTeacherName,
+               sub.name as subjectName,c.name as className
+        FROM substitutions s
+        LEFT JOIN teachers t1 ON s.originalTeacherId=t1.id
+        LEFT JOIN teachers t2 ON s.substituteTeacherId=t2.id
+        LEFT JOIN subjects sub ON s.subjectId=sub.id
+        LEFT JOIN classes c ON s.classId=c.id
+        ORDER BY s.id DESC"""))
+    conn.close()
+    return jsonify(data)
+
+@app.route('/api/substitutions', methods=['POST'])
+def add_substitution():
+    d = request.json
+    conn = get_db()
+    conn.execute("""
+        CREATE TABLE IF NOT EXISTS substitutions (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            originalTeacherId INTEGER NOT NULL,
+            substituteTeacherId INTEGER NOT NULL DEFAULT -1,
+            subjectId INTEGER NOT NULL,
+            classId INTEGER NOT NULL,
+            dayId INTEGER NOT NULL,
+            periodId INTEGER NOT NULL,
+            status TEXT NOT NULL DEFAULT 'PENDING',
+            reason TEXT DEFAULT '',
+            date TEXT DEFAULT ''
+        )""")
+    c = conn.cursor()
+    c.execute("""INSERT INTO substitutions
+                 (originalTeacherId,substituteTeacherId,subjectId,classId,dayId,periodId,status,reason,date)
+                 VALUES(?,?,?,?,?,?,'PENDING',?,?)""",
+              (d['originalTeacherId'], d.get('substituteTeacherId', -1),
+               d['subjectId'], d['classId'], d['dayId'], d['periodId'],
+               d.get('reason', ''), d.get('date', '')))
+    conn.commit()
+    nid = c.lastrowid
+    conn.close()
+    return jsonify({'id': nid}), 201
+
+@app.route('/api/substitutions/<int:sid>/status', methods=['PUT'])
+def update_substitution_status(sid):
+    d = request.json
+    status = d.get('status', 'PENDING')
+    conn = get_db()
+    conn.execute("UPDATE substitutions SET status=? WHERE id=?", (status, sid))
+    conn.commit()
+    conn.close()
+    return jsonify({'ok': True})
+
+@app.route('/api/substitutions/<int:sid>', methods=['DELETE'])
+def delete_substitution(sid):
+    conn = get_db()
+    conn.execute("DELETE FROM substitutions WHERE id=?", (sid,))
+    conn.commit()
+    conn.close()
+    return jsonify({'ok': True})
+
+@app.route('/api/substitutions/available', methods=['GET'])
+def get_available_substitutes():
+    """Return teachers who are free for a given (day,period)."""
+    day = request.args.get('day', type=int)
+    period = request.args.get('period', type=int)
+    if not day or not period:
+        return jsonify({'error': 'day and period required'}), 400
+    conn = get_db()
+    busy = set()
+    for row in conn.execute("SELECT teacherId FROM timetable_slots WHERE dayId=? AND periodId=?", (day, period)):
+        busy.add(row['teacherId'])
+    for row in conn.execute("SELECT teacherId FROM teacher_constraints WHERE dayId=? AND periodId=?", (day, period)):
+        busy.add(row['teacherId'])
+    teachers = qrows(conn.execute("SELECT * FROM teachers ORDER BY name"))
+    conn.close()
+    available = [t for t in teachers if t['id'] not in busy]
+    return jsonify(available)
+
+@app.route('/api/substitutions/suggest', methods=['GET'])
+def suggest_substitute_teachers():
+    """Rank potential substitute teachers by subject match + availability + workload."""
+    absent = request.args.get('absentTeacherId', type=int)
+    subject_id = request.args.get('subjectId', type=int)
+    day = request.args.get('dayId', type=int)
+    period = request.args.get('periodId', type=int)
+    if not absent or not subject_id or not day or not period:
+        return jsonify({'error': 'absentTeacherId, subjectId, dayId, periodId required'}), 400
+
+    conn = get_db()
+
+    busy_teachers = set()
+    for row in conn.execute("SELECT teacherId FROM timetable_slots WHERE dayId=? AND periodId=?", (day, period)):
+        busy_teachers.add(row['teacherId'])
+    for row in conn.execute("SELECT teacherId FROM teacher_constraints WHERE dayId=? AND periodId=?", (day, period)):
+        busy_teachers.add(row['teacherId'])
+
+    teachers = qrows(conn.execute("SELECT * FROM teachers ORDER BY name"))
+    lessons = qrows(conn.execute("SELECT * FROM lessons"))
+
+    suggestions = []
+    for t in teachers:
+        if t['id'] == absent:
+            continue
+
+        score = 0
+        reasons = []
+
+        teaches_subject = any(
+            l['subjectId'] == subject_id and (l['teacherId'] == t['id'] or l.get('secondTeacherId') == t['id'])
+            for l in lessons
+        )
+        if teaches_subject:
+            score += 50
+            reasons.append('Teaches this subject')
+        else:
+            reasons.append('Does not teach this subject')
+
+        is_free = t['id'] not in busy_teachers
+        if is_free:
+            score += 30
+            reasons.append('Free at this period')
+        else:
+            reasons.append('Busy at this period')
+
+        lesson_count = sum(1 for l in lessons if l['teacherId'] == t['id'] or l.get('secondTeacherId') == t['id'])
+        workload_bonus = max(0, 20 - lesson_count)
+        score += workload_bonus
+
+        suggestions.append({
+            'teacherId': t['id'],
+            'teacherName': t['name'],
+            'score': score,
+            'reason': '; '.join(reasons)
+        })
+
+    suggestions.sort(key=lambda s: s['score'], reverse=True)
+    conn.close()
+    return jsonify(suggestions)
+
+# ── DIVISIONS ──────────────────────────────────────────────────────────────────
+
+@app.route('/api/divisions', methods=['GET'])
+def get_divisions():
+    conn = get_db()
+    conn.execute("""
+        CREATE TABLE IF NOT EXISTS divisions (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            name TEXT NOT NULL,
+            canRunInParallel INTEGER NOT NULL DEFAULT 1
+        )""")
+    # Also ensure classes have divisionId column
+    try:
+        conn.execute("ALTER TABLE classes ADD COLUMN divisionId INTEGER DEFAULT NULL")
+        conn.execute("ALTER TABLE classes ADD COLUMN groupId INTEGER DEFAULT NULL")
+        conn.commit()
+    except Exception:
+        pass
+    data = qrows(conn.execute("SELECT * FROM divisions ORDER BY name"))
+    # Attach class members
+    for d in data:
+        d['members'] = qrows(conn.execute(
+            "SELECT id,name FROM classes WHERE divisionId=? ORDER BY name", (d['id'],)))
+    conn.close()
+    return jsonify(data)
+
+@app.route('/api/divisions', methods=['POST'])
+def add_division():
+    d = request.json
+    name = (d.get('name') or '').strip()
+    if not name:
+        return jsonify({'error': 'Name required'}), 400
+    conn = get_db()
+    conn.execute("""
+        CREATE TABLE IF NOT EXISTS divisions (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            name TEXT NOT NULL,
+            canRunInParallel INTEGER NOT NULL DEFAULT 1
+        )""")
+    c = conn.cursor()
+    c.execute("INSERT INTO divisions (name,canRunInParallel) VALUES(?,?)",
+              (name, int(d.get('canRunInParallel', 1))))
+    conn.commit()
+    nid = c.lastrowid
+    conn.close()
+    return jsonify({'id': nid, 'name': name}), 201
+
+@app.route('/api/divisions/<int:did>', methods=['PUT'])
+def update_division(did):
+    d = request.json
+    name = (d.get('name') or '').strip()
+    if not name:
+        return jsonify({'error': 'Name required'}), 400
+    conn = get_db()
+    conn.execute("UPDATE divisions SET name=?,canRunInParallel=? WHERE id=?",
+                 (name, int(d.get('canRunInParallel', 1)), did))
+    conn.commit()
+    conn.close()
+    return jsonify({'ok': True})
+
+@app.route('/api/divisions/<int:did>', methods=['DELETE'])
+def delete_division(did):
+    conn = get_db()
+    conn.execute("DELETE FROM divisions WHERE id=?", (did,))
+    conn.execute("UPDATE classes SET divisionId=NULL WHERE divisionId=?", (did,))
+    conn.commit()
+    conn.close()
+    return jsonify({'ok': True})
+
+@app.route('/api/divisions/assign', methods=['POST'])
+def assign_class_to_division():
+    d = request.json
+    conn = get_db()
+    try:
+        conn.execute("ALTER TABLE classes ADD COLUMN divisionId INTEGER DEFAULT NULL")
+        conn.commit()
+    except Exception:
+        pass
+    conn.execute("UPDATE classes SET divisionId=? WHERE id=?",
+                 (d['divisionId'], d['classId']))
+    conn.commit()
+    conn.close()
+    return jsonify({'ok': True})
+
+@app.route('/api/divisions/unassign', methods=['POST'])
+def unassign_class_from_division():
+    d = request.json
+    conn = get_db()
+    conn.execute("UPDATE classes SET divisionId=NULL WHERE id=?", (d['classId'],))
+    conn.commit()
+    conn.close()
+    return jsonify({'ok': True})
+
+# ── VERSION COMPARISON ─────────────────────────────────────────────────────────
+
+@app.route('/api/versions/compare', methods=['POST'])
+def compare_versions():
+    d = request.json
+    v1_id = d.get('v1')
+    v2_id = d.get('v2')
+    if v1_id is None or v2_id is None or v1_id >= len(_VERSIONS) or v2_id >= len(_VERSIONS):
+        return jsonify({'error': 'Invalid version IDs'}), 400
+    v1 = _VERSIONS[v1_id]
+    v2 = _VERSIONS[v2_id]
+
+    # Index slots by (classId, dayId, periodId)
+    idx1 = {(s['classId'], s['dayId'], s['periodId']): s for s in v1['slots']}
+    idx2 = {(s['classId'], s['dayId'], s['periodId']): s for s in v2['slots']}
+
+    added = []
+    removed = []
+    changed = []
+    all_keys = set(idx1.keys()) | set(idx2.keys())
+    for key in all_keys:
+        s1 = idx1.get(key)
+        s2 = idx2.get(key)
+        if s1 and not s2:
+            removed.append(s1)
+        elif s2 and not s1:
+            added.append(s2)
+        elif s1 and s2 and (s1['teacherId'] != s2['teacherId'] or s1['subjectId'] != s2['subjectId']):
+            changed.append({'from': s1, 'to': s2})
+
+    return jsonify({
+        'v1': {'label': v1['label'], 'score': v1['score']},
+        'v2': {'label': v2['label'], 'score': v2['score']},
+        'added': len(added),
+        'removed': len(removed),
+        'changed': len(changed),
+        'addedSlots': added[:20],
+        'removedSlots': removed[:20],
+        'changedSlots': changed[:20],
+    })
+
 # ── ENTRY POINT ───────────────────────────────────────────────────────────────
 
 @app.route('/', defaults={'path': ''})
@@ -1051,6 +1732,220 @@ def index(path):
     return render_template('index.html')
 
 
+# ── TIMETABLE VERSIONS ─────────────────────────────────────────────────────────
+
+_VERSIONS = []  # list of {'label': str, 'timestamp': str, 'score': int, 'slots': list, 'unscheduled': list}
+
+@app.route('/api/versions', methods=['GET'])
+def get_versions():
+    summaries = []
+    for i, v in enumerate(_VERSIONS):
+        summaries.append({
+            'id': i,
+            'label': v['label'],
+            'timestamp': v['timestamp'],
+            'score': v['score'],
+            'slotCount': len(v['slots']),
+            'unscheduledCount': len(v['unscheduled']),
+        })
+    return jsonify(summaries)
+
+@app.route('/api/versions', methods=['POST'])
+def save_version():
+    d = request.json or {}
+    label = d.get('label', '').strip() or 'Version %d' % (len(_VERSIONS) + 1)
+    conn = get_db()
+    slots = qrows(conn.execute("SELECT * FROM timetable_slots"))
+    # Get current unscheduled from last generation
+    unscheduled = _build_unscheduled_list(conn) if slots else []
+    conn.close()
+    _VERSIONS.append({
+        'label': label,
+        'timestamp': datetime.utcnow().strftime('%Y-%m-%dT%H:%M:%SZ'),
+        'score': 0,
+        'slots': slots,
+        'unscheduled': unscheduled,
+    })
+    return jsonify({'id': len(_VERSIONS) - 1, 'label': label}), 201
+
+@app.route('/api/versions/<int:vid>', methods=['GET'])
+def get_version(vid):
+    if vid < 0 or vid >= len(_VERSIONS):
+        return jsonify({'error': 'Version not found'}), 404
+    return jsonify(_VERSIONS[vid])
+
+@app.route('/api/versions/<int:vid>/restore', methods=['POST'])
+def restore_version(vid):
+    if vid < 0 or vid >= len(_VERSIONS):
+        return jsonify({'error': 'Version not found'}), 404
+    ver = _VERSIONS[vid]
+    conn = get_db()
+    conn.execute("DELETE FROM timetable_slots")
+    for s in ver['slots']:
+        conn.execute("""INSERT INTO timetable_slots
+                        (classId,dayId,periodId,subjectId,teacherId,roomId,locked,weekType)
+                        VALUES(?,?,?,?,?,?,?,?)""",
+                     (s['classId'], s['dayId'], s['periodId'],
+                      s.get('subjectId'), s.get('teacherId'), s.get('roomId'),
+                      s.get('locked', 0), s.get('weekType', 0)))
+    conn.commit()
+    conn.close()
+    return jsonify({'message': 'Restored version: ' + ver['label']})
+
+
+def _build_unscheduled_list(conn):
+    """Helper: build unscheduled list from the DB state."""
+    lessons = qrows(conn.execute("""
+        SELECT l.*, c.name as className, s.name as subjectName,
+               t.name as teacherName
+        FROM lessons l
+        LEFT JOIN classes c ON l.classId=c.id
+        LEFT JOIN subjects s ON l.subjectId=s.id
+        LEFT JOIN teachers t ON l.teacherId=t.id
+    """))
+    # Count scheduled periods per lesson
+    scheduled_counts = {}
+    for row in qrows(conn.execute(
+        "SELECT classId, subjectId, COUNT(*) as cnt FROM timetable_slots GROUP BY classId, subjectId"
+    )):
+        key = (row['classId'], row['subjectId'])
+        scheduled_counts[key] = row['cnt']
+    unscheduled = []
+    for l in lessons:
+        key = (l['classId'], l['subjectId'])
+        scheduled = scheduled_counts.get(key, 0)
+        if scheduled < l['periodsPerWeek']:
+            unscheduled.append({
+                'subjectName': l.get('subjectName', ''),
+                'className': l.get('className', ''),
+                'teacherName': l.get('teacherName', ''),
+                'periodsCount': l['periodsPerWeek'] - scheduled,
+            })
+    return unscheduled
+
+
+# ── C++ SOLVER BRIDGE ──────────────────────────────────────────────────────────
+
+import subprocess as _subprocess
+import json as _json
+
+_binary_path = os.environ.get('CPP_SOLVER_PATH') or os.path.join(
+    os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
+    'build_cmake', 'timetableGen'
+)
+
+@app.route('/api/solve', methods=['POST'])
+def solve_with_cpp():
+    if not os.path.exists(_binary_path):
+        return jsonify({'error': 'C++ solver binary not found at ' + _binary_path}), 500
+    try:
+        result = _subprocess.run(
+            [_binary_path, '--solve-from-db'],
+            capture_output=True, text=True, timeout=120,
+            cwd=os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        )
+        if result.returncode != 0:
+            stderr = result.stderr.strip()
+            return jsonify({'error': stderr or 'Solver exited with code %d' % result.returncode}), 500
+        output = _json.loads(result.stdout.strip())
+        return jsonify(output)
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+
+# ── SAMPLE DATA ──────────────────────────────────────────────────────────────
+
+@app.route('/api/sample-school', methods=['GET'])
+def sample_school():
+    """Return realistic Kenyan secondary school data as a config template."""
+    import sys
+    sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+    import timetable_gen as tg
+    return jsonify(tg.get_sample_school())
+
+
+# ── DYNAMIC TIMETABLE GENERATION ─────────────────────────────────────────────
+
+@app.route('/api/generate-timetable', methods=['POST'])
+def generate_timetable():
+    """Generate a timetable from a fully user-defined configuration.
+
+    Each class can have its own lesson_duration_minutes to support
+    streams with different period lengths (e.g., Form 4: 60min, others: 40min).
+    """
+    import sys
+    sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+    import timetable_gen as tg
+    import pdf_generator as pg
+    import tempfile
+
+    data = request.json
+    if not data:
+        return jsonify({'error': 'Empty request body'}), 400
+
+    try:
+        parsed = tg.parse_payload(data)
+    except Exception as e:
+        return jsonify({'error': 'Invalid configuration: ' + str(e)}), 400
+
+    try:
+        result = tg.solve_timetable(parsed)
+    except Exception as e:
+        return jsonify({'error': 'Solver error: ' + str(e)}), 500
+
+    slots = result.get('slots', [])
+    unscheduled = result.get('unscheduled', [])
+
+    days = parsed['days']
+    school_name = data.get('school', {}).get(
+        'name', 'School Timetable')
+
+    output_format = request.args.get('format', 'pdf')
+    if output_format == 'pdf' and pg.HAS_REPORTLAB:
+        tmp = tempfile.NamedTemporaryFile(suffix='.pdf', delete=False)
+        tmp.close()
+        try:
+            success = pg.generate_timetable_pdf(
+                slot_data=slots,
+                days=days,
+                periods=[],
+                unscheduled=unscheduled,
+                output_path=tmp.name,
+                title='Class Timetables',
+                school_name=school_name,
+                class_timelines=parsed.get('class_timelines', {}),
+            )
+            if success:
+                with open(tmp.name, 'rb') as f:
+                    pdf_data = f.read()
+                os.unlink(tmp.name)
+                return Response(
+                    pdf_data,
+                    mimetype='application/pdf',
+                    headers={
+                        'Content-Disposition':
+                        'attachment;filename=timetable_generated.pdf'
+                    },
+                )
+        except Exception:
+            import traceback
+            traceback.print_exc()
+        finally:
+            if os.path.exists(tmp.name):
+                os.unlink(tmp.name)
+
+    return jsonify({
+        'score': result.get('score', 0),
+        'slots': len(slots),
+        'unscheduled': len(unscheduled),
+        'slots_data': slots[:50],
+        'unscheduled_data': unscheduled[:20],
+    })
+
+
+# ── ENTRY POINT ───────────────────────────────────────────────────────────────
+
 if __name__ == '__main__':
     init_db()
-    app.run(host='0.0.0.0', port=5000, debug=False)
+    port = int(os.environ.get('FLASK_PORT', '5000'))
+    app.run(host='127.0.0.1', port=port, debug=False)

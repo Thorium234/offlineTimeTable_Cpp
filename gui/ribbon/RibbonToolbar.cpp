@@ -22,6 +22,17 @@ void RibbonToolbar::setupUi() {
         layout->addWidget(sep);
     };
 
+    // Tab navigation: Home | Timetable
+    homeBtn = createButton(tr("🏠 Home"), tr("Go to dashboard home"));
+    homeBtn->setObjectName("TabBtn");
+    layout->addWidget(homeBtn);
+
+    timetableTabBtn = createButton(tr("📅 Timetable"), tr("Go to timetable view"));
+    timetableTabBtn->setObjectName("TabBtn");
+    layout->addWidget(timetableTabBtn);
+
+    addSeparator();
+
     // Generate button (prominent orange)
     generateBtn = new QPushButton(tr("  ▶  Generate"), this);
     generateBtn->setObjectName("GenerateBtn");
@@ -36,6 +47,10 @@ void RibbonToolbar::setupUi() {
     layout->addWidget(exportCsvBtn);
     exportHtmlBtn = createButton(tr("HTML"), tr("Export timetable to HTML"));
     layout->addWidget(exportHtmlBtn);
+    exportPdfBtn = createButton(tr("PDF"), tr("Export timetable to PDF"));
+    layout->addWidget(exportPdfBtn);
+    printBtn = createButton(tr("🖨 Print"), tr("Print timetable preview"));
+    layout->addWidget(printBtn);
 
     addSeparator();
 
@@ -70,9 +85,49 @@ void RibbonToolbar::setupUi() {
 
     addSeparator();
 
+    // Undo / Redo
+    undoBtn = createButton(tr("↩ Undo"), tr("Undo last manual change"));
+    undoBtn->setEnabled(false);
+    layout->addWidget(undoBtn);
+
+    redoBtn = createButton(tr("↪ Redo"), tr("Redo last undone change"));
+    redoBtn->setEnabled(false);
+    layout->addWidget(redoBtn);
+
+    addSeparator();
+
+    // Lock toggle
+    lockBtn = createButton(tr("🔒 Lock"), tr("Toggle lock on selected slot"));
+    layout->addWidget(lockBtn);
+
+    // Constraint/block mode toggle
+    constraintsBtn = new QPushButton(tr("🚫 Block"), this);
+    constraintsBtn->setToolTip(tr("Toggle constraint blocking mode (click cells to block teacher)"));
+    constraintsBtn->setFixedHeight(30);
+    constraintsBtn->setCheckable(true);
+    constraintsBtn->setStyleSheet(
+        "QPushButton { background: #2a2a2a; border: 1px solid #444; "
+        "border-radius: 3px; padding: 4px 14px; color: #ddd; font-size: 9pt; }"
+        "QPushButton:checked { background: #c0392b; border-color: #e74c3c; color: #fff; }"
+        "QPushButton:hover:!checked { background: #333; }"
+    );
+    layout->addWidget(constraintsBtn);
+
+    addSeparator();
+
     // Benchmark
     benchmarkBtn = createButton(tr("Benchmark"), tr("Run performance benchmark"));
     layout->addWidget(benchmarkBtn);
+
+    addSeparator();
+
+    // Substitutions & Divisions & Violations
+    substitutionsBtn = createButton(tr("Substitutions"), tr("Manage teacher substitutions"));
+    layout->addWidget(substitutionsBtn);
+    divisionsBtn = createButton(tr("Divisions"), tr("Manage class divisions/groups"));
+    layout->addWidget(divisionsBtn);
+    violationsBtn = createButton(tr("Violations"), tr("Show constraint violations and suggestions"));
+    layout->addWidget(violationsBtn);
 
     layout->addStretch();
 
@@ -86,10 +141,21 @@ void RibbonToolbar::setupUi() {
     layout->addWidget(statusLabel);
 
     // Connections
+    connect(homeBtn, &QPushButton::clicked, this, &RibbonToolbar::homeClicked);
+    connect(timetableTabBtn, &QPushButton::clicked, this, &RibbonToolbar::timetableClicked);
     connect(generateBtn, &QPushButton::clicked, this, &RibbonToolbar::generateClicked);
     connect(exportCsvBtn, &QPushButton::clicked, this, &RibbonToolbar::exportCsvClicked);
     connect(exportHtmlBtn, &QPushButton::clicked, this, &RibbonToolbar::exportHtmlClicked);
+    connect(exportPdfBtn, &QPushButton::clicked, this, &RibbonToolbar::exportPdfClicked);
+    connect(printBtn, &QPushButton::clicked, this, &RibbonToolbar::printPreviewClicked);
+    connect(undoBtn, &QPushButton::clicked, this, &RibbonToolbar::undoClicked);
+    connect(redoBtn, &QPushButton::clicked, this, &RibbonToolbar::redoClicked);
+    connect(lockBtn, &QPushButton::clicked, this, &RibbonToolbar::lockClicked);
+    connect(constraintsBtn, &QPushButton::toggled, this, &RibbonToolbar::constraintsModeToggled);
     connect(benchmarkBtn, &QPushButton::clicked, this, &RibbonToolbar::benchmarkClicked);
+    connect(substitutionsBtn, &QPushButton::clicked, this, &RibbonToolbar::substitutionsClicked);
+    connect(divisionsBtn, &QPushButton::clicked, this, &RibbonToolbar::divisionsClicked);
+    connect(violationsBtn, &QPushButton::clicked, this, &RibbonToolbar::violationsClicked);
     connect(viewModeGroup, QOverload<int>::of(&QButtonGroup::idClicked), this, [this](int id) {
         emit viewModeChanged(static_cast<ViewMode>(id));
     });
@@ -118,4 +184,12 @@ void RibbonToolbar::setStatusText(const QString &text) {
 void RibbonToolbar::setGenerationRunning(bool running) {
     generateBtn->setEnabled(!running);
     generateBtn->setText(running ? tr("  ⏳ Generating...") : tr("  ▶  Generate"));
+}
+
+void RibbonToolbar::setUndoEnabled(bool enabled) {
+    undoBtn->setEnabled(enabled);
+}
+
+void RibbonToolbar::setRedoEnabled(bool enabled) {
+    redoBtn->setEnabled(enabled);
 }

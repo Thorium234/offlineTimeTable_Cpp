@@ -1,0 +1,30 @@
+---
+Checks: >
+  clang-diagnostic-*,
+  clang-analyzer-*,
+  bugprone-*,
+  performance-*,
+  readability-*,
+  modernize-*,
+  -modernize-use-trailing-return-type,
+  -readability-identifier-length,
+  -readability-uppercase-literal-suffix,
+  -readability-magic-numbers,
+  -bugprone-easily-swappable-parameters,
+  -modernize-pass-by-value,
+  -modernize-return-braced-init-list,
+WarningsAsErrors: >
+  clang-diagnostic-*,
+  bugprone-unchecked-optional-access,
+  bugprone-unused-raii,
+CheckOptions:
+  readability-identifier-naming.ClassCase: CamelCase
+  readability-identifier-naming.StructCase: CamelCase
+  readability-identifier-naming.EnumCase: CamelCase
+  readability-identifier-naming.FunctionCase: camelBack
+  readability-identifier-naming.VariableCase: camelBack
+  readability-identifier-naming.MemberCase: camelBack
+  readability-identifier-naming.ParameterCase: camelBack
+  readability-identifier-naming.ConstantCase: UPPER_CASE
+  readability-identifier-naming.PrivateMemberPrefix: '_'
+...

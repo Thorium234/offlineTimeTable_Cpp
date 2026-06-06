@@ -113,10 +113,48 @@ int TimetableEvaluator::calculateScore(const Timetable& timetable, const DataMan
         }
     }
 
-    // 4. Unscheduled Lessons Penalty
+    // 4. Even Subject Distribution Across Days (aSc-style)
+    // Reward even spread: for each class, for each subject, calculate how many days
+    // it's scheduled on vs total days. Clustered = worse.
+    for (const auto& pair : timetable.schedules) {
+        int classId = pair.first;
+        (void)classId;
+        const auto& grid = pair.second;
+        // Build subject->day count
+        std::map<int, int> subjDayCount;
+        std::map<int, int> subjTotalCount;
+        for (int d = 0; d < numDays; ++d) {
+            std::map<int, bool> seenOnDay;
+            for (int p = 0; p < numPeriods; ++p) {
+                if (d < static_cast<int>(grid.size()) && p < static_cast<int>(grid[d].size())) {
+                    if (!grid[d][p].isEmpty()) {
+                        int sid = grid[d][p].subjectId;
+                        subjTotalCount[sid]++;
+                        if (!seenOnDay[sid]) {
+                            seenOnDay[sid] = true;
+                            subjDayCount[sid]++;
+                        }
+                    }
+                }
+            }
+        }
+        // Penalize if a subject could use more days but is clustered
+        for (const auto& sc : subjTotalCount) {
+            int sid = sc.first;
+            int total = sc.second;
+            int daysUsed = subjDayCount[sid];
+            int maxPossibleDays = std::min(numDays, total);
+            if (daysUsed < maxPossibleDays) {
+                // Clustered: penalty proportional to how many days could be better used
+                score -= weights.distributionWeight * (maxPossibleDays - daysUsed);
+            }
+        }
+    }
+
+    // 5. Unscheduled Lessons Penalty
     score -= static_cast<int>(timetable.unscheduledLessons.size()) * weights.unscheduledWeight;
 
-    // 5. Teacher Preferences
+    // 6. Teacher Preferences
     for (const auto& pair : timetable.schedules) {
         const auto& grid = pair.second;
         for (int d = 0; d < numDays; ++d) {

@@ -159,3 +159,41 @@ QMessageBox QLabel {
 QMessageBox QPushButton {
     min-width: 80px;
 }
+
+/* ─── Dashboard ─── */
+
+#TabBtn {
+    background-color: rgba(50, 50, 50, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 4px;
+    padding: 6px 16px;
+    color: #cccccc;
+    font-weight: bold;
+    font-size: 9pt;
+    min-height: 30px;
+}
+
+#TabBtn:hover {
+    background-color: #ff6600;
+    border-color: #ff7711;
+    color: #ffffff;
+}
+
+/* Unscheduled section in dashboard */
+#UnscheduledSection {
+    background-color: rgba(244, 67, 54, 0.08);
+    border: 1px solid rgba(244, 67, 54, 0.25);
+    border-radius: 8px;
+}
+
+/* Metric card frame */
+#MetricCard {
+    background-color: rgba(35, 35, 35, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 10px;
+}
+
+#MetricCard:hover {
+    border-color: #ff6600;
+    background-color: rgba(45, 45, 45, 0.8);
+}

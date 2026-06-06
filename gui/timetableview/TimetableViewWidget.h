@@ -2,12 +2,14 @@
 
 #include <QWidget>
 #include <QShowEvent>
-#include <QTableWidget>
-#include <QComboBox>
+#include <QGraphicsView>
 #include <QLabel>
+#include <QComboBox>
 #include "../../services/DataManager.h"
 #include "../../timetable/Timetable.h"
 #include "../ribbon/RibbonToolbar.h"
+
+class TimetableScene;
 
 class TimetableViewWidget : public QWidget {
     Q_OBJECT
@@ -15,28 +17,33 @@ public:
     explicit TimetableViewWidget(DataManager *dm, QWidget *parent = nullptr);
     void setTimetable(const Timetable &t);
     void setViewMode(ViewMode mode);
+    ViewMode currentViewMode() const { return currentMode; }
     void setViewSelection(const QString &type, int id);
+    void setConstraintMode(bool enabled);
+    bool isConstraintMode() const { return constraintMode; }
     void refresh();
+
+signals:
+    void undoRedoStateChanged();
 
 protected:
     void showEvent(QShowEvent *event) override;
 
 private:
     void setupUi();
-    void populateGrid();
-    void populateClassGrid();
-    void populateTeacherGrid();
-    void populateRoomGrid();
-    void onCellClicked(int row, int col);
-    QColor colorForTeacher(int teacherId) const;
-    QColor colorForSubject(int subjectId) const;
+    void onCardMoved(class LessonCardItem *item, int fromDay, int fromPeriod,
+                     int toDay, int toPeriod);
+    void onCardLockToggled(class LessonCardItem *item);
 
     DataManager *dm;
     Timetable timetable;
     ViewMode currentMode = ViewMode::CLASS;
     int selectedEntityId = -1;
+    bool constraintMode = false;
 
+    QGraphicsView *view;
+    TimetableScene *scene;
     QLabel *viewTitle;
-    QTableWidget *gridWidget;
+    QComboBox *weekCombo;
     QWidget *emptyState;
 };

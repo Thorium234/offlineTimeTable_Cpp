@@ -1,4 +1,5 @@
 #include "BacktrackingSolver.h"
+#include "DataManager.h"
 #include "TimetableEvaluator.h"
 #include "FeasibilityChecker.h"
 #include <iostream>
@@ -79,8 +80,15 @@ int BacktrackingSolver::getLCVScore(int unitIdx, int d, int p,
 
         const auto& other = units[u];
 
-        // Only overlaps/conflicts if sharing class or teacher
-        if (other.classId == placedUnit.classId || other.teacherId == placedUnit.teacherId) {
+        // Conflicts if sharing any class or teacher
+        bool sharesClass = (other.classId == placedUnit.classId);
+        for (int ccid : placedUnit.combinedClassIds) {
+            if (other.classId == ccid) { sharesClass = true; break; }
+        }
+        bool sharesTeacher = (other.teacherId == placedUnit.teacherId ||
+                             (placedUnit.secondTeacherId >= 0 && other.teacherId == placedUnit.secondTeacherId));
+
+        if (sharesClass || sharesTeacher) {
             int k_other = other.blockSize;
             const auto& dom = domainTracker.getDomain(u);
             for (const auto& slot : dom) {
@@ -119,7 +127,7 @@ bool BacktrackingSolver::backtrack(int placedCount,
         stats.maxRecursionDepth = depth;
     }
 
-    if (stats.nodesVisited > MAX_STATES) {
+    if (stats.nodesVisited > m_maxStates) {
         return false;
     }
 
@@ -149,28 +157,46 @@ bool BacktrackingSolver::backtrack(int placedCount,
     const auto& unit = units[chosenUnitIdx];
     int k = unit.blockSize;
 
-    // Value ordering using Least Constraining Value (LCV)
+    // Value ordering using Least Constraining Value (LCV) + gap-awareness
     struct ValueCandidate {
         int d, p;
         int lcvScore;
+        int gapCost;
     };
     std::vector<ValueCandidate> candidates;
     const auto& domain = domainTracker.getDomain(chosenUnitIdx);
     for (const auto& slot : domain) {
         int lcv = getLCVScore(chosenUnitIdx, slot.first, slot.second, units, placed, domainTracker, numPeriods);
-        candidates.push_back({slot.first, slot.second, lcv});
+
+        // Soft score: estimate gap cost if placed here for the teacher (week-aware)
+        int gapCost = 0;
+        int wt = unit.weekType;
+        int before = (slot.second > 0 && tracker.isBusy(ResourceType::TEACHER, unit.teacherId, slot.first, slot.second - 1, wt)) ? 0 : 1;
+        int afterBlock = slot.second + k;
+        int after = (afterBlock < numPeriods && tracker.isBusy(ResourceType::TEACHER, unit.teacherId, slot.first, afterBlock, wt)) ? 0 : 1;
+        gapCost = before + after;
+
+        candidates.push_back({slot.first, slot.second, lcv, gapCost});
     }
 
-    // Sort by LCV score ascending (least constraining first)
+    // Sort by LCV first (hard constraint), then gap cost (soft optimization)
     std::sort(candidates.begin(), candidates.end(), [](const ValueCandidate& a, const ValueCandidate& b) {
-        return a.lcvScore < b.lcvScore;
+        if (a.lcvScore != b.lcvScore) return a.lcvScore < b.lcvScore;
+        return a.gapCost < b.gapCost; // prefer placements that fill/avoid gaps
     });
 
     for (const auto& cand : candidates) {
+        // Build all class and teacher IDs
+        std::vector<int> allClassIds = {unit.classId};
+        allClassIds.insert(allClassIds.end(), unit.combinedClassIds.begin(), unit.combinedClassIds.end());
+        std::vector<int> allTeacherIds = {unit.teacherId};
+        if (unit.secondTeacherId >= 0) allTeacherIds.push_back(unit.secondTeacherId);
+
         int d = cand.d;
         int p = cand.p;
 
-        // Check if all slots in the block are free
+        // Check if all slots in the block are free (week-aware, multi-class, multi-teacher)
+        int wt = unit.weekType;
         bool canPlace = true;
         for (int offset = 0; offset < k; ++offset) {
             int currentP = p + offset;
@@ -182,67 +208,68 @@ bool BacktrackingSolver::backtrack(int placedCount,
                 bool blocked = false;
                 switch (fe.recurrence) {
                     case RecurrenceType::DAILY:
-                        // Blocks this period on ALL days
                         blocked = (fe.periodId == periodId);
                         break;
                     case RecurrenceType::WEEKLY:
                     case RecurrenceType::NONE:
-                        // Blocks only specific (day, period)
                         blocked = (fe.dayId == dayId && fe.periodId == periodId);
                         break;
                     default:
                         throw std::logic_error("Unknown recurrence type");
                 }
-                if (blocked) {
-                    canPlace = false;
-                    break;
+                if (blocked) { canPlace = false; break; }
+            }
+            if (!canPlace) break;
+
+            // Check all classes
+            for (int cid : allClassIds) {
+                if (tracker.isBusy(ResourceType::CLASS, cid, d, currentP, wt)) {
+                    canPlace = false; break;
                 }
             }
             if (!canPlace) break;
 
-            // Class, Teacher, or unavailability checks
-            if (tracker.isBusy(ResourceType::CLASS, unit.classId, d, currentP) ||
-                tracker.isBusy(ResourceType::TEACHER, unit.teacherId, d, currentP) ||
-                dm.isTeacherUnavailable(unit.teacherId, dayId, periodId)) {
-                canPlace = false;
-                break;
+            // Check all teachers
+            for (int tid : allTeacherIds) {
+                if (tracker.isBusy(ResourceType::TEACHER, tid, d, currentP, wt) ||
+                    dm.isTeacherUnavailable(tid, dayId, periodId)) {
+                    canPlace = false; break;
+                }
             }
+            if (!canPlace) break;
         }
         if (!canPlace) continue;
 
         // ==== Check Education Block (Earliest/Latest Period) ====
         int earliestPeriod = getClassEarliestPeriod(dm, unit.classId);
         int latestPeriod = getClassLatestPeriod(dm, unit.classId);
-        
+
         if (earliestPeriod >= 0 && p < earliestPeriod) {
-            continue; // Block starts before earliest allowed period
+            continue;
         }
         if (latestPeriod >= 0 && p + k - 1 > latestPeriod) {
-            continue; // Block ends after latest allowed period
+            continue;
         }
 
-        // ==== Check Teacher Max Consecutive ====
-        int teacherMaxConsecutive = getTeacherMaxConsecutive(dm, unit.teacherId);
-        if (teacherMaxConsecutive > 0) {
-            // Count existing consecutive periods before p
-            int left = 0;
-            for (int i = p - 1; i >= 0 && tracker.isBusy(ResourceType::TEACHER, unit.teacherId, d, i); --i) {
-                left++;
-            }
-            // Count how many periods in the block
-            int blockLength = k;
-            // Count existing consecutive periods after the block
-            int right = 0;
-            int afterBlock = p + k;
-            for (int i = afterBlock; i < numPeriods && tracker.isBusy(ResourceType::TEACHER, unit.teacherId, d, i); ++i) {
-                right++;
-            }
-            // Total consecutive if we place here
-            int totalConsecutive = left + blockLength + right;
-            if (totalConsecutive > teacherMaxConsecutive) {
-                continue;
+        // ==== Check Teacher Max Consecutive for both teachers (week-aware) ====
+        bool consecOk = true;
+        for (int tid : allTeacherIds) {
+            int tmc = getTeacherMaxConsecutive(dm, tid);
+            if (tmc > 0) {
+                int left = 0;
+                for (int i = p - 1; i >= 0 && tracker.isBusy(ResourceType::TEACHER, tid, d, i, wt); --i) {
+                    left++;
+                }
+                int right = 0;
+                int afterBlock = p + k;
+                for (int i = afterBlock; i < numPeriods && tracker.isBusy(ResourceType::TEACHER, tid, d, i, wt); ++i) {
+                    right++;
+                }
+                int totalConsecutive = left + k + right;
+                if (totalConsecutive > tmc) { consecOk = false; break; }
             }
         }
+        if (!consecOk) continue;
 
         // Check maxPerDay constraint
         if (unit.maxPerDay > 0) {
@@ -250,13 +277,13 @@ bool BacktrackingSolver::backtrack(int placedCount,
             if (alreadyOnDay + k > unit.maxPerDay) continue;
         }
 
-        // Find a room available and of sufficient capacity for all periods of the block
+        // Find a room available (week-aware)
         int allocatedRoomId = -1;
         for (const auto& room : dm.rooms) {
             if (room.roomTypeId == unit.reqRoomTypeId && room.capacity >= unit.studentCount) {
                 bool roomFree = true;
                 for (int offset = 0; offset < k; ++offset) {
-                    if (tracker.isBusy(ResourceType::ROOM, room.id, d, p + offset)) {
+                    if (tracker.isBusy(ResourceType::ROOM, room.id, d, p + offset, wt)) {
                         roomFree = false;
                         break;
                     }
@@ -269,24 +296,26 @@ bool BacktrackingSolver::backtrack(int placedCount,
         }
 
         if (allocatedRoomId != -1) {
-            // Apply placement
+            // Apply placement (multi-class, multi-teacher, week-aware)
             for (int offset = 0; offset < k; ++offset) {
-                timetable.setSlot(unit.classId, d, p + offset, unit.subjectId, unit.teacherId, allocatedRoomId);
-                tracker.markBusy(ResourceType::CLASS, unit.classId, d, p + offset, true);
-                tracker.markBusy(ResourceType::TEACHER, unit.teacherId, d, p + offset, true);
-                tracker.markBusy(ResourceType::ROOM, allocatedRoomId, d, p + offset, true);
+                for (int cid : allClassIds) {
+                    timetable.setSlot(cid, d, p + offset, unit.subjectId, unit.teacherId, allocatedRoomId, wt);
+                    tracker.markBusy(ResourceType::CLASS, cid, d, p + offset, wt);
+                }
+                for (int tid : allTeacherIds) {
+                    tracker.markBusy(ResourceType::TEACHER, tid, d, p + offset, wt);
+                }
+                tracker.markBusy(ResourceType::ROOM, allocatedRoomId, d, p + offset, wt);
             }
             placed[chosenUnitIdx] = true;
             assignedSlots[chosenUnitIdx] = d * numPeriods + p;
 
-            // Snapshot domains
             auto domainsSnapshot = domainTracker.getSnapshot();
 
-            // Propagate constraints
             bool feasible = domainTracker.propagate(chosenUnitIdx, d, p, units, placed, numPeriods);
 
             if (feasible) {
-                if (backtrack(placedCount + 1, units, placed, dm, tracker, domainTracker, 
+                if (backtrack(placedCount + 1, units, placed, dm, tracker, domainTracker,
                               timetable, assignedSlots, numDays, numPeriods, stats, depth + 1)) {
                     return true;
                 }
@@ -294,14 +323,17 @@ bool BacktrackingSolver::backtrack(int placedCount,
                 stats.prunedBranches++;
             }
 
-            // Restore domains snapshot
             domainTracker.restoreSnapshot(domainsSnapshot);
 
-            // Undo placement
+            // Undo placement (multi-class, multi-teacher, week-aware)
             for (int offset = 0; offset < k; ++offset) {
-                timetable.clearSlot(unit.classId, d, p + offset);
-                tracker.markBusy(ResourceType::CLASS, unit.classId, d, p + offset, false);
-                tracker.markBusy(ResourceType::TEACHER, unit.teacherId, d, p + offset, false);
+                for (int cid : allClassIds) {
+                    timetable.clearSlot(cid, d, p + offset);
+                    tracker.markBusy(ResourceType::CLASS, cid, d, p + offset, false);
+                }
+                for (int tid : allTeacherIds) {
+                    tracker.markBusy(ResourceType::TEACHER, tid, d, p + offset, false);
+                }
                 tracker.markBusy(ResourceType::ROOM, allocatedRoomId, d, p + offset, false);
             }
             placed[chosenUnitIdx] = false;
@@ -312,7 +344,8 @@ bool BacktrackingSolver::backtrack(int placedCount,
     return false;
 }
 
-Timetable BacktrackingSolver::solve(const DataManager& dm, SolverStats& stats) {
+Timetable BacktrackingSolver::solve(const DataManager& dm, SolverStats& stats, const SolverOptions& options) {
+    m_maxStates = options.maxStates;
     Timetable timetable;
     int numDays = static_cast<int>(dm.days.size());
     int numPeriods = static_cast<int>(dm.periods.size());
@@ -346,12 +379,15 @@ Timetable BacktrackingSolver::solve(const DataManager& dm, SolverStats& stats) {
             units.push_back(LessonUnit{
                 static_cast<int>(i),
                 lesson.teacherId,
+                lesson.secondTeacherId,
                 lesson.subjectId,
                 lesson.classId,
+                lesson.combinedClassIds,
                 reqRoomTypeId,
                 studentCount,
                 curSize,
-                lesson.maxPerDay
+                lesson.maxPerDay,
+                lesson.weekType
             });
             periodsLeft -= curSize;
         }

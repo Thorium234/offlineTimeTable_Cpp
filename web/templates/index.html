@@ -111,6 +111,32 @@
           <div id="list-lessons"></div>
         </div>
       </div>
+      <!-- Substitutions -->
+      <div class="sp" id="sp-substitutions">
+        <div class="sp-hd" onclick="App.togglePanel('substitutions')">
+          <i class="ico fa-solid fa-people-arrows"></i>
+          <span class="ttl">Substitutions</span>
+          <span class="cnt" id="cnt-substitutions">0</span>
+          <i class="chev fa-solid fa-chevron-down"></i>
+        </div>
+        <div class="sp-body">
+          <button class="sp-add" onclick="App.openSubstitutionDialog()"><i class="fa-solid fa-plus"></i> Request Substitution</button>
+          <div id="list-substitutions"></div>
+        </div>
+      </div>
+      <!-- Divisions -->
+      <div class="sp" id="sp-divisions">
+        <div class="sp-hd" onclick="App.togglePanel('divisions')">
+          <i class="ico fa-solid fa-layer-group"></i>
+          <span class="ttl">Divisions</span>
+          <span class="cnt" id="cnt-divisions">0</span>
+          <i class="chev fa-solid fa-chevron-down"></i>
+        </div>
+        <div class="sp-body">
+          <button class="sp-add" onclick="App.openDivisionDialog()"><i class="fa-solid fa-plus"></i> Add Division</button>
+          <div id="list-divisions"></div>
+        </div>
+      </div>
     </div>
   </div>
 

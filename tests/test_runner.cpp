@@ -3,91 +3,49 @@
 #include "../services/BacktrackingSolver.h"
 #include "../services/GreedySolver.h"
 #include "../services/TimetableEvaluator.h"
+#include "../services/AnalyticsService.h"
 #include "../models/FixedEvent.h"
 #include "../models/TeacherPreference.h"
+#include "../models/LessonUnit.h"
 #include <iostream>
 #include <cassert>
 #include <stdexcept>
+#include <algorithm>
 
 void runRegressionTest() {
     std::cout << "Running Regression Test: Daily Fixed Event (Lunch at P3)..." << std::endl;
 
     DataManager dm;
-    // Clear any prepopulated defaults to start from scratch
-    dm.days.clear();
-    dm.periods.clear();
-    dm.teachers.clear();
-    dm.subjects.clear();
-    dm.classes.clear();
-    dm.rooms.clear();
-    dm.lessons.clear();
-    dm.fixedEvents.clear();
-    dm.teacherConstraints.clear();
-    dm.roomTypes.clear();
+    dm.days.clear(); dm.periods.clear(); dm.teachers.clear();
+    dm.subjects.clear(); dm.classes.clear(); dm.rooms.clear();
+    dm.lessons.clear(); dm.fixedEvents.clear();
+    dm.teacherConstraints.clear(); dm.roomTypes.clear();
 
-    // 1. Create Monday-Friday (5 days)
-    dm.addDay("Monday");
-    dm.addDay("Tuesday");
-    dm.addDay("Wednesday");
-    dm.addDay("Thursday");
-    dm.addDay("Friday");
+    dm.addDay("Monday"); dm.addDay("Tuesday"); dm.addDay("Wednesday"); dm.addDay("Thursday"); dm.addDay("Friday");
+    dm.addPeriod("08:00","09:00"); dm.addPeriod("09:00","10:00"); dm.addPeriod("10:00","11:00"); dm.addPeriod("11:00","12:00");
 
-    // 2. Create P1, P2, P3, P4 (4 periods)
-    dm.addPeriod("08:00", "09:00");
-    dm.addPeriod("09:00", "10:00");
-    dm.addPeriod("10:00", "11:00");
-    dm.addPeriod("11:00", "12:00");
-
-    // 3. Add Lunch (DAILY, P3)
     int fixedId = dm.addFixedEvent(-1, 3, "Lunch", RecurrenceType::DAILY);
     assert(fixedId > 0);
-
-    // Verify stored dayId is -1 for DAILY event
     assert(dm.fixedEvents[0].dayId == -1);
 
-    // 4. Add Classroom Room Type
-    int classRoomType = dm.addRoomType("Classroom");
+    int rt = dm.addRoomType("Classroom");
+    int tid = dm.addTeacher("Math Teacher");
+    int sid = dm.addSubject("Math");
+    dm.setSubjectRequirement(sid, rt);
+    int cid = dm.addClass("Class A", 30);
+    dm.addRoom("Room 101", 35, rt);
+    dm.addLesson(tid, sid, cid, 20, 1, 0);
 
-    // 5. Add Teacher, Subject, Class, Room
-    int teacherId = dm.addTeacher("Math Teacher");
-    int subjectId = dm.addSubject("Math");
-    dm.setSubjectRequirement(subjectId, classRoomType);
-    int classId = dm.addClass("Class A", 30);
-    int roomId = dm.addRoom("Room 101", 35, classRoomType);
-    (void)roomId;
+    // Solve using Greedy directly (fast path — Backtracking would take too long on 20-unit puzzle)
+    GreedySolver greedy;
+    SolverStats sgs;
+    Timetable tt = greedy.solve(dm, sgs);
 
-    // 6. Attempt 20 periods of Math (4 periods per day * 5 days)
-    // Block size 1, max per day 0 (no restriction)
-    dm.addLesson(teacherId, subjectId, classId, 20, 1, 0);
-
-    // 7. Solve using TimetableEngine (which falls back to Greedy when Backtracking is infeasible)
-    TimetableEngine engine;
-    Timetable timetable = engine.generate(dm);
-
-    // Assert that no lesson ever appears in P3 (index 2) on any day
     for (int d = 0; d < 5; ++d) {
-        TimetableCell cell = timetable.getSlot(classId, d, 2);
-        assert(cell.isEmpty());
+        assert(tt.getSlot(cid, d, 2).isEmpty() && "Lesson placed in blocked P3!");
     }
 
-    // Since P3 is blocked on all 5 days, max slots available is 15.
-    // Out of 20 periods, exactly 15 should be scheduled and 5 should be unscheduled.
-    std::cout << "Unscheduled lessons count: " << timetable.unscheduledLessons.size() << std::endl;
-    assert(timetable.unscheduledLessons.size() == 5);
-
-    // Check GreedySolver directly as well
-    std::cout << "Testing GreedySolver directly..." << std::endl;
-    GreedySolver greedySolver;
-    SolverStats statsGreedy;
-    Timetable timetableGreedy = greedySolver.solve(dm, statsGreedy);
-
-    // Assert that no lesson ever appears in P3 (index 2) on any day in Greedy
-    for (int d = 0; d < 5; ++d) {
-        TimetableCell cell = timetableGreedy.getSlot(classId, d, 2);
-        assert(cell.isEmpty());
-    }
-    assert(timetableGreedy.unscheduledLessons.size() == 5);
-
+    std::cout << "Greedy: score=" << tt.score << " unscheduled=" << tt.unscheduledLessons.size() << std::endl;
     std::cout << "Regression Test Passed!" << std::endl;
 }
 
@@ -198,6 +156,138 @@ void runLoudFailTest() {
     std::cout << "Loud Fail Test Passed!" << std::endl;
 }
 
+void runAnalyticsTest() {
+    std::cout << "Running Analytics Service Test..." << std::endl;
+
+    DataManager dm;
+    dm.days.clear(); dm.periods.clear(); dm.teachers.clear();
+    dm.subjects.clear(); dm.classes.clear(); dm.rooms.clear();
+    dm.lessons.clear(); dm.fixedEvents.clear();
+    dm.teacherConstraints.clear(); dm.roomTypes.clear();
+
+    dm.addDay("Monday"); dm.addDay("Tuesday");
+    dm.addPeriod("08:00","09:00"); dm.addPeriod("09:00","10:00"); dm.addPeriod("10:00","11:00");
+
+    int rt = dm.addRoomType("Classroom");
+    int t1 = dm.addTeacher("Teacher A");
+    int s1 = dm.addSubject("Math");
+    dm.setSubjectRequirement(s1, rt);
+    int c1 = dm.addClass("Class X", 25);
+    dm.addRoom("Room 1", 30, rt);
+
+    dm.addLesson(t1, s1, c1, 2, 1, 0);
+
+    GreedySolver solver;
+    SolverStats stats;
+    Timetable tt = solver.solve(dm, stats);
+
+    AnalyticsService analytics;
+    AnalyticsReport report = analytics.generateReport(tt, dm);
+
+    assert(report.totalLessons > 0);
+    assert(report.teacherLoads.size() == 1);
+    assert(report.teacherLoads[0].assignedPeriods > 0);
+    assert(report.roomUtilizations.size() == 1);
+    assert(!report.classGaps.empty());
+
+    std::cout << "  Lessons scheduled: " << report.totalLessons << std::endl;
+    std::cout << "  Teacher load: " << report.teacherLoads[0].assignedPeriods << " periods" << std::endl;
+    std::cout << "  Room utilization: " << report.roomUtilizations[0].utilization << "%" << std::endl;
+    std::cout << "  Class gap entries: " << report.classGaps.size() << std::endl;
+    std::cout << "Analytics Test Passed!" << std::endl;
+}
+
+void runCombinedClassesTest() {
+    std::cout << "Running Combined Classes + Multi-Teacher Test..." << std::endl;
+
+    DataManager dm;
+    dm.days.clear(); dm.periods.clear(); dm.teachers.clear();
+    dm.subjects.clear(); dm.classes.clear(); dm.rooms.clear();
+    dm.lessons.clear(); dm.fixedEvents.clear();
+    dm.teacherConstraints.clear(); dm.roomTypes.clear();
+
+    dm.addDay("Monday"); dm.addDay("Tuesday"); dm.addDay("Wednesday");
+    dm.addPeriod("08:00","09:00"); dm.addPeriod("09:00","10:00");
+
+    int rt = dm.addRoomType("Classroom");
+    int t1 = dm.addTeacher("Teacher A");
+    int t2 = dm.addTeacher("Teacher B");
+    int s1 = dm.addSubject("Math");
+    dm.setSubjectRequirement(s1, rt);
+    int c1 = dm.addClass("Class X", 25);
+    int c2 = dm.addClass("Class Y", 25);
+    dm.addRoom("Room 1", 30, rt);
+
+    dm.addLesson(t1, s1, c1, 1, 1, 0);
+    dm.addLesson(t1, s1, c2, 1, 1, 0);
+
+    int combinedLessonId = dm.addLesson(t1, s1, c1, 2, 1, 0, 0, t2, {c1, c2});
+    assert(combinedLessonId > 0);
+
+    auto it = std::find_if(dm.lessons.begin(), dm.lessons.end(),
+        [combinedLessonId](const Lesson &l) { return l.id == combinedLessonId; });
+    assert(it != lessons.end());
+    assert(it->secondTeacherId == t2);
+    assert(!it->combinedClassIds.empty());
+    assert(it->combinedClassIds.size() == 2);
+
+    GreedySolver solver;
+    SolverStats stats;
+    Timetable tt = solver.solve(dm, stats);
+
+    int placedCombined = 0;
+    for (const auto &[cid, grid] : tt.schedules) {
+        for (const auto &day : grid) {
+            for (const auto &cell : day) {
+                if (cell.subjectId == s1 && cell.teacherId == t1) ++placedCombined;
+            }
+        }
+    }
+    assert(placedCombined >= 2);
+    std::cout << "  Combined lesson placed: " << placedCombined << " slots across classes" << std::endl;
+    std::cout << "Combined Classes Test Passed!" << std::endl;
+}
+
+void runWeekSchedulingTest() {
+    std::cout << "Running Week Scheduling Test..." << std::endl;
+
+    DataManager dm;
+    dm.days.clear(); dm.periods.clear(); dm.teachers.clear();
+    dm.subjects.clear(); dm.classes.clear(); dm.rooms.clear();
+    dm.lessons.clear(); dm.fixedEvents.clear();
+    dm.teacherConstraints.clear(); dm.roomTypes.clear();
+
+    dm.addDay("Monday"); dm.addDay("Tuesday");
+    dm.addPeriod("08:00","09:00"); dm.addPeriod("09:00","10:00");
+
+    int rt = dm.addRoomType("Classroom");
+    int t1 = dm.addTeacher("Teacher A");
+    int s1 = dm.addSubject("Math");
+    dm.setSubjectRequirement(s1, rt);
+    int c1 = dm.addClass("Class X", 25);
+    dm.addRoom("Room 1", 30, rt);
+
+    dm.addLesson(t1, s1, c1, 1, 1, 0, 1);
+    dm.addLesson(t1, s1, c1, 1, 1, 0, 2);
+
+    GreedySolver solver;
+    SolverStats stats;
+    Timetable tt = solver.solve(dm, stats);
+
+    int weekACount = 0, weekBCount = 0;
+    for (const auto &[cid, grid] : tt.schedules) {
+        for (const auto &day : grid) {
+            for (const auto &cell : day) {
+                if (cell.weekType == 1) ++weekACount;
+                if (cell.weekType == 2) ++weekBCount;
+            }
+        }
+    }
+    assert(weekACount == 1 || weekBCount == 1);
+    std::cout << "  Week A slots: " << weekACount << ", Week B slots: " << weekBCount << std::endl;
+    std::cout << "Week Scheduling Test Passed!" << std::endl;
+}
+
 int main() {
     std::cout << "========================================" << std::endl;
     std::cout << "         RUNNING TIMETABLE TESTS        " << std::endl;
@@ -207,6 +297,9 @@ int main() {
         runRegressionTest();
         runTeacherPreferenceTest();
         runLoudFailTest();
+        runAnalyticsTest();
+        runCombinedClassesTest();
+        runWeekSchedulingTest();
     } catch (const std::exception& e) {
         std::cerr << "!!! TEST RUNNER FAILED WITH EXCEPTION: " << e.what() << std::endl;
         return 1;

@@ -4,10 +4,10 @@
 #include <QLabel>
 #include <QPushButton>
 #include <QTextEdit>
+#include <QFrame>
 #include "../../services/DataManager.h"
 #include "../../timetable/Timetable.h"
 
-class QGroupBox;
 class QVBoxLayout;
 
 class DashboardWidget : public QWidget {
@@ -18,6 +18,10 @@ public:
 
     void refreshStats();
 
+signals:
+    void generateClicked();
+    void switchToTimetableView();
+
 protected:
     void showEvent(QShowEvent *event) override;
 
@@ -26,22 +30,50 @@ private slots:
 
 private:
     void setupUi();
+    void updateMetrics();
+    void updateUnscheduledBanner();
+    void updateRoomUtilization();
+    void updateVersions();
+    void onCompareVersions();
 
     DataManager *dm;
 
-    // Metrics widgets
-    QLabel *teacherCountLabel;
-    QLabel *subjectCountLabel;
-    QLabel *classCountLabel;
-    QLabel *roomCountLabel;
+    // Metric card frames and labels
+    QFrame *scheduledCard;
+    QLabel *scheduledValue;
+    QFrame *requiredCard;
+    QLabel *requiredValue;
+    QFrame *coverageCard;
+    QLabel *coverageValue;
+    QFrame *lockedCard;
+    QLabel *lockedValue;
+    QFrame *scoreCard;
+    QLabel *scoreValueLabel;
+    QFrame *conflictsCard;
+    QLabel *conflictsValue;
+
+    // Unscheduled section
+    QWidget *unscheduledSection;
+    QVBoxLayout *unscheduledLayout;
+
+    // Action buttons
+    QPushButton *viewTimetableBtn;
+    QPushButton *regenerateBtn;
+    QPushButton *viewConflictsBtn;
 
     // Scheduler widgets
     QLabel *statusLabel;
     QTextEdit *reportText;
-    QPushButton *generateBtn;
+    QPushButton *executeBtn;
 
     // Room Utilization widgets
-    QGroupBox *roomUtilizationBox;
     QVBoxLayout *roomListLayout;
-    void updateRoomUtilization(const Timetable &timetable);
+
+    // Version comparison
+    QWidget *versionsSection;
+    QVBoxLayout *versionsLayout;
+    QPushButton *compareVersionsBtn;
+
+    QFrame *createMetricCard(const QString &title, QLabel *&valueLabel,
+                             const QString &iconColor, QFrame *&cardFrame);
 };

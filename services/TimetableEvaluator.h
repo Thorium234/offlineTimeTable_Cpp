@@ -6,6 +6,7 @@ struct EvaluationWeights {
     int teacherGapWeight = 10;
     int classGapWeight = 15;
     int subjectClusterWeight = 5;
+    int distributionWeight = 8;
     int unscheduledWeight = 50;
     int teacherPreferredBonus = 10;
     int teacherUndesirablePenalty = 20;

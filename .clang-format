@@ -1,0 +1,23 @@
+BasedOnStyle: WebKit
+IndentWidth: 4
+UseTab: Never
+BreakBeforeBraces: Custom
+BraceWrapping:
+  AfterClass: true
+  AfterControlStatement: Never
+  AfterEnum: true
+  AfterFunction: true
+  AfterStruct: true
+  AfterUnion: true
+  BeforeCatch: true
+  BeforeElse: true
+AllowShortFunctionsOnASingleLine: Inline
+AllowShortIfStatementsOnASingleLine: Never
+AllowShortLoopsOnASingleLine: false
+AccessModifierOffset: -4
+ColumnLimit: 120
+PointerAlignment: Left
+SpaceAfterTemplateKeyword: true
+SpaceBeforeParens: ControlStatements
+SortIncludes: true
+IncludeBlocks: Preserve
