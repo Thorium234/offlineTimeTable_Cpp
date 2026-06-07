@@ -1,4 +1,4 @@
-# Install script for directory: /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp
+# Install script for directory: /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -50,5 +50,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/build_cmake/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/build_cmake/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

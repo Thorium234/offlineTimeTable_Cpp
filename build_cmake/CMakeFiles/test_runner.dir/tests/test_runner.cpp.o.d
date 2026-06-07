@@ -1,7 +1,7 @@
 CMakeFiles/test_runner.dir/tests/test_runner.cpp.o: \
- /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/tests/test_runner.cpp \
+ /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/tests/test_runner.cpp \
  /usr/include/stdc-predef.h \
- /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/tests/../services/DataManager.h \
+ /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/tests/../services/DataManager.h \
  /usr/include/c++/13/vector /usr/include/c++/13/bits/requires_hosted.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/c++config.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/os_defines.h \
@@ -59,7 +59,7 @@ CMakeFiles/test_runner.dir/tests/test_runner.cpp.o: \
  /usr/include/strings.h \
  /usr/include/x86_64-linux-gnu/bits/strings_fortified.h \
  /usr/include/x86_64-linux-gnu/bits/string_fortified.h \
- /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/tests/../services/../models/Teacher.h \
+ /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/tests/../services/../models/Teacher.h \
  /usr/include/c++/13/string /usr/include/c++/13/bits/stringfwd.h \
  /usr/include/c++/13/bits/char_traits.h \
  /usr/include/c++/13/bits/postypes.h /usr/include/c++/13/cwchar \
@@ -131,25 +131,25 @@ CMakeFiles/test_runner.dir/tests/test_runner.cpp.o: \
  /usr/include/x86_64-linux-gnu/bits/types/error_t.h \
  /usr/include/c++/13/bits/charconv.h \
  /usr/include/c++/13/bits/basic_string.tcc \
- /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/tests/../services/../models/Subject.h \
- /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/tests/../services/../models/SchoolClass.h \
- /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/tests/../services/../models/Room.h \
- /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/tests/../services/../models/Lesson.h \
- /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/tests/../services/../models/Day.h \
- /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/tests/../services/../models/Period.h \
- /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/tests/../services/../models/TeacherConstraint.h \
- /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/tests/../services/../models/SubjectRequirement.h \
- /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/tests/../services/../models/RoomType.h \
- /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/tests/../services/../models/FixedEvent.h \
+ /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/tests/../services/../models/Subject.h \
+ /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/tests/../services/../models/SchoolClass.h \
+ /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/tests/../services/../models/Room.h \
+ /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/tests/../services/../models/Lesson.h \
+ /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/tests/../services/../models/Day.h \
+ /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/tests/../services/../models/Period.h \
+ /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/tests/../services/../models/TeacherConstraint.h \
+ /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/tests/../services/../models/SubjectRequirement.h \
+ /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/tests/../services/../models/RoomType.h \
+ /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/tests/../services/../models/FixedEvent.h \
  /usr/include/c++/13/stdexcept /usr/include/c++/13/exception \
  /usr/include/c++/13/bits/exception_ptr.h \
  /usr/include/c++/13/bits/cxxabi_init_exception.h \
  /usr/include/c++/13/typeinfo /usr/include/c++/13/bits/nested_exception.h \
- /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/tests/../services/../models/TeacherPreference.h \
- /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/tests/../services/../models/Substitution.h \
- /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/tests/../services/../models/Division.h \
- /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/tests/../services/../models/ConstraintViolation.h \
- /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/tests/../services/SQLiteService.h \
+ /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/tests/../services/../models/TeacherPreference.h \
+ /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/tests/../services/../models/Substitution.h \
+ /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/tests/../services/../models/Division.h \
+ /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/tests/../services/../models/ConstraintViolation.h \
+ /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/tests/../services/SQLiteService.h \
  /home/thorium/anaconda3/include/qt/QtSql/QSqlDatabase \
  /home/thorium/anaconda3/include/qt/QtSql/qsqldatabase.h \
  /home/thorium/anaconda3/include/qt/QtSql/qtsqlglobal.h \
@@ -226,26 +226,26 @@ CMakeFiles/test_runner.dir/tests/test_runner.cpp.o: \
  /home/thorium/anaconda3/include/qt/QtSql/qsqlerror.h \
  /home/thorium/anaconda3/include/qt/QtCore/QString \
  /home/thorium/anaconda3/include/qt/QtCore/qstring.h \
- /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/tests/../services/../timetable/Timetable.h \
+ /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/tests/../services/../timetable/Timetable.h \
  /usr/include/c++/13/map /usr/include/c++/13/bits/stl_tree.h \
  /usr/include/c++/13/ext/aligned_buffer.h \
  /usr/include/c++/13/bits/node_handle.h \
  /usr/include/c++/13/bits/stl_map.h \
  /usr/include/c++/13/bits/stl_multimap.h \
  /usr/include/c++/13/bits/erase_if.h \
- /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/tests/../services/UndoRedoStack.h \
- /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/tests/../services/ConflictChecker.h \
- /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/tests/../services/SolverStrategy.h \
- /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/tests/../services/TimetableEngine.h \
- /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/tests/../services/BacktrackingSolver.h \
- /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/tests/../services/ResourceTracker.h \
- /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/tests/../services/DomainTracker.h \
- /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/tests/../services/../models/LessonUnit.h \
+ /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/tests/../services/UndoRedoStack.h \
+ /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/tests/../services/ConflictChecker.h \
+ /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/tests/../services/SolverStrategy.h \
+ /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/tests/../services/TimetableEngine.h \
+ /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/tests/../services/BacktrackingSolver.h \
+ /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/tests/../services/ResourceTracker.h \
+ /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/tests/../services/DomainTracker.h \
+ /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/tests/../services/../models/LessonUnit.h \
  /usr/include/c++/13/set /usr/include/c++/13/bits/stl_set.h \
  /usr/include/c++/13/bits/stl_multiset.h \
- /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/tests/../services/GreedySolver.h \
- /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/tests/../services/TimetableEvaluator.h \
- /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/tests/../services/AnalyticsService.h \
+ /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/tests/../services/GreedySolver.h \
+ /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/tests/../services/TimetableEvaluator.h \
+ /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/tests/../services/AnalyticsService.h \
  /usr/include/c++/13/iostream /usr/include/c++/13/ostream \
  /usr/include/c++/13/ios /usr/include/c++/13/bits/basic_ios.h \
  /usr/include/c++/13/bits/locale_facets.h /usr/include/c++/13/cwctype \

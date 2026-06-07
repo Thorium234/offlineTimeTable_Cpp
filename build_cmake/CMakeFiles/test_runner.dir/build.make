@@ -53,10 +53,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp
+CMAKE_SOURCE_DIR = /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/build_cmake
+CMAKE_BINARY_DIR = /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/build_cmake
 
 # Include any dependencies generated for this target.
 include CMakeFiles/test_runner.dir/depend.make
@@ -72,303 +72,303 @@ include CMakeFiles/test_runner.dir/flags.make
 test_runner_autogen/timestamp: /home/thorium/anaconda3/bin/moc
 test_runner_autogen/timestamp: /home/thorium/anaconda3/bin/uic
 test_runner_autogen/timestamp: CMakeFiles/test_runner.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold --progress-dir=/home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/build_cmake/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Automatic MOC and UIC for target test_runner"
-	/usr/bin/cmake -E cmake_autogen /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/build_cmake/CMakeFiles/test_runner_autogen.dir/AutogenInfo.json Release
-	/usr/bin/cmake -E touch /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/build_cmake/test_runner_autogen/timestamp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold --progress-dir=/home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/build_cmake/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Automatic MOC and UIC for target test_runner"
+	/usr/bin/cmake -E cmake_autogen /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/build_cmake/CMakeFiles/test_runner_autogen.dir/AutogenInfo.json Release
+	/usr/bin/cmake -E touch /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/build_cmake/test_runner_autogen/timestamp
 
 CMakeFiles/test_runner.dir/test_runner_autogen/mocs_compilation.cpp.o: CMakeFiles/test_runner.dir/flags.make
 CMakeFiles/test_runner.dir/test_runner_autogen/mocs_compilation.cpp.o: test_runner_autogen/mocs_compilation.cpp
 CMakeFiles/test_runner.dir/test_runner_autogen/mocs_compilation.cpp.o: CMakeFiles/test_runner.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/build_cmake/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/test_runner.dir/test_runner_autogen/mocs_compilation.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/test_runner.dir/test_runner_autogen/mocs_compilation.cpp.o -MF CMakeFiles/test_runner.dir/test_runner_autogen/mocs_compilation.cpp.o.d -o CMakeFiles/test_runner.dir/test_runner_autogen/mocs_compilation.cpp.o -c /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/build_cmake/test_runner_autogen/mocs_compilation.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/build_cmake/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/test_runner.dir/test_runner_autogen/mocs_compilation.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/test_runner.dir/test_runner_autogen/mocs_compilation.cpp.o -MF CMakeFiles/test_runner.dir/test_runner_autogen/mocs_compilation.cpp.o.d -o CMakeFiles/test_runner.dir/test_runner_autogen/mocs_compilation.cpp.o -c /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/build_cmake/test_runner_autogen/mocs_compilation.cpp
 
 CMakeFiles/test_runner.dir/test_runner_autogen/mocs_compilation.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/test_runner.dir/test_runner_autogen/mocs_compilation.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/build_cmake/test_runner_autogen/mocs_compilation.cpp > CMakeFiles/test_runner.dir/test_runner_autogen/mocs_compilation.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/build_cmake/test_runner_autogen/mocs_compilation.cpp > CMakeFiles/test_runner.dir/test_runner_autogen/mocs_compilation.cpp.i
 
 CMakeFiles/test_runner.dir/test_runner_autogen/mocs_compilation.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/test_runner.dir/test_runner_autogen/mocs_compilation.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/build_cmake/test_runner_autogen/mocs_compilation.cpp -o CMakeFiles/test_runner.dir/test_runner_autogen/mocs_compilation.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/build_cmake/test_runner_autogen/mocs_compilation.cpp -o CMakeFiles/test_runner.dir/test_runner_autogen/mocs_compilation.cpp.s
 
 CMakeFiles/test_runner.dir/tests/test_runner.cpp.o: CMakeFiles/test_runner.dir/flags.make
-CMakeFiles/test_runner.dir/tests/test_runner.cpp.o: /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/tests/test_runner.cpp
+CMakeFiles/test_runner.dir/tests/test_runner.cpp.o: /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/tests/test_runner.cpp
 CMakeFiles/test_runner.dir/tests/test_runner.cpp.o: CMakeFiles/test_runner.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/build_cmake/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/test_runner.dir/tests/test_runner.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/test_runner.dir/tests/test_runner.cpp.o -MF CMakeFiles/test_runner.dir/tests/test_runner.cpp.o.d -o CMakeFiles/test_runner.dir/tests/test_runner.cpp.o -c /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/tests/test_runner.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/build_cmake/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/test_runner.dir/tests/test_runner.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/test_runner.dir/tests/test_runner.cpp.o -MF CMakeFiles/test_runner.dir/tests/test_runner.cpp.o.d -o CMakeFiles/test_runner.dir/tests/test_runner.cpp.o -c /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/tests/test_runner.cpp
 
 CMakeFiles/test_runner.dir/tests/test_runner.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/test_runner.dir/tests/test_runner.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/tests/test_runner.cpp > CMakeFiles/test_runner.dir/tests/test_runner.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/tests/test_runner.cpp > CMakeFiles/test_runner.dir/tests/test_runner.cpp.i
 
 CMakeFiles/test_runner.dir/tests/test_runner.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/test_runner.dir/tests/test_runner.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/tests/test_runner.cpp -o CMakeFiles/test_runner.dir/tests/test_runner.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/tests/test_runner.cpp -o CMakeFiles/test_runner.dir/tests/test_runner.cpp.s
 
 CMakeFiles/test_runner.dir/services/DataManager.cpp.o: CMakeFiles/test_runner.dir/flags.make
-CMakeFiles/test_runner.dir/services/DataManager.cpp.o: /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/services/DataManager.cpp
+CMakeFiles/test_runner.dir/services/DataManager.cpp.o: /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/services/DataManager.cpp
 CMakeFiles/test_runner.dir/services/DataManager.cpp.o: CMakeFiles/test_runner.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/build_cmake/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/test_runner.dir/services/DataManager.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/test_runner.dir/services/DataManager.cpp.o -MF CMakeFiles/test_runner.dir/services/DataManager.cpp.o.d -o CMakeFiles/test_runner.dir/services/DataManager.cpp.o -c /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/services/DataManager.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/build_cmake/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/test_runner.dir/services/DataManager.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/test_runner.dir/services/DataManager.cpp.o -MF CMakeFiles/test_runner.dir/services/DataManager.cpp.o.d -o CMakeFiles/test_runner.dir/services/DataManager.cpp.o -c /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/services/DataManager.cpp
 
 CMakeFiles/test_runner.dir/services/DataManager.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/test_runner.dir/services/DataManager.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/services/DataManager.cpp > CMakeFiles/test_runner.dir/services/DataManager.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/services/DataManager.cpp > CMakeFiles/test_runner.dir/services/DataManager.cpp.i
 
 CMakeFiles/test_runner.dir/services/DataManager.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/test_runner.dir/services/DataManager.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/services/DataManager.cpp -o CMakeFiles/test_runner.dir/services/DataManager.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/services/DataManager.cpp -o CMakeFiles/test_runner.dir/services/DataManager.cpp.s
 
 CMakeFiles/test_runner.dir/services/SQLiteService.cpp.o: CMakeFiles/test_runner.dir/flags.make
-CMakeFiles/test_runner.dir/services/SQLiteService.cpp.o: /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/services/SQLiteService.cpp
+CMakeFiles/test_runner.dir/services/SQLiteService.cpp.o: /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/services/SQLiteService.cpp
 CMakeFiles/test_runner.dir/services/SQLiteService.cpp.o: CMakeFiles/test_runner.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/build_cmake/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/test_runner.dir/services/SQLiteService.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/test_runner.dir/services/SQLiteService.cpp.o -MF CMakeFiles/test_runner.dir/services/SQLiteService.cpp.o.d -o CMakeFiles/test_runner.dir/services/SQLiteService.cpp.o -c /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/services/SQLiteService.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/build_cmake/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/test_runner.dir/services/SQLiteService.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/test_runner.dir/services/SQLiteService.cpp.o -MF CMakeFiles/test_runner.dir/services/SQLiteService.cpp.o.d -o CMakeFiles/test_runner.dir/services/SQLiteService.cpp.o -c /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/services/SQLiteService.cpp
 
 CMakeFiles/test_runner.dir/services/SQLiteService.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/test_runner.dir/services/SQLiteService.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/services/SQLiteService.cpp > CMakeFiles/test_runner.dir/services/SQLiteService.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/services/SQLiteService.cpp > CMakeFiles/test_runner.dir/services/SQLiteService.cpp.i
 
 CMakeFiles/test_runner.dir/services/SQLiteService.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/test_runner.dir/services/SQLiteService.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/services/SQLiteService.cpp -o CMakeFiles/test_runner.dir/services/SQLiteService.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/services/SQLiteService.cpp -o CMakeFiles/test_runner.dir/services/SQLiteService.cpp.s
 
 CMakeFiles/test_runner.dir/services/TimetableEngine.cpp.o: CMakeFiles/test_runner.dir/flags.make
-CMakeFiles/test_runner.dir/services/TimetableEngine.cpp.o: /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/services/TimetableEngine.cpp
+CMakeFiles/test_runner.dir/services/TimetableEngine.cpp.o: /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/services/TimetableEngine.cpp
 CMakeFiles/test_runner.dir/services/TimetableEngine.cpp.o: CMakeFiles/test_runner.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/build_cmake/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/test_runner.dir/services/TimetableEngine.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/test_runner.dir/services/TimetableEngine.cpp.o -MF CMakeFiles/test_runner.dir/services/TimetableEngine.cpp.o.d -o CMakeFiles/test_runner.dir/services/TimetableEngine.cpp.o -c /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/services/TimetableEngine.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/build_cmake/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/test_runner.dir/services/TimetableEngine.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/test_runner.dir/services/TimetableEngine.cpp.o -MF CMakeFiles/test_runner.dir/services/TimetableEngine.cpp.o.d -o CMakeFiles/test_runner.dir/services/TimetableEngine.cpp.o -c /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/services/TimetableEngine.cpp
 
 CMakeFiles/test_runner.dir/services/TimetableEngine.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/test_runner.dir/services/TimetableEngine.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/services/TimetableEngine.cpp > CMakeFiles/test_runner.dir/services/TimetableEngine.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/services/TimetableEngine.cpp > CMakeFiles/test_runner.dir/services/TimetableEngine.cpp.i
 
 CMakeFiles/test_runner.dir/services/TimetableEngine.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/test_runner.dir/services/TimetableEngine.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/services/TimetableEngine.cpp -o CMakeFiles/test_runner.dir/services/TimetableEngine.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/services/TimetableEngine.cpp -o CMakeFiles/test_runner.dir/services/TimetableEngine.cpp.s
 
 CMakeFiles/test_runner.dir/services/ResourceTracker.cpp.o: CMakeFiles/test_runner.dir/flags.make
-CMakeFiles/test_runner.dir/services/ResourceTracker.cpp.o: /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/services/ResourceTracker.cpp
+CMakeFiles/test_runner.dir/services/ResourceTracker.cpp.o: /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/services/ResourceTracker.cpp
 CMakeFiles/test_runner.dir/services/ResourceTracker.cpp.o: CMakeFiles/test_runner.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/build_cmake/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/test_runner.dir/services/ResourceTracker.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/test_runner.dir/services/ResourceTracker.cpp.o -MF CMakeFiles/test_runner.dir/services/ResourceTracker.cpp.o.d -o CMakeFiles/test_runner.dir/services/ResourceTracker.cpp.o -c /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/services/ResourceTracker.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/build_cmake/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/test_runner.dir/services/ResourceTracker.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/test_runner.dir/services/ResourceTracker.cpp.o -MF CMakeFiles/test_runner.dir/services/ResourceTracker.cpp.o.d -o CMakeFiles/test_runner.dir/services/ResourceTracker.cpp.o -c /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/services/ResourceTracker.cpp
 
 CMakeFiles/test_runner.dir/services/ResourceTracker.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/test_runner.dir/services/ResourceTracker.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/services/ResourceTracker.cpp > CMakeFiles/test_runner.dir/services/ResourceTracker.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/services/ResourceTracker.cpp > CMakeFiles/test_runner.dir/services/ResourceTracker.cpp.i
 
 CMakeFiles/test_runner.dir/services/ResourceTracker.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/test_runner.dir/services/ResourceTracker.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/services/ResourceTracker.cpp -o CMakeFiles/test_runner.dir/services/ResourceTracker.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/services/ResourceTracker.cpp -o CMakeFiles/test_runner.dir/services/ResourceTracker.cpp.s
 
 CMakeFiles/test_runner.dir/services/ExportService.cpp.o: CMakeFiles/test_runner.dir/flags.make
-CMakeFiles/test_runner.dir/services/ExportService.cpp.o: /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/services/ExportService.cpp
+CMakeFiles/test_runner.dir/services/ExportService.cpp.o: /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/services/ExportService.cpp
 CMakeFiles/test_runner.dir/services/ExportService.cpp.o: CMakeFiles/test_runner.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/build_cmake/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/test_runner.dir/services/ExportService.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/test_runner.dir/services/ExportService.cpp.o -MF CMakeFiles/test_runner.dir/services/ExportService.cpp.o.d -o CMakeFiles/test_runner.dir/services/ExportService.cpp.o -c /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/services/ExportService.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/build_cmake/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/test_runner.dir/services/ExportService.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/test_runner.dir/services/ExportService.cpp.o -MF CMakeFiles/test_runner.dir/services/ExportService.cpp.o.d -o CMakeFiles/test_runner.dir/services/ExportService.cpp.o -c /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/services/ExportService.cpp
 
 CMakeFiles/test_runner.dir/services/ExportService.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/test_runner.dir/services/ExportService.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/services/ExportService.cpp > CMakeFiles/test_runner.dir/services/ExportService.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/services/ExportService.cpp > CMakeFiles/test_runner.dir/services/ExportService.cpp.i
 
 CMakeFiles/test_runner.dir/services/ExportService.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/test_runner.dir/services/ExportService.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/services/ExportService.cpp -o CMakeFiles/test_runner.dir/services/ExportService.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/services/ExportService.cpp -o CMakeFiles/test_runner.dir/services/ExportService.cpp.s
 
 CMakeFiles/test_runner.dir/services/TimetableEvaluator.cpp.o: CMakeFiles/test_runner.dir/flags.make
-CMakeFiles/test_runner.dir/services/TimetableEvaluator.cpp.o: /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/services/TimetableEvaluator.cpp
+CMakeFiles/test_runner.dir/services/TimetableEvaluator.cpp.o: /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/services/TimetableEvaluator.cpp
 CMakeFiles/test_runner.dir/services/TimetableEvaluator.cpp.o: CMakeFiles/test_runner.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/build_cmake/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/test_runner.dir/services/TimetableEvaluator.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/test_runner.dir/services/TimetableEvaluator.cpp.o -MF CMakeFiles/test_runner.dir/services/TimetableEvaluator.cpp.o.d -o CMakeFiles/test_runner.dir/services/TimetableEvaluator.cpp.o -c /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/services/TimetableEvaluator.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/build_cmake/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/test_runner.dir/services/TimetableEvaluator.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/test_runner.dir/services/TimetableEvaluator.cpp.o -MF CMakeFiles/test_runner.dir/services/TimetableEvaluator.cpp.o.d -o CMakeFiles/test_runner.dir/services/TimetableEvaluator.cpp.o -c /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/services/TimetableEvaluator.cpp
 
 CMakeFiles/test_runner.dir/services/TimetableEvaluator.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/test_runner.dir/services/TimetableEvaluator.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/services/TimetableEvaluator.cpp > CMakeFiles/test_runner.dir/services/TimetableEvaluator.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/services/TimetableEvaluator.cpp > CMakeFiles/test_runner.dir/services/TimetableEvaluator.cpp.i
 
 CMakeFiles/test_runner.dir/services/TimetableEvaluator.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/test_runner.dir/services/TimetableEvaluator.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/services/TimetableEvaluator.cpp -o CMakeFiles/test_runner.dir/services/TimetableEvaluator.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/services/TimetableEvaluator.cpp -o CMakeFiles/test_runner.dir/services/TimetableEvaluator.cpp.s
 
 CMakeFiles/test_runner.dir/services/FeasibilityChecker.cpp.o: CMakeFiles/test_runner.dir/flags.make
-CMakeFiles/test_runner.dir/services/FeasibilityChecker.cpp.o: /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/services/FeasibilityChecker.cpp
+CMakeFiles/test_runner.dir/services/FeasibilityChecker.cpp.o: /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/services/FeasibilityChecker.cpp
 CMakeFiles/test_runner.dir/services/FeasibilityChecker.cpp.o: CMakeFiles/test_runner.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/build_cmake/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/test_runner.dir/services/FeasibilityChecker.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/test_runner.dir/services/FeasibilityChecker.cpp.o -MF CMakeFiles/test_runner.dir/services/FeasibilityChecker.cpp.o.d -o CMakeFiles/test_runner.dir/services/FeasibilityChecker.cpp.o -c /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/services/FeasibilityChecker.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/build_cmake/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/test_runner.dir/services/FeasibilityChecker.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/test_runner.dir/services/FeasibilityChecker.cpp.o -MF CMakeFiles/test_runner.dir/services/FeasibilityChecker.cpp.o.d -o CMakeFiles/test_runner.dir/services/FeasibilityChecker.cpp.o -c /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/services/FeasibilityChecker.cpp
 
 CMakeFiles/test_runner.dir/services/FeasibilityChecker.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/test_runner.dir/services/FeasibilityChecker.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/services/FeasibilityChecker.cpp > CMakeFiles/test_runner.dir/services/FeasibilityChecker.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/services/FeasibilityChecker.cpp > CMakeFiles/test_runner.dir/services/FeasibilityChecker.cpp.i
 
 CMakeFiles/test_runner.dir/services/FeasibilityChecker.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/test_runner.dir/services/FeasibilityChecker.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/services/FeasibilityChecker.cpp -o CMakeFiles/test_runner.dir/services/FeasibilityChecker.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/services/FeasibilityChecker.cpp -o CMakeFiles/test_runner.dir/services/FeasibilityChecker.cpp.s
 
 CMakeFiles/test_runner.dir/services/DomainTracker.cpp.o: CMakeFiles/test_runner.dir/flags.make
-CMakeFiles/test_runner.dir/services/DomainTracker.cpp.o: /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/services/DomainTracker.cpp
+CMakeFiles/test_runner.dir/services/DomainTracker.cpp.o: /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/services/DomainTracker.cpp
 CMakeFiles/test_runner.dir/services/DomainTracker.cpp.o: CMakeFiles/test_runner.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/build_cmake/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object CMakeFiles/test_runner.dir/services/DomainTracker.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/test_runner.dir/services/DomainTracker.cpp.o -MF CMakeFiles/test_runner.dir/services/DomainTracker.cpp.o.d -o CMakeFiles/test_runner.dir/services/DomainTracker.cpp.o -c /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/services/DomainTracker.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/build_cmake/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object CMakeFiles/test_runner.dir/services/DomainTracker.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/test_runner.dir/services/DomainTracker.cpp.o -MF CMakeFiles/test_runner.dir/services/DomainTracker.cpp.o.d -o CMakeFiles/test_runner.dir/services/DomainTracker.cpp.o -c /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/services/DomainTracker.cpp
 
 CMakeFiles/test_runner.dir/services/DomainTracker.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/test_runner.dir/services/DomainTracker.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/services/DomainTracker.cpp > CMakeFiles/test_runner.dir/services/DomainTracker.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/services/DomainTracker.cpp > CMakeFiles/test_runner.dir/services/DomainTracker.cpp.i
 
 CMakeFiles/test_runner.dir/services/DomainTracker.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/test_runner.dir/services/DomainTracker.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/services/DomainTracker.cpp -o CMakeFiles/test_runner.dir/services/DomainTracker.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/services/DomainTracker.cpp -o CMakeFiles/test_runner.dir/services/DomainTracker.cpp.s
 
 CMakeFiles/test_runner.dir/services/Benchmark.cpp.o: CMakeFiles/test_runner.dir/flags.make
-CMakeFiles/test_runner.dir/services/Benchmark.cpp.o: /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/services/Benchmark.cpp
+CMakeFiles/test_runner.dir/services/Benchmark.cpp.o: /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/services/Benchmark.cpp
 CMakeFiles/test_runner.dir/services/Benchmark.cpp.o: CMakeFiles/test_runner.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/build_cmake/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object CMakeFiles/test_runner.dir/services/Benchmark.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/test_runner.dir/services/Benchmark.cpp.o -MF CMakeFiles/test_runner.dir/services/Benchmark.cpp.o.d -o CMakeFiles/test_runner.dir/services/Benchmark.cpp.o -c /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/services/Benchmark.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/build_cmake/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object CMakeFiles/test_runner.dir/services/Benchmark.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/test_runner.dir/services/Benchmark.cpp.o -MF CMakeFiles/test_runner.dir/services/Benchmark.cpp.o.d -o CMakeFiles/test_runner.dir/services/Benchmark.cpp.o -c /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/services/Benchmark.cpp
 
 CMakeFiles/test_runner.dir/services/Benchmark.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/test_runner.dir/services/Benchmark.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/services/Benchmark.cpp > CMakeFiles/test_runner.dir/services/Benchmark.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/services/Benchmark.cpp > CMakeFiles/test_runner.dir/services/Benchmark.cpp.i
 
 CMakeFiles/test_runner.dir/services/Benchmark.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/test_runner.dir/services/Benchmark.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/services/Benchmark.cpp -o CMakeFiles/test_runner.dir/services/Benchmark.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/services/Benchmark.cpp -o CMakeFiles/test_runner.dir/services/Benchmark.cpp.s
 
 CMakeFiles/test_runner.dir/services/BacktrackingSolver.cpp.o: CMakeFiles/test_runner.dir/flags.make
-CMakeFiles/test_runner.dir/services/BacktrackingSolver.cpp.o: /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/services/BacktrackingSolver.cpp
+CMakeFiles/test_runner.dir/services/BacktrackingSolver.cpp.o: /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/services/BacktrackingSolver.cpp
 CMakeFiles/test_runner.dir/services/BacktrackingSolver.cpp.o: CMakeFiles/test_runner.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/build_cmake/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object CMakeFiles/test_runner.dir/services/BacktrackingSolver.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/test_runner.dir/services/BacktrackingSolver.cpp.o -MF CMakeFiles/test_runner.dir/services/BacktrackingSolver.cpp.o.d -o CMakeFiles/test_runner.dir/services/BacktrackingSolver.cpp.o -c /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/services/BacktrackingSolver.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/build_cmake/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object CMakeFiles/test_runner.dir/services/BacktrackingSolver.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/test_runner.dir/services/BacktrackingSolver.cpp.o -MF CMakeFiles/test_runner.dir/services/BacktrackingSolver.cpp.o.d -o CMakeFiles/test_runner.dir/services/BacktrackingSolver.cpp.o -c /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/services/BacktrackingSolver.cpp
 
 CMakeFiles/test_runner.dir/services/BacktrackingSolver.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/test_runner.dir/services/BacktrackingSolver.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/services/BacktrackingSolver.cpp > CMakeFiles/test_runner.dir/services/BacktrackingSolver.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/services/BacktrackingSolver.cpp > CMakeFiles/test_runner.dir/services/BacktrackingSolver.cpp.i
 
 CMakeFiles/test_runner.dir/services/BacktrackingSolver.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/test_runner.dir/services/BacktrackingSolver.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/services/BacktrackingSolver.cpp -o CMakeFiles/test_runner.dir/services/BacktrackingSolver.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/services/BacktrackingSolver.cpp -o CMakeFiles/test_runner.dir/services/BacktrackingSolver.cpp.s
 
 CMakeFiles/test_runner.dir/services/GreedySolver.cpp.o: CMakeFiles/test_runner.dir/flags.make
-CMakeFiles/test_runner.dir/services/GreedySolver.cpp.o: /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/services/GreedySolver.cpp
+CMakeFiles/test_runner.dir/services/GreedySolver.cpp.o: /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/services/GreedySolver.cpp
 CMakeFiles/test_runner.dir/services/GreedySolver.cpp.o: CMakeFiles/test_runner.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/build_cmake/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building CXX object CMakeFiles/test_runner.dir/services/GreedySolver.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/test_runner.dir/services/GreedySolver.cpp.o -MF CMakeFiles/test_runner.dir/services/GreedySolver.cpp.o.d -o CMakeFiles/test_runner.dir/services/GreedySolver.cpp.o -c /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/services/GreedySolver.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/build_cmake/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building CXX object CMakeFiles/test_runner.dir/services/GreedySolver.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/test_runner.dir/services/GreedySolver.cpp.o -MF CMakeFiles/test_runner.dir/services/GreedySolver.cpp.o.d -o CMakeFiles/test_runner.dir/services/GreedySolver.cpp.o -c /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/services/GreedySolver.cpp
 
 CMakeFiles/test_runner.dir/services/GreedySolver.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/test_runner.dir/services/GreedySolver.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/services/GreedySolver.cpp > CMakeFiles/test_runner.dir/services/GreedySolver.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/services/GreedySolver.cpp > CMakeFiles/test_runner.dir/services/GreedySolver.cpp.i
 
 CMakeFiles/test_runner.dir/services/GreedySolver.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/test_runner.dir/services/GreedySolver.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/services/GreedySolver.cpp -o CMakeFiles/test_runner.dir/services/GreedySolver.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/services/GreedySolver.cpp -o CMakeFiles/test_runner.dir/services/GreedySolver.cpp.s
 
 CMakeFiles/test_runner.dir/timetable/Timetable.cpp.o: CMakeFiles/test_runner.dir/flags.make
-CMakeFiles/test_runner.dir/timetable/Timetable.cpp.o: /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/timetable/Timetable.cpp
+CMakeFiles/test_runner.dir/timetable/Timetable.cpp.o: /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/timetable/Timetable.cpp
 CMakeFiles/test_runner.dir/timetable/Timetable.cpp.o: CMakeFiles/test_runner.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/build_cmake/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Building CXX object CMakeFiles/test_runner.dir/timetable/Timetable.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/test_runner.dir/timetable/Timetable.cpp.o -MF CMakeFiles/test_runner.dir/timetable/Timetable.cpp.o.d -o CMakeFiles/test_runner.dir/timetable/Timetable.cpp.o -c /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/timetable/Timetable.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/build_cmake/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Building CXX object CMakeFiles/test_runner.dir/timetable/Timetable.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/test_runner.dir/timetable/Timetable.cpp.o -MF CMakeFiles/test_runner.dir/timetable/Timetable.cpp.o.d -o CMakeFiles/test_runner.dir/timetable/Timetable.cpp.o -c /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/timetable/Timetable.cpp
 
 CMakeFiles/test_runner.dir/timetable/Timetable.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/test_runner.dir/timetable/Timetable.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/timetable/Timetable.cpp > CMakeFiles/test_runner.dir/timetable/Timetable.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/timetable/Timetable.cpp > CMakeFiles/test_runner.dir/timetable/Timetable.cpp.i
 
 CMakeFiles/test_runner.dir/timetable/Timetable.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/test_runner.dir/timetable/Timetable.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/timetable/Timetable.cpp -o CMakeFiles/test_runner.dir/timetable/Timetable.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/timetable/Timetable.cpp -o CMakeFiles/test_runner.dir/timetable/Timetable.cpp.s
 
 CMakeFiles/test_runner.dir/services/AnalyticsService.cpp.o: CMakeFiles/test_runner.dir/flags.make
-CMakeFiles/test_runner.dir/services/AnalyticsService.cpp.o: /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/services/AnalyticsService.cpp
+CMakeFiles/test_runner.dir/services/AnalyticsService.cpp.o: /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/services/AnalyticsService.cpp
 CMakeFiles/test_runner.dir/services/AnalyticsService.cpp.o: CMakeFiles/test_runner.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/build_cmake/CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Building CXX object CMakeFiles/test_runner.dir/services/AnalyticsService.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/test_runner.dir/services/AnalyticsService.cpp.o -MF CMakeFiles/test_runner.dir/services/AnalyticsService.cpp.o.d -o CMakeFiles/test_runner.dir/services/AnalyticsService.cpp.o -c /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/services/AnalyticsService.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/build_cmake/CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Building CXX object CMakeFiles/test_runner.dir/services/AnalyticsService.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/test_runner.dir/services/AnalyticsService.cpp.o -MF CMakeFiles/test_runner.dir/services/AnalyticsService.cpp.o.d -o CMakeFiles/test_runner.dir/services/AnalyticsService.cpp.o -c /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/services/AnalyticsService.cpp
 
 CMakeFiles/test_runner.dir/services/AnalyticsService.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/test_runner.dir/services/AnalyticsService.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/services/AnalyticsService.cpp > CMakeFiles/test_runner.dir/services/AnalyticsService.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/services/AnalyticsService.cpp > CMakeFiles/test_runner.dir/services/AnalyticsService.cpp.i
 
 CMakeFiles/test_runner.dir/services/AnalyticsService.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/test_runner.dir/services/AnalyticsService.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/services/AnalyticsService.cpp -o CMakeFiles/test_runner.dir/services/AnalyticsService.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/services/AnalyticsService.cpp -o CMakeFiles/test_runner.dir/services/AnalyticsService.cpp.s
 
 CMakeFiles/test_runner.dir/services/PdfReportService.cpp.o: CMakeFiles/test_runner.dir/flags.make
-CMakeFiles/test_runner.dir/services/PdfReportService.cpp.o: /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/services/PdfReportService.cpp
+CMakeFiles/test_runner.dir/services/PdfReportService.cpp.o: /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/services/PdfReportService.cpp
 CMakeFiles/test_runner.dir/services/PdfReportService.cpp.o: CMakeFiles/test_runner.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/build_cmake/CMakeFiles --progress-num=$(CMAKE_PROGRESS_17) "Building CXX object CMakeFiles/test_runner.dir/services/PdfReportService.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/test_runner.dir/services/PdfReportService.cpp.o -MF CMakeFiles/test_runner.dir/services/PdfReportService.cpp.o.d -o CMakeFiles/test_runner.dir/services/PdfReportService.cpp.o -c /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/services/PdfReportService.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/build_cmake/CMakeFiles --progress-num=$(CMAKE_PROGRESS_17) "Building CXX object CMakeFiles/test_runner.dir/services/PdfReportService.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/test_runner.dir/services/PdfReportService.cpp.o -MF CMakeFiles/test_runner.dir/services/PdfReportService.cpp.o.d -o CMakeFiles/test_runner.dir/services/PdfReportService.cpp.o -c /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/services/PdfReportService.cpp
 
 CMakeFiles/test_runner.dir/services/PdfReportService.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/test_runner.dir/services/PdfReportService.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/services/PdfReportService.cpp > CMakeFiles/test_runner.dir/services/PdfReportService.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/services/PdfReportService.cpp > CMakeFiles/test_runner.dir/services/PdfReportService.cpp.i
 
 CMakeFiles/test_runner.dir/services/PdfReportService.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/test_runner.dir/services/PdfReportService.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/services/PdfReportService.cpp -o CMakeFiles/test_runner.dir/services/PdfReportService.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/services/PdfReportService.cpp -o CMakeFiles/test_runner.dir/services/PdfReportService.cpp.s
 
 CMakeFiles/test_runner.dir/services/ConstraintExplanationService.cpp.o: CMakeFiles/test_runner.dir/flags.make
-CMakeFiles/test_runner.dir/services/ConstraintExplanationService.cpp.o: /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/services/ConstraintExplanationService.cpp
+CMakeFiles/test_runner.dir/services/ConstraintExplanationService.cpp.o: /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/services/ConstraintExplanationService.cpp
 CMakeFiles/test_runner.dir/services/ConstraintExplanationService.cpp.o: CMakeFiles/test_runner.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/build_cmake/CMakeFiles --progress-num=$(CMAKE_PROGRESS_18) "Building CXX object CMakeFiles/test_runner.dir/services/ConstraintExplanationService.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/test_runner.dir/services/ConstraintExplanationService.cpp.o -MF CMakeFiles/test_runner.dir/services/ConstraintExplanationService.cpp.o.d -o CMakeFiles/test_runner.dir/services/ConstraintExplanationService.cpp.o -c /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/services/ConstraintExplanationService.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/build_cmake/CMakeFiles --progress-num=$(CMAKE_PROGRESS_18) "Building CXX object CMakeFiles/test_runner.dir/services/ConstraintExplanationService.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/test_runner.dir/services/ConstraintExplanationService.cpp.o -MF CMakeFiles/test_runner.dir/services/ConstraintExplanationService.cpp.o.d -o CMakeFiles/test_runner.dir/services/ConstraintExplanationService.cpp.o -c /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/services/ConstraintExplanationService.cpp
 
 CMakeFiles/test_runner.dir/services/ConstraintExplanationService.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/test_runner.dir/services/ConstraintExplanationService.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/services/ConstraintExplanationService.cpp > CMakeFiles/test_runner.dir/services/ConstraintExplanationService.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/services/ConstraintExplanationService.cpp > CMakeFiles/test_runner.dir/services/ConstraintExplanationService.cpp.i
 
 CMakeFiles/test_runner.dir/services/ConstraintExplanationService.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/test_runner.dir/services/ConstraintExplanationService.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/services/ConstraintExplanationService.cpp -o CMakeFiles/test_runner.dir/services/ConstraintExplanationService.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/services/ConstraintExplanationService.cpp -o CMakeFiles/test_runner.dir/services/ConstraintExplanationService.cpp.s
 
 CMakeFiles/test_runner.dir/services/ConstraintExplain.cpp.o: CMakeFiles/test_runner.dir/flags.make
-CMakeFiles/test_runner.dir/services/ConstraintExplain.cpp.o: /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/services/ConstraintExplain.cpp
+CMakeFiles/test_runner.dir/services/ConstraintExplain.cpp.o: /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/services/ConstraintExplain.cpp
 CMakeFiles/test_runner.dir/services/ConstraintExplain.cpp.o: CMakeFiles/test_runner.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/build_cmake/CMakeFiles --progress-num=$(CMAKE_PROGRESS_19) "Building CXX object CMakeFiles/test_runner.dir/services/ConstraintExplain.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/test_runner.dir/services/ConstraintExplain.cpp.o -MF CMakeFiles/test_runner.dir/services/ConstraintExplain.cpp.o.d -o CMakeFiles/test_runner.dir/services/ConstraintExplain.cpp.o -c /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/services/ConstraintExplain.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/build_cmake/CMakeFiles --progress-num=$(CMAKE_PROGRESS_19) "Building CXX object CMakeFiles/test_runner.dir/services/ConstraintExplain.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/test_runner.dir/services/ConstraintExplain.cpp.o -MF CMakeFiles/test_runner.dir/services/ConstraintExplain.cpp.o.d -o CMakeFiles/test_runner.dir/services/ConstraintExplain.cpp.o -c /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/services/ConstraintExplain.cpp
 
 CMakeFiles/test_runner.dir/services/ConstraintExplain.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/test_runner.dir/services/ConstraintExplain.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/services/ConstraintExplain.cpp > CMakeFiles/test_runner.dir/services/ConstraintExplain.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/services/ConstraintExplain.cpp > CMakeFiles/test_runner.dir/services/ConstraintExplain.cpp.i
 
 CMakeFiles/test_runner.dir/services/ConstraintExplain.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/test_runner.dir/services/ConstraintExplain.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/services/ConstraintExplain.cpp -o CMakeFiles/test_runner.dir/services/ConstraintExplain.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/services/ConstraintExplain.cpp -o CMakeFiles/test_runner.dir/services/ConstraintExplain.cpp.s
 
 CMakeFiles/test_runner.dir/services/ConflictChecker.cpp.o: CMakeFiles/test_runner.dir/flags.make
-CMakeFiles/test_runner.dir/services/ConflictChecker.cpp.o: /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/services/ConflictChecker.cpp
+CMakeFiles/test_runner.dir/services/ConflictChecker.cpp.o: /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/services/ConflictChecker.cpp
 CMakeFiles/test_runner.dir/services/ConflictChecker.cpp.o: CMakeFiles/test_runner.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/build_cmake/CMakeFiles --progress-num=$(CMAKE_PROGRESS_20) "Building CXX object CMakeFiles/test_runner.dir/services/ConflictChecker.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/test_runner.dir/services/ConflictChecker.cpp.o -MF CMakeFiles/test_runner.dir/services/ConflictChecker.cpp.o.d -o CMakeFiles/test_runner.dir/services/ConflictChecker.cpp.o -c /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/services/ConflictChecker.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/build_cmake/CMakeFiles --progress-num=$(CMAKE_PROGRESS_20) "Building CXX object CMakeFiles/test_runner.dir/services/ConflictChecker.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/test_runner.dir/services/ConflictChecker.cpp.o -MF CMakeFiles/test_runner.dir/services/ConflictChecker.cpp.o.d -o CMakeFiles/test_runner.dir/services/ConflictChecker.cpp.o -c /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/services/ConflictChecker.cpp
 
 CMakeFiles/test_runner.dir/services/ConflictChecker.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/test_runner.dir/services/ConflictChecker.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/services/ConflictChecker.cpp > CMakeFiles/test_runner.dir/services/ConflictChecker.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/services/ConflictChecker.cpp > CMakeFiles/test_runner.dir/services/ConflictChecker.cpp.i
 
 CMakeFiles/test_runner.dir/services/ConflictChecker.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/test_runner.dir/services/ConflictChecker.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/services/ConflictChecker.cpp -o CMakeFiles/test_runner.dir/services/ConflictChecker.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/services/ConflictChecker.cpp -o CMakeFiles/test_runner.dir/services/ConflictChecker.cpp.s
 
 CMakeFiles/test_runner.dir/services/UndoRedoStack.cpp.o: CMakeFiles/test_runner.dir/flags.make
-CMakeFiles/test_runner.dir/services/UndoRedoStack.cpp.o: /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/services/UndoRedoStack.cpp
+CMakeFiles/test_runner.dir/services/UndoRedoStack.cpp.o: /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/services/UndoRedoStack.cpp
 CMakeFiles/test_runner.dir/services/UndoRedoStack.cpp.o: CMakeFiles/test_runner.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/build_cmake/CMakeFiles --progress-num=$(CMAKE_PROGRESS_21) "Building CXX object CMakeFiles/test_runner.dir/services/UndoRedoStack.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/test_runner.dir/services/UndoRedoStack.cpp.o -MF CMakeFiles/test_runner.dir/services/UndoRedoStack.cpp.o.d -o CMakeFiles/test_runner.dir/services/UndoRedoStack.cpp.o -c /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/services/UndoRedoStack.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/build_cmake/CMakeFiles --progress-num=$(CMAKE_PROGRESS_21) "Building CXX object CMakeFiles/test_runner.dir/services/UndoRedoStack.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/test_runner.dir/services/UndoRedoStack.cpp.o -MF CMakeFiles/test_runner.dir/services/UndoRedoStack.cpp.o.d -o CMakeFiles/test_runner.dir/services/UndoRedoStack.cpp.o -c /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/services/UndoRedoStack.cpp
 
 CMakeFiles/test_runner.dir/services/UndoRedoStack.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/test_runner.dir/services/UndoRedoStack.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/services/UndoRedoStack.cpp > CMakeFiles/test_runner.dir/services/UndoRedoStack.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/services/UndoRedoStack.cpp > CMakeFiles/test_runner.dir/services/UndoRedoStack.cpp.i
 
 CMakeFiles/test_runner.dir/services/UndoRedoStack.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/test_runner.dir/services/UndoRedoStack.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/services/UndoRedoStack.cpp -o CMakeFiles/test_runner.dir/services/UndoRedoStack.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/services/UndoRedoStack.cpp -o CMakeFiles/test_runner.dir/services/UndoRedoStack.cpp.s
 
 CMakeFiles/test_runner.dir/services/TimelineGenerator.cpp.o: CMakeFiles/test_runner.dir/flags.make
-CMakeFiles/test_runner.dir/services/TimelineGenerator.cpp.o: /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/services/TimelineGenerator.cpp
+CMakeFiles/test_runner.dir/services/TimelineGenerator.cpp.o: /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/services/TimelineGenerator.cpp
 CMakeFiles/test_runner.dir/services/TimelineGenerator.cpp.o: CMakeFiles/test_runner.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/build_cmake/CMakeFiles --progress-num=$(CMAKE_PROGRESS_22) "Building CXX object CMakeFiles/test_runner.dir/services/TimelineGenerator.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/test_runner.dir/services/TimelineGenerator.cpp.o -MF CMakeFiles/test_runner.dir/services/TimelineGenerator.cpp.o.d -o CMakeFiles/test_runner.dir/services/TimelineGenerator.cpp.o -c /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/services/TimelineGenerator.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/build_cmake/CMakeFiles --progress-num=$(CMAKE_PROGRESS_22) "Building CXX object CMakeFiles/test_runner.dir/services/TimelineGenerator.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/test_runner.dir/services/TimelineGenerator.cpp.o -MF CMakeFiles/test_runner.dir/services/TimelineGenerator.cpp.o.d -o CMakeFiles/test_runner.dir/services/TimelineGenerator.cpp.o -c /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/services/TimelineGenerator.cpp
 
 CMakeFiles/test_runner.dir/services/TimelineGenerator.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/test_runner.dir/services/TimelineGenerator.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/services/TimelineGenerator.cpp > CMakeFiles/test_runner.dir/services/TimelineGenerator.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/services/TimelineGenerator.cpp > CMakeFiles/test_runner.dir/services/TimelineGenerator.cpp.i
 
 CMakeFiles/test_runner.dir/services/TimelineGenerator.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/test_runner.dir/services/TimelineGenerator.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/services/TimelineGenerator.cpp -o CMakeFiles/test_runner.dir/services/TimelineGenerator.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/services/TimelineGenerator.cpp -o CMakeFiles/test_runner.dir/services/TimelineGenerator.cpp.s
 
 # Object files for target test_runner
 test_runner_OBJECTS = \
@@ -425,7 +425,7 @@ test_runner: /home/thorium/anaconda3/lib/libQt5Widgets.so.5.15.2
 test_runner: /home/thorium/anaconda3/lib/libQt5Gui.so.5.15.2
 test_runner: /home/thorium/anaconda3/lib/libQt5Core.so.5.15.2
 test_runner: CMakeFiles/test_runner.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/build_cmake/CMakeFiles --progress-num=$(CMAKE_PROGRESS_23) "Linking CXX executable test_runner"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/build_cmake/CMakeFiles --progress-num=$(CMAKE_PROGRESS_23) "Linking CXX executable test_runner"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/test_runner.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -437,6 +437,6 @@ CMakeFiles/test_runner.dir/clean:
 .PHONY : CMakeFiles/test_runner.dir/clean
 
 CMakeFiles/test_runner.dir/depend: test_runner_autogen/timestamp
-	cd /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/build_cmake && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/build_cmake /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/build_cmake /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/build_cmake/CMakeFiles/test_runner.dir/DependInfo.cmake "--color=$(COLOR)"
+	cd /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/build_cmake && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/build_cmake /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/build_cmake /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/build_cmake/CMakeFiles/test_runner.dir/DependInfo.cmake "--color=$(COLOR)"
 .PHONY : CMakeFiles/test_runner.dir/depend
 

@@ -1,7 +1,7 @@
 CMakeFiles/timetableGen.dir/gui/rooms/RoomDialog.cpp.o: \
- /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/gui/rooms/RoomDialog.cpp \
+ /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/gui/rooms/RoomDialog.cpp \
  /usr/include/stdc-predef.h \
- /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/gui/rooms/RoomDialog.h \
+ /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/gui/rooms/RoomDialog.h \
  /home/thorium/anaconda3/include/qt/QtWidgets/QDialog \
  /home/thorium/anaconda3/include/qt/QtWidgets/qdialog.h \
  /home/thorium/anaconda3/include/qt/QtWidgets/qtwidgetsglobal.h \
@@ -326,7 +326,7 @@ CMakeFiles/timetableGen.dir/gui/rooms/RoomDialog.cpp.o: \
  /home/thorium/anaconda3/include/qt/QtWidgets/QPushButton \
  /home/thorium/anaconda3/include/qt/QtWidgets/qpushbutton.h \
  /home/thorium/anaconda3/include/qt/QtWidgets/qabstractbutton.h \
- /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/gui/rooms/../../models/RoomType.h \
+ /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/gui/rooms/../../models/RoomType.h \
  /home/thorium/anaconda3/include/qt/QtWidgets/QFormLayout \
  /home/thorium/anaconda3/include/qt/QtWidgets/qformlayout.h \
  /home/thorium/anaconda3/include/qt/QtWidgets/QLayout \

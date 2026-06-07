@@ -1,5 +1,5 @@
-/home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/build_cmake/timetableGen_autogen/3N7FN5E5SX/moc_SubjectDialog.cpp: /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/gui/subjects/SubjectDialog.h \
-  /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/build_cmake/timetableGen_autogen/moc_predefs.h \
+/home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/build_cmake/timetableGen_autogen/3N7FN5E5SX/moc_SubjectDialog.cpp: /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/gui/subjects/SubjectDialog.h \
+  /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/build_cmake/timetableGen_autogen/moc_predefs.h \
   /home/thorium/anaconda3/include/qt/QtCore/qalgorithms.h \
   /home/thorium/anaconda3/include/qt/QtCore/qarraydata.h \
   /home/thorium/anaconda3/include/qt/QtCore/qatomic.h \

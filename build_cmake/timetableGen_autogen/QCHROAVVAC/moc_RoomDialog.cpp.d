@@ -1,6 +1,6 @@
-/home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/build_cmake/timetableGen_autogen/QCHROAVVAC/moc_RoomDialog.cpp: /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/gui/rooms/RoomDialog.h \
-  /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/build_cmake/timetableGen_autogen/moc_predefs.h \
-  /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/models/RoomType.h \
+/home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/build_cmake/timetableGen_autogen/QCHROAVVAC/moc_RoomDialog.cpp: /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/gui/rooms/RoomDialog.h \
+  /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/build_cmake/timetableGen_autogen/moc_predefs.h \
+  /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/models/RoomType.h \
   /home/thorium/anaconda3/include/qt/QtCore/qabstractitemmodel.h \
   /home/thorium/anaconda3/include/qt/QtCore/qalgorithms.h \
   /home/thorium/anaconda3/include/qt/QtCore/qarraydata.h \

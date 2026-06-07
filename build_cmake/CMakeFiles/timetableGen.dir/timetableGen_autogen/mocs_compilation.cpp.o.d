@@ -1,7 +1,7 @@
 CMakeFiles/timetableGen.dir/timetableGen_autogen/mocs_compilation.cpp.o: \
- /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/build_cmake/timetableGen_autogen/mocs_compilation.cpp \
+ /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/build_cmake/timetableGen_autogen/mocs_compilation.cpp \
  /usr/include/stdc-predef.h \
- /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/build_cmake/timetableGen_autogen/DMHXEJ42XS/moc_MainWindow.cpp \
+ /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/build_cmake/timetableGen_autogen/DMHXEJ42XS/moc_MainWindow.cpp \
  /usr/include/c++/13/memory /usr/include/c++/13/bits/memoryfwd.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/c++config.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/os_defines.h \
@@ -118,7 +118,7 @@ CMakeFiles/timetableGen.dir/timetableGen_autogen/mocs_compilation.cpp.o: \
  /usr/include/c++/13/backward/auto_ptr.h \
  /usr/include/c++/13/pstl/glue_memory_defs.h \
  /usr/include/c++/13/pstl/execution_defs.h \
- /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/build_cmake/timetableGen_autogen/DMHXEJ42XS/../../../gui/MainWindow.h \
+ /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/build_cmake/timetableGen_autogen/DMHXEJ42XS/../../../gui/MainWindow.h \
  /home/thorium/anaconda3/include/qt/QtWidgets/QMainWindow \
  /home/thorium/anaconda3/include/qt/QtWidgets/qmainwindow.h \
  /home/thorium/anaconda3/include/qt/QtWidgets/qtwidgetsglobal.h \
@@ -304,24 +304,24 @@ CMakeFiles/timetableGen.dir/timetableGen_autogen/mocs_compilation.cpp.o: \
  /home/thorium/anaconda3/include/qt/QtWidgets/qstackedwidget.h \
  /home/thorium/anaconda3/include/qt/QtWidgets/QLabel \
  /home/thorium/anaconda3/include/qt/QtWidgets/qlabel.h \
- /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/build_cmake/timetableGen_autogen/DMHXEJ42XS/../../../gui/../services/DataManager.h \
+ /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/build_cmake/timetableGen_autogen/DMHXEJ42XS/../../../gui/../services/DataManager.h \
  /usr/include/c++/13/cstring \
- /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/build_cmake/timetableGen_autogen/DMHXEJ42XS/../../../gui/../services/../models/Teacher.h \
- /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/build_cmake/timetableGen_autogen/DMHXEJ42XS/../../../gui/../services/../models/Subject.h \
- /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/build_cmake/timetableGen_autogen/DMHXEJ42XS/../../../gui/../services/../models/SchoolClass.h \
- /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/build_cmake/timetableGen_autogen/DMHXEJ42XS/../../../gui/../services/../models/Room.h \
- /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/build_cmake/timetableGen_autogen/DMHXEJ42XS/../../../gui/../services/../models/Lesson.h \
- /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/build_cmake/timetableGen_autogen/DMHXEJ42XS/../../../gui/../services/../models/Day.h \
- /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/build_cmake/timetableGen_autogen/DMHXEJ42XS/../../../gui/../services/../models/Period.h \
- /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/build_cmake/timetableGen_autogen/DMHXEJ42XS/../../../gui/../services/../models/TeacherConstraint.h \
- /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/build_cmake/timetableGen_autogen/DMHXEJ42XS/../../../gui/../services/../models/SubjectRequirement.h \
- /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/build_cmake/timetableGen_autogen/DMHXEJ42XS/../../../gui/../services/../models/RoomType.h \
- /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/build_cmake/timetableGen_autogen/DMHXEJ42XS/../../../gui/../services/../models/FixedEvent.h \
- /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/build_cmake/timetableGen_autogen/DMHXEJ42XS/../../../gui/../services/../models/TeacherPreference.h \
- /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/build_cmake/timetableGen_autogen/DMHXEJ42XS/../../../gui/../services/../models/Substitution.h \
- /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/build_cmake/timetableGen_autogen/DMHXEJ42XS/../../../gui/../services/../models/Division.h \
- /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/build_cmake/timetableGen_autogen/DMHXEJ42XS/../../../gui/../services/../models/ConstraintViolation.h \
- /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/build_cmake/timetableGen_autogen/DMHXEJ42XS/../../../gui/../services/SQLiteService.h \
+ /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/build_cmake/timetableGen_autogen/DMHXEJ42XS/../../../gui/../services/../models/Teacher.h \
+ /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/build_cmake/timetableGen_autogen/DMHXEJ42XS/../../../gui/../services/../models/Subject.h \
+ /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/build_cmake/timetableGen_autogen/DMHXEJ42XS/../../../gui/../services/../models/SchoolClass.h \
+ /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/build_cmake/timetableGen_autogen/DMHXEJ42XS/../../../gui/../services/../models/Room.h \
+ /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/build_cmake/timetableGen_autogen/DMHXEJ42XS/../../../gui/../services/../models/Lesson.h \
+ /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/build_cmake/timetableGen_autogen/DMHXEJ42XS/../../../gui/../services/../models/Day.h \
+ /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/build_cmake/timetableGen_autogen/DMHXEJ42XS/../../../gui/../services/../models/Period.h \
+ /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/build_cmake/timetableGen_autogen/DMHXEJ42XS/../../../gui/../services/../models/TeacherConstraint.h \
+ /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/build_cmake/timetableGen_autogen/DMHXEJ42XS/../../../gui/../services/../models/SubjectRequirement.h \
+ /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/build_cmake/timetableGen_autogen/DMHXEJ42XS/../../../gui/../services/../models/RoomType.h \
+ /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/build_cmake/timetableGen_autogen/DMHXEJ42XS/../../../gui/../services/../models/FixedEvent.h \
+ /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/build_cmake/timetableGen_autogen/DMHXEJ42XS/../../../gui/../services/../models/TeacherPreference.h \
+ /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/build_cmake/timetableGen_autogen/DMHXEJ42XS/../../../gui/../services/../models/Substitution.h \
+ /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/build_cmake/timetableGen_autogen/DMHXEJ42XS/../../../gui/../services/../models/Division.h \
+ /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/build_cmake/timetableGen_autogen/DMHXEJ42XS/../../../gui/../services/../models/ConstraintViolation.h \
+ /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/build_cmake/timetableGen_autogen/DMHXEJ42XS/../../../gui/../services/SQLiteService.h \
  /home/thorium/anaconda3/include/qt/QtSql/QSqlDatabase \
  /home/thorium/anaconda3/include/qt/QtSql/qsqldatabase.h \
  /home/thorium/anaconda3/include/qt/QtSql/qtsqlglobal.h \
@@ -333,11 +333,11 @@ CMakeFiles/timetableGen.dir/timetableGen_autogen/mocs_compilation.cpp.o: \
  /home/thorium/anaconda3/include/qt/QtSql/qsqlerror.h \
  /home/thorium/anaconda3/include/qt/QtCore/QString \
  /home/thorium/anaconda3/include/qt/QtCore/qstring.h \
- /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/build_cmake/timetableGen_autogen/DMHXEJ42XS/../../../gui/../services/../timetable/Timetable.h \
- /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/build_cmake/timetableGen_autogen/DMHXEJ42XS/../../../gui/../services/UndoRedoStack.h \
- /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/build_cmake/timetableGen_autogen/DMHXEJ42XS/../../../gui/../services/ConflictChecker.h \
- /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/build_cmake/timetableGen_autogen/DMHXEJ42XS/../../../gui/../services/SolverStrategy.h \
- /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/build_cmake/timetableGen_autogen/DMHXEJ42XS/../../../gui/ribbon/RibbonToolbar.h \
+ /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/build_cmake/timetableGen_autogen/DMHXEJ42XS/../../../gui/../services/../timetable/Timetable.h \
+ /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/build_cmake/timetableGen_autogen/DMHXEJ42XS/../../../gui/../services/UndoRedoStack.h \
+ /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/build_cmake/timetableGen_autogen/DMHXEJ42XS/../../../gui/../services/ConflictChecker.h \
+ /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/build_cmake/timetableGen_autogen/DMHXEJ42XS/../../../gui/../services/SolverStrategy.h \
+ /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/build_cmake/timetableGen_autogen/DMHXEJ42XS/../../../gui/ribbon/RibbonToolbar.h \
  /home/thorium/anaconda3/include/qt/QtWidgets/QWidget \
  /home/thorium/anaconda3/include/qt/QtWidgets/qwidget.h \
  /home/thorium/anaconda3/include/qt/QtWidgets/QPushButton \
@@ -345,7 +345,7 @@ CMakeFiles/timetableGen.dir/timetableGen_autogen/mocs_compilation.cpp.o: \
  /home/thorium/anaconda3/include/qt/QtWidgets/qabstractbutton.h \
  /home/thorium/anaconda3/include/qt/QtWidgets/QButtonGroup \
  /home/thorium/anaconda3/include/qt/QtWidgets/qbuttongroup.h \
- /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/build_cmake/timetableGen_autogen/DMHXEJ42XS/../../../gui/sidebar/DataSidebar.h \
+ /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/build_cmake/timetableGen_autogen/DMHXEJ42XS/../../../gui/sidebar/DataSidebar.h \
  /home/thorium/anaconda3/include/qt/QtWidgets/QTreeWidget \
  /home/thorium/anaconda3/include/qt/QtWidgets/qtreewidget.h \
  /home/thorium/anaconda3/include/qt/QtWidgets/qtreeview.h \
@@ -369,7 +369,7 @@ CMakeFiles/timetableGen.dir/timetableGen_autogen/mocs_compilation.cpp.o: \
  /home/thorium/anaconda3/include/qt/QtWidgets/qtabbar.h \
  /home/thorium/anaconda3/include/qt/QtWidgets/qrubberband.h \
  /home/thorium/anaconda3/include/qt/QtWidgets/qtreewidgetitemiterator.h \
- /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/build_cmake/timetableGen_autogen/DMHXEJ42XS/../../../gui/timetableview/TimetableViewWidget.h \
+ /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/build_cmake/timetableGen_autogen/DMHXEJ42XS/../../../gui/timetableview/TimetableViewWidget.h \
  /home/thorium/anaconda3/include/qt/QtGui/QShowEvent \
  /home/thorium/anaconda3/include/qt/QtGui/qevent.h \
  /home/thorium/anaconda3/include/qt/QtCore/qcoreevent.h \
@@ -387,7 +387,7 @@ CMakeFiles/timetableGen.dir/timetableGen_autogen/mocs_compilation.cpp.o: \
  /home/thorium/anaconda3/include/qt/QtWidgets/qgraphicsscene.h \
  /home/thorium/anaconda3/include/qt/QtWidgets/QComboBox \
  /home/thorium/anaconda3/include/qt/QtWidgets/qcombobox.h \
- /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/build_cmake/timetableGen_autogen/DMHXEJ42XS/../../../gui/dashboard/DashboardWidget.h \
+ /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/build_cmake/timetableGen_autogen/DMHXEJ42XS/../../../gui/dashboard/DashboardWidget.h \
  /home/thorium/anaconda3/include/qt/QtWidgets/QTextEdit \
  /home/thorium/anaconda3/include/qt/QtWidgets/qtextedit.h \
  /home/thorium/anaconda3/include/qt/QtGui/qtextdocument.h \
@@ -395,51 +395,51 @@ CMakeFiles/timetableGen.dir/timetableGen_autogen/mocs_compilation.cpp.o: \
  /home/thorium/anaconda3/include/qt/QtGui/qtextformat.h \
  /home/thorium/anaconda3/include/qt/QtWidgets/QFrame \
  /home/thorium/anaconda3/include/qt/QtWidgets/qframe.h \
- /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/build_cmake/timetableGen_autogen/DMHXEJ42XS/../../../gui/substitutions/SubstitutionWidget.h \
+ /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/build_cmake/timetableGen_autogen/DMHXEJ42XS/../../../gui/substitutions/SubstitutionWidget.h \
  /home/thorium/anaconda3/include/qt/QtWidgets/QTableView \
  /home/thorium/anaconda3/include/qt/QtWidgets/qtableview.h \
  /home/thorium/anaconda3/include/qt/QtGui/QStandardItemModel \
  /home/thorium/anaconda3/include/qt/QtGui/qstandarditemmodel.h \
- /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/build_cmake/timetableGen_autogen/DMHXEJ42XS/../../../gui/divisions/DivisionWidget.h \
+ /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/build_cmake/timetableGen_autogen/DMHXEJ42XS/../../../gui/divisions/DivisionWidget.h \
  /home/thorium/anaconda3/include/qt/QtWidgets/QLineEdit \
  /home/thorium/anaconda3/include/qt/QtWidgets/qlineedit.h \
  /home/thorium/anaconda3/include/qt/QtWidgets/QCheckBox \
  /home/thorium/anaconda3/include/qt/QtWidgets/qcheckbox.h \
- /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/build_cmake/timetableGen_autogen/6XHY6POGKJ/moc_ClassDialog.cpp \
- /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/build_cmake/timetableGen_autogen/6XHY6POGKJ/../../../gui/classes/ClassDialog.h \
+ /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/build_cmake/timetableGen_autogen/6XHY6POGKJ/moc_ClassDialog.cpp \
+ /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/build_cmake/timetableGen_autogen/6XHY6POGKJ/../../../gui/classes/ClassDialog.h \
  /home/thorium/anaconda3/include/qt/QtWidgets/QDialog \
  /home/thorium/anaconda3/include/qt/QtWidgets/qdialog.h \
  /home/thorium/anaconda3/include/qt/QtWidgets/QSpinBox \
  /home/thorium/anaconda3/include/qt/QtWidgets/qspinbox.h \
- /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/build_cmake/timetableGen_autogen/UAABUEX5WD/moc_ConstraintRelaxationDialog.cpp \
- /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/build_cmake/timetableGen_autogen/UAABUEX5WD/../../../gui/constraints/ConstraintRelaxationDialog.h \
+ /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/build_cmake/timetableGen_autogen/UAABUEX5WD/moc_ConstraintRelaxationDialog.cpp \
+ /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/build_cmake/timetableGen_autogen/UAABUEX5WD/../../../gui/constraints/ConstraintRelaxationDialog.h \
  /home/thorium/anaconda3/include/qt/QtWidgets/QTableWidget \
  /home/thorium/anaconda3/include/qt/QtWidgets/qtablewidget.h \
  /home/thorium/anaconda3/include/qt/QtWidgets/qtableview.h \
- /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/build_cmake/timetableGen_autogen/RFHCREA6TT/moc_DashboardWidget.cpp \
- /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/build_cmake/timetableGen_autogen/53MARQA3GU/moc_DivisionWidget.cpp \
- /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/build_cmake/timetableGen_autogen/KDFFYXMCPP/moc_RibbonToolbar.cpp \
- /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/build_cmake/timetableGen_autogen/QCHROAVVAC/moc_RoomDialog.cpp \
- /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/build_cmake/timetableGen_autogen/QCHROAVVAC/../../../gui/rooms/RoomDialog.h \
- /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/build_cmake/timetableGen_autogen/OL4NCZULB5/moc_DataSidebar.cpp \
- /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/build_cmake/timetableGen_autogen/3N7FN5E5SX/moc_SubjectDialog.cpp \
- /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/build_cmake/timetableGen_autogen/3N7FN5E5SX/../../../gui/subjects/SubjectDialog.h \
- /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/build_cmake/timetableGen_autogen/GZ4XGGUQ6T/moc_SubstitutionWidget.cpp \
- /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/build_cmake/timetableGen_autogen/T42TDTEGMM/moc_TeacherDialog.cpp \
- /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/build_cmake/timetableGen_autogen/T42TDTEGMM/../../../gui/teachers/TeacherDialog.h \
- /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/build_cmake/timetableGen_autogen/Y35E7JOGH3/moc_LessonCardItem.cpp \
- /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/build_cmake/timetableGen_autogen/Y35E7JOGH3/../../../gui/timetableview/LessonCardItem.h \
+ /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/build_cmake/timetableGen_autogen/RFHCREA6TT/moc_DashboardWidget.cpp \
+ /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/build_cmake/timetableGen_autogen/53MARQA3GU/moc_DivisionWidget.cpp \
+ /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/build_cmake/timetableGen_autogen/KDFFYXMCPP/moc_RibbonToolbar.cpp \
+ /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/build_cmake/timetableGen_autogen/QCHROAVVAC/moc_RoomDialog.cpp \
+ /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/build_cmake/timetableGen_autogen/QCHROAVVAC/../../../gui/rooms/RoomDialog.h \
+ /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/build_cmake/timetableGen_autogen/OL4NCZULB5/moc_DataSidebar.cpp \
+ /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/build_cmake/timetableGen_autogen/3N7FN5E5SX/moc_SubjectDialog.cpp \
+ /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/build_cmake/timetableGen_autogen/3N7FN5E5SX/../../../gui/subjects/SubjectDialog.h \
+ /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/build_cmake/timetableGen_autogen/GZ4XGGUQ6T/moc_SubstitutionWidget.cpp \
+ /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/build_cmake/timetableGen_autogen/T42TDTEGMM/moc_TeacherDialog.cpp \
+ /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/build_cmake/timetableGen_autogen/T42TDTEGMM/../../../gui/teachers/TeacherDialog.h \
+ /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/build_cmake/timetableGen_autogen/Y35E7JOGH3/moc_LessonCardItem.cpp \
+ /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/build_cmake/timetableGen_autogen/Y35E7JOGH3/../../../gui/timetableview/LessonCardItem.h \
  /home/thorium/anaconda3/include/qt/QtWidgets/QGraphicsObject \
  /home/thorium/anaconda3/include/qt/QtWidgets/qgraphicsitem.h \
  /home/thorium/anaconda3/include/qt/QtGui/qpainterpath.h \
  /home/thorium/anaconda3/include/qt/QtGui/QColor \
  /home/thorium/anaconda3/include/qt/QtGui/qcolor.h \
- /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/build_cmake/timetableGen_autogen/Y35E7JOGH3/moc_TimetableScene.cpp \
- /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/build_cmake/timetableGen_autogen/Y35E7JOGH3/../../../gui/timetableview/TimetableScene.h \
+ /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/build_cmake/timetableGen_autogen/Y35E7JOGH3/moc_TimetableScene.cpp \
+ /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/build_cmake/timetableGen_autogen/Y35E7JOGH3/../../../gui/timetableview/TimetableScene.h \
  /home/thorium/anaconda3/include/qt/QtWidgets/QGraphicsScene \
  /home/thorium/anaconda3/include/qt/QtWidgets/qgraphicsscene.h \
  /home/thorium/anaconda3/include/qt/QtCore/QMap \
  /home/thorium/anaconda3/include/qt/QtCore/qmap.h \
  /home/thorium/anaconda3/include/qt/QtCore/QPair \
  /home/thorium/anaconda3/include/qt/QtCore/qpair.h \
- /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/build_cmake/timetableGen_autogen/Y35E7JOGH3/moc_TimetableViewWidget.cpp
+ /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/build_cmake/timetableGen_autogen/Y35E7JOGH3/moc_TimetableViewWidget.cpp

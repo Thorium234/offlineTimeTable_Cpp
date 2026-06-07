@@ -1,7 +1,7 @@
 CMakeFiles/timetableGen.dir/gui/MainWindow.cpp.o: \
- /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/gui/MainWindow.cpp \
+ /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/gui/MainWindow.cpp \
  /usr/include/stdc-predef.h \
- /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/gui/MainWindow.h \
+ /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/gui/MainWindow.h \
  /home/thorium/anaconda3/include/qt/QtWidgets/QMainWindow \
  /home/thorium/anaconda3/include/qt/QtWidgets/qmainwindow.h \
  /home/thorium/anaconda3/include/qt/QtWidgets/qtwidgetsglobal.h \
@@ -304,24 +304,24 @@ CMakeFiles/timetableGen.dir/gui/MainWindow.cpp.o: \
  /home/thorium/anaconda3/include/qt/QtWidgets/qstackedwidget.h \
  /home/thorium/anaconda3/include/qt/QtWidgets/QLabel \
  /home/thorium/anaconda3/include/qt/QtWidgets/qlabel.h \
- /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/gui/../services/DataManager.h \
+ /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/gui/../services/DataManager.h \
  /usr/include/c++/13/cstring \
- /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/gui/../services/../models/Teacher.h \
- /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/gui/../services/../models/Subject.h \
- /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/gui/../services/../models/SchoolClass.h \
- /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/gui/../services/../models/Room.h \
- /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/gui/../services/../models/Lesson.h \
- /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/gui/../services/../models/Day.h \
- /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/gui/../services/../models/Period.h \
- /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/gui/../services/../models/TeacherConstraint.h \
- /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/gui/../services/../models/SubjectRequirement.h \
- /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/gui/../services/../models/RoomType.h \
- /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/gui/../services/../models/FixedEvent.h \
- /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/gui/../services/../models/TeacherPreference.h \
- /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/gui/../services/../models/Substitution.h \
- /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/gui/../services/../models/Division.h \
- /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/gui/../services/../models/ConstraintViolation.h \
- /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/gui/../services/SQLiteService.h \
+ /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/gui/../services/../models/Teacher.h \
+ /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/gui/../services/../models/Subject.h \
+ /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/gui/../services/../models/SchoolClass.h \
+ /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/gui/../services/../models/Room.h \
+ /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/gui/../services/../models/Lesson.h \
+ /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/gui/../services/../models/Day.h \
+ /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/gui/../services/../models/Period.h \
+ /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/gui/../services/../models/TeacherConstraint.h \
+ /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/gui/../services/../models/SubjectRequirement.h \
+ /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/gui/../services/../models/RoomType.h \
+ /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/gui/../services/../models/FixedEvent.h \
+ /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/gui/../services/../models/TeacherPreference.h \
+ /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/gui/../services/../models/Substitution.h \
+ /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/gui/../services/../models/Division.h \
+ /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/gui/../services/../models/ConstraintViolation.h \
+ /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/gui/../services/SQLiteService.h \
  /home/thorium/anaconda3/include/qt/QtSql/QSqlDatabase \
  /home/thorium/anaconda3/include/qt/QtSql/qsqldatabase.h \
  /home/thorium/anaconda3/include/qt/QtSql/qtsqlglobal.h \
@@ -333,11 +333,11 @@ CMakeFiles/timetableGen.dir/gui/MainWindow.cpp.o: \
  /home/thorium/anaconda3/include/qt/QtSql/qsqlerror.h \
  /home/thorium/anaconda3/include/qt/QtCore/QString \
  /home/thorium/anaconda3/include/qt/QtCore/qstring.h \
- /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/gui/../services/../timetable/Timetable.h \
- /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/gui/../services/UndoRedoStack.h \
- /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/gui/../services/ConflictChecker.h \
- /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/gui/../services/SolverStrategy.h \
- /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/gui/ribbon/RibbonToolbar.h \
+ /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/gui/../services/../timetable/Timetable.h \
+ /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/gui/../services/UndoRedoStack.h \
+ /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/gui/../services/ConflictChecker.h \
+ /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/gui/../services/SolverStrategy.h \
+ /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/gui/ribbon/RibbonToolbar.h \
  /home/thorium/anaconda3/include/qt/QtWidgets/QWidget \
  /home/thorium/anaconda3/include/qt/QtWidgets/qwidget.h \
  /home/thorium/anaconda3/include/qt/QtWidgets/QPushButton \
@@ -345,7 +345,7 @@ CMakeFiles/timetableGen.dir/gui/MainWindow.cpp.o: \
  /home/thorium/anaconda3/include/qt/QtWidgets/qabstractbutton.h \
  /home/thorium/anaconda3/include/qt/QtWidgets/QButtonGroup \
  /home/thorium/anaconda3/include/qt/QtWidgets/qbuttongroup.h \
- /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/gui/sidebar/DataSidebar.h \
+ /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/gui/sidebar/DataSidebar.h \
  /home/thorium/anaconda3/include/qt/QtWidgets/QTreeWidget \
  /home/thorium/anaconda3/include/qt/QtWidgets/qtreewidget.h \
  /home/thorium/anaconda3/include/qt/QtWidgets/qtreeview.h \
@@ -369,7 +369,7 @@ CMakeFiles/timetableGen.dir/gui/MainWindow.cpp.o: \
  /home/thorium/anaconda3/include/qt/QtWidgets/qtabbar.h \
  /home/thorium/anaconda3/include/qt/QtWidgets/qrubberband.h \
  /home/thorium/anaconda3/include/qt/QtWidgets/qtreewidgetitemiterator.h \
- /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/gui/timetableview/TimetableViewWidget.h \
+ /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/gui/timetableview/TimetableViewWidget.h \
  /home/thorium/anaconda3/include/qt/QtGui/QShowEvent \
  /home/thorium/anaconda3/include/qt/QtGui/qevent.h \
  /home/thorium/anaconda3/include/qt/QtCore/qcoreevent.h \
@@ -387,7 +387,7 @@ CMakeFiles/timetableGen.dir/gui/MainWindow.cpp.o: \
  /home/thorium/anaconda3/include/qt/QtWidgets/qgraphicsscene.h \
  /home/thorium/anaconda3/include/qt/QtWidgets/QComboBox \
  /home/thorium/anaconda3/include/qt/QtWidgets/qcombobox.h \
- /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/gui/dashboard/DashboardWidget.h \
+ /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/gui/dashboard/DashboardWidget.h \
  /home/thorium/anaconda3/include/qt/QtWidgets/QTextEdit \
  /home/thorium/anaconda3/include/qt/QtWidgets/qtextedit.h \
  /home/thorium/anaconda3/include/qt/QtGui/qtextdocument.h \
@@ -395,23 +395,23 @@ CMakeFiles/timetableGen.dir/gui/MainWindow.cpp.o: \
  /home/thorium/anaconda3/include/qt/QtGui/qtextformat.h \
  /home/thorium/anaconda3/include/qt/QtWidgets/QFrame \
  /home/thorium/anaconda3/include/qt/QtWidgets/qframe.h \
- /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/gui/substitutions/SubstitutionWidget.h \
+ /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/gui/substitutions/SubstitutionWidget.h \
  /home/thorium/anaconda3/include/qt/QtWidgets/QTableView \
  /home/thorium/anaconda3/include/qt/QtWidgets/qtableview.h \
  /home/thorium/anaconda3/include/qt/QtGui/QStandardItemModel \
  /home/thorium/anaconda3/include/qt/QtGui/qstandarditemmodel.h \
- /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/gui/divisions/DivisionWidget.h \
+ /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/gui/divisions/DivisionWidget.h \
  /home/thorium/anaconda3/include/qt/QtWidgets/QLineEdit \
  /home/thorium/anaconda3/include/qt/QtWidgets/qlineedit.h \
  /home/thorium/anaconda3/include/qt/QtWidgets/QCheckBox \
  /home/thorium/anaconda3/include/qt/QtWidgets/qcheckbox.h \
- /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/gui/../services/TimetableEngine.h \
- /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/gui/../services/ExportService.h \
- /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/gui/../services/PdfReportService.h \
+ /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/gui/../services/TimetableEngine.h \
+ /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/gui/../services/ExportService.h \
+ /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/gui/../services/PdfReportService.h \
  /usr/include/c++/13/optional \
- /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/gui/../services/../services/AnalyticsService.h \
- /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/gui/../services/Benchmark.h \
- /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/gui/../utils/PathUtil.h \
+ /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/gui/../services/../services/AnalyticsService.h \
+ /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/gui/../services/Benchmark.h \
+ /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/gui/../utils/PathUtil.h \
  /home/thorium/anaconda3/include/qt/QtCore/QCoreApplication \
  /home/thorium/anaconda3/include/qt/QtCore/qcoreapplication.h \
  /home/thorium/anaconda3/include/qt/QtCore/qeventloop.h \
@@ -454,7 +454,7 @@ CMakeFiles/timetableGen.dir/gui/MainWindow.cpp.o: \
  /home/thorium/anaconda3/include/qt/QtCore/qcoreapplication.h \
  /home/thorium/anaconda3/include/qt/QtGui/qguiapplication.h \
  /home/thorium/anaconda3/include/qt/QtGui/qinputmethod.h \
- /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/gui/constraints/ConstraintRelaxationDialog.h \
+ /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/gui/constraints/ConstraintRelaxationDialog.h \
  /home/thorium/anaconda3/include/qt/QtWidgets/QDialog \
  /home/thorium/anaconda3/include/qt/QtWidgets/qdialog.h \
  /home/thorium/anaconda3/include/qt/QtWidgets/QTableWidget \

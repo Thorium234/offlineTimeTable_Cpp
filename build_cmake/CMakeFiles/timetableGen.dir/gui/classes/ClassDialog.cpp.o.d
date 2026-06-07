@@ -1,7 +1,7 @@
 CMakeFiles/timetableGen.dir/gui/classes/ClassDialog.cpp.o: \
- /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/gui/classes/ClassDialog.cpp \
+ /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/gui/classes/ClassDialog.cpp \
  /usr/include/stdc-predef.h \
- /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/gui/classes/ClassDialog.h \
+ /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/gui/classes/ClassDialog.h \
  /home/thorium/anaconda3/include/qt/QtWidgets/QDialog \
  /home/thorium/anaconda3/include/qt/QtWidgets/qdialog.h \
  /home/thorium/anaconda3/include/qt/QtWidgets/qtwidgetsglobal.h \

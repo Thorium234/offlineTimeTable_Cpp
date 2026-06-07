@@ -1,8 +1,8 @@
 CMakeFiles/test_runner.dir/services/DomainTracker.cpp.o: \
- /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/services/DomainTracker.cpp \
+ /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/services/DomainTracker.cpp \
  /usr/include/stdc-predef.h \
- /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/services/DomainTracker.h \
- /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/services/../models/LessonUnit.h \
+ /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/services/DomainTracker.h \
+ /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/services/../models/LessonUnit.h \
  /usr/include/c++/13/vector /usr/include/c++/13/bits/requires_hosted.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/c++config.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/os_defines.h \
@@ -53,7 +53,7 @@ CMakeFiles/test_runner.dir/services/DomainTracker.cpp.o: \
  /usr/lib/gcc/x86_64-linux-gnu/13/include/stddef.h \
  /usr/include/c++/13/bits/uses_allocator.h \
  /usr/include/c++/13/bits/uses_allocator_args.h /usr/include/c++/13/tuple \
- /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/services/../models/FixedEvent.h \
+ /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/services/../models/FixedEvent.h \
  /usr/include/c++/13/string /usr/include/c++/13/bits/stringfwd.h \
  /usr/include/c++/13/bits/char_traits.h \
  /usr/include/c++/13/bits/postypes.h /usr/include/c++/13/cwchar \

@@ -53,10 +53,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp
+CMAKE_SOURCE_DIR = /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/build_cmake
+CMAKE_BINARY_DIR = /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/build_cmake
 
 # Utility rule file for timetableGen_autogen_timestamp_deps.
 
@@ -66,8 +66,8 @@ include CMakeFiles/timetableGen_autogen_timestamp_deps.dir/compiler_depend.make
 # Include the progress variables for this target.
 include CMakeFiles/timetableGen_autogen_timestamp_deps.dir/progress.make
 
-CMakeFiles/timetableGen_autogen_timestamp_deps: /home/thorium/anaconda3/bin/uic
 CMakeFiles/timetableGen_autogen_timestamp_deps: /home/thorium/anaconda3/lib/libQt5Widgets.so.5.15.2
+CMakeFiles/timetableGen_autogen_timestamp_deps: /home/thorium/anaconda3/bin/uic
 CMakeFiles/timetableGen_autogen_timestamp_deps: /home/thorium/anaconda3/bin/moc
 CMakeFiles/timetableGen_autogen_timestamp_deps: /home/thorium/anaconda3/lib/libQt5Sql.so.5.15.2
 CMakeFiles/timetableGen_autogen_timestamp_deps: /home/thorium/anaconda3/lib/libQt5PrintSupport.so.5.15.2
@@ -85,6 +85,6 @@ CMakeFiles/timetableGen_autogen_timestamp_deps.dir/clean:
 .PHONY : CMakeFiles/timetableGen_autogen_timestamp_deps.dir/clean
 
 CMakeFiles/timetableGen_autogen_timestamp_deps.dir/depend:
-	cd /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/build_cmake && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/build_cmake /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/build_cmake /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/build_cmake/CMakeFiles/timetableGen_autogen_timestamp_deps.dir/DependInfo.cmake "--color=$(COLOR)"
+	cd /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/build_cmake && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/build_cmake /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/build_cmake /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/build_cmake/CMakeFiles/timetableGen_autogen_timestamp_deps.dir/DependInfo.cmake "--color=$(COLOR)"
 .PHONY : CMakeFiles/timetableGen_autogen_timestamp_deps.dir/depend
 

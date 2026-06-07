@@ -1,7 +1,7 @@
 CMakeFiles/test_runner.dir/services/SQLiteService.cpp.o: \
- /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/services/SQLiteService.cpp \
+ /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/services/SQLiteService.cpp \
  /usr/include/stdc-predef.h \
- /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/services/SQLiteService.h \
+ /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/services/SQLiteService.h \
  /home/thorium/anaconda3/include/qt/QtSql/QSqlDatabase \
  /home/thorium/anaconda3/include/qt/QtSql/qsqldatabase.h \
  /home/thorium/anaconda3/include/qt/QtSql/qtsqlglobal.h \
@@ -210,7 +210,7 @@ CMakeFiles/test_runner.dir/services/SQLiteService.cpp.o: \
  /usr/include/c++/13/bits/stl_vector.h \
  /usr/include/c++/13/bits/stl_bvector.h \
  /usr/include/c++/13/bits/vector.tcc \
- /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/services/../utils/PathUtil.h \
+ /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/services/../utils/PathUtil.h \
  /home/thorium/anaconda3/include/qt/QtCore/QCoreApplication \
  /home/thorium/anaconda3/include/qt/QtCore/qcoreapplication.h \
  /home/thorium/anaconda3/include/qt/QtCore/qobject.h \

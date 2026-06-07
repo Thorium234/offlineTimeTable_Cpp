@@ -4,7 +4,7 @@
 # compile CXX with /usr/bin/c++
 CXX_DEFINES = -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NO_DEBUG -DQT_PRINTSUPPORT_LIB -DQT_SQL_LIB -DQT_WIDGETS_LIB
 
-CXX_INCLUDES = -I/home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/build_cmake/timetableGen_autogen/include -isystem /home/thorium/anaconda3/include/qt -isystem /home/thorium/anaconda3/include/qt/QtWidgets -isystem /home/thorium/anaconda3/include/qt/QtGui -isystem /home/thorium/anaconda3/include/qt/QtCore -isystem /home/thorium/anaconda3/./mkspecs/linux-g++ -isystem /home/thorium/anaconda3/include/qt/QtSql -isystem /home/thorium/anaconda3/include/qt/QtPrintSupport
+CXX_INCLUDES = -I/home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/build_cmake/timetableGen_autogen/include -isystem /home/thorium/anaconda3/include/qt -isystem /home/thorium/anaconda3/include/qt/QtWidgets -isystem /home/thorium/anaconda3/include/qt/QtGui -isystem /home/thorium/anaconda3/include/qt/QtCore -isystem /home/thorium/anaconda3/./mkspecs/linux-g++ -isystem /home/thorium/anaconda3/include/qt/QtSql -isystem /home/thorium/anaconda3/include/qt/QtPrintSupport
 
 CXX_FLAGS = -O3 -DNDEBUG -std=gnu++17 -fPIE -Wall -Wextra -Wpedantic -Wshadow -Wnon-virtual-dtor -Wold-style-cast -Wcast-align -Wunused -Woverloaded-virtual -Wconversion -Wsign-conversion -Wnull-dereference -Wformat=2 -Wmisleading-indentation -Wduplicated-cond -fPIC
 

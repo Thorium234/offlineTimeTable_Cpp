@@ -53,10 +53,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp
+CMAKE_SOURCE_DIR = /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/build_cmake
+CMAKE_BINARY_DIR = /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/build_cmake
 
 # Include any dependencies generated for this target.
 include CMakeFiles/timetableGen.dir/depend.make
@@ -72,499 +72,499 @@ include CMakeFiles/timetableGen.dir/flags.make
 timetableGen_autogen/timestamp: /home/thorium/anaconda3/bin/moc
 timetableGen_autogen/timestamp: /home/thorium/anaconda3/bin/uic
 timetableGen_autogen/timestamp: CMakeFiles/timetableGen.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold --progress-dir=/home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/build_cmake/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Automatic MOC and UIC for target timetableGen"
-	/usr/bin/cmake -E cmake_autogen /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/build_cmake/CMakeFiles/timetableGen_autogen.dir/AutogenInfo.json Release
-	/usr/bin/cmake -E touch /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/build_cmake/timetableGen_autogen/timestamp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold --progress-dir=/home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/build_cmake/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Automatic MOC and UIC for target timetableGen"
+	/usr/bin/cmake -E cmake_autogen /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/build_cmake/CMakeFiles/timetableGen_autogen.dir/AutogenInfo.json Release
+	/usr/bin/cmake -E touch /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/build_cmake/timetableGen_autogen/timestamp
 
 CMakeFiles/timetableGen.dir/timetableGen_autogen/mocs_compilation.cpp.o: CMakeFiles/timetableGen.dir/flags.make
 CMakeFiles/timetableGen.dir/timetableGen_autogen/mocs_compilation.cpp.o: timetableGen_autogen/mocs_compilation.cpp
 CMakeFiles/timetableGen.dir/timetableGen_autogen/mocs_compilation.cpp.o: CMakeFiles/timetableGen.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/build_cmake/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/timetableGen.dir/timetableGen_autogen/mocs_compilation.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/timetableGen.dir/timetableGen_autogen/mocs_compilation.cpp.o -MF CMakeFiles/timetableGen.dir/timetableGen_autogen/mocs_compilation.cpp.o.d -o CMakeFiles/timetableGen.dir/timetableGen_autogen/mocs_compilation.cpp.o -c /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/build_cmake/timetableGen_autogen/mocs_compilation.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/build_cmake/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/timetableGen.dir/timetableGen_autogen/mocs_compilation.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/timetableGen.dir/timetableGen_autogen/mocs_compilation.cpp.o -MF CMakeFiles/timetableGen.dir/timetableGen_autogen/mocs_compilation.cpp.o.d -o CMakeFiles/timetableGen.dir/timetableGen_autogen/mocs_compilation.cpp.o -c /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/build_cmake/timetableGen_autogen/mocs_compilation.cpp
 
 CMakeFiles/timetableGen.dir/timetableGen_autogen/mocs_compilation.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/timetableGen.dir/timetableGen_autogen/mocs_compilation.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/build_cmake/timetableGen_autogen/mocs_compilation.cpp > CMakeFiles/timetableGen.dir/timetableGen_autogen/mocs_compilation.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/build_cmake/timetableGen_autogen/mocs_compilation.cpp > CMakeFiles/timetableGen.dir/timetableGen_autogen/mocs_compilation.cpp.i
 
 CMakeFiles/timetableGen.dir/timetableGen_autogen/mocs_compilation.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/timetableGen.dir/timetableGen_autogen/mocs_compilation.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/build_cmake/timetableGen_autogen/mocs_compilation.cpp -o CMakeFiles/timetableGen.dir/timetableGen_autogen/mocs_compilation.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/build_cmake/timetableGen_autogen/mocs_compilation.cpp -o CMakeFiles/timetableGen.dir/timetableGen_autogen/mocs_compilation.cpp.s
 
 CMakeFiles/timetableGen.dir/main.cpp.o: CMakeFiles/timetableGen.dir/flags.make
-CMakeFiles/timetableGen.dir/main.cpp.o: /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/main.cpp
+CMakeFiles/timetableGen.dir/main.cpp.o: /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/main.cpp
 CMakeFiles/timetableGen.dir/main.cpp.o: CMakeFiles/timetableGen.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/build_cmake/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/timetableGen.dir/main.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/timetableGen.dir/main.cpp.o -MF CMakeFiles/timetableGen.dir/main.cpp.o.d -o CMakeFiles/timetableGen.dir/main.cpp.o -c /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/main.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/build_cmake/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/timetableGen.dir/main.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/timetableGen.dir/main.cpp.o -MF CMakeFiles/timetableGen.dir/main.cpp.o.d -o CMakeFiles/timetableGen.dir/main.cpp.o -c /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/main.cpp
 
 CMakeFiles/timetableGen.dir/main.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/timetableGen.dir/main.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/main.cpp > CMakeFiles/timetableGen.dir/main.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/main.cpp > CMakeFiles/timetableGen.dir/main.cpp.i
 
 CMakeFiles/timetableGen.dir/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/timetableGen.dir/main.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/main.cpp -o CMakeFiles/timetableGen.dir/main.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/main.cpp -o CMakeFiles/timetableGen.dir/main.cpp.s
 
 CMakeFiles/timetableGen.dir/gui/MainWindow.cpp.o: CMakeFiles/timetableGen.dir/flags.make
-CMakeFiles/timetableGen.dir/gui/MainWindow.cpp.o: /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/gui/MainWindow.cpp
+CMakeFiles/timetableGen.dir/gui/MainWindow.cpp.o: /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/gui/MainWindow.cpp
 CMakeFiles/timetableGen.dir/gui/MainWindow.cpp.o: CMakeFiles/timetableGen.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/build_cmake/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/timetableGen.dir/gui/MainWindow.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/timetableGen.dir/gui/MainWindow.cpp.o -MF CMakeFiles/timetableGen.dir/gui/MainWindow.cpp.o.d -o CMakeFiles/timetableGen.dir/gui/MainWindow.cpp.o -c /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/gui/MainWindow.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/build_cmake/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/timetableGen.dir/gui/MainWindow.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/timetableGen.dir/gui/MainWindow.cpp.o -MF CMakeFiles/timetableGen.dir/gui/MainWindow.cpp.o.d -o CMakeFiles/timetableGen.dir/gui/MainWindow.cpp.o -c /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/gui/MainWindow.cpp
 
 CMakeFiles/timetableGen.dir/gui/MainWindow.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/timetableGen.dir/gui/MainWindow.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/gui/MainWindow.cpp > CMakeFiles/timetableGen.dir/gui/MainWindow.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/gui/MainWindow.cpp > CMakeFiles/timetableGen.dir/gui/MainWindow.cpp.i
 
 CMakeFiles/timetableGen.dir/gui/MainWindow.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/timetableGen.dir/gui/MainWindow.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/gui/MainWindow.cpp -o CMakeFiles/timetableGen.dir/gui/MainWindow.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/gui/MainWindow.cpp -o CMakeFiles/timetableGen.dir/gui/MainWindow.cpp.s
 
 CMakeFiles/timetableGen.dir/gui/ribbon/RibbonToolbar.cpp.o: CMakeFiles/timetableGen.dir/flags.make
-CMakeFiles/timetableGen.dir/gui/ribbon/RibbonToolbar.cpp.o: /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/gui/ribbon/RibbonToolbar.cpp
+CMakeFiles/timetableGen.dir/gui/ribbon/RibbonToolbar.cpp.o: /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/gui/ribbon/RibbonToolbar.cpp
 CMakeFiles/timetableGen.dir/gui/ribbon/RibbonToolbar.cpp.o: CMakeFiles/timetableGen.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/build_cmake/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/timetableGen.dir/gui/ribbon/RibbonToolbar.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/timetableGen.dir/gui/ribbon/RibbonToolbar.cpp.o -MF CMakeFiles/timetableGen.dir/gui/ribbon/RibbonToolbar.cpp.o.d -o CMakeFiles/timetableGen.dir/gui/ribbon/RibbonToolbar.cpp.o -c /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/gui/ribbon/RibbonToolbar.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/build_cmake/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/timetableGen.dir/gui/ribbon/RibbonToolbar.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/timetableGen.dir/gui/ribbon/RibbonToolbar.cpp.o -MF CMakeFiles/timetableGen.dir/gui/ribbon/RibbonToolbar.cpp.o.d -o CMakeFiles/timetableGen.dir/gui/ribbon/RibbonToolbar.cpp.o -c /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/gui/ribbon/RibbonToolbar.cpp
 
 CMakeFiles/timetableGen.dir/gui/ribbon/RibbonToolbar.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/timetableGen.dir/gui/ribbon/RibbonToolbar.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/gui/ribbon/RibbonToolbar.cpp > CMakeFiles/timetableGen.dir/gui/ribbon/RibbonToolbar.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/gui/ribbon/RibbonToolbar.cpp > CMakeFiles/timetableGen.dir/gui/ribbon/RibbonToolbar.cpp.i
 
 CMakeFiles/timetableGen.dir/gui/ribbon/RibbonToolbar.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/timetableGen.dir/gui/ribbon/RibbonToolbar.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/gui/ribbon/RibbonToolbar.cpp -o CMakeFiles/timetableGen.dir/gui/ribbon/RibbonToolbar.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/gui/ribbon/RibbonToolbar.cpp -o CMakeFiles/timetableGen.dir/gui/ribbon/RibbonToolbar.cpp.s
 
 CMakeFiles/timetableGen.dir/gui/sidebar/DataSidebar.cpp.o: CMakeFiles/timetableGen.dir/flags.make
-CMakeFiles/timetableGen.dir/gui/sidebar/DataSidebar.cpp.o: /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/gui/sidebar/DataSidebar.cpp
+CMakeFiles/timetableGen.dir/gui/sidebar/DataSidebar.cpp.o: /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/gui/sidebar/DataSidebar.cpp
 CMakeFiles/timetableGen.dir/gui/sidebar/DataSidebar.cpp.o: CMakeFiles/timetableGen.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/build_cmake/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/timetableGen.dir/gui/sidebar/DataSidebar.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/timetableGen.dir/gui/sidebar/DataSidebar.cpp.o -MF CMakeFiles/timetableGen.dir/gui/sidebar/DataSidebar.cpp.o.d -o CMakeFiles/timetableGen.dir/gui/sidebar/DataSidebar.cpp.o -c /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/gui/sidebar/DataSidebar.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/build_cmake/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/timetableGen.dir/gui/sidebar/DataSidebar.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/timetableGen.dir/gui/sidebar/DataSidebar.cpp.o -MF CMakeFiles/timetableGen.dir/gui/sidebar/DataSidebar.cpp.o.d -o CMakeFiles/timetableGen.dir/gui/sidebar/DataSidebar.cpp.o -c /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/gui/sidebar/DataSidebar.cpp
 
 CMakeFiles/timetableGen.dir/gui/sidebar/DataSidebar.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/timetableGen.dir/gui/sidebar/DataSidebar.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/gui/sidebar/DataSidebar.cpp > CMakeFiles/timetableGen.dir/gui/sidebar/DataSidebar.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/gui/sidebar/DataSidebar.cpp > CMakeFiles/timetableGen.dir/gui/sidebar/DataSidebar.cpp.i
 
 CMakeFiles/timetableGen.dir/gui/sidebar/DataSidebar.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/timetableGen.dir/gui/sidebar/DataSidebar.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/gui/sidebar/DataSidebar.cpp -o CMakeFiles/timetableGen.dir/gui/sidebar/DataSidebar.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/gui/sidebar/DataSidebar.cpp -o CMakeFiles/timetableGen.dir/gui/sidebar/DataSidebar.cpp.s
 
 CMakeFiles/timetableGen.dir/gui/timetableview/TimetableViewWidget.cpp.o: CMakeFiles/timetableGen.dir/flags.make
-CMakeFiles/timetableGen.dir/gui/timetableview/TimetableViewWidget.cpp.o: /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/gui/timetableview/TimetableViewWidget.cpp
+CMakeFiles/timetableGen.dir/gui/timetableview/TimetableViewWidget.cpp.o: /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/gui/timetableview/TimetableViewWidget.cpp
 CMakeFiles/timetableGen.dir/gui/timetableview/TimetableViewWidget.cpp.o: CMakeFiles/timetableGen.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/build_cmake/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/timetableGen.dir/gui/timetableview/TimetableViewWidget.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/timetableGen.dir/gui/timetableview/TimetableViewWidget.cpp.o -MF CMakeFiles/timetableGen.dir/gui/timetableview/TimetableViewWidget.cpp.o.d -o CMakeFiles/timetableGen.dir/gui/timetableview/TimetableViewWidget.cpp.o -c /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/gui/timetableview/TimetableViewWidget.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/build_cmake/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/timetableGen.dir/gui/timetableview/TimetableViewWidget.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/timetableGen.dir/gui/timetableview/TimetableViewWidget.cpp.o -MF CMakeFiles/timetableGen.dir/gui/timetableview/TimetableViewWidget.cpp.o.d -o CMakeFiles/timetableGen.dir/gui/timetableview/TimetableViewWidget.cpp.o -c /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/gui/timetableview/TimetableViewWidget.cpp
 
 CMakeFiles/timetableGen.dir/gui/timetableview/TimetableViewWidget.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/timetableGen.dir/gui/timetableview/TimetableViewWidget.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/gui/timetableview/TimetableViewWidget.cpp > CMakeFiles/timetableGen.dir/gui/timetableview/TimetableViewWidget.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/gui/timetableview/TimetableViewWidget.cpp > CMakeFiles/timetableGen.dir/gui/timetableview/TimetableViewWidget.cpp.i
 
 CMakeFiles/timetableGen.dir/gui/timetableview/TimetableViewWidget.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/timetableGen.dir/gui/timetableview/TimetableViewWidget.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/gui/timetableview/TimetableViewWidget.cpp -o CMakeFiles/timetableGen.dir/gui/timetableview/TimetableViewWidget.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/gui/timetableview/TimetableViewWidget.cpp -o CMakeFiles/timetableGen.dir/gui/timetableview/TimetableViewWidget.cpp.s
 
 CMakeFiles/timetableGen.dir/gui/timetableview/TimetableScene.cpp.o: CMakeFiles/timetableGen.dir/flags.make
-CMakeFiles/timetableGen.dir/gui/timetableview/TimetableScene.cpp.o: /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/gui/timetableview/TimetableScene.cpp
+CMakeFiles/timetableGen.dir/gui/timetableview/TimetableScene.cpp.o: /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/gui/timetableview/TimetableScene.cpp
 CMakeFiles/timetableGen.dir/gui/timetableview/TimetableScene.cpp.o: CMakeFiles/timetableGen.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/build_cmake/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/timetableGen.dir/gui/timetableview/TimetableScene.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/timetableGen.dir/gui/timetableview/TimetableScene.cpp.o -MF CMakeFiles/timetableGen.dir/gui/timetableview/TimetableScene.cpp.o.d -o CMakeFiles/timetableGen.dir/gui/timetableview/TimetableScene.cpp.o -c /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/gui/timetableview/TimetableScene.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/build_cmake/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/timetableGen.dir/gui/timetableview/TimetableScene.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/timetableGen.dir/gui/timetableview/TimetableScene.cpp.o -MF CMakeFiles/timetableGen.dir/gui/timetableview/TimetableScene.cpp.o.d -o CMakeFiles/timetableGen.dir/gui/timetableview/TimetableScene.cpp.o -c /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/gui/timetableview/TimetableScene.cpp
 
 CMakeFiles/timetableGen.dir/gui/timetableview/TimetableScene.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/timetableGen.dir/gui/timetableview/TimetableScene.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/gui/timetableview/TimetableScene.cpp > CMakeFiles/timetableGen.dir/gui/timetableview/TimetableScene.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/gui/timetableview/TimetableScene.cpp > CMakeFiles/timetableGen.dir/gui/timetableview/TimetableScene.cpp.i
 
 CMakeFiles/timetableGen.dir/gui/timetableview/TimetableScene.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/timetableGen.dir/gui/timetableview/TimetableScene.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/gui/timetableview/TimetableScene.cpp -o CMakeFiles/timetableGen.dir/gui/timetableview/TimetableScene.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/gui/timetableview/TimetableScene.cpp -o CMakeFiles/timetableGen.dir/gui/timetableview/TimetableScene.cpp.s
 
 CMakeFiles/timetableGen.dir/gui/timetableview/LessonCardItem.cpp.o: CMakeFiles/timetableGen.dir/flags.make
-CMakeFiles/timetableGen.dir/gui/timetableview/LessonCardItem.cpp.o: /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/gui/timetableview/LessonCardItem.cpp
+CMakeFiles/timetableGen.dir/gui/timetableview/LessonCardItem.cpp.o: /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/gui/timetableview/LessonCardItem.cpp
 CMakeFiles/timetableGen.dir/gui/timetableview/LessonCardItem.cpp.o: CMakeFiles/timetableGen.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/build_cmake/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/timetableGen.dir/gui/timetableview/LessonCardItem.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/timetableGen.dir/gui/timetableview/LessonCardItem.cpp.o -MF CMakeFiles/timetableGen.dir/gui/timetableview/LessonCardItem.cpp.o.d -o CMakeFiles/timetableGen.dir/gui/timetableview/LessonCardItem.cpp.o -c /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/gui/timetableview/LessonCardItem.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/build_cmake/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/timetableGen.dir/gui/timetableview/LessonCardItem.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/timetableGen.dir/gui/timetableview/LessonCardItem.cpp.o -MF CMakeFiles/timetableGen.dir/gui/timetableview/LessonCardItem.cpp.o.d -o CMakeFiles/timetableGen.dir/gui/timetableview/LessonCardItem.cpp.o -c /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/gui/timetableview/LessonCardItem.cpp
 
 CMakeFiles/timetableGen.dir/gui/timetableview/LessonCardItem.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/timetableGen.dir/gui/timetableview/LessonCardItem.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/gui/timetableview/LessonCardItem.cpp > CMakeFiles/timetableGen.dir/gui/timetableview/LessonCardItem.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/gui/timetableview/LessonCardItem.cpp > CMakeFiles/timetableGen.dir/gui/timetableview/LessonCardItem.cpp.i
 
 CMakeFiles/timetableGen.dir/gui/timetableview/LessonCardItem.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/timetableGen.dir/gui/timetableview/LessonCardItem.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/gui/timetableview/LessonCardItem.cpp -o CMakeFiles/timetableGen.dir/gui/timetableview/LessonCardItem.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/gui/timetableview/LessonCardItem.cpp -o CMakeFiles/timetableGen.dir/gui/timetableview/LessonCardItem.cpp.s
 
 CMakeFiles/timetableGen.dir/gui/dashboard/DashboardWidget.cpp.o: CMakeFiles/timetableGen.dir/flags.make
-CMakeFiles/timetableGen.dir/gui/dashboard/DashboardWidget.cpp.o: /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/gui/dashboard/DashboardWidget.cpp
+CMakeFiles/timetableGen.dir/gui/dashboard/DashboardWidget.cpp.o: /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/gui/dashboard/DashboardWidget.cpp
 CMakeFiles/timetableGen.dir/gui/dashboard/DashboardWidget.cpp.o: CMakeFiles/timetableGen.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/build_cmake/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/timetableGen.dir/gui/dashboard/DashboardWidget.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/timetableGen.dir/gui/dashboard/DashboardWidget.cpp.o -MF CMakeFiles/timetableGen.dir/gui/dashboard/DashboardWidget.cpp.o.d -o CMakeFiles/timetableGen.dir/gui/dashboard/DashboardWidget.cpp.o -c /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/gui/dashboard/DashboardWidget.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/build_cmake/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/timetableGen.dir/gui/dashboard/DashboardWidget.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/timetableGen.dir/gui/dashboard/DashboardWidget.cpp.o -MF CMakeFiles/timetableGen.dir/gui/dashboard/DashboardWidget.cpp.o.d -o CMakeFiles/timetableGen.dir/gui/dashboard/DashboardWidget.cpp.o -c /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/gui/dashboard/DashboardWidget.cpp
 
 CMakeFiles/timetableGen.dir/gui/dashboard/DashboardWidget.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/timetableGen.dir/gui/dashboard/DashboardWidget.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/gui/dashboard/DashboardWidget.cpp > CMakeFiles/timetableGen.dir/gui/dashboard/DashboardWidget.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/gui/dashboard/DashboardWidget.cpp > CMakeFiles/timetableGen.dir/gui/dashboard/DashboardWidget.cpp.i
 
 CMakeFiles/timetableGen.dir/gui/dashboard/DashboardWidget.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/timetableGen.dir/gui/dashboard/DashboardWidget.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/gui/dashboard/DashboardWidget.cpp -o CMakeFiles/timetableGen.dir/gui/dashboard/DashboardWidget.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/gui/dashboard/DashboardWidget.cpp -o CMakeFiles/timetableGen.dir/gui/dashboard/DashboardWidget.cpp.s
 
 CMakeFiles/timetableGen.dir/gui/teachers/TeacherDialog.cpp.o: CMakeFiles/timetableGen.dir/flags.make
-CMakeFiles/timetableGen.dir/gui/teachers/TeacherDialog.cpp.o: /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/gui/teachers/TeacherDialog.cpp
+CMakeFiles/timetableGen.dir/gui/teachers/TeacherDialog.cpp.o: /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/gui/teachers/TeacherDialog.cpp
 CMakeFiles/timetableGen.dir/gui/teachers/TeacherDialog.cpp.o: CMakeFiles/timetableGen.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/build_cmake/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object CMakeFiles/timetableGen.dir/gui/teachers/TeacherDialog.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/timetableGen.dir/gui/teachers/TeacherDialog.cpp.o -MF CMakeFiles/timetableGen.dir/gui/teachers/TeacherDialog.cpp.o.d -o CMakeFiles/timetableGen.dir/gui/teachers/TeacherDialog.cpp.o -c /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/gui/teachers/TeacherDialog.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/build_cmake/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object CMakeFiles/timetableGen.dir/gui/teachers/TeacherDialog.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/timetableGen.dir/gui/teachers/TeacherDialog.cpp.o -MF CMakeFiles/timetableGen.dir/gui/teachers/TeacherDialog.cpp.o.d -o CMakeFiles/timetableGen.dir/gui/teachers/TeacherDialog.cpp.o -c /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/gui/teachers/TeacherDialog.cpp
 
 CMakeFiles/timetableGen.dir/gui/teachers/TeacherDialog.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/timetableGen.dir/gui/teachers/TeacherDialog.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/gui/teachers/TeacherDialog.cpp > CMakeFiles/timetableGen.dir/gui/teachers/TeacherDialog.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/gui/teachers/TeacherDialog.cpp > CMakeFiles/timetableGen.dir/gui/teachers/TeacherDialog.cpp.i
 
 CMakeFiles/timetableGen.dir/gui/teachers/TeacherDialog.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/timetableGen.dir/gui/teachers/TeacherDialog.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/gui/teachers/TeacherDialog.cpp -o CMakeFiles/timetableGen.dir/gui/teachers/TeacherDialog.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/gui/teachers/TeacherDialog.cpp -o CMakeFiles/timetableGen.dir/gui/teachers/TeacherDialog.cpp.s
 
 CMakeFiles/timetableGen.dir/gui/subjects/SubjectDialog.cpp.o: CMakeFiles/timetableGen.dir/flags.make
-CMakeFiles/timetableGen.dir/gui/subjects/SubjectDialog.cpp.o: /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/gui/subjects/SubjectDialog.cpp
+CMakeFiles/timetableGen.dir/gui/subjects/SubjectDialog.cpp.o: /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/gui/subjects/SubjectDialog.cpp
 CMakeFiles/timetableGen.dir/gui/subjects/SubjectDialog.cpp.o: CMakeFiles/timetableGen.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/build_cmake/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object CMakeFiles/timetableGen.dir/gui/subjects/SubjectDialog.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/timetableGen.dir/gui/subjects/SubjectDialog.cpp.o -MF CMakeFiles/timetableGen.dir/gui/subjects/SubjectDialog.cpp.o.d -o CMakeFiles/timetableGen.dir/gui/subjects/SubjectDialog.cpp.o -c /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/gui/subjects/SubjectDialog.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/build_cmake/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object CMakeFiles/timetableGen.dir/gui/subjects/SubjectDialog.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/timetableGen.dir/gui/subjects/SubjectDialog.cpp.o -MF CMakeFiles/timetableGen.dir/gui/subjects/SubjectDialog.cpp.o.d -o CMakeFiles/timetableGen.dir/gui/subjects/SubjectDialog.cpp.o -c /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/gui/subjects/SubjectDialog.cpp
 
 CMakeFiles/timetableGen.dir/gui/subjects/SubjectDialog.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/timetableGen.dir/gui/subjects/SubjectDialog.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/gui/subjects/SubjectDialog.cpp > CMakeFiles/timetableGen.dir/gui/subjects/SubjectDialog.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/gui/subjects/SubjectDialog.cpp > CMakeFiles/timetableGen.dir/gui/subjects/SubjectDialog.cpp.i
 
 CMakeFiles/timetableGen.dir/gui/subjects/SubjectDialog.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/timetableGen.dir/gui/subjects/SubjectDialog.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/gui/subjects/SubjectDialog.cpp -o CMakeFiles/timetableGen.dir/gui/subjects/SubjectDialog.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/gui/subjects/SubjectDialog.cpp -o CMakeFiles/timetableGen.dir/gui/subjects/SubjectDialog.cpp.s
 
 CMakeFiles/timetableGen.dir/gui/classes/ClassDialog.cpp.o: CMakeFiles/timetableGen.dir/flags.make
-CMakeFiles/timetableGen.dir/gui/classes/ClassDialog.cpp.o: /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/gui/classes/ClassDialog.cpp
+CMakeFiles/timetableGen.dir/gui/classes/ClassDialog.cpp.o: /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/gui/classes/ClassDialog.cpp
 CMakeFiles/timetableGen.dir/gui/classes/ClassDialog.cpp.o: CMakeFiles/timetableGen.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/build_cmake/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object CMakeFiles/timetableGen.dir/gui/classes/ClassDialog.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/timetableGen.dir/gui/classes/ClassDialog.cpp.o -MF CMakeFiles/timetableGen.dir/gui/classes/ClassDialog.cpp.o.d -o CMakeFiles/timetableGen.dir/gui/classes/ClassDialog.cpp.o -c /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/gui/classes/ClassDialog.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/build_cmake/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object CMakeFiles/timetableGen.dir/gui/classes/ClassDialog.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/timetableGen.dir/gui/classes/ClassDialog.cpp.o -MF CMakeFiles/timetableGen.dir/gui/classes/ClassDialog.cpp.o.d -o CMakeFiles/timetableGen.dir/gui/classes/ClassDialog.cpp.o -c /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/gui/classes/ClassDialog.cpp
 
 CMakeFiles/timetableGen.dir/gui/classes/ClassDialog.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/timetableGen.dir/gui/classes/ClassDialog.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/gui/classes/ClassDialog.cpp > CMakeFiles/timetableGen.dir/gui/classes/ClassDialog.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/gui/classes/ClassDialog.cpp > CMakeFiles/timetableGen.dir/gui/classes/ClassDialog.cpp.i
 
 CMakeFiles/timetableGen.dir/gui/classes/ClassDialog.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/timetableGen.dir/gui/classes/ClassDialog.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/gui/classes/ClassDialog.cpp -o CMakeFiles/timetableGen.dir/gui/classes/ClassDialog.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/gui/classes/ClassDialog.cpp -o CMakeFiles/timetableGen.dir/gui/classes/ClassDialog.cpp.s
 
 CMakeFiles/timetableGen.dir/gui/rooms/RoomDialog.cpp.o: CMakeFiles/timetableGen.dir/flags.make
-CMakeFiles/timetableGen.dir/gui/rooms/RoomDialog.cpp.o: /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/gui/rooms/RoomDialog.cpp
+CMakeFiles/timetableGen.dir/gui/rooms/RoomDialog.cpp.o: /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/gui/rooms/RoomDialog.cpp
 CMakeFiles/timetableGen.dir/gui/rooms/RoomDialog.cpp.o: CMakeFiles/timetableGen.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/build_cmake/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building CXX object CMakeFiles/timetableGen.dir/gui/rooms/RoomDialog.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/timetableGen.dir/gui/rooms/RoomDialog.cpp.o -MF CMakeFiles/timetableGen.dir/gui/rooms/RoomDialog.cpp.o.d -o CMakeFiles/timetableGen.dir/gui/rooms/RoomDialog.cpp.o -c /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/gui/rooms/RoomDialog.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/build_cmake/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building CXX object CMakeFiles/timetableGen.dir/gui/rooms/RoomDialog.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/timetableGen.dir/gui/rooms/RoomDialog.cpp.o -MF CMakeFiles/timetableGen.dir/gui/rooms/RoomDialog.cpp.o.d -o CMakeFiles/timetableGen.dir/gui/rooms/RoomDialog.cpp.o -c /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/gui/rooms/RoomDialog.cpp
 
 CMakeFiles/timetableGen.dir/gui/rooms/RoomDialog.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/timetableGen.dir/gui/rooms/RoomDialog.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/gui/rooms/RoomDialog.cpp > CMakeFiles/timetableGen.dir/gui/rooms/RoomDialog.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/gui/rooms/RoomDialog.cpp > CMakeFiles/timetableGen.dir/gui/rooms/RoomDialog.cpp.i
 
 CMakeFiles/timetableGen.dir/gui/rooms/RoomDialog.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/timetableGen.dir/gui/rooms/RoomDialog.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/gui/rooms/RoomDialog.cpp -o CMakeFiles/timetableGen.dir/gui/rooms/RoomDialog.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/gui/rooms/RoomDialog.cpp -o CMakeFiles/timetableGen.dir/gui/rooms/RoomDialog.cpp.s
 
 CMakeFiles/timetableGen.dir/gui/substitutions/SubstitutionWidget.cpp.o: CMakeFiles/timetableGen.dir/flags.make
-CMakeFiles/timetableGen.dir/gui/substitutions/SubstitutionWidget.cpp.o: /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/gui/substitutions/SubstitutionWidget.cpp
+CMakeFiles/timetableGen.dir/gui/substitutions/SubstitutionWidget.cpp.o: /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/gui/substitutions/SubstitutionWidget.cpp
 CMakeFiles/timetableGen.dir/gui/substitutions/SubstitutionWidget.cpp.o: CMakeFiles/timetableGen.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/build_cmake/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Building CXX object CMakeFiles/timetableGen.dir/gui/substitutions/SubstitutionWidget.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/timetableGen.dir/gui/substitutions/SubstitutionWidget.cpp.o -MF CMakeFiles/timetableGen.dir/gui/substitutions/SubstitutionWidget.cpp.o.d -o CMakeFiles/timetableGen.dir/gui/substitutions/SubstitutionWidget.cpp.o -c /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/gui/substitutions/SubstitutionWidget.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/build_cmake/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Building CXX object CMakeFiles/timetableGen.dir/gui/substitutions/SubstitutionWidget.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/timetableGen.dir/gui/substitutions/SubstitutionWidget.cpp.o -MF CMakeFiles/timetableGen.dir/gui/substitutions/SubstitutionWidget.cpp.o.d -o CMakeFiles/timetableGen.dir/gui/substitutions/SubstitutionWidget.cpp.o -c /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/gui/substitutions/SubstitutionWidget.cpp
 
 CMakeFiles/timetableGen.dir/gui/substitutions/SubstitutionWidget.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/timetableGen.dir/gui/substitutions/SubstitutionWidget.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/gui/substitutions/SubstitutionWidget.cpp > CMakeFiles/timetableGen.dir/gui/substitutions/SubstitutionWidget.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/gui/substitutions/SubstitutionWidget.cpp > CMakeFiles/timetableGen.dir/gui/substitutions/SubstitutionWidget.cpp.i
 
 CMakeFiles/timetableGen.dir/gui/substitutions/SubstitutionWidget.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/timetableGen.dir/gui/substitutions/SubstitutionWidget.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/gui/substitutions/SubstitutionWidget.cpp -o CMakeFiles/timetableGen.dir/gui/substitutions/SubstitutionWidget.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/gui/substitutions/SubstitutionWidget.cpp -o CMakeFiles/timetableGen.dir/gui/substitutions/SubstitutionWidget.cpp.s
 
 CMakeFiles/timetableGen.dir/gui/divisions/DivisionWidget.cpp.o: CMakeFiles/timetableGen.dir/flags.make
-CMakeFiles/timetableGen.dir/gui/divisions/DivisionWidget.cpp.o: /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/gui/divisions/DivisionWidget.cpp
+CMakeFiles/timetableGen.dir/gui/divisions/DivisionWidget.cpp.o: /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/gui/divisions/DivisionWidget.cpp
 CMakeFiles/timetableGen.dir/gui/divisions/DivisionWidget.cpp.o: CMakeFiles/timetableGen.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/build_cmake/CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Building CXX object CMakeFiles/timetableGen.dir/gui/divisions/DivisionWidget.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/timetableGen.dir/gui/divisions/DivisionWidget.cpp.o -MF CMakeFiles/timetableGen.dir/gui/divisions/DivisionWidget.cpp.o.d -o CMakeFiles/timetableGen.dir/gui/divisions/DivisionWidget.cpp.o -c /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/gui/divisions/DivisionWidget.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/build_cmake/CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Building CXX object CMakeFiles/timetableGen.dir/gui/divisions/DivisionWidget.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/timetableGen.dir/gui/divisions/DivisionWidget.cpp.o -MF CMakeFiles/timetableGen.dir/gui/divisions/DivisionWidget.cpp.o.d -o CMakeFiles/timetableGen.dir/gui/divisions/DivisionWidget.cpp.o -c /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/gui/divisions/DivisionWidget.cpp
 
 CMakeFiles/timetableGen.dir/gui/divisions/DivisionWidget.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/timetableGen.dir/gui/divisions/DivisionWidget.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/gui/divisions/DivisionWidget.cpp > CMakeFiles/timetableGen.dir/gui/divisions/DivisionWidget.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/gui/divisions/DivisionWidget.cpp > CMakeFiles/timetableGen.dir/gui/divisions/DivisionWidget.cpp.i
 
 CMakeFiles/timetableGen.dir/gui/divisions/DivisionWidget.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/timetableGen.dir/gui/divisions/DivisionWidget.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/gui/divisions/DivisionWidget.cpp -o CMakeFiles/timetableGen.dir/gui/divisions/DivisionWidget.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/gui/divisions/DivisionWidget.cpp -o CMakeFiles/timetableGen.dir/gui/divisions/DivisionWidget.cpp.s
 
 CMakeFiles/timetableGen.dir/gui/constraints/ConstraintRelaxationDialog.cpp.o: CMakeFiles/timetableGen.dir/flags.make
-CMakeFiles/timetableGen.dir/gui/constraints/ConstraintRelaxationDialog.cpp.o: /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/gui/constraints/ConstraintRelaxationDialog.cpp
+CMakeFiles/timetableGen.dir/gui/constraints/ConstraintRelaxationDialog.cpp.o: /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/gui/constraints/ConstraintRelaxationDialog.cpp
 CMakeFiles/timetableGen.dir/gui/constraints/ConstraintRelaxationDialog.cpp.o: CMakeFiles/timetableGen.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/build_cmake/CMakeFiles --progress-num=$(CMAKE_PROGRESS_17) "Building CXX object CMakeFiles/timetableGen.dir/gui/constraints/ConstraintRelaxationDialog.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/timetableGen.dir/gui/constraints/ConstraintRelaxationDialog.cpp.o -MF CMakeFiles/timetableGen.dir/gui/constraints/ConstraintRelaxationDialog.cpp.o.d -o CMakeFiles/timetableGen.dir/gui/constraints/ConstraintRelaxationDialog.cpp.o -c /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/gui/constraints/ConstraintRelaxationDialog.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/build_cmake/CMakeFiles --progress-num=$(CMAKE_PROGRESS_17) "Building CXX object CMakeFiles/timetableGen.dir/gui/constraints/ConstraintRelaxationDialog.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/timetableGen.dir/gui/constraints/ConstraintRelaxationDialog.cpp.o -MF CMakeFiles/timetableGen.dir/gui/constraints/ConstraintRelaxationDialog.cpp.o.d -o CMakeFiles/timetableGen.dir/gui/constraints/ConstraintRelaxationDialog.cpp.o -c /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/gui/constraints/ConstraintRelaxationDialog.cpp
 
 CMakeFiles/timetableGen.dir/gui/constraints/ConstraintRelaxationDialog.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/timetableGen.dir/gui/constraints/ConstraintRelaxationDialog.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/gui/constraints/ConstraintRelaxationDialog.cpp > CMakeFiles/timetableGen.dir/gui/constraints/ConstraintRelaxationDialog.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/gui/constraints/ConstraintRelaxationDialog.cpp > CMakeFiles/timetableGen.dir/gui/constraints/ConstraintRelaxationDialog.cpp.i
 
 CMakeFiles/timetableGen.dir/gui/constraints/ConstraintRelaxationDialog.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/timetableGen.dir/gui/constraints/ConstraintRelaxationDialog.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/gui/constraints/ConstraintRelaxationDialog.cpp -o CMakeFiles/timetableGen.dir/gui/constraints/ConstraintRelaxationDialog.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/gui/constraints/ConstraintRelaxationDialog.cpp -o CMakeFiles/timetableGen.dir/gui/constraints/ConstraintRelaxationDialog.cpp.s
 
 CMakeFiles/timetableGen.dir/services/DataManager.cpp.o: CMakeFiles/timetableGen.dir/flags.make
-CMakeFiles/timetableGen.dir/services/DataManager.cpp.o: /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/services/DataManager.cpp
+CMakeFiles/timetableGen.dir/services/DataManager.cpp.o: /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/services/DataManager.cpp
 CMakeFiles/timetableGen.dir/services/DataManager.cpp.o: CMakeFiles/timetableGen.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/build_cmake/CMakeFiles --progress-num=$(CMAKE_PROGRESS_18) "Building CXX object CMakeFiles/timetableGen.dir/services/DataManager.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/timetableGen.dir/services/DataManager.cpp.o -MF CMakeFiles/timetableGen.dir/services/DataManager.cpp.o.d -o CMakeFiles/timetableGen.dir/services/DataManager.cpp.o -c /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/services/DataManager.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/build_cmake/CMakeFiles --progress-num=$(CMAKE_PROGRESS_18) "Building CXX object CMakeFiles/timetableGen.dir/services/DataManager.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/timetableGen.dir/services/DataManager.cpp.o -MF CMakeFiles/timetableGen.dir/services/DataManager.cpp.o.d -o CMakeFiles/timetableGen.dir/services/DataManager.cpp.o -c /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/services/DataManager.cpp
 
 CMakeFiles/timetableGen.dir/services/DataManager.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/timetableGen.dir/services/DataManager.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/services/DataManager.cpp > CMakeFiles/timetableGen.dir/services/DataManager.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/services/DataManager.cpp > CMakeFiles/timetableGen.dir/services/DataManager.cpp.i
 
 CMakeFiles/timetableGen.dir/services/DataManager.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/timetableGen.dir/services/DataManager.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/services/DataManager.cpp -o CMakeFiles/timetableGen.dir/services/DataManager.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/services/DataManager.cpp -o CMakeFiles/timetableGen.dir/services/DataManager.cpp.s
 
 CMakeFiles/timetableGen.dir/services/SQLiteService.cpp.o: CMakeFiles/timetableGen.dir/flags.make
-CMakeFiles/timetableGen.dir/services/SQLiteService.cpp.o: /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/services/SQLiteService.cpp
+CMakeFiles/timetableGen.dir/services/SQLiteService.cpp.o: /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/services/SQLiteService.cpp
 CMakeFiles/timetableGen.dir/services/SQLiteService.cpp.o: CMakeFiles/timetableGen.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/build_cmake/CMakeFiles --progress-num=$(CMAKE_PROGRESS_19) "Building CXX object CMakeFiles/timetableGen.dir/services/SQLiteService.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/timetableGen.dir/services/SQLiteService.cpp.o -MF CMakeFiles/timetableGen.dir/services/SQLiteService.cpp.o.d -o CMakeFiles/timetableGen.dir/services/SQLiteService.cpp.o -c /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/services/SQLiteService.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/build_cmake/CMakeFiles --progress-num=$(CMAKE_PROGRESS_19) "Building CXX object CMakeFiles/timetableGen.dir/services/SQLiteService.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/timetableGen.dir/services/SQLiteService.cpp.o -MF CMakeFiles/timetableGen.dir/services/SQLiteService.cpp.o.d -o CMakeFiles/timetableGen.dir/services/SQLiteService.cpp.o -c /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/services/SQLiteService.cpp
 
 CMakeFiles/timetableGen.dir/services/SQLiteService.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/timetableGen.dir/services/SQLiteService.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/services/SQLiteService.cpp > CMakeFiles/timetableGen.dir/services/SQLiteService.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/services/SQLiteService.cpp > CMakeFiles/timetableGen.dir/services/SQLiteService.cpp.i
 
 CMakeFiles/timetableGen.dir/services/SQLiteService.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/timetableGen.dir/services/SQLiteService.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/services/SQLiteService.cpp -o CMakeFiles/timetableGen.dir/services/SQLiteService.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/services/SQLiteService.cpp -o CMakeFiles/timetableGen.dir/services/SQLiteService.cpp.s
 
 CMakeFiles/timetableGen.dir/services/TimetableEngine.cpp.o: CMakeFiles/timetableGen.dir/flags.make
-CMakeFiles/timetableGen.dir/services/TimetableEngine.cpp.o: /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/services/TimetableEngine.cpp
+CMakeFiles/timetableGen.dir/services/TimetableEngine.cpp.o: /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/services/TimetableEngine.cpp
 CMakeFiles/timetableGen.dir/services/TimetableEngine.cpp.o: CMakeFiles/timetableGen.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/build_cmake/CMakeFiles --progress-num=$(CMAKE_PROGRESS_20) "Building CXX object CMakeFiles/timetableGen.dir/services/TimetableEngine.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/timetableGen.dir/services/TimetableEngine.cpp.o -MF CMakeFiles/timetableGen.dir/services/TimetableEngine.cpp.o.d -o CMakeFiles/timetableGen.dir/services/TimetableEngine.cpp.o -c /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/services/TimetableEngine.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/build_cmake/CMakeFiles --progress-num=$(CMAKE_PROGRESS_20) "Building CXX object CMakeFiles/timetableGen.dir/services/TimetableEngine.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/timetableGen.dir/services/TimetableEngine.cpp.o -MF CMakeFiles/timetableGen.dir/services/TimetableEngine.cpp.o.d -o CMakeFiles/timetableGen.dir/services/TimetableEngine.cpp.o -c /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/services/TimetableEngine.cpp
 
 CMakeFiles/timetableGen.dir/services/TimetableEngine.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/timetableGen.dir/services/TimetableEngine.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/services/TimetableEngine.cpp > CMakeFiles/timetableGen.dir/services/TimetableEngine.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/services/TimetableEngine.cpp > CMakeFiles/timetableGen.dir/services/TimetableEngine.cpp.i
 
 CMakeFiles/timetableGen.dir/services/TimetableEngine.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/timetableGen.dir/services/TimetableEngine.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/services/TimetableEngine.cpp -o CMakeFiles/timetableGen.dir/services/TimetableEngine.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/services/TimetableEngine.cpp -o CMakeFiles/timetableGen.dir/services/TimetableEngine.cpp.s
 
 CMakeFiles/timetableGen.dir/services/ResourceTracker.cpp.o: CMakeFiles/timetableGen.dir/flags.make
-CMakeFiles/timetableGen.dir/services/ResourceTracker.cpp.o: /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/services/ResourceTracker.cpp
+CMakeFiles/timetableGen.dir/services/ResourceTracker.cpp.o: /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/services/ResourceTracker.cpp
 CMakeFiles/timetableGen.dir/services/ResourceTracker.cpp.o: CMakeFiles/timetableGen.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/build_cmake/CMakeFiles --progress-num=$(CMAKE_PROGRESS_21) "Building CXX object CMakeFiles/timetableGen.dir/services/ResourceTracker.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/timetableGen.dir/services/ResourceTracker.cpp.o -MF CMakeFiles/timetableGen.dir/services/ResourceTracker.cpp.o.d -o CMakeFiles/timetableGen.dir/services/ResourceTracker.cpp.o -c /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/services/ResourceTracker.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/build_cmake/CMakeFiles --progress-num=$(CMAKE_PROGRESS_21) "Building CXX object CMakeFiles/timetableGen.dir/services/ResourceTracker.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/timetableGen.dir/services/ResourceTracker.cpp.o -MF CMakeFiles/timetableGen.dir/services/ResourceTracker.cpp.o.d -o CMakeFiles/timetableGen.dir/services/ResourceTracker.cpp.o -c /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/services/ResourceTracker.cpp
 
 CMakeFiles/timetableGen.dir/services/ResourceTracker.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/timetableGen.dir/services/ResourceTracker.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/services/ResourceTracker.cpp > CMakeFiles/timetableGen.dir/services/ResourceTracker.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/services/ResourceTracker.cpp > CMakeFiles/timetableGen.dir/services/ResourceTracker.cpp.i
 
 CMakeFiles/timetableGen.dir/services/ResourceTracker.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/timetableGen.dir/services/ResourceTracker.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/services/ResourceTracker.cpp -o CMakeFiles/timetableGen.dir/services/ResourceTracker.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/services/ResourceTracker.cpp -o CMakeFiles/timetableGen.dir/services/ResourceTracker.cpp.s
 
 CMakeFiles/timetableGen.dir/services/ExportService.cpp.o: CMakeFiles/timetableGen.dir/flags.make
-CMakeFiles/timetableGen.dir/services/ExportService.cpp.o: /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/services/ExportService.cpp
+CMakeFiles/timetableGen.dir/services/ExportService.cpp.o: /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/services/ExportService.cpp
 CMakeFiles/timetableGen.dir/services/ExportService.cpp.o: CMakeFiles/timetableGen.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/build_cmake/CMakeFiles --progress-num=$(CMAKE_PROGRESS_22) "Building CXX object CMakeFiles/timetableGen.dir/services/ExportService.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/timetableGen.dir/services/ExportService.cpp.o -MF CMakeFiles/timetableGen.dir/services/ExportService.cpp.o.d -o CMakeFiles/timetableGen.dir/services/ExportService.cpp.o -c /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/services/ExportService.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/build_cmake/CMakeFiles --progress-num=$(CMAKE_PROGRESS_22) "Building CXX object CMakeFiles/timetableGen.dir/services/ExportService.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/timetableGen.dir/services/ExportService.cpp.o -MF CMakeFiles/timetableGen.dir/services/ExportService.cpp.o.d -o CMakeFiles/timetableGen.dir/services/ExportService.cpp.o -c /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/services/ExportService.cpp
 
 CMakeFiles/timetableGen.dir/services/ExportService.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/timetableGen.dir/services/ExportService.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/services/ExportService.cpp > CMakeFiles/timetableGen.dir/services/ExportService.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/services/ExportService.cpp > CMakeFiles/timetableGen.dir/services/ExportService.cpp.i
 
 CMakeFiles/timetableGen.dir/services/ExportService.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/timetableGen.dir/services/ExportService.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/services/ExportService.cpp -o CMakeFiles/timetableGen.dir/services/ExportService.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/services/ExportService.cpp -o CMakeFiles/timetableGen.dir/services/ExportService.cpp.s
 
 CMakeFiles/timetableGen.dir/services/TimetableEvaluator.cpp.o: CMakeFiles/timetableGen.dir/flags.make
-CMakeFiles/timetableGen.dir/services/TimetableEvaluator.cpp.o: /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/services/TimetableEvaluator.cpp
+CMakeFiles/timetableGen.dir/services/TimetableEvaluator.cpp.o: /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/services/TimetableEvaluator.cpp
 CMakeFiles/timetableGen.dir/services/TimetableEvaluator.cpp.o: CMakeFiles/timetableGen.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/build_cmake/CMakeFiles --progress-num=$(CMAKE_PROGRESS_23) "Building CXX object CMakeFiles/timetableGen.dir/services/TimetableEvaluator.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/timetableGen.dir/services/TimetableEvaluator.cpp.o -MF CMakeFiles/timetableGen.dir/services/TimetableEvaluator.cpp.o.d -o CMakeFiles/timetableGen.dir/services/TimetableEvaluator.cpp.o -c /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/services/TimetableEvaluator.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/build_cmake/CMakeFiles --progress-num=$(CMAKE_PROGRESS_23) "Building CXX object CMakeFiles/timetableGen.dir/services/TimetableEvaluator.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/timetableGen.dir/services/TimetableEvaluator.cpp.o -MF CMakeFiles/timetableGen.dir/services/TimetableEvaluator.cpp.o.d -o CMakeFiles/timetableGen.dir/services/TimetableEvaluator.cpp.o -c /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/services/TimetableEvaluator.cpp
 
 CMakeFiles/timetableGen.dir/services/TimetableEvaluator.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/timetableGen.dir/services/TimetableEvaluator.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/services/TimetableEvaluator.cpp > CMakeFiles/timetableGen.dir/services/TimetableEvaluator.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/services/TimetableEvaluator.cpp > CMakeFiles/timetableGen.dir/services/TimetableEvaluator.cpp.i
 
 CMakeFiles/timetableGen.dir/services/TimetableEvaluator.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/timetableGen.dir/services/TimetableEvaluator.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/services/TimetableEvaluator.cpp -o CMakeFiles/timetableGen.dir/services/TimetableEvaluator.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/services/TimetableEvaluator.cpp -o CMakeFiles/timetableGen.dir/services/TimetableEvaluator.cpp.s
 
 CMakeFiles/timetableGen.dir/services/FeasibilityChecker.cpp.o: CMakeFiles/timetableGen.dir/flags.make
-CMakeFiles/timetableGen.dir/services/FeasibilityChecker.cpp.o: /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/services/FeasibilityChecker.cpp
+CMakeFiles/timetableGen.dir/services/FeasibilityChecker.cpp.o: /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/services/FeasibilityChecker.cpp
 CMakeFiles/timetableGen.dir/services/FeasibilityChecker.cpp.o: CMakeFiles/timetableGen.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/build_cmake/CMakeFiles --progress-num=$(CMAKE_PROGRESS_24) "Building CXX object CMakeFiles/timetableGen.dir/services/FeasibilityChecker.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/timetableGen.dir/services/FeasibilityChecker.cpp.o -MF CMakeFiles/timetableGen.dir/services/FeasibilityChecker.cpp.o.d -o CMakeFiles/timetableGen.dir/services/FeasibilityChecker.cpp.o -c /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/services/FeasibilityChecker.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/build_cmake/CMakeFiles --progress-num=$(CMAKE_PROGRESS_24) "Building CXX object CMakeFiles/timetableGen.dir/services/FeasibilityChecker.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/timetableGen.dir/services/FeasibilityChecker.cpp.o -MF CMakeFiles/timetableGen.dir/services/FeasibilityChecker.cpp.o.d -o CMakeFiles/timetableGen.dir/services/FeasibilityChecker.cpp.o -c /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/services/FeasibilityChecker.cpp
 
 CMakeFiles/timetableGen.dir/services/FeasibilityChecker.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/timetableGen.dir/services/FeasibilityChecker.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/services/FeasibilityChecker.cpp > CMakeFiles/timetableGen.dir/services/FeasibilityChecker.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/services/FeasibilityChecker.cpp > CMakeFiles/timetableGen.dir/services/FeasibilityChecker.cpp.i
 
 CMakeFiles/timetableGen.dir/services/FeasibilityChecker.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/timetableGen.dir/services/FeasibilityChecker.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/services/FeasibilityChecker.cpp -o CMakeFiles/timetableGen.dir/services/FeasibilityChecker.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/services/FeasibilityChecker.cpp -o CMakeFiles/timetableGen.dir/services/FeasibilityChecker.cpp.s
 
 CMakeFiles/timetableGen.dir/services/DomainTracker.cpp.o: CMakeFiles/timetableGen.dir/flags.make
-CMakeFiles/timetableGen.dir/services/DomainTracker.cpp.o: /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/services/DomainTracker.cpp
+CMakeFiles/timetableGen.dir/services/DomainTracker.cpp.o: /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/services/DomainTracker.cpp
 CMakeFiles/timetableGen.dir/services/DomainTracker.cpp.o: CMakeFiles/timetableGen.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/build_cmake/CMakeFiles --progress-num=$(CMAKE_PROGRESS_25) "Building CXX object CMakeFiles/timetableGen.dir/services/DomainTracker.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/timetableGen.dir/services/DomainTracker.cpp.o -MF CMakeFiles/timetableGen.dir/services/DomainTracker.cpp.o.d -o CMakeFiles/timetableGen.dir/services/DomainTracker.cpp.o -c /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/services/DomainTracker.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/build_cmake/CMakeFiles --progress-num=$(CMAKE_PROGRESS_25) "Building CXX object CMakeFiles/timetableGen.dir/services/DomainTracker.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/timetableGen.dir/services/DomainTracker.cpp.o -MF CMakeFiles/timetableGen.dir/services/DomainTracker.cpp.o.d -o CMakeFiles/timetableGen.dir/services/DomainTracker.cpp.o -c /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/services/DomainTracker.cpp
 
 CMakeFiles/timetableGen.dir/services/DomainTracker.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/timetableGen.dir/services/DomainTracker.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/services/DomainTracker.cpp > CMakeFiles/timetableGen.dir/services/DomainTracker.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/services/DomainTracker.cpp > CMakeFiles/timetableGen.dir/services/DomainTracker.cpp.i
 
 CMakeFiles/timetableGen.dir/services/DomainTracker.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/timetableGen.dir/services/DomainTracker.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/services/DomainTracker.cpp -o CMakeFiles/timetableGen.dir/services/DomainTracker.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/services/DomainTracker.cpp -o CMakeFiles/timetableGen.dir/services/DomainTracker.cpp.s
 
 CMakeFiles/timetableGen.dir/services/Benchmark.cpp.o: CMakeFiles/timetableGen.dir/flags.make
-CMakeFiles/timetableGen.dir/services/Benchmark.cpp.o: /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/services/Benchmark.cpp
+CMakeFiles/timetableGen.dir/services/Benchmark.cpp.o: /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/services/Benchmark.cpp
 CMakeFiles/timetableGen.dir/services/Benchmark.cpp.o: CMakeFiles/timetableGen.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/build_cmake/CMakeFiles --progress-num=$(CMAKE_PROGRESS_26) "Building CXX object CMakeFiles/timetableGen.dir/services/Benchmark.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/timetableGen.dir/services/Benchmark.cpp.o -MF CMakeFiles/timetableGen.dir/services/Benchmark.cpp.o.d -o CMakeFiles/timetableGen.dir/services/Benchmark.cpp.o -c /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/services/Benchmark.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/build_cmake/CMakeFiles --progress-num=$(CMAKE_PROGRESS_26) "Building CXX object CMakeFiles/timetableGen.dir/services/Benchmark.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/timetableGen.dir/services/Benchmark.cpp.o -MF CMakeFiles/timetableGen.dir/services/Benchmark.cpp.o.d -o CMakeFiles/timetableGen.dir/services/Benchmark.cpp.o -c /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/services/Benchmark.cpp
 
 CMakeFiles/timetableGen.dir/services/Benchmark.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/timetableGen.dir/services/Benchmark.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/services/Benchmark.cpp > CMakeFiles/timetableGen.dir/services/Benchmark.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/services/Benchmark.cpp > CMakeFiles/timetableGen.dir/services/Benchmark.cpp.i
 
 CMakeFiles/timetableGen.dir/services/Benchmark.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/timetableGen.dir/services/Benchmark.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/services/Benchmark.cpp -o CMakeFiles/timetableGen.dir/services/Benchmark.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/services/Benchmark.cpp -o CMakeFiles/timetableGen.dir/services/Benchmark.cpp.s
 
 CMakeFiles/timetableGen.dir/services/BacktrackingSolver.cpp.o: CMakeFiles/timetableGen.dir/flags.make
-CMakeFiles/timetableGen.dir/services/BacktrackingSolver.cpp.o: /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/services/BacktrackingSolver.cpp
+CMakeFiles/timetableGen.dir/services/BacktrackingSolver.cpp.o: /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/services/BacktrackingSolver.cpp
 CMakeFiles/timetableGen.dir/services/BacktrackingSolver.cpp.o: CMakeFiles/timetableGen.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/build_cmake/CMakeFiles --progress-num=$(CMAKE_PROGRESS_27) "Building CXX object CMakeFiles/timetableGen.dir/services/BacktrackingSolver.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/timetableGen.dir/services/BacktrackingSolver.cpp.o -MF CMakeFiles/timetableGen.dir/services/BacktrackingSolver.cpp.o.d -o CMakeFiles/timetableGen.dir/services/BacktrackingSolver.cpp.o -c /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/services/BacktrackingSolver.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/build_cmake/CMakeFiles --progress-num=$(CMAKE_PROGRESS_27) "Building CXX object CMakeFiles/timetableGen.dir/services/BacktrackingSolver.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/timetableGen.dir/services/BacktrackingSolver.cpp.o -MF CMakeFiles/timetableGen.dir/services/BacktrackingSolver.cpp.o.d -o CMakeFiles/timetableGen.dir/services/BacktrackingSolver.cpp.o -c /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/services/BacktrackingSolver.cpp
 
 CMakeFiles/timetableGen.dir/services/BacktrackingSolver.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/timetableGen.dir/services/BacktrackingSolver.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/services/BacktrackingSolver.cpp > CMakeFiles/timetableGen.dir/services/BacktrackingSolver.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/services/BacktrackingSolver.cpp > CMakeFiles/timetableGen.dir/services/BacktrackingSolver.cpp.i
 
 CMakeFiles/timetableGen.dir/services/BacktrackingSolver.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/timetableGen.dir/services/BacktrackingSolver.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/services/BacktrackingSolver.cpp -o CMakeFiles/timetableGen.dir/services/BacktrackingSolver.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/services/BacktrackingSolver.cpp -o CMakeFiles/timetableGen.dir/services/BacktrackingSolver.cpp.s
 
 CMakeFiles/timetableGen.dir/services/GreedySolver.cpp.o: CMakeFiles/timetableGen.dir/flags.make
-CMakeFiles/timetableGen.dir/services/GreedySolver.cpp.o: /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/services/GreedySolver.cpp
+CMakeFiles/timetableGen.dir/services/GreedySolver.cpp.o: /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/services/GreedySolver.cpp
 CMakeFiles/timetableGen.dir/services/GreedySolver.cpp.o: CMakeFiles/timetableGen.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/build_cmake/CMakeFiles --progress-num=$(CMAKE_PROGRESS_28) "Building CXX object CMakeFiles/timetableGen.dir/services/GreedySolver.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/timetableGen.dir/services/GreedySolver.cpp.o -MF CMakeFiles/timetableGen.dir/services/GreedySolver.cpp.o.d -o CMakeFiles/timetableGen.dir/services/GreedySolver.cpp.o -c /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/services/GreedySolver.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/build_cmake/CMakeFiles --progress-num=$(CMAKE_PROGRESS_28) "Building CXX object CMakeFiles/timetableGen.dir/services/GreedySolver.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/timetableGen.dir/services/GreedySolver.cpp.o -MF CMakeFiles/timetableGen.dir/services/GreedySolver.cpp.o.d -o CMakeFiles/timetableGen.dir/services/GreedySolver.cpp.o -c /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/services/GreedySolver.cpp
 
 CMakeFiles/timetableGen.dir/services/GreedySolver.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/timetableGen.dir/services/GreedySolver.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/services/GreedySolver.cpp > CMakeFiles/timetableGen.dir/services/GreedySolver.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/services/GreedySolver.cpp > CMakeFiles/timetableGen.dir/services/GreedySolver.cpp.i
 
 CMakeFiles/timetableGen.dir/services/GreedySolver.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/timetableGen.dir/services/GreedySolver.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/services/GreedySolver.cpp -o CMakeFiles/timetableGen.dir/services/GreedySolver.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/services/GreedySolver.cpp -o CMakeFiles/timetableGen.dir/services/GreedySolver.cpp.s
 
 CMakeFiles/timetableGen.dir/timetable/Timetable.cpp.o: CMakeFiles/timetableGen.dir/flags.make
-CMakeFiles/timetableGen.dir/timetable/Timetable.cpp.o: /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/timetable/Timetable.cpp
+CMakeFiles/timetableGen.dir/timetable/Timetable.cpp.o: /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/timetable/Timetable.cpp
 CMakeFiles/timetableGen.dir/timetable/Timetable.cpp.o: CMakeFiles/timetableGen.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/build_cmake/CMakeFiles --progress-num=$(CMAKE_PROGRESS_29) "Building CXX object CMakeFiles/timetableGen.dir/timetable/Timetable.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/timetableGen.dir/timetable/Timetable.cpp.o -MF CMakeFiles/timetableGen.dir/timetable/Timetable.cpp.o.d -o CMakeFiles/timetableGen.dir/timetable/Timetable.cpp.o -c /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/timetable/Timetable.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/build_cmake/CMakeFiles --progress-num=$(CMAKE_PROGRESS_29) "Building CXX object CMakeFiles/timetableGen.dir/timetable/Timetable.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/timetableGen.dir/timetable/Timetable.cpp.o -MF CMakeFiles/timetableGen.dir/timetable/Timetable.cpp.o.d -o CMakeFiles/timetableGen.dir/timetable/Timetable.cpp.o -c /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/timetable/Timetable.cpp
 
 CMakeFiles/timetableGen.dir/timetable/Timetable.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/timetableGen.dir/timetable/Timetable.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/timetable/Timetable.cpp > CMakeFiles/timetableGen.dir/timetable/Timetable.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/timetable/Timetable.cpp > CMakeFiles/timetableGen.dir/timetable/Timetable.cpp.i
 
 CMakeFiles/timetableGen.dir/timetable/Timetable.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/timetableGen.dir/timetable/Timetable.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/timetable/Timetable.cpp -o CMakeFiles/timetableGen.dir/timetable/Timetable.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/timetable/Timetable.cpp -o CMakeFiles/timetableGen.dir/timetable/Timetable.cpp.s
 
 CMakeFiles/timetableGen.dir/services/AnalyticsService.cpp.o: CMakeFiles/timetableGen.dir/flags.make
-CMakeFiles/timetableGen.dir/services/AnalyticsService.cpp.o: /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/services/AnalyticsService.cpp
+CMakeFiles/timetableGen.dir/services/AnalyticsService.cpp.o: /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/services/AnalyticsService.cpp
 CMakeFiles/timetableGen.dir/services/AnalyticsService.cpp.o: CMakeFiles/timetableGen.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/build_cmake/CMakeFiles --progress-num=$(CMAKE_PROGRESS_30) "Building CXX object CMakeFiles/timetableGen.dir/services/AnalyticsService.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/timetableGen.dir/services/AnalyticsService.cpp.o -MF CMakeFiles/timetableGen.dir/services/AnalyticsService.cpp.o.d -o CMakeFiles/timetableGen.dir/services/AnalyticsService.cpp.o -c /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/services/AnalyticsService.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/build_cmake/CMakeFiles --progress-num=$(CMAKE_PROGRESS_30) "Building CXX object CMakeFiles/timetableGen.dir/services/AnalyticsService.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/timetableGen.dir/services/AnalyticsService.cpp.o -MF CMakeFiles/timetableGen.dir/services/AnalyticsService.cpp.o.d -o CMakeFiles/timetableGen.dir/services/AnalyticsService.cpp.o -c /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/services/AnalyticsService.cpp
 
 CMakeFiles/timetableGen.dir/services/AnalyticsService.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/timetableGen.dir/services/AnalyticsService.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/services/AnalyticsService.cpp > CMakeFiles/timetableGen.dir/services/AnalyticsService.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/services/AnalyticsService.cpp > CMakeFiles/timetableGen.dir/services/AnalyticsService.cpp.i
 
 CMakeFiles/timetableGen.dir/services/AnalyticsService.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/timetableGen.dir/services/AnalyticsService.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/services/AnalyticsService.cpp -o CMakeFiles/timetableGen.dir/services/AnalyticsService.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/services/AnalyticsService.cpp -o CMakeFiles/timetableGen.dir/services/AnalyticsService.cpp.s
 
 CMakeFiles/timetableGen.dir/services/PdfReportService.cpp.o: CMakeFiles/timetableGen.dir/flags.make
-CMakeFiles/timetableGen.dir/services/PdfReportService.cpp.o: /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/services/PdfReportService.cpp
+CMakeFiles/timetableGen.dir/services/PdfReportService.cpp.o: /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/services/PdfReportService.cpp
 CMakeFiles/timetableGen.dir/services/PdfReportService.cpp.o: CMakeFiles/timetableGen.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/build_cmake/CMakeFiles --progress-num=$(CMAKE_PROGRESS_31) "Building CXX object CMakeFiles/timetableGen.dir/services/PdfReportService.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/timetableGen.dir/services/PdfReportService.cpp.o -MF CMakeFiles/timetableGen.dir/services/PdfReportService.cpp.o.d -o CMakeFiles/timetableGen.dir/services/PdfReportService.cpp.o -c /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/services/PdfReportService.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/build_cmake/CMakeFiles --progress-num=$(CMAKE_PROGRESS_31) "Building CXX object CMakeFiles/timetableGen.dir/services/PdfReportService.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/timetableGen.dir/services/PdfReportService.cpp.o -MF CMakeFiles/timetableGen.dir/services/PdfReportService.cpp.o.d -o CMakeFiles/timetableGen.dir/services/PdfReportService.cpp.o -c /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/services/PdfReportService.cpp
 
 CMakeFiles/timetableGen.dir/services/PdfReportService.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/timetableGen.dir/services/PdfReportService.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/services/PdfReportService.cpp > CMakeFiles/timetableGen.dir/services/PdfReportService.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/services/PdfReportService.cpp > CMakeFiles/timetableGen.dir/services/PdfReportService.cpp.i
 
 CMakeFiles/timetableGen.dir/services/PdfReportService.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/timetableGen.dir/services/PdfReportService.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/services/PdfReportService.cpp -o CMakeFiles/timetableGen.dir/services/PdfReportService.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/services/PdfReportService.cpp -o CMakeFiles/timetableGen.dir/services/PdfReportService.cpp.s
 
 CMakeFiles/timetableGen.dir/services/ConstraintExplanationService.cpp.o: CMakeFiles/timetableGen.dir/flags.make
-CMakeFiles/timetableGen.dir/services/ConstraintExplanationService.cpp.o: /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/services/ConstraintExplanationService.cpp
+CMakeFiles/timetableGen.dir/services/ConstraintExplanationService.cpp.o: /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/services/ConstraintExplanationService.cpp
 CMakeFiles/timetableGen.dir/services/ConstraintExplanationService.cpp.o: CMakeFiles/timetableGen.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/build_cmake/CMakeFiles --progress-num=$(CMAKE_PROGRESS_32) "Building CXX object CMakeFiles/timetableGen.dir/services/ConstraintExplanationService.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/timetableGen.dir/services/ConstraintExplanationService.cpp.o -MF CMakeFiles/timetableGen.dir/services/ConstraintExplanationService.cpp.o.d -o CMakeFiles/timetableGen.dir/services/ConstraintExplanationService.cpp.o -c /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/services/ConstraintExplanationService.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/build_cmake/CMakeFiles --progress-num=$(CMAKE_PROGRESS_32) "Building CXX object CMakeFiles/timetableGen.dir/services/ConstraintExplanationService.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/timetableGen.dir/services/ConstraintExplanationService.cpp.o -MF CMakeFiles/timetableGen.dir/services/ConstraintExplanationService.cpp.o.d -o CMakeFiles/timetableGen.dir/services/ConstraintExplanationService.cpp.o -c /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/services/ConstraintExplanationService.cpp
 
 CMakeFiles/timetableGen.dir/services/ConstraintExplanationService.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/timetableGen.dir/services/ConstraintExplanationService.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/services/ConstraintExplanationService.cpp > CMakeFiles/timetableGen.dir/services/ConstraintExplanationService.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/services/ConstraintExplanationService.cpp > CMakeFiles/timetableGen.dir/services/ConstraintExplanationService.cpp.i
 
 CMakeFiles/timetableGen.dir/services/ConstraintExplanationService.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/timetableGen.dir/services/ConstraintExplanationService.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/services/ConstraintExplanationService.cpp -o CMakeFiles/timetableGen.dir/services/ConstraintExplanationService.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/services/ConstraintExplanationService.cpp -o CMakeFiles/timetableGen.dir/services/ConstraintExplanationService.cpp.s
 
 CMakeFiles/timetableGen.dir/services/ConstraintExplain.cpp.o: CMakeFiles/timetableGen.dir/flags.make
-CMakeFiles/timetableGen.dir/services/ConstraintExplain.cpp.o: /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/services/ConstraintExplain.cpp
+CMakeFiles/timetableGen.dir/services/ConstraintExplain.cpp.o: /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/services/ConstraintExplain.cpp
 CMakeFiles/timetableGen.dir/services/ConstraintExplain.cpp.o: CMakeFiles/timetableGen.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/build_cmake/CMakeFiles --progress-num=$(CMAKE_PROGRESS_33) "Building CXX object CMakeFiles/timetableGen.dir/services/ConstraintExplain.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/timetableGen.dir/services/ConstraintExplain.cpp.o -MF CMakeFiles/timetableGen.dir/services/ConstraintExplain.cpp.o.d -o CMakeFiles/timetableGen.dir/services/ConstraintExplain.cpp.o -c /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/services/ConstraintExplain.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/build_cmake/CMakeFiles --progress-num=$(CMAKE_PROGRESS_33) "Building CXX object CMakeFiles/timetableGen.dir/services/ConstraintExplain.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/timetableGen.dir/services/ConstraintExplain.cpp.o -MF CMakeFiles/timetableGen.dir/services/ConstraintExplain.cpp.o.d -o CMakeFiles/timetableGen.dir/services/ConstraintExplain.cpp.o -c /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/services/ConstraintExplain.cpp
 
 CMakeFiles/timetableGen.dir/services/ConstraintExplain.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/timetableGen.dir/services/ConstraintExplain.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/services/ConstraintExplain.cpp > CMakeFiles/timetableGen.dir/services/ConstraintExplain.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/services/ConstraintExplain.cpp > CMakeFiles/timetableGen.dir/services/ConstraintExplain.cpp.i
 
 CMakeFiles/timetableGen.dir/services/ConstraintExplain.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/timetableGen.dir/services/ConstraintExplain.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/services/ConstraintExplain.cpp -o CMakeFiles/timetableGen.dir/services/ConstraintExplain.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/services/ConstraintExplain.cpp -o CMakeFiles/timetableGen.dir/services/ConstraintExplain.cpp.s
 
 CMakeFiles/timetableGen.dir/services/ConflictChecker.cpp.o: CMakeFiles/timetableGen.dir/flags.make
-CMakeFiles/timetableGen.dir/services/ConflictChecker.cpp.o: /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/services/ConflictChecker.cpp
+CMakeFiles/timetableGen.dir/services/ConflictChecker.cpp.o: /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/services/ConflictChecker.cpp
 CMakeFiles/timetableGen.dir/services/ConflictChecker.cpp.o: CMakeFiles/timetableGen.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/build_cmake/CMakeFiles --progress-num=$(CMAKE_PROGRESS_34) "Building CXX object CMakeFiles/timetableGen.dir/services/ConflictChecker.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/timetableGen.dir/services/ConflictChecker.cpp.o -MF CMakeFiles/timetableGen.dir/services/ConflictChecker.cpp.o.d -o CMakeFiles/timetableGen.dir/services/ConflictChecker.cpp.o -c /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/services/ConflictChecker.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/build_cmake/CMakeFiles --progress-num=$(CMAKE_PROGRESS_34) "Building CXX object CMakeFiles/timetableGen.dir/services/ConflictChecker.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/timetableGen.dir/services/ConflictChecker.cpp.o -MF CMakeFiles/timetableGen.dir/services/ConflictChecker.cpp.o.d -o CMakeFiles/timetableGen.dir/services/ConflictChecker.cpp.o -c /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/services/ConflictChecker.cpp
 
 CMakeFiles/timetableGen.dir/services/ConflictChecker.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/timetableGen.dir/services/ConflictChecker.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/services/ConflictChecker.cpp > CMakeFiles/timetableGen.dir/services/ConflictChecker.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/services/ConflictChecker.cpp > CMakeFiles/timetableGen.dir/services/ConflictChecker.cpp.i
 
 CMakeFiles/timetableGen.dir/services/ConflictChecker.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/timetableGen.dir/services/ConflictChecker.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/services/ConflictChecker.cpp -o CMakeFiles/timetableGen.dir/services/ConflictChecker.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/services/ConflictChecker.cpp -o CMakeFiles/timetableGen.dir/services/ConflictChecker.cpp.s
 
 CMakeFiles/timetableGen.dir/services/UndoRedoStack.cpp.o: CMakeFiles/timetableGen.dir/flags.make
-CMakeFiles/timetableGen.dir/services/UndoRedoStack.cpp.o: /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/services/UndoRedoStack.cpp
+CMakeFiles/timetableGen.dir/services/UndoRedoStack.cpp.o: /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/services/UndoRedoStack.cpp
 CMakeFiles/timetableGen.dir/services/UndoRedoStack.cpp.o: CMakeFiles/timetableGen.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/build_cmake/CMakeFiles --progress-num=$(CMAKE_PROGRESS_35) "Building CXX object CMakeFiles/timetableGen.dir/services/UndoRedoStack.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/timetableGen.dir/services/UndoRedoStack.cpp.o -MF CMakeFiles/timetableGen.dir/services/UndoRedoStack.cpp.o.d -o CMakeFiles/timetableGen.dir/services/UndoRedoStack.cpp.o -c /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/services/UndoRedoStack.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/build_cmake/CMakeFiles --progress-num=$(CMAKE_PROGRESS_35) "Building CXX object CMakeFiles/timetableGen.dir/services/UndoRedoStack.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/timetableGen.dir/services/UndoRedoStack.cpp.o -MF CMakeFiles/timetableGen.dir/services/UndoRedoStack.cpp.o.d -o CMakeFiles/timetableGen.dir/services/UndoRedoStack.cpp.o -c /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/services/UndoRedoStack.cpp
 
 CMakeFiles/timetableGen.dir/services/UndoRedoStack.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/timetableGen.dir/services/UndoRedoStack.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/services/UndoRedoStack.cpp > CMakeFiles/timetableGen.dir/services/UndoRedoStack.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/services/UndoRedoStack.cpp > CMakeFiles/timetableGen.dir/services/UndoRedoStack.cpp.i
 
 CMakeFiles/timetableGen.dir/services/UndoRedoStack.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/timetableGen.dir/services/UndoRedoStack.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/services/UndoRedoStack.cpp -o CMakeFiles/timetableGen.dir/services/UndoRedoStack.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/services/UndoRedoStack.cpp -o CMakeFiles/timetableGen.dir/services/UndoRedoStack.cpp.s
 
 CMakeFiles/timetableGen.dir/services/TimelineGenerator.cpp.o: CMakeFiles/timetableGen.dir/flags.make
-CMakeFiles/timetableGen.dir/services/TimelineGenerator.cpp.o: /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/services/TimelineGenerator.cpp
+CMakeFiles/timetableGen.dir/services/TimelineGenerator.cpp.o: /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/services/TimelineGenerator.cpp
 CMakeFiles/timetableGen.dir/services/TimelineGenerator.cpp.o: CMakeFiles/timetableGen.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/build_cmake/CMakeFiles --progress-num=$(CMAKE_PROGRESS_36) "Building CXX object CMakeFiles/timetableGen.dir/services/TimelineGenerator.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/timetableGen.dir/services/TimelineGenerator.cpp.o -MF CMakeFiles/timetableGen.dir/services/TimelineGenerator.cpp.o.d -o CMakeFiles/timetableGen.dir/services/TimelineGenerator.cpp.o -c /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/services/TimelineGenerator.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/build_cmake/CMakeFiles --progress-num=$(CMAKE_PROGRESS_36) "Building CXX object CMakeFiles/timetableGen.dir/services/TimelineGenerator.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/timetableGen.dir/services/TimelineGenerator.cpp.o -MF CMakeFiles/timetableGen.dir/services/TimelineGenerator.cpp.o.d -o CMakeFiles/timetableGen.dir/services/TimelineGenerator.cpp.o -c /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/services/TimelineGenerator.cpp
 
 CMakeFiles/timetableGen.dir/services/TimelineGenerator.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/timetableGen.dir/services/TimelineGenerator.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/services/TimelineGenerator.cpp > CMakeFiles/timetableGen.dir/services/TimelineGenerator.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/services/TimelineGenerator.cpp > CMakeFiles/timetableGen.dir/services/TimelineGenerator.cpp.i
 
 CMakeFiles/timetableGen.dir/services/TimelineGenerator.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/timetableGen.dir/services/TimelineGenerator.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/services/TimelineGenerator.cpp -o CMakeFiles/timetableGen.dir/services/TimelineGenerator.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/services/TimelineGenerator.cpp -o CMakeFiles/timetableGen.dir/services/TimelineGenerator.cpp.s
 
 # Object files for target timetableGen
 timetableGen_OBJECTS = \
@@ -649,7 +649,7 @@ timetableGen: /home/thorium/anaconda3/lib/libQt5Widgets.so.5.15.2
 timetableGen: /home/thorium/anaconda3/lib/libQt5Gui.so.5.15.2
 timetableGen: /home/thorium/anaconda3/lib/libQt5Core.so.5.15.2
 timetableGen: CMakeFiles/timetableGen.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/build_cmake/CMakeFiles --progress-num=$(CMAKE_PROGRESS_37) "Linking CXX executable timetableGen"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/build_cmake/CMakeFiles --progress-num=$(CMAKE_PROGRESS_37) "Linking CXX executable timetableGen"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/timetableGen.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -661,6 +661,6 @@ CMakeFiles/timetableGen.dir/clean:
 .PHONY : CMakeFiles/timetableGen.dir/clean
 
 CMakeFiles/timetableGen.dir/depend: timetableGen_autogen/timestamp
-	cd /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/build_cmake && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/build_cmake /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/build_cmake /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/build_cmake/CMakeFiles/timetableGen.dir/DependInfo.cmake "--color=$(COLOR)"
+	cd /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/build_cmake && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/build_cmake /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/build_cmake /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/build_cmake/CMakeFiles/timetableGen.dir/DependInfo.cmake "--color=$(COLOR)"
 .PHONY : CMakeFiles/timetableGen.dir/depend
 

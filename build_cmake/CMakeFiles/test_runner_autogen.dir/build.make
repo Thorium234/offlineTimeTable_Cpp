@@ -53,10 +53,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp
+CMAKE_SOURCE_DIR = /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/build_cmake
+CMAKE_BINARY_DIR = /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/build_cmake
 
 # Utility rule file for test_runner_autogen.
 
@@ -71,9 +71,9 @@ CMakeFiles/test_runner_autogen: test_runner_autogen/timestamp
 test_runner_autogen/timestamp: /home/thorium/anaconda3/bin/moc
 test_runner_autogen/timestamp: /home/thorium/anaconda3/bin/uic
 test_runner_autogen/timestamp: CMakeFiles/test_runner_autogen.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold --progress-dir=/home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/build_cmake/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Automatic MOC and UIC for target test_runner"
-	/usr/bin/cmake -E cmake_autogen /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/build_cmake/CMakeFiles/test_runner_autogen.dir/AutogenInfo.json Release
-	/usr/bin/cmake -E touch /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/build_cmake/test_runner_autogen/timestamp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold --progress-dir=/home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/build_cmake/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Automatic MOC and UIC for target test_runner"
+	/usr/bin/cmake -E cmake_autogen /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/build_cmake/CMakeFiles/test_runner_autogen.dir/AutogenInfo.json Release
+	/usr/bin/cmake -E touch /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/build_cmake/test_runner_autogen/timestamp
 
 test_runner_autogen: CMakeFiles/test_runner_autogen
 test_runner_autogen: test_runner_autogen/timestamp
@@ -89,6 +89,6 @@ CMakeFiles/test_runner_autogen.dir/clean:
 .PHONY : CMakeFiles/test_runner_autogen.dir/clean
 
 CMakeFiles/test_runner_autogen.dir/depend:
-	cd /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/build_cmake && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/build_cmake /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/build_cmake /home/thorium/Desktop/programming/2026/c++Projects/webOfflineTimeTableCpp/offlineTimeTableCpp/build_cmake/CMakeFiles/test_runner_autogen.dir/DependInfo.cmake "--color=$(COLOR)"
+	cd /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/build_cmake && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/build_cmake /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/build_cmake /home/thorium/Desktop/programming/2026/c++Projects/offlineTimeTableCpp/build_cmake/CMakeFiles/test_runner_autogen.dir/DependInfo.cmake "--color=$(COLOR)"
 .PHONY : CMakeFiles/test_runner_autogen.dir/depend
 
