@@ -97,25 +97,21 @@ ScheduleConfig TimelineGenerator::generateFromConfig(
             int segEnd = boundaries[i + 1];
             if (segStart >= segEnd) continue;
 
-            // Check if this segment is entirely within a break
             bool isBreak = false;
             for (const auto& brk : breaks) {
-                if (std::find(brk.dayIds.begin(), brk.dayIds.end(), day.id) != brk.dayIds.end()) {
-                    int bs = timeToMinutes(brk.startTime);
-                    int be = timeToMinutes(brk.endTime);
-                    if (segStart >= bs && segEnd <= be) {
-                        TimeBlock block;
-                        block.dayId = day.id;
-                        block.slotIndex = slotIdx++;
-                        block.startTime = minutesToTime(segStart);
-                        block.endTime = minutesToTime(segEnd);
-                        block.durationMinutes = segEnd - segStart;
-                        block.type = BlockType::FIXED_BREAK;
-                        block.label = brk.name;
-                        layout.blocks.push_back(block);
-                        isBreak = true;
-                        break;
-                    }
+                if (std::find(brk.dayIds.begin(), brk.dayIds.end(), day.id) != brk.dayIds.end() &&
+                    isTimeInBreak(segStart, brk)) {
+                    TimeBlock block;
+                    block.dayId = day.id;
+                    block.slotIndex = slotIdx++;
+                    block.startTime = minutesToTime(segStart);
+                    block.endTime = minutesToTime(segEnd);
+                    block.durationMinutes = segEnd - segStart;
+                    block.type = BlockType::FIXED_BREAK;
+                    block.label = brk.name;
+                    layout.blocks.push_back(block);
+                    isBreak = true;
+                    break;
                 }
             }
             if (isBreak) continue;

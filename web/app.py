@@ -203,13 +203,14 @@ def update_teacher(tid):
 @app.route('/api/teachers/<int:tid>', methods=['DELETE'])
 def delete_teacher(tid):
     conn = get_db()
-    for q in ["DELETE FROM teachers WHERE id=?",
-              "DELETE FROM lessons WHERE teacherId=? OR secondTeacherId=?",
-              "DELETE FROM teacher_constraints WHERE teacherId=?",
-              "DELETE FROM teacher_preferences WHERE teacherId=?",
-              "DELETE FROM substitutions WHERE originalTeacherId=? OR substituteTeacherId=?",
-              "DELETE FROM timetable_slots WHERE teacherId=?"]:
-        conn.execute(q, (tid, tid, tid, tid, tid, tid))
+    for q, params in [
+            ("DELETE FROM teachers WHERE id=?", (tid,)),
+            ("DELETE FROM lessons WHERE teacherId=? OR secondTeacherId=?", (tid, tid)),
+            ("DELETE FROM teacher_constraints WHERE teacherId=?", (tid,)),
+            ("DELETE FROM teacher_preferences WHERE teacherId=?", (tid,)),
+            ("DELETE FROM substitutions WHERE originalTeacherId=? OR substituteTeacherId=?", (tid, tid)),
+            ("DELETE FROM timetable_slots WHERE teacherId=?", (tid,))]:
+        conn.execute(q, params)
     conn.commit()
     conn.close()
     return jsonify({'ok': True})
@@ -675,7 +676,8 @@ def _solve_backtrack(lessons, rooms, constraints, prefs, teachers, locked_slots,
         ppw = lesson['periodsPerWeek']
         mpd = lesson.get('maxPerDay', 0)
         wt = int(lesson.get('weekType', 0))
-        second_tid = int(lesson.get('secondTeacherId', -1))
+        second_tid_raw = lesson.get('secondTeacherId')
+        second_tid = -1 if second_tid_raw is None else int(second_tid_raw)
         combined_ids = lesson.get('combinedClassIds', [])
 
         all_class_ids = [cid] + combined_ids
@@ -790,7 +792,8 @@ def _solve_greedy(lessons, rooms, constraints, prefs, teachers, locked_slots, se
         ppw = lesson['periodsPerWeek']
         mpd = lesson.get('maxPerDay', 0)
         wt = int(lesson.get('weekType', 0))
-        second_tid = int(lesson.get('secondTeacherId', -1))
+        second_tid_raw = lesson.get('secondTeacherId')
+        second_tid = -1 if second_tid_raw is None else int(second_tid_raw)
         combined_ids = lesson.get('combinedClassIds', [])
 
         all_class_ids = [cid] + combined_ids
@@ -1867,7 +1870,7 @@ def sample_school():
 # ── DYNAMIC TIMETABLE GENERATION ─────────────────────────────────────────────
 
 @app.route('/api/generate-timetable', methods=['POST'])
-def generate_timetable():
+def generate_timetable_from_config():
     """Generate a timetable from a fully user-defined configuration.
 
     Each class can have its own lesson_duration_minutes to support

@@ -95,6 +95,9 @@ if [ ! -x "$BINARY" ]; then
     exit 1
 fi
 
+# Prepend system lib path to avoid Anaconda's old libstdc++
+export LD_LIBRARY_PATH="/usr/lib/x86_64-linux-gnu${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"
+
 # Special Qt5 path (for CI / extracted debs)
 if [ -d /tmp/qt5/usr/lib/x86_64-linux-gnu ]; then
     export LD_LIBRARY_PATH="/tmp/qt5/usr/lib/x86_64-linux-gnu${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"

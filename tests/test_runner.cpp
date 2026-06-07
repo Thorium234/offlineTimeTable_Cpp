@@ -226,7 +226,7 @@ void runCombinedClassesTest() {
 
     auto it = std::find_if(dm.lessons.begin(), dm.lessons.end(),
         [combinedLessonId](const Lesson &l) { return l.id == combinedLessonId; });
-    assert(it != lessons.end());
+    assert(it != dm.lessons.end());
     assert(it->secondTeacherId == t2);
     assert(!it->combinedClassIds.empty());
     assert(it->combinedClassIds.size() == 2);
