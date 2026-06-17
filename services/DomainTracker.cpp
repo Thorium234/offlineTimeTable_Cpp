@@ -106,8 +106,15 @@ bool DomainTracker::propagate(int placedUnitIdx, int d, int p,
 
         const auto& other = units[u];
 
-        // Only conflicts if sharing class or teacher
-        if (other.classId == placedUnit.classId || other.teacherId == placedUnit.teacherId) {
+        // Conflicts if sharing any class (primary or combined) or teacher (primary or second)
+        bool sharesClass = (other.classId == placedUnit.classId);
+        for (int ccid : placedUnit.combinedClassIds) {
+            if (other.classId == ccid) { sharesClass = true; break; }
+        }
+        bool sharesTeacher = (other.teacherId == placedUnit.teacherId ||
+                             (placedUnit.secondTeacherId >= 0 && other.teacherId == placedUnit.secondTeacherId));
+
+        if (sharesClass || sharesTeacher) {
             // Find all domain slots on the same day d and filter out overlapping ones
             int k_other = other.blockSize;
 

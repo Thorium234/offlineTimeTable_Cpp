@@ -51,7 +51,11 @@ void ResourceTracker::markBusy(ResourceType type, int resourceId, int dayIdx, in
         }
     }
     if (dayIdx >= 0 && dayIdx < totalDays && periodIdx >= 0 && periodIdx < totalPeriods) {
-        busyMap[type][resourceId][dayIdx][periodIdx] = busy ? 1 : 0;
+        if (busy) {
+            busyMap[type][resourceId][dayIdx][periodIdx] |= 1;  // Set bit 0 (every week)
+        } else {
+            busyMap[type][resourceId][dayIdx][periodIdx] &= ~1; // Clear bit 0 only, preserve week-type bits
+        }
     }
 }
 

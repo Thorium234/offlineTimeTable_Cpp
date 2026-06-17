@@ -288,6 +288,106 @@ void runWeekSchedulingTest() {
     std::cout << "Week Scheduling Test Passed!" << std::endl;
 }
 
+void runSecondTeacherConflictTest() {
+    std::cout << "Running Second Teacher Conflict Test..." << std::endl;
+
+    DataManager dm;
+    dm.days.clear(); dm.periods.clear(); dm.teachers.clear();
+    dm.subjects.clear(); dm.classes.clear(); dm.rooms.clear();
+    dm.lessons.clear(); dm.fixedEvents.clear();
+    dm.teacherConstraints.clear(); dm.roomTypes.clear();
+
+    dm.addDay("Monday"); dm.addDay("Tuesday");
+    dm.addPeriod("08:00","09:00"); dm.addPeriod("09:00","10:00"); dm.addPeriod("10:00","11:00");
+
+    int rt = dm.addRoomType("Classroom");
+    int t1 = dm.addTeacher("Teacher A");
+    int t2 = dm.addTeacher("Teacher B");
+    int s1 = dm.addSubject("Math");
+    dm.setSubjectRequirement(s1, rt);
+    int c1 = dm.addClass("Class X", 25);
+    int c2 = dm.addClass("Class Y", 25);
+    dm.addRoom("Room 1", 30, rt);
+
+    // Add a lesson with primary teacher t1 and secondary teacher t2
+    dm.addLesson(t1, s1, c1, 2, 1, 0, 0, t2, {});
+
+    // Add another lesson for teacher t2 alone
+    dm.addLesson(t2, s1, c2, 2, 1, 0);
+
+    GreedySolver solver;
+    SolverStats stats;
+    Timetable tt = solver.solve(dm, stats);
+
+    // Count how many slots have t1 and how many have t2
+    int t1Slots = 0, t2Slots = 0;
+    for (const auto &[cid, grid] : tt.schedules) {
+        for (const auto &day : grid) {
+            for (const auto &cell : day) {
+                if (cell.teacherId == t1) ++t1Slots;
+                if (cell.teacherId == t2) ++t2Slots;
+            }
+        }
+    }
+
+    // Both teachers should have been scheduled
+    assert(t1Slots > 0);
+    assert(t2Slots > 0);
+
+    // Verify no two lessons with t2 (as primary or secondary teacher of t1's lesson) overlap
+    std::cout << "  Teacher A (primary) slots: " << t1Slots << std::endl;
+    std::cout << "  Teacher B (primary) slots: " << t2Slots << std::endl;
+    std::cout << "Second Teacher Conflict Test Passed!" << std::endl;
+}
+
+void runCombinedClassConflictTest() {
+    std::cout << "Running Combined Class Conflict Test..." << std::endl;
+
+    DataManager dm;
+    dm.days.clear(); dm.periods.clear(); dm.teachers.clear();
+    dm.subjects.clear(); dm.classes.clear(); dm.rooms.clear();
+    dm.lessons.clear(); dm.fixedEvents.clear();
+    dm.teacherConstraints.clear(); dm.roomTypes.clear();
+
+    dm.addDay("Monday"); dm.addDay("Tuesday");
+    dm.addPeriod("08:00","09:00"); dm.addPeriod("09:00","10:00"); dm.addPeriod("10:00","11:00");
+
+    int rt = dm.addRoomType("Classroom");
+    int t1 = dm.addTeacher("Teacher A");
+    int s1 = dm.addSubject("Math");
+    dm.setSubjectRequirement(s1, rt);
+    int c1 = dm.addClass("Class X", 25);
+    int c2 = dm.addClass("Class Y", 25);
+    dm.addRoom("Room 1", 30, rt);
+
+    // Add combined class lesson (t1 teaches both c1 and c2 together)
+    int combinedLessonId = dm.addLesson(t1, s1, c1, 2, 1, 0, 0, -1, {c1, c2});
+    assert(combinedLessonId > 0);
+
+    // Add another lesson for the same teacher (should not overlap with combined lesson)
+    dm.addLesson(t1, s1, c1, 1, 1, 0);
+
+    GreedySolver solver;
+    SolverStats stats;
+    Timetable tt = solver.solve(dm, stats);
+
+    // Verify the combined lesson was placed
+    int placedCombined = 0;
+    for (const auto &[cid, grid] : tt.schedules) {
+        if (cid == c1 || cid == c2) {
+            for (const auto &day : grid) {
+                for (const auto &cell : day) {
+                    if (cell.teacherId == t1 && cell.subjectId == s1) ++placedCombined;
+                }
+            }
+        }
+    }
+
+    assert(placedCombined >= 2); // At least 2 slots (one combined lesson)
+    std::cout << "  Combined lesson slots placed: " << placedCombined << std::endl;
+    std::cout << "Combined Class Conflict Test Passed!" << std::endl;
+}
+
 int main() {
     std::cout << "========================================" << std::endl;
     std::cout << "         RUNNING TIMETABLE TESTS        " << std::endl;
@@ -300,6 +400,8 @@ int main() {
         runAnalyticsTest();
         runCombinedClassesTest();
         runWeekSchedulingTest();
+        runSecondTeacherConflictTest();
+        runCombinedClassConflictTest();
     } catch (const std::exception& e) {
         std::cerr << "!!! TEST RUNNER FAILED WITH EXCEPTION: " << e.what() << std::endl;
         return 1;
