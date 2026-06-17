@@ -19,6 +19,7 @@ test_runner
 *~
 *.orig
 *.bak
+.snapshots
 
 # ─── Qt generated ────────────────────────────────────────────────────────────
 *_autogen/
