@@ -19,23 +19,31 @@ DB_PATH = os.environ.get('FLASK_DB_PATH') or os.path.join(
     os.path.dirname(__file__), '..', 'data', 'timetableGen.db'
 )
 
-DAYS = [
+# Default seed data — used to populate the DB on first run.
+_DEFAULT_DAYS = [
     {'id': 1, 'name': 'Monday'},
     {'id': 2, 'name': 'Tuesday'},
     {'id': 3, 'name': 'Wednesday'},
     {'id': 4, 'name': 'Thursday'},
     {'id': 5, 'name': 'Friday'},
 ]
-PERIODS = [
-    {'id': 1, 'start': '08:00', 'end': '08:45'},
-    {'id': 2, 'start': '08:45', 'end': '09:30'},
-    {'id': 3, 'start': '09:30', 'end': '10:15'},
-    {'id': 4, 'start': '10:15', 'end': '11:00'},
-    {'id': 5, 'start': '11:00', 'end': '11:45'},
-    {'id': 6, 'start': '12:30', 'end': '13:15'},
-    {'id': 7, 'start': '13:15', 'end': '14:00'},
-    {'id': 8, 'start': '14:00', 'end': '14:45'},
+_DEFAULT_PERIODS = [
+    {'id': 1, 'label': 'Period 1', 'startTime': '08:00', 'endTime': '08:45'},
+    {'id': 2, 'label': 'Period 2', 'startTime': '08:50', 'endTime': '09:35'},
+    {'id': 3, 'label': 'Period 3', 'startTime': '09:40', 'endTime': '10:25'},
+    {'id': 4, 'label': 'Period 4', 'startTime': '10:40', 'endTime': '11:25'},
+    {'id': 5, 'label': 'Period 5', 'startTime': '11:30', 'endTime': '12:15'},
+    {'id': 6, 'label': 'Period 6', 'startTime': '13:00', 'endTime': '14:45'},
 ]
+
+# Module-level caches — populated by _refresh_days_periods() at startup.
+# Solvers and all other code read these instead of the old hardcoded constants.
+g_days: list = []
+g_periods: list = []
+
+# Legacy aliases so any remaining references to DAYS / PERIODS still work.
+DAYS = g_days
+PERIODS = g_periods
 
 
 def get_db():
@@ -50,6 +58,8 @@ def init_db():
     conn = get_db()
     c = conn.cursor()
     c.executescript("""
+        PRAGMA journal_mode=WAL;
+
         CREATE TABLE IF NOT EXISTS teachers (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             name TEXT NOT NULL,
@@ -130,34 +140,187 @@ def init_db():
             reason TEXT DEFAULT '',
             date TEXT DEFAULT ''
         );
+
+        CREATE TABLE IF NOT EXISTS schema_migrations (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            name TEXT NOT NULL UNIQUE,
+            applied_at TEXT NOT NULL DEFAULT (datetime('now'))
+        );
+        CREATE TABLE IF NOT EXISTS days (
+            id INTEGER PRIMARY KEY,
+            name TEXT NOT NULL
+        );
+        CREATE TABLE IF NOT EXISTS periods (
+            id INTEGER PRIMARY KEY,
+            label TEXT NOT NULL,
+            startTime TEXT NOT NULL,
+            endTime TEXT NOT NULL
+        );
+        CREATE TABLE IF NOT EXISTS subject_requirements (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            subjectId INTEGER NOT NULL UNIQUE,
+            roomTypeId INTEGER NOT NULL DEFAULT 1
+        );
     """)
-    # Migrations — add columns that may be missing in existing DBs
-    for migration in [
-        "ALTER TABLE timetable_slots ADD COLUMN locked INTEGER NOT NULL DEFAULT 0",
-        "ALTER TABLE teachers ADD COLUMN color TEXT NOT NULL DEFAULT ''",
-        "ALTER TABLE subjects ADD COLUMN color TEXT NOT NULL DEFAULT ''",
-        "ALTER TABLE classes ADD COLUMN divisionId INTEGER DEFAULT NULL",
-        "ALTER TABLE classes ADD COLUMN groupId INTEGER DEFAULT NULL",
-        "ALTER TABLE lessons ADD COLUMN weekType INTEGER DEFAULT 0",
-        "ALTER TABLE lessons ADD COLUMN secondTeacherId INTEGER DEFAULT -1",
-        "ALTER TABLE timetable_slots ADD COLUMN weekType INTEGER NOT NULL DEFAULT 0",
-        "CREATE TABLE IF NOT EXISTS lesson_combined_classes (lessonId INTEGER NOT NULL, classId INTEGER NOT NULL, UNIQUE(lessonId, classId))",
-    ]:
-        try:
-            c.execute(migration)
-            conn.commit()
-        except Exception:
-            pass
     c.execute("SELECT COUNT(*) FROM room_types")
     if c.fetchone()[0] == 0:
         for rt in ['Classroom', 'Science Lab', 'Computer Lab', 'Art Room', 'Gym']:
             c.execute("INSERT INTO room_types (name) VALUES (?)", (rt,))
     conn.commit()
     conn.close()
+    _apply_migrations()
+    _seed_days_periods()
+    _refresh_days_periods()
+
+
+# Canonical 14-migration list — must match C++ SQLiteService::applyMigrations() exactly.
+_MIGRATIONS = [
+    ("001_add_timetable_slots_locked",
+     "ALTER TABLE timetable_slots ADD COLUMN locked INTEGER NOT NULL DEFAULT 0"),
+    ("002_add_teachers_color",
+     "ALTER TABLE teachers ADD COLUMN color TEXT NOT NULL DEFAULT ''"),
+    ("003_add_subjects_color",
+     "ALTER TABLE subjects ADD COLUMN color TEXT NOT NULL DEFAULT ''"),
+    ("004_add_classes_divisionId",
+     "ALTER TABLE classes ADD COLUMN divisionId INTEGER DEFAULT NULL"),
+    ("005_add_classes_groupId",
+     "ALTER TABLE classes ADD COLUMN groupId INTEGER DEFAULT NULL"),
+    ("006_add_lessons_weekType",
+     "ALTER TABLE lessons ADD COLUMN weekType INTEGER DEFAULT 0"),
+    ("007_add_lessons_secondTeacherId",
+     "ALTER TABLE lessons ADD COLUMN secondTeacherId INTEGER DEFAULT -1"),
+    ("008_add_timetable_slots_weekType",
+     "ALTER TABLE timetable_slots ADD COLUMN weekType INTEGER NOT NULL DEFAULT 0"),
+    ("009_create_lesson_combined_classes",
+     "CREATE TABLE IF NOT EXISTS lesson_combined_classes "
+     "(lessonId INTEGER NOT NULL, classId INTEGER NOT NULL, UNIQUE(lessonId, classId))"),
+    ("010_add_classes_earliestPeriod",
+     "ALTER TABLE classes ADD COLUMN earliestPeriod INTEGER DEFAULT NULL"),
+    ("011_add_classes_latestPeriod",
+     "ALTER TABLE classes ADD COLUMN latestPeriod INTEGER DEFAULT NULL"),
+    ("012_create_subject_requirements",
+     "CREATE TABLE IF NOT EXISTS subject_requirements "
+     "(id INTEGER PRIMARY KEY AUTOINCREMENT, subjectId INTEGER NOT NULL UNIQUE, "
+     "roomTypeId INTEGER NOT NULL DEFAULT 1)"),
+    ("013_create_days",
+     "CREATE TABLE IF NOT EXISTS days (id INTEGER PRIMARY KEY, name TEXT NOT NULL)"),
+    ("014_create_periods",
+     "CREATE TABLE IF NOT EXISTS periods "
+     "(id INTEGER PRIMARY KEY, label TEXT NOT NULL, startTime TEXT NOT NULL, endTime TEXT NOT NULL)"),
+]
+
+
+def _apply_migrations():
+    """Apply each numbered migration exactly once using an EXCLUSIVE transaction."""
+    conn = get_db()
+    try:
+        conn.execute("BEGIN EXCLUSIVE")
+        applied = {row[0] for row in conn.execute(
+            "SELECT name FROM schema_migrations"
+        ).fetchall()}
+        for name, sql in _MIGRATIONS:
+            if name not in applied:
+                try:
+                    conn.execute(sql)
+                    conn.execute(
+                        "INSERT OR IGNORE INTO schema_migrations (name) VALUES (?)",
+                        (name,)
+                    )
+                except Exception:
+                    # Column / table already exists — still record as applied so we
+                    # do not retry on every startup.
+                    try:
+                        conn.execute(
+                            "INSERT OR IGNORE INTO schema_migrations (name) VALUES (?)",
+                            (name,)
+                        )
+                    except Exception:
+                        pass
+        conn.execute("COMMIT")
+    except Exception:
+        try:
+            conn.execute("ROLLBACK")
+        except Exception:
+            pass
+    finally:
+        conn.close()
 
 
 def qrows(q):
     return [dict(r) for r in q.fetchall()]
+
+
+def _seed_days_periods():
+    """Insert default days / periods rows on first run (idempotent via INSERT OR IGNORE)."""
+    conn = get_db()
+    try:
+        # Seed days if empty
+        count = conn.execute("SELECT COUNT(*) FROM days").fetchone()[0]
+        if count == 0:
+            for d in _DEFAULT_DAYS:
+                conn.execute(
+                    "INSERT OR IGNORE INTO days (id, name) VALUES (?, ?)",
+                    (d['id'], d['name'])
+                )
+        # Seed periods if empty
+        count = conn.execute("SELECT COUNT(*) FROM periods").fetchone()[0]
+        if count == 0:
+            for p in _DEFAULT_PERIODS:
+                conn.execute(
+                    "INSERT OR IGNORE INTO periods (id, label, startTime, endTime) VALUES (?, ?, ?, ?)",
+                    (p['id'], p['label'], p['startTime'], p['endTime'])
+                )
+        conn.commit()
+    finally:
+        conn.close()
+
+
+def _load_days() -> list:
+    """Query and return all day rows from the DB ordered by id."""
+    conn = get_db()
+    try:
+        rows = conn.execute("SELECT id, name FROM days ORDER BY id").fetchall()
+        return [{'id': r['id'], 'name': r['name']} for r in rows]
+    finally:
+        conn.close()
+
+
+def _load_periods() -> list:
+    """Query and return all period rows from the DB ordered by id."""
+    conn = get_db()
+    try:
+        rows = conn.execute(
+            "SELECT id, label, startTime, endTime FROM periods ORDER BY id"
+        ).fetchall()
+        return [
+            {
+                'id': r['id'],
+                'label': r['label'],
+                # Keep 'start'/'end' keys so existing solver code using PERIODS still works
+                'start': r['startTime'],
+                'end': r['endTime'],
+                'startTime': r['startTime'],
+                'endTime': r['endTime'],
+            }
+            for r in rows
+        ]
+    finally:
+        conn.close()
+
+
+def _refresh_days_periods():
+    """Reload g_days / g_periods in-place from the DB. Called once at startup."""
+    global g_days, g_periods, DAYS, PERIODS
+    loaded_days = _load_days()
+    loaded_periods = _load_periods()
+    # Update in-place so the DAYS / PERIODS aliases remain valid
+    g_days.clear()
+    g_days.extend(loaded_days)
+    g_periods.clear()
+    g_periods.extend(loaded_periods)
+    # Ensure legacy aliases point to the same objects
+    DAYS = g_days
+    PERIODS = g_periods
 
 
 # ── TEACHERS ──────────────────────────────────────────────────────────────────
@@ -271,8 +434,13 @@ def delete_subject(sid):
 @app.route('/api/classes', methods=['GET'])
 def get_classes():
     conn = get_db()
-    data = qrows(conn.execute("SELECT * FROM classes ORDER BY name"))
+    data = qrows(conn.execute(
+        "SELECT id, name, studentCount, "
+        "earliestPeriod, latestPeriod, divisionId "
+        "FROM classes ORDER BY name"
+    ))
     conn.close()
+    # Ensure absent/NULL columns map to null in JSON (sqlite3.Row already does this)
     return jsonify(data)
 
 
@@ -298,12 +466,78 @@ def update_class(cid):
     name = (d.get('name') or '').strip()
     if not name:
         return jsonify({'error': 'Name required'}), 400
+
+    earliest = d.get('earliestPeriod')
+    latest = d.get('latestPeriod')
+    division_id = d.get('divisionId')
+
+    # earliestPeriod and latestPeriod must be provided together or both absent
+    if (earliest is None) != (latest is None):
+        return jsonify({
+            'error': 'earliestPeriod and latestPeriod must be provided together or both omitted'
+        }), 400
+
+    # If both provided, earliest must be strictly less than latest
+    if earliest is not None and latest is not None:
+        if earliest >= latest:
+            return jsonify({
+                'error': 'earliestPeriod must be strictly less than latestPeriod'
+            }), 400
+
     conn = get_db()
-    conn.execute("UPDATE classes SET name=?,studentCount=? WHERE id=?",
-                 (name, int(d.get('studentCount', 0)), cid))
+
+    # Validate that period IDs exist in the periods table
+    if earliest is not None:
+        row = conn.execute(
+            "SELECT id FROM periods WHERE id=?", (earliest,)
+        ).fetchone()
+        if row is None:
+            conn.close()
+            return jsonify({
+                'error': 'earliestPeriod references a non-existent period'
+            }), 422
+    if latest is not None:
+        row = conn.execute(
+            "SELECT id FROM periods WHERE id=?", (latest,)
+        ).fetchone()
+        if row is None:
+            conn.close()
+            return jsonify({
+                'error': 'latestPeriod references a non-existent period'
+            }), 422
+
+    # Validate divisionId against the divisions table
+    if division_id is not None:
+        try:
+            row = conn.execute(
+                "SELECT id FROM divisions WHERE id=?", (division_id,)
+            ).fetchone()
+            if row is None:
+                conn.close()
+                return jsonify({
+                    'error': 'divisionId references a non-existent division'
+                }), 422
+        except Exception:
+            conn.close()
+            return jsonify({'error': 'divisions feature is not configured'}), 422
+
+    conn.execute(
+        "UPDATE classes SET name=?, studentCount=?, "
+        "earliestPeriod=?, latestPeriod=?, divisionId=? WHERE id=?",
+        (name, int(d.get('studentCount', 0)),
+         earliest, latest, division_id, cid)
+    )
     conn.commit()
+
+    # Return the full updated record
+    row = conn.execute(
+        "SELECT id, name, studentCount, earliestPeriod, latestPeriod, divisionId "
+        "FROM classes WHERE id=?", (cid,)
+    ).fetchone()
     conn.close()
-    return jsonify({'ok': True})
+    if row is None:
+        return jsonify({'error': 'Class not found'}), 404
+    return jsonify(dict(row))
 
 
 @app.route('/api/classes/<int:cid>', methods=['DELETE'])
@@ -404,6 +638,106 @@ def delete_room_type(rid):
     conn.commit()
     conn.close()
     return jsonify({'ok': True})
+
+
+# ── SUBJECT REQUIREMENTS ──────────────────────────────────────────────────────
+
+@app.route('/api/subject-requirements', methods=['GET'])
+def get_subject_requirements():
+    conn = get_db()
+    data = qrows(conn.execute("""
+        SELECT sr.id, sr.subjectId, s.name as subjectName, sr.roomTypeId
+        FROM subject_requirements sr
+        JOIN subjects s ON s.id = sr.subjectId
+        ORDER BY s.name
+    """))
+    conn.close()
+    return jsonify(data)
+
+
+@app.route('/api/subject-requirements', methods=['POST'])
+def add_subject_requirement():
+    d = request.json or {}
+    subject_id = d.get('subjectId')
+    room_type_id = d.get('roomTypeId')
+    if subject_id is None or room_type_id is None:
+        return jsonify({'error': 'subjectId and roomTypeId are required'}), 400
+    conn = get_db()
+    # Validate subjectId exists
+    row = conn.execute("SELECT id FROM subjects WHERE id=?", (subject_id,)).fetchone()
+    if row is None:
+        conn.close()
+        return jsonify({'error': f'subjectId {subject_id} does not exist in subjects'}), 422
+    # Validate roomTypeId exists
+    row = conn.execute("SELECT id FROM room_types WHERE id=?", (room_type_id,)).fetchone()
+    if row is None:
+        conn.close()
+        return jsonify({'error': f'roomTypeId {room_type_id} does not exist in room_types'}), 422
+    c = conn.cursor()
+    c.execute(
+        "INSERT OR REPLACE INTO subject_requirements (subjectId, roomTypeId) VALUES (?,?)",
+        (subject_id, room_type_id)
+    )
+    conn.commit()
+    nid = c.lastrowid
+    # Fetch the inserted/replaced record with subjectName
+    record = dict(conn.execute("""
+        SELECT sr.id, sr.subjectId, s.name as subjectName, sr.roomTypeId
+        FROM subject_requirements sr
+        JOIN subjects s ON s.id = sr.subjectId
+        WHERE sr.id = ?
+    """, (nid,)).fetchone())
+    conn.close()
+    return jsonify(record), 201
+
+
+@app.route('/api/subject-requirements/<int:req_id>', methods=['PUT'])
+def update_subject_requirement(req_id):
+    d = request.json or {}
+    room_type_id = d.get('roomTypeId')
+    if room_type_id is None:
+        return jsonify({'error': 'roomTypeId is required'}), 400
+    conn = get_db()
+    # Check the record exists
+    existing = conn.execute(
+        "SELECT id FROM subject_requirements WHERE id=?", (req_id,)
+    ).fetchone()
+    if existing is None:
+        conn.close()
+        return jsonify({'error': f'subject_requirement id {req_id} not found'}), 404
+    # Validate roomTypeId exists
+    row = conn.execute("SELECT id FROM room_types WHERE id=?", (room_type_id,)).fetchone()
+    if row is None:
+        conn.close()
+        return jsonify({'error': f'roomTypeId {room_type_id} does not exist in room_types'}), 422
+    conn.execute(
+        "UPDATE subject_requirements SET roomTypeId=? WHERE id=?",
+        (room_type_id, req_id)
+    )
+    conn.commit()
+    record = dict(conn.execute("""
+        SELECT sr.id, sr.subjectId, s.name as subjectName, sr.roomTypeId
+        FROM subject_requirements sr
+        JOIN subjects s ON s.id = sr.subjectId
+        WHERE sr.id = ?
+    """, (req_id,)).fetchone())
+    conn.close()
+    return jsonify(record)
+
+
+@app.route('/api/subject-requirements/<int:req_id>', methods=['DELETE'])
+def delete_subject_requirement(req_id):
+    conn = get_db()
+    existing = conn.execute(
+        "SELECT id FROM subject_requirements WHERE id=?", (req_id,)
+    ).fetchone()
+    if existing is None:
+        conn.close()
+        return jsonify({'error': f'subject_requirement id {req_id} not found'}), 404
+    conn.execute("DELETE FROM subject_requirements WHERE id=?", (req_id,))
+    conn.commit()
+    conn.close()
+    return '', 204
 
 
 # ── LESSONS ───────────────────────────────────────────────────────────────────
@@ -1055,7 +1389,34 @@ def get_analytics():
 
 @app.route('/api/meta', methods=['GET'])
 def get_meta():
-    return jsonify({'days': DAYS, 'periods': PERIODS})
+    conn = get_db()
+    try:
+        days_rows = [
+            {'id': r['id'], 'name': r['name']}
+            for r in conn.execute("SELECT id, name FROM days ORDER BY id").fetchall()
+        ]
+        periods_rows = [
+            {
+                'id': r['id'],
+                'label': r['label'],
+                'startTime': r['startTime'],
+                'endTime': r['endTime'],
+                # Legacy keys kept for backward compatibility
+                'start': r['startTime'],
+                'end': r['endTime'],
+            }
+            for r in conn.execute(
+                "SELECT id, label, startTime, endTime FROM periods ORDER BY id"
+            ).fetchall()
+        ]
+        # Fallback: if DB is somehow empty, return the in-memory cache
+        if not days_rows:
+            days_rows = g_days
+        if not periods_rows:
+            periods_rows = g_periods
+    finally:
+        conn.close()
+    return jsonify({'days': days_rows, 'periods': periods_rows})
 
 
 # ── DATA IMPORT / EXPORT ──────────────────────────────────────────────────────

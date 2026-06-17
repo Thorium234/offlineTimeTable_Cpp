@@ -5,29 +5,12 @@
 #include <QDebug>
 
 DataManager::DataManager() {
-    // Prepopulate standard school days
-    addDay("Monday");
-    addDay("Tuesday");
-    addDay("Wednesday");
-    addDay("Thursday");
-    addDay("Friday");
-
-    // Prepopulate standard school periods
-    addPeriod("08:00", "08:45");
-    addPeriod("08:45", "09:30");
-    addPeriod("09:30", "10:15");
-    addPeriod("10:15", "11:00");
-    addPeriod("11:00", "11:45");
-    addPeriod("12:30", "13:15");
-    addPeriod("13:15", "14:00");
-    addPeriod("14:00", "14:45");
-
-    // Prepopulate standard room types
+    // Prepopulate standard room types (in-memory only — not persisted to DB)
     addRoomType("Classroom");
     addRoomType("Science Lab");
     addRoomType("Computer Lab");
 
-    // Open SQLite DB and load persisted entities
+    // Open SQLite DB and load persisted entities (including days and periods)
     loadFromDB();
 }
 
@@ -48,6 +31,8 @@ bool DataManager::loadFromDB()
     roomTypes.clear();
     fixedEvents.clear();
     subjectRequirements.clear();
+    days.clear();
+    periods.clear();
 
     for (const auto &rec : sql.fetchTeachers()) {
         Teacher t;
@@ -96,6 +81,39 @@ bool DataManager::loadFromDB()
         if (rec.recurrence == "DAILY") rt = RecurrenceType::DAILY;
         else if (rec.recurrence == "WEEKLY") rt = RecurrenceType::WEEKLY;
         fixedEvents.push_back(FixedEvent{rec.id, rec.dayId, rec.periodId, rec.name.toStdString(), rt});
+    }
+    // Load days from DB (seeded on first run by SQLiteService::initSchema)
+    for (const auto &rec : sql.fetchDays()) {
+        Day d;
+        d.id   = rec.id;
+        d.name = rec.name.toStdString();
+        days.push_back(d);
+    }
+    // Fallback: if DB returned no days (e.g. very old DB without seeding), use defaults
+    if (days.empty()) {
+        addDay("Monday");
+        addDay("Tuesday");
+        addDay("Wednesday");
+        addDay("Thursday");
+        addDay("Friday");
+    }
+    // Load periods from DB (seeded on first run by SQLiteService::initSchema)
+    for (const auto &rec : sql.fetchPeriods()) {
+        Period p;
+        p.id        = rec.id;
+        p.label     = rec.label.toStdString();
+        p.startTime = rec.startTime.toStdString();
+        p.endTime   = rec.endTime.toStdString();
+        periods.push_back(p);
+    }
+    // Fallback: if DB returned no periods, use defaults
+    if (periods.empty()) {
+        addPeriod("Period 1", "08:00", "08:45");
+        addPeriod("Period 2", "08:50", "09:35");
+        addPeriod("Period 3", "09:40", "10:25");
+        addPeriod("Period 4", "10:40", "11:25");
+        addPeriod("Period 5", "11:30", "12:15");
+        addPeriod("Period 6", "13:00", "14:45");
     }
     // Load substitutions
     substitutions.clear();
@@ -369,9 +387,14 @@ int DataManager::addDay(const std::string& name) {
     return nextId;
 }
 
-int DataManager::addPeriod(const std::string& startTime, const std::string& endTime) {
+int DataManager::addPeriod(const std::string& label, const std::string& startTime, const std::string& endTime) {
     int nextId = static_cast<int>(periods.size()) + 1;
-    periods.push_back(Period{nextId, startTime, endTime});
+    Period p;
+    p.id        = nextId;
+    p.label     = label;
+    p.startTime = startTime;
+    p.endTime   = endTime;
+    periods.push_back(p);
     return nextId;
 }
 
@@ -444,7 +467,11 @@ std::string DataManager::getDayName(int id) const {
 
 std::string DataManager::getPeriodTime(int id) const {
     for (const auto& p : periods) {
-        if (p.id == id) return p.startTime + "-" + p.endTime;
+        if (p.id == id) {
+            // Return label if set, otherwise fall back to time range
+            if (!p.label.empty()) return p.label;
+            return p.startTime + "-" + p.endTime;
+        }
     }
     return "Unknown Period";
 }

@@ -70,6 +70,24 @@ struct FixedEventRecord {
     QString recurrence;
 };
 
+struct DayRecord {
+    int id;
+    QString name;
+};
+
+struct PeriodRecord {
+    int id;
+    QString label;
+    QString startTime;
+    QString endTime;
+};
+
+struct SubjectRequirementRecord {
+    int id;
+    int subjectId;
+    int roomTypeId;
+};
+
 class SQLiteService {
 public:
     SQLiteService();
@@ -168,10 +186,24 @@ public:
     bool addClassToDivision(int classId, int divisionId);
     bool removeClassFromDivision(int classId);
 
+    // Migration runner — applies all numbered migrations exactly once
+    void applyMigrations();
+
+    // Days / Periods — seeded on first run; loaded from DB at startup
+    std::vector<DayRecord> fetchDays();
+    std::vector<PeriodRecord> fetchPeriods();
+
+    // Subject requirements — maps subjectId to required roomTypeId
+    std::vector<SubjectRequirementRecord> fetchSubjectRequirements();
+
     // Expose underlying QSqlDatabase for Qt models
     QSqlDatabase &getDatabase();
 
 private:
     QSqlDatabase db;
     bool exec(const QString &query);
+
+    // Seed helpers — called once from initSchema() if tables are empty
+    void seedDefaultDays();
+    void seedDefaultPeriods();
 };

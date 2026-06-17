@@ -92,7 +92,7 @@ public:
     bool removeLesson(int id);
 
     int addDay(const std::string& name);
-    int addPeriod(const std::string& startTime, const std::string& endTime);
+    int addPeriod(const std::string& label, const std::string& startTime, const std::string& endTime);
     bool addTeacherConstraint(int teacherId, int dayId, int periodId);
     
     int addRoomType(const std::string& name);

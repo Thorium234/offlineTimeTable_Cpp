@@ -66,10 +66,10 @@ include CMakeFiles/timetableGen_autogen_timestamp_deps.dir/compiler_depend.make
 # Include the progress variables for this target.
 include CMakeFiles/timetableGen_autogen_timestamp_deps.dir/progress.make
 
-CMakeFiles/timetableGen_autogen_timestamp_deps: /home/thorium/anaconda3/lib/libQt5Widgets.so.5.15.2
-CMakeFiles/timetableGen_autogen_timestamp_deps: /home/thorium/anaconda3/bin/uic
-CMakeFiles/timetableGen_autogen_timestamp_deps: /home/thorium/anaconda3/bin/moc
 CMakeFiles/timetableGen_autogen_timestamp_deps: /home/thorium/anaconda3/lib/libQt5Sql.so.5.15.2
+CMakeFiles/timetableGen_autogen_timestamp_deps: /home/thorium/anaconda3/bin/uic
+CMakeFiles/timetableGen_autogen_timestamp_deps: /home/thorium/anaconda3/lib/libQt5Widgets.so.5.15.2
+CMakeFiles/timetableGen_autogen_timestamp_deps: /home/thorium/anaconda3/bin/moc
 CMakeFiles/timetableGen_autogen_timestamp_deps: /home/thorium/anaconda3/lib/libQt5PrintSupport.so.5.15.2
 
 timetableGen_autogen_timestamp_deps: CMakeFiles/timetableGen_autogen_timestamp_deps

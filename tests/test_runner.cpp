@@ -22,7 +22,7 @@ void runRegressionTest() {
     dm.teacherConstraints.clear(); dm.roomTypes.clear();
 
     dm.addDay("Monday"); dm.addDay("Tuesday"); dm.addDay("Wednesday"); dm.addDay("Thursday"); dm.addDay("Friday");
-    dm.addPeriod("08:00","09:00"); dm.addPeriod("09:00","10:00"); dm.addPeriod("10:00","11:00"); dm.addPeriod("11:00","12:00");
+    dm.addPeriod("Period 1","08:00","09:00"); dm.addPeriod("Period 2","09:00","10:00"); dm.addPeriod("Period 3","10:00","11:00"); dm.addPeriod("Period 4","11:00","12:00");
 
     int fixedId = dm.addFixedEvent(-1, 3, "Lunch", RecurrenceType::DAILY);
     assert(fixedId > 0);
@@ -66,8 +66,8 @@ void runTeacherPreferenceTest() {
 
     dm.addDay("Monday");
     dm.addDay("Tuesday");
-    dm.addPeriod("08:00", "09:00");
-    dm.addPeriod("09:00", "10:00");
+    dm.addPeriod("Period 1", "08:00", "09:00");
+    dm.addPeriod("Period 2", "09:00", "10:00");
 
     int classRoomType = dm.addRoomType("Classroom");
     int teacherId = dm.addTeacher("Math Teacher");
@@ -166,7 +166,7 @@ void runAnalyticsTest() {
     dm.teacherConstraints.clear(); dm.roomTypes.clear();
 
     dm.addDay("Monday"); dm.addDay("Tuesday");
-    dm.addPeriod("08:00","09:00"); dm.addPeriod("09:00","10:00"); dm.addPeriod("10:00","11:00");
+    dm.addPeriod("Period 1","08:00","09:00"); dm.addPeriod("Period 2","09:00","10:00"); dm.addPeriod("Period 3","10:00","11:00");
 
     int rt = dm.addRoomType("Classroom");
     int t1 = dm.addTeacher("Teacher A");
@@ -207,7 +207,7 @@ void runCombinedClassesTest() {
     dm.teacherConstraints.clear(); dm.roomTypes.clear();
 
     dm.addDay("Monday"); dm.addDay("Tuesday"); dm.addDay("Wednesday");
-    dm.addPeriod("08:00","09:00"); dm.addPeriod("09:00","10:00");
+    dm.addPeriod("Period 1","08:00","09:00"); dm.addPeriod("Period 2","09:00","10:00");
 
     int rt = dm.addRoomType("Classroom");
     int t1 = dm.addTeacher("Teacher A");
@@ -258,7 +258,7 @@ void runWeekSchedulingTest() {
     dm.teacherConstraints.clear(); dm.roomTypes.clear();
 
     dm.addDay("Monday"); dm.addDay("Tuesday");
-    dm.addPeriod("08:00","09:00"); dm.addPeriod("09:00","10:00");
+    dm.addPeriod("Period 1","08:00","09:00"); dm.addPeriod("Period 2","09:00","10:00");
 
     int rt = dm.addRoomType("Classroom");
     int t1 = dm.addTeacher("Teacher A");

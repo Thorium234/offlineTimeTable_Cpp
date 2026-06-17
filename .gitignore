@@ -49,3 +49,5 @@ data/*.db-wal
 compile_commands.json
 .clangd/
 
+.kiro
+.Kiro

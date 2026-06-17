@@ -43,36 +43,197 @@ bool SQLiteService::exec(const QString &query) {
 }
 
 bool SQLiteService::initSchema() {
-    // Teachers table (Flask-compatible schema)
+    // Enable WAL journal mode for concurrent C++/Flask access
+    exec("PRAGMA journal_mode=WAL");
+
+    // ── Core tables (CREATE IF NOT EXISTS — safe to re-run) ──────────────────
     if (!exec("CREATE TABLE IF NOT EXISTS teachers (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT NOT NULL, maxConsecutive INTEGER DEFAULT 0)")) return false;
-    // Silently attempt column migrations (may already exist in Flask-created DBs)
-    QSqlQuery m(db);
-    m.exec("ALTER TABLE teachers ADD COLUMN maxConsecutive INTEGER DEFAULT 0");
-    m.exec("ALTER TABLE teachers ADD COLUMN color TEXT DEFAULT ''");
-    m.exec("ALTER TABLE subjects ADD COLUMN color TEXT DEFAULT ''");
-    m.exec("ALTER TABLE timetable_slots ADD COLUMN locked INTEGER DEFAULT 0");
-    m.exec("ALTER TABLE lessons ADD COLUMN weekType INTEGER DEFAULT 0");
-    m.exec("ALTER TABLE lessons ADD COLUMN secondTeacherId INTEGER DEFAULT -1");
-    m.exec("CREATE TABLE IF NOT EXISTS lesson_combined_classes (lessonId INTEGER NOT NULL, classId INTEGER NOT NULL, UNIQUE(lessonId, classId))");
-    // Subjects table
     if (!exec("CREATE TABLE IF NOT EXISTS subjects (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT NOT NULL)")) return false;
-    // Classes table
     if (!exec("CREATE TABLE IF NOT EXISTS classes (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT NOT NULL, studentCount INTEGER NOT NULL)")) return false;
-    // Rooms table
     if (!exec("CREATE TABLE IF NOT EXISTS rooms (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT NOT NULL, capacity INTEGER NOT NULL, roomTypeId INTEGER NOT NULL)")) return false;
-    // Room types table
     if (!exec("CREATE TABLE IF NOT EXISTS room_types (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT NOT NULL)")) return false;
-    // Lessons table
     if (!exec("CREATE TABLE IF NOT EXISTS lessons (id INTEGER PRIMARY KEY AUTOINCREMENT, teacherId INTEGER NOT NULL, secondTeacherId INTEGER DEFAULT -1, subjectId INTEGER NOT NULL, classId INTEGER NOT NULL, periodsPerWeek INTEGER NOT NULL DEFAULT 1, blockSize INTEGER NOT NULL DEFAULT 1, maxPerDay INTEGER NOT NULL DEFAULT 0, weekType INTEGER NOT NULL DEFAULT 0)")) return false;
-    // Teacher constraints table
     if (!exec("CREATE TABLE IF NOT EXISTS teacher_constraints (id INTEGER PRIMARY KEY AUTOINCREMENT, teacherId INTEGER NOT NULL, dayId INTEGER NOT NULL, periodId INTEGER NOT NULL, UNIQUE(teacherId, dayId, periodId))")) return false;
-    // Teacher preferences table
     if (!exec("CREATE TABLE IF NOT EXISTS teacher_preferences (id INTEGER PRIMARY KEY AUTOINCREMENT, teacherId INTEGER NOT NULL, dayId INTEGER NOT NULL, periodId INTEGER NOT NULL, prefType TEXT NOT NULL DEFAULT 'NEUTRAL', UNIQUE(teacherId, dayId, periodId))")) return false;
-    // Fixed events table
     if (!exec("CREATE TABLE IF NOT EXISTS fixed_events (id INTEGER PRIMARY KEY AUTOINCREMENT, dayId INTEGER NOT NULL DEFAULT -1, periodId INTEGER NOT NULL, name TEXT NOT NULL DEFAULT '', recurrence TEXT NOT NULL DEFAULT 'NONE')")) return false;
-    // Timetable slots table
     if (!exec("CREATE TABLE IF NOT EXISTS timetable_slots (id INTEGER PRIMARY KEY AUTOINCREMENT, classId INTEGER NOT NULL, dayId INTEGER NOT NULL, periodId INTEGER NOT NULL, subjectId INTEGER, teacherId INTEGER, roomId INTEGER, locked INTEGER NOT NULL DEFAULT 0, UNIQUE(classId, dayId, periodId))")) return false;
+
+    // ── Migration-managed tables (also created here so they exist before applyMigrations runs) ──
+    if (!exec("CREATE TABLE IF NOT EXISTS schema_migrations (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT NOT NULL UNIQUE, applied_at TEXT NOT NULL DEFAULT (datetime('now')))")) return false;
+    if (!exec("CREATE TABLE IF NOT EXISTS days (id INTEGER PRIMARY KEY, name TEXT NOT NULL)")) return false;
+    if (!exec("CREATE TABLE IF NOT EXISTS periods (id INTEGER PRIMARY KEY, label TEXT NOT NULL, startTime TEXT NOT NULL, endTime TEXT NOT NULL)")) return false;
+    if (!exec("CREATE TABLE IF NOT EXISTS subject_requirements (id INTEGER PRIMARY KEY AUTOINCREMENT, subjectId INTEGER NOT NULL UNIQUE, roomTypeId INTEGER NOT NULL DEFAULT 1)")) return false;
+
+    // ── Numbered migration runner ─────────────────────────────────────────────
+    applyMigrations();
+
+    // ── Seed days and periods tables on first run ─────────────────────────────
+    seedDefaultDays();
+    seedDefaultPeriods();
+
     return true;
+}
+
+void SQLiteService::applyMigrations() {
+    // The canonical 14-migration list (same order as Flask _apply_migrations).
+    // Each entry: { name, sql }
+    static const struct { const char *name; const char *sql; } MIGRATIONS[] = {
+        { "001_add_timetable_slots_locked",
+          "ALTER TABLE timetable_slots ADD COLUMN locked INTEGER NOT NULL DEFAULT 0" },
+        { "002_add_teachers_color",
+          "ALTER TABLE teachers ADD COLUMN color TEXT NOT NULL DEFAULT ''" },
+        { "003_add_subjects_color",
+          "ALTER TABLE subjects ADD COLUMN color TEXT NOT NULL DEFAULT ''" },
+        { "004_add_classes_divisionId",
+          "ALTER TABLE classes ADD COLUMN divisionId INTEGER DEFAULT NULL" },
+        { "005_add_classes_groupId",
+          "ALTER TABLE classes ADD COLUMN groupId INTEGER DEFAULT NULL" },
+        { "006_add_lessons_weekType",
+          "ALTER TABLE lessons ADD COLUMN weekType INTEGER DEFAULT 0" },
+        { "007_add_lessons_secondTeacherId",
+          "ALTER TABLE lessons ADD COLUMN secondTeacherId INTEGER DEFAULT -1" },
+        { "008_add_timetable_slots_weekType",
+          "ALTER TABLE timetable_slots ADD COLUMN weekType INTEGER NOT NULL DEFAULT 0" },
+        { "009_create_lesson_combined_classes",
+          "CREATE TABLE IF NOT EXISTS lesson_combined_classes (lessonId INTEGER NOT NULL, classId INTEGER NOT NULL, UNIQUE(lessonId, classId))" },
+        { "010_add_classes_earliestPeriod",
+          "ALTER TABLE classes ADD COLUMN earliestPeriod INTEGER DEFAULT NULL" },
+        { "011_add_classes_latestPeriod",
+          "ALTER TABLE classes ADD COLUMN latestPeriod INTEGER DEFAULT NULL" },
+        { "012_create_subject_requirements",
+          "CREATE TABLE IF NOT EXISTS subject_requirements (id INTEGER PRIMARY KEY AUTOINCREMENT, subjectId INTEGER NOT NULL UNIQUE, roomTypeId INTEGER NOT NULL DEFAULT 1)" },
+        { "013_create_days",
+          "CREATE TABLE IF NOT EXISTS days (id INTEGER PRIMARY KEY, name TEXT NOT NULL)" },
+        { "014_create_periods",
+          "CREATE TABLE IF NOT EXISTS periods (id INTEGER PRIMARY KEY, label TEXT NOT NULL, startTime TEXT NOT NULL, endTime TEXT NOT NULL)" },
+    };
+
+    for (const auto &m : MIGRATIONS) {
+        // Check whether this migration has already been applied
+        QSqlQuery check(db);
+        check.prepare("SELECT COUNT(*) FROM schema_migrations WHERE name = :name");
+        check.bindValue(":name", QString::fromUtf8(m.name));
+        check.exec();
+        if (check.next() && check.value(0).toInt() > 0) {
+            continue; // already applied — skip
+        }
+
+        // Apply inside an EXCLUSIVE transaction for concurrency safety
+        if (!exec("BEGIN EXCLUSIVE")) {
+            qWarning() << "applyMigrations: could not acquire EXCLUSIVE lock for" << m.name;
+            continue;
+        }
+
+        // Re-check inside the transaction (another process may have applied it between
+        // our outer check above and acquiring the lock now)
+        QSqlQuery recheck(db);
+        recheck.prepare("SELECT COUNT(*) FROM schema_migrations WHERE name = :name");
+        recheck.bindValue(":name", QString::fromUtf8(m.name));
+        recheck.exec();
+        bool alreadyApplied = recheck.next() && recheck.value(0).toInt() > 0;
+
+        if (!alreadyApplied) {
+            QSqlQuery mq(db);
+            bool ok = mq.exec(QString::fromUtf8(m.sql));
+            if (!ok) {
+                // ALTER TABLE fails if column already exists — that is acceptable; treat
+                // as applied so we do not retry on every startup.
+                qWarning() << "Migration" << m.name << "SQL error (column may already exist):"
+                           << mq.lastError().text();
+            }
+            QSqlQuery ins(db);
+            ins.prepare("INSERT OR IGNORE INTO schema_migrations (name) VALUES (:name)");
+            ins.bindValue(":name", QString::fromUtf8(m.name));
+            ins.exec();
+        }
+
+        exec("COMMIT");
+    }
+}
+
+// ── Days / Periods seeding ────────────────────────────────────────────────────
+
+void SQLiteService::seedDefaultDays() {
+    QSqlQuery check(db);
+    check.exec("SELECT COUNT(*) FROM days");
+    if (check.next() && check.value(0).toInt() > 0)
+        return; // already seeded
+
+    static const struct { int id; const char *name; } DEFAULT_DAYS[] = {
+        { 1, "Monday" },
+        { 2, "Tuesday" },
+        { 3, "Wednesday" },
+        { 4, "Thursday" },
+        { 5, "Friday" },
+    };
+    for (const auto &d : DEFAULT_DAYS) {
+        QSqlQuery q(db);
+        q.prepare("INSERT OR IGNORE INTO days (id, name) VALUES (:id, :name)");
+        q.bindValue(":id", d.id);
+        q.bindValue(":name", QString::fromUtf8(d.name));
+        if (!q.exec()) {
+            qWarning() << "seedDefaultDays: failed to insert day" << d.id
+                       << ":" << q.lastError().text();
+        }
+    }
+}
+
+void SQLiteService::seedDefaultPeriods() {
+    QSqlQuery check(db);
+    check.exec("SELECT COUNT(*) FROM periods");
+    if (check.next() && check.value(0).toInt() > 0)
+        return; // already seeded
+
+    static const struct { int id; const char *label; const char *start; const char *end; }
+    DEFAULT_PERIODS[] = {
+        { 1, "Period 1", "08:00", "08:45" },
+        { 2, "Period 2", "08:50", "09:35" },
+        { 3, "Period 3", "09:40", "10:25" },
+        { 4, "Period 4", "10:40", "11:25" },
+        { 5, "Period 5", "11:30", "12:15" },
+        { 6, "Period 6", "13:00", "14:45" },
+    };
+    for (const auto &p : DEFAULT_PERIODS) {
+        QSqlQuery q(db);
+        q.prepare("INSERT OR IGNORE INTO periods (id, label, startTime, endTime) "
+                  "VALUES (:id, :label, :start, :end)");
+        q.bindValue(":id",    p.id);
+        q.bindValue(":label", QString::fromUtf8(p.label));
+        q.bindValue(":start", QString::fromUtf8(p.start));
+        q.bindValue(":end",   QString::fromUtf8(p.end));
+        if (!q.exec()) {
+            qWarning() << "seedDefaultPeriods: failed to insert period" << p.id
+                       << ":" << q.lastError().text();
+        }
+    }
+}
+
+std::vector<DayRecord> SQLiteService::fetchDays() {
+    std::vector<DayRecord> r;
+    QSqlQuery q(db);
+    q.exec("SELECT id, name FROM days ORDER BY id");
+    while (q.next()) {
+        DayRecord rec;
+        rec.id   = q.value(0).toInt();
+        rec.name = q.value(1).toString();
+        r.push_back(rec);
+    }
+    return r;
+}
+
+std::vector<PeriodRecord> SQLiteService::fetchPeriods() {
+    std::vector<PeriodRecord> r;
+    QSqlQuery q(db);
+    q.exec("SELECT id, label, startTime, endTime FROM periods ORDER BY id");
+    while (q.next()) {
+        PeriodRecord rec;
+        rec.id        = q.value(0).toInt();
+        rec.label     = q.value(1).toString();
+        rec.startTime = q.value(2).toString();
+        rec.endTime   = q.value(3).toString();
+        r.push_back(rec);
+    }
+    return r;
 }
 
 int SQLiteService::addTeacher(const QString &name, int maxConsecutive) {
@@ -521,4 +682,18 @@ bool SQLiteService::addTimetableSlot(int classId, int dayId, int periodId, int s
     q.bindValue(":teacherId", teacherId);
     q.bindValue(":roomId", roomId);
     return q.exec();
+}
+
+std::vector<SubjectRequirementRecord> SQLiteService::fetchSubjectRequirements() {
+    std::vector<SubjectRequirementRecord> r;
+    QSqlQuery q(db);
+    q.exec("SELECT id, subjectId, roomTypeId FROM subject_requirements ORDER BY subjectId");
+    while (q.next()) {
+        SubjectRequirementRecord rec;
+        rec.id         = q.value(0).toInt();
+        rec.subjectId  = q.value(1).toInt();
+        rec.roomTypeId = q.value(2).toInt();
+        r.push_back(rec);
+    }
+    return r;
 }

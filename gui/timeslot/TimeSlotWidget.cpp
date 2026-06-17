@@ -153,7 +153,10 @@ void TimeSlotWidget::addPeriod() {
         return;
     }
     
-    dm->addPeriod(startTime.toStdString(), endTime.toStdString());
+    // Generate a default label based on current period count
+    int nextNum = static_cast<int>(dm->periods.size()) + 1;
+    std::string label = "Period " + std::to_string(nextNum);
+    dm->addPeriod(label, startTime.toStdString(), endTime.toStdString());
     startTimeEdit->clear();
     endTimeEdit->clear();
     setupPeriodsTab();
